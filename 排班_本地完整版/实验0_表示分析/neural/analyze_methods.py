@@ -10,6 +10,8 @@
   - 另附逐个设计运行的表：每条规则的平均 HV，以及每种方法各设计运行的均值、最小～最大、"最好一次"
     （"最好一次"按测试集挑出，只作报告，不能当作方法的成绩）；
   - 分 全部 / 原 / E / H / M 组报告。只用所有臂都有结果的实例（不全时会提示缺多少）。
+  - 多重比较：每个分组内做 Holm 校正，两个检验族分开——两两表（除 dec5、默认规则外的方法两两，7 种方法时 21 对）；
+    主表的"对 dec5 / 对默认规则"（每种方法对两个参照，dec5 对默认规则只算一次）。表中同时给原始 p 和 Holm p。
 多个 CSV 合并时按 (实例, 臂, 次) 去重（先出现的为准）。
 """
 import argparse, collections, csv, os, re, sys
@@ -75,6 +77,17 @@ def normalize(runs, insts, arms):
     return H, R
 
 
+def holm(ps):
+    """Holm 逐步校正：ps 为原始 p 列表 → 校正后 p 列表（顺序不变）"""
+    m = len(ps)
+    order = sorted(range(m), key=lambda i: ps[i])
+    adj, run = [0.0] * m, 0.0
+    for k, i in enumerate(order):
+        run = max(run, min(1.0, (m - k) * ps[i]))
+        adj[i] = run
+    return adj
+
+
 def compare(Hm, a, b, grp):
     """方法 a 对 b：实例层面平均差、配对 Wilcoxon p、逐实例 Mann-Whitney 好/差数"""
     d = np.array([np.mean(Hm[(i, a)]) - np.mean(Hm[(i, b)]) for i in grp])
@@ -110,7 +123,8 @@ def main():
     Rm = {(i, m): [r for x in xs for r in R[(i, x)]] for i in insts for m, xs in meth.items()}
     out = [f"# 测试集方法对比：{len(insts)} 个实例（Python NSGA-II，465 次评价）\n",
            f"输入：{', '.join(os.path.relpath(p, HERE) for p in a.csv)}。HV 在每个实例内用全部 {len(arms)} 个臂统一归一化。"
-           "方法层面：每个实例上对所有设计运行 × MOEA 次数取平均；p = 实例层面配对 Wilcoxon（双侧，未做多重比较校正）；"
+           "方法层面：每个实例上对所有设计运行 × MOEA 次数取平均；p = 实例层面配对 Wilcoxon（双侧）原始 p，"
+           "Holm p = 分组内按检验族做 Holm 校正（主表一族、两两表一族）；"
            "好/差 = 逐实例 Mann-Whitney p<0.05 的实例数；资源差 = 最少资源数 − 下界（实例平均）。\n"]
     miss = [i for i in all_insts if i not in insts]
     if miss:
@@ -123,32 +137,50 @@ def main():
     for gname, grp in [("全部", insts)] + [(g + " 组", [i for i in insts if I.group(i) == g]) for g in ["原", "E", "H", "M"]]:
         if not grp:
             continue
+        refs = [b for b in REFS if b in meth]
+        lm = [m for m in mlist if m not in REFS]
+        # 主表检验族：每种方法对每个参照（dec5 对默认规则只算一次）
+        cmp_main = {}
+        for m in mlist:
+            for b in refs:
+                if m != b and (b, m) not in cmp_main:
+                    cmp_main[(m, b)] = compare(Hm, m, b, grp)
+        keys = list(cmp_main)
+        hadj = dict(zip(keys, holm([cmp_main[k][1] for k in keys])))
+
+        def main_cell(m, b):
+            if m == b:
+                return ["—", "—", "—", "—"]
+            k = (m, b) if (m, b) in cmp_main else (b, m)
+            dm, p, up, dn = cmp_main[k]
+            if k != (m, b):
+                dm, up, dn = -dm, dn, up
+            return [f"{dm:+.3f}", f"{p:.3g}", f"{hadj[k]:.3g}", f"{up}/{dn}"]
         out += [f"\n## {gname}（{len(grp)} 个实例）\n",
-                "| 方法 | 平均 HV | " + " | ".join(f"对 {b} | p | 好/差" for b in REFS if b in meth) + " | 资源差 |",
-                "|---|---|" + "---|---|---|" * len([b for b in REFS if b in meth]) + "---|"]
+                "| 方法 | 平均 HV | " + " | ".join(f"对 {b} | p | Holm p | 好/差" for b in refs) + " | 资源差 |",
+                "|---|---|" + "---|---|---|---|" * len(refs) + "---|"]
         for m in mlist:
             row = [m, f"{np.mean([np.mean(Hm[(i, m)]) for i in grp]):.3f}"]
-            for b in REFS:
-                if b not in meth:
-                    continue
-                if m == b:
-                    row += ["—", "—", "—"]; continue
-                dm, p, up, dn = compare(Hm, m, b, grp)
-                row += [f"{dm:+.3f}", f"{p:.3g}", f"{up}/{dn}"]
+            for b in refs:
+                row += main_cell(m, b)
             row.append(f"{np.nanmean([np.nanmean(Rm[(i, m)]) for i in grp]):.2f}")
             out.append("| " + " | ".join(row) + " |")
-        # 方法两两对比（行 − 列：平均差，括号内 Wilcoxon p）
-        lm = [m for m in mlist if m not in REFS]
+        # 方法两两对比（行 − 列），Holm 校正的检验族 = 这些方法的全部无序对
         if len(lm) > 1:
-            out += ["\n方法两两对比（行 − 列的平均 HV 差，括号内为配对 Wilcoxon p）：\n",
+            pairs = [(m, n) for k, m in enumerate(lm) for n in lm[k + 1:]]
+            pc = {pr: compare(Hm, pr[0], pr[1], grp) for pr in pairs}
+            pa = dict(zip(pairs, holm([pc[pr][1] for pr in pairs])))
+            out += [f"\n方法两两对比（行 − 列的平均 HV 差；括号内为配对 Wilcoxon 原始 p；Holm p，{len(pairs)} 对一起校正；"
+                    "* 表示 Holm p < 0.05）：\n",
                     "| | " + " | ".join(lm) + " |", "|---|" + "---|" * len(lm)]
             for m in lm:
                 cells = []
                 for n in lm:
                     if m == n:
                         cells.append("—"); continue
-                    dm, p, _, _ = compare(Hm, m, n, grp)
-                    cells.append(f"{dm:+.3f}（{p:.2g}）")
+                    k = (m, n) if (m, n) in pc else (n, m)
+                    dm = pc[k][0] if k == (m, n) else -pc[k][0]
+                    cells.append(f"{dm:+.3f}（{pc[k][1]:.2g}；Holm {pa[k]:.2g}{'*' if pa[k] < 0.05 else ''}）")
                 out.append(f"| {m} | " + " | ".join(cells) + " |")
     # 逐个设计运行
     out += ["\n## 逐个设计运行（全部实例）\n",

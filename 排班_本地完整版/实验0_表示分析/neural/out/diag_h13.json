@@ -1,0 +1,15064 @@
+{
+ "LLM-full(s2)": {
+  "pure_feasible": 0,
+  "rand_feasible": 0,
+  "reasons": {
+   "工具用完": 67
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   5,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 1,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 4,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 5,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 9,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 10,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 11,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 12,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 13,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 14,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "新开类型2"
+   },
+   {
+    "k": 15,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 16,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 17,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 18,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 21,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 22,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 23,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     0,
+     1,
+     2
+    ],
+    "robot_left": [
+     10,
+     8,
+     7
+    ],
+    "tool_left": [
+     5,
+     7,
+     2
+    ],
+    "tools_opened": [
+     3,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 32,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 33,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 34,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     1,
+     0,
+     2
+    ],
+    "robot_left": [
+     9,
+     9,
+     7
+    ],
+    "tool_left": [
+     6,
+     7,
+     2
+    ],
+    "tools_opened": [
+     2,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 35,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 38,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 43,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 44,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 45,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 46,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 49,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 50,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 51,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 52,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 53,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 54,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 55,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 56,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 59,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 60,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 61,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 62,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 65,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 66,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   }
+  ]
+ },
+ "LLM-full(s3)": {
+  "pure_feasible": 0,
+  "rand_feasible": 0,
+  "reasons": {
+   "工具用完": 67
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   12,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 1,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 4,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 5,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 9,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 10,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 11,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 12,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 13,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 14,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "新开类型2"
+   },
+   {
+    "k": 15,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 16,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 17,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 18,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 21,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 22,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 23,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": false,
+    "shift": 12,
+    "t": 123,
+    "remaining": 597,
+    "opened": [
+     0,
+     1,
+     4
+    ],
+    "robot_left": [
+     10,
+     8,
+     5
+    ],
+    "tool_left": [
+     5,
+     7,
+     2
+    ],
+    "tools_opened": [
+     3,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 32,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 33,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 34,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     1,
+     0,
+     2
+    ],
+    "robot_left": [
+     9,
+     9,
+     7
+    ],
+    "tool_left": [
+     6,
+     7,
+     2
+    ],
+    "tools_opened": [
+     2,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 35,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 38,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 43,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 44,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 45,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 46,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 49,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 50,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 51,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 52,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 53,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 54,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 55,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 56,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 59,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 60,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 61,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 62,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 65,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 66,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   }
+  ]
+ },
+ "LLM-score(s2)": {
+  "pure_feasible": 0,
+  "rand_feasible": 1,
+  "reasons": {
+   "工具用完": 66
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   12,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 1,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 4,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 5,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 9,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 10,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 11,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 12,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 13,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 14,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "新开类型2"
+   },
+   {
+    "k": 15,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 16,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 17,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 18,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 21,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 22,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 23,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": false,
+    "shift": 12,
+    "t": 123,
+    "remaining": 597,
+    "opened": [
+     0,
+     1,
+     4
+    ],
+    "robot_left": [
+     10,
+     8,
+     5
+    ],
+    "tool_left": [
+     5,
+     7,
+     2
+    ],
+    "tools_opened": [
+     3,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 32,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 33,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 34,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.4399999999999995
+    ]
+   },
+   {
+    "k": 35,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 38,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 43,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 44,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 45,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 46,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 49,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 50,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 51,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 52,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 53,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 54,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 55,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 56,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 59,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 60,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 61,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 62,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 65,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 66,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   }
+  ]
+ },
+ "LLM-score(s3)": {
+  "pure_feasible": 0,
+  "rand_feasible": 0,
+  "reasons": {
+   "工具用完": 67
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   5,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 1,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 4,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 5,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 9,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 10,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 11,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 12,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 13,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 14,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "新开类型2"
+   },
+   {
+    "k": 15,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 16,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 17,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 18,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 21,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 22,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 23,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     0,
+     1,
+     2
+    ],
+    "robot_left": [
+     10,
+     8,
+     7
+    ],
+    "tool_left": [
+     5,
+     7,
+     2
+    ],
+    "tools_opened": [
+     3,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 32,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 33,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 34,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     1,
+     0,
+     2
+    ],
+    "robot_left": [
+     9,
+     9,
+     7
+    ],
+    "tool_left": [
+     6,
+     7,
+     2
+    ],
+    "tools_opened": [
+     2,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 35,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 38,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 43,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 44,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 45,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 46,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 49,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 50,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 51,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 52,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 53,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 54,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 55,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 56,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 59,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 60,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 61,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 62,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 65,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 66,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   }
+  ]
+ },
+ "EoH(run1)": {
+  "pure_feasible": 0,
+  "rand_feasible": 1,
+  "reasons": {
+   "工具用完": 66
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 1,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 4,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 5,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 9,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 10,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 11,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 12,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 13,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 14,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "新开类型2"
+   },
+   {
+    "k": 15,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 16,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 17,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 18,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 21,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 22,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 23,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     0,
+     1,
+     2
+    ],
+    "robot_left": [
+     10,
+     8,
+     7
+    ],
+    "tool_left": [
+     5,
+     7,
+     2
+    ],
+    "tools_opened": [
+     3,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 32,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 33,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 34,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 35,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 38,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 43,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 44,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 45,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 46,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 49,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 50,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 51,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 52,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 53,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 54,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 55,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 56,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 59,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 60,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 61,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 62,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 65,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 66,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   }
+  ]
+ },
+ "LLM(r47)": {
+  "pure_feasible": 2,
+  "rand_feasible": 47,
+  "reasons": {
+   "工具用完": 18
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 1,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.92546822355602
+    ]
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 4,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.58220551325828
+    ]
+   },
+   {
+    "k": 5,
+    "ok": true,
+    "obj": [
+     15.0,
+     6.003675495823507
+    ]
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": true,
+    "obj": [
+     13.0,
+     43.41514191854051
+    ]
+   },
+   {
+    "k": 9,
+    "ok": true,
+    "obj": [
+     11.0,
+     15.4265697795284
+    ]
+   },
+   {
+    "k": 10,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 11,
+    "ok": true,
+    "obj": [
+     11.0,
+     14.33165675239429
+    ]
+   },
+   {
+    "k": 12,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.92546822355602
+    ]
+   },
+   {
+    "k": 13,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 14,
+    "ok": true,
+    "obj": [
+     15.0,
+     4.594029771560082
+    ]
+   },
+   {
+    "k": 15,
+    "ok": true,
+    "obj": [
+     13.0,
+     40.53166143382536
+    ]
+   },
+   {
+    "k": 16,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 17,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.92546822355602
+    ]
+   },
+   {
+    "k": 18,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 21,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.4399999999999995
+    ]
+   },
+   {
+    "k": 22,
+    "ok": true,
+    "obj": [
+     15.0,
+     4.594029771560082
+    ]
+   },
+   {
+    "k": 23,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": true,
+    "obj": [
+     20.0,
+     39.85700148297764
+    ]
+   },
+   {
+    "k": 32,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 33,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 34,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     1,
+     0,
+     2
+    ],
+    "robot_left": [
+     9,
+     9,
+     7
+    ],
+    "tool_left": [
+     6,
+     7,
+     2
+    ],
+    "tools_opened": [
+     2,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 35,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": true,
+    "obj": [
+     14.0,
+     46.19755698984241
+    ]
+   },
+   {
+    "k": 38,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.92546822355602
+    ]
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 43,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 44,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.58220551325828
+    ]
+   },
+   {
+    "k": 45,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 46,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.92546822355602
+    ]
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 49,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 50,
+    "ok": true,
+    "obj": [
+     13.0,
+     36.45162233163673
+    ]
+   },
+   {
+    "k": 51,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 52,
+    "ok": true,
+    "obj": [
+     15.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 53,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.003675495823507
+    ]
+   },
+   {
+    "k": 54,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.58220551325828
+    ]
+   },
+   {
+    "k": 55,
+    "ok": true,
+    "obj": [
+     14.0,
+     38.88872514275684
+    ]
+   },
+   {
+    "k": 56,
+    "ok": true,
+    "obj": [
+     13.0,
+     44.54288807377236
+    ]
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": true,
+    "obj": [
+     11.0,
+     13.525021443297938
+    ]
+   },
+   {
+    "k": 59,
+    "ok": true,
+    "obj": [
+     9.0,
+     7.385156781689795
+    ]
+   },
+   {
+    "k": 60,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.259849460512067
+    ]
+   },
+   {
+    "k": 61,
+    "ok": true,
+    "obj": [
+     15.0,
+     4.594029771560082
+    ]
+   },
+   {
+    "k": 62,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.92546822355602
+    ]
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 65,
+    "ok": true,
+    "obj": [
+     13.0,
+     41.92546822355602
+    ]
+   },
+   {
+    "k": 66,
+    "ok": true,
+    "obj": [
+     13.0,
+     45.632106396179296
+    ]
+   }
+  ]
+ },
+ "LLM(r35)": {
+  "pure_feasible": 2,
+  "rand_feasible": 47,
+  "reasons": {
+   "工具用完": 18
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 1,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 4,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 5,
+    "ok": true,
+    "obj": [
+     15.0,
+     6.003675495823507
+    ]
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": true,
+    "obj": [
+     12.0,
+     9.6
+    ]
+   },
+   {
+    "k": 9,
+    "ok": true,
+    "obj": [
+     11.0,
+     15.133282051160673
+    ]
+   },
+   {
+    "k": 10,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 11,
+    "ok": true,
+    "obj": [
+     11.0,
+     30.04017021087777
+    ]
+   },
+   {
+    "k": 12,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 13,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 14,
+    "ok": true,
+    "obj": [
+     15.0,
+     4.594029771560082
+    ]
+   },
+   {
+    "k": 15,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.4
+    ]
+   },
+   {
+    "k": 16,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 17,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 18,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 21,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.4399999999999995
+    ]
+   },
+   {
+    "k": 22,
+    "ok": true,
+    "obj": [
+     15.0,
+     4.594029771560082
+    ]
+   },
+   {
+    "k": 23,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": true,
+    "obj": [
+     18.0,
+     14.941816070624252
+    ]
+   },
+   {
+    "k": 32,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 33,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 34,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     1,
+     0,
+     2
+    ],
+    "robot_left": [
+     9,
+     9,
+     7
+    ],
+    "tool_left": [
+     6,
+     7,
+     2
+    ],
+    "tools_opened": [
+     2,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 35,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.082606157515391
+    ]
+   },
+   {
+    "k": 38,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 43,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 44,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 45,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 46,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 49,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 50,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.4
+    ]
+   },
+   {
+    "k": 51,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 52,
+    "ok": true,
+    "obj": [
+     15.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 53,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.003675495823507
+    ]
+   },
+   {
+    "k": 54,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 55,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 56,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": true,
+    "obj": [
+     11.0,
+     13.525021443297938
+    ]
+   },
+   {
+    "k": 59,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.4399999999999995
+    ]
+   },
+   {
+    "k": 60,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.777243302996675
+    ]
+   },
+   {
+    "k": 61,
+    "ok": true,
+    "obj": [
+     15.0,
+     4.594029771560082
+    ]
+   },
+   {
+    "k": 62,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 65,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 66,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   }
+  ]
+ },
+ "GP(run4)": {
+  "pure_feasible": 2,
+  "rand_feasible": 37,
+  "reasons": {
+   "工具用完": 28
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 1,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 2,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 3,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 4,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 5,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 6,
+    "ok": true,
+    "obj": [
+     17.0,
+     15.733100870254876
+    ]
+   },
+   {
+    "k": 7,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 8,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 9,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 10,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 11,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 12,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 13,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 14,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "新开类型2"
+   },
+   {
+    "k": 15,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 16,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 17,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 18,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 19,
+    "ok": true,
+    "obj": [
+     13.0,
+     52.23243340517523
+    ]
+   },
+   {
+    "k": 20,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 21,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 22,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 23,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 24,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 25,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 26,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 27,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 28,
+    "ok": true,
+    "obj": [
+     18.0,
+     39.27191430201066
+    ]
+   },
+   {
+    "k": 29,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 30,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 31,
+    "ok": true,
+    "obj": [
+     11.0,
+     4.8
+    ]
+   },
+   {
+    "k": 32,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 33,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 34,
+    "ok": true,
+    "obj": [
+     11.0,
+     15.860792702636349
+    ]
+   },
+   {
+    "k": 35,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 36,
+    "ok": true,
+    "obj": [
+     17.0,
+     14.449078806286575
+    ]
+   },
+   {
+    "k": 37,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 38,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 39,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 40,
+    "ok": true,
+    "obj": [
+     18.0,
+     67.36719224925955
+    ]
+   },
+   {
+    "k": 41,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.138795979750322
+    ]
+   },
+   {
+    "k": 42,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 43,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 44,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 45,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 46,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 47,
+    "ok": true,
+    "obj": [
+     17.0,
+     13.131584623957746
+    ]
+   },
+   {
+    "k": 48,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 49,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 50,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 51,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 52,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 53,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 54,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 55,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 56,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 57,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 58,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 59,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 60,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 61,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 62,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 63,
+    "ok": true,
+    "obj": [
+     12.0,
+     10.882606157515392
+    ]
+   },
+   {
+    "k": 64,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 65,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 66,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   }
+  ]
+ },
+ "ES16(s0)": {
+  "pure_feasible": 2,
+  "rand_feasible": 44,
+  "reasons": {
+   "工具用完": 21
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 1,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 2,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 3,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 4,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 5,
+    "ok": true,
+    "obj": [
+     18.0,
+     69.41428314953345
+    ]
+   },
+   {
+    "k": 6,
+    "ok": true,
+    "obj": [
+     15.0,
+     5.460663145043218
+    ]
+   },
+   {
+    "k": 7,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 8,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 9,
+    "ok": true,
+    "obj": [
+     18.0,
+     9.163923392911416
+    ]
+   },
+   {
+    "k": 10,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 11,
+    "ok": true,
+    "obj": [
+     12.0,
+     7.348469228349534
+    ]
+   },
+   {
+    "k": 12,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 13,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 14,
+    "ok": true,
+    "obj": [
+     17.0,
+     14.449078806286575
+    ]
+   },
+   {
+    "k": 15,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 16,
+    "ok": true,
+    "obj": [
+     12.0,
+     10.96540012949824
+    ]
+   },
+   {
+    "k": 17,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 18,
+    "ok": true,
+    "obj": [
+     18.0,
+     7.959899496852959
+    ]
+   },
+   {
+    "k": 19,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.4399999999999995
+    ]
+   },
+   {
+    "k": 20,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 21,
+    "ok": true,
+    "obj": [
+     13.0,
+     40.8401696792983
+    ]
+   },
+   {
+    "k": 22,
+    "ok": true,
+    "obj": [
+     18.0,
+     36.05614685275412
+    ]
+   },
+   {
+    "k": 23,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 24,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 25,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 26,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 27,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 28,
+    "ok": true,
+    "obj": [
+     15.0,
+     5.92746859276655
+    ]
+   },
+   {
+    "k": 29,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 30,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 31,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     0,
+     1,
+     2
+    ],
+    "robot_left": [
+     10,
+     8,
+     7
+    ],
+    "tool_left": [
+     5,
+     7,
+     2
+    ],
+    "tools_opened": [
+     3,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 32,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 33,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 34,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 35,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 36,
+    "ok": true,
+    "obj": [
+     15.0,
+     11.847562559989445
+    ]
+   },
+   {
+    "k": 37,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 38,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 39,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 40,
+    "ok": true,
+    "obj": [
+     15.0,
+     8.83280378548773
+    ]
+   },
+   {
+    "k": 41,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 42,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 43,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 44,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 45,
+    "ok": true,
+    "obj": [
+     11.0,
+     13.29520956378738
+    ]
+   },
+   {
+    "k": 46,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 47,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 48,
+    "ok": true,
+    "obj": [
+     12.0,
+     9.6
+    ]
+   },
+   {
+    "k": 49,
+    "ok": true,
+    "obj": [
+     12.0,
+     8.818163074019441
+    ]
+   },
+   {
+    "k": 50,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 51,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 52,
+    "ok": true,
+    "obj": [
+     17.0,
+     13.898056483550828
+    ]
+   },
+   {
+    "k": 53,
+    "ok": true,
+    "obj": [
+     11.0,
+     14.926070525224334
+    ]
+   },
+   {
+    "k": 54,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 55,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 56,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 57,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 58,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 59,
+    "ok": true,
+    "obj": [
+     12.0,
+     11.300769231534833
+    ]
+   },
+   {
+    "k": 60,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 61,
+    "ok": true,
+    "obj": [
+     17.0,
+     10.255847235642433
+    ]
+   },
+   {
+    "k": 62,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 63,
+    "ok": true,
+    "obj": [
+     9.0,
+     9.579014578904337
+    ]
+   },
+   {
+    "k": 64,
+    "ok": true,
+    "obj": [
+     12.0,
+     12.329098372008664
+    ]
+   },
+   {
+    "k": 65,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 66,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   }
+  ]
+ },
+ "默认": {
+  "pure_feasible": 2,
+  "rand_feasible": 47,
+  "reasons": {
+   "工具用完": 18
+  },
+  "fail_shift": [
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   5,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2
+  ],
+  "rows": [
+   {
+    "k": 0,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 1,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   },
+   {
+    "k": 2,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 3,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 4,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   },
+   {
+    "k": 5,
+    "ok": true,
+    "obj": [
+     16.0,
+     55.283886756968506
+    ]
+   },
+   {
+    "k": 6,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 7,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 8,
+    "ok": true,
+    "obj": [
+     14.0,
+     35.887585304698966
+    ]
+   },
+   {
+    "k": 9,
+    "ok": true,
+    "obj": [
+     11.0,
+     11.660841281982405
+    ]
+   },
+   {
+    "k": 10,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 11,
+    "ok": true,
+    "obj": [
+     11.0,
+     11.854905768603375
+    ]
+   },
+   {
+    "k": 12,
+    "ok": true,
+    "obj": [
+     13.0,
+     38.27428184324352
+    ]
+   },
+   {
+    "k": 13,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 14,
+    "ok": true,
+    "obj": [
+     15.0,
+     4.594029771560082
+    ]
+   },
+   {
+    "k": 15,
+    "ok": true,
+    "obj": [
+     14.0,
+     40.976464125701455
+    ]
+   },
+   {
+    "k": 16,
+    "ok": true,
+    "obj": [
+     11.0,
+     56.874123876723615
+    ]
+   },
+   {
+    "k": 17,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   },
+   {
+    "k": 18,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 19,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 20,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 21,
+    "ok": true,
+    "obj": [
+     9.0,
+     6.4399999999999995
+    ]
+   },
+   {
+    "k": 22,
+    "ok": true,
+    "obj": [
+     15.0,
+     5.460663145043218
+    ]
+   },
+   {
+    "k": 23,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 24,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 25,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 26,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 27,
+    "ok": true,
+    "obj": [
+     13.0,
+     37.84615840588687
+    ]
+   },
+   {
+    "k": 28,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 29,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 30,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 31,
+    "ok": true,
+    "obj": [
+     14.0,
+     35.60988588274045
+    ]
+   },
+   {
+    "k": 32,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 33,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 34,
+    "ok": false,
+    "shift": 5,
+    "t": 53,
+    "remaining": 667,
+    "opened": [
+     1,
+     0,
+     2
+    ],
+    "robot_left": [
+     9,
+     9,
+     7
+    ],
+    "tool_left": [
+     6,
+     7,
+     2
+    ],
+    "tools_opened": [
+     2,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 35,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 36,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 37,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.88540377724514
+    ]
+   },
+   {
+    "k": 38,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   },
+   {
+    "k": 39,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 40,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 41,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 42,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 43,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 44,
+    "ok": true,
+    "obj": [
+     14.0,
+     37.63701778458558
+    ]
+   },
+   {
+    "k": 45,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 46,
+    "ok": true,
+    "obj": [
+     14.0,
+     37.87337164277277
+    ]
+   },
+   {
+    "k": 47,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 48,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 49,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 50,
+    "ok": true,
+    "obj": [
+     14.0,
+     35.973249698134886
+    ]
+   },
+   {
+    "k": 51,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 52,
+    "ok": true,
+    "obj": [
+     15.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 53,
+    "ok": true,
+    "obj": [
+     9.0,
+     7.3371143170299735
+    ]
+   },
+   {
+    "k": 54,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   },
+   {
+    "k": 55,
+    "ok": true,
+    "obj": [
+     14.0,
+     38.88872514275684
+    ]
+   },
+   {
+    "k": 56,
+    "ok": true,
+    "obj": [
+     14.0,
+     44.62538030446547
+    ]
+   },
+   {
+    "k": 57,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 58,
+    "ok": true,
+    "obj": [
+     12.0,
+     17.732524190081993
+    ]
+   },
+   {
+    "k": 59,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 60,
+    "ok": true,
+    "obj": [
+     13.0,
+     37.615645052990246
+    ]
+   },
+   {
+    "k": 61,
+    "ok": true,
+    "obj": [
+     16.0,
+     26.701785643113364
+    ]
+   },
+   {
+    "k": 62,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   },
+   {
+    "k": 63,
+    "ok": false,
+    "shift": 2,
+    "t": 23,
+    "remaining": 697,
+    "opened": [
+     0,
+     0,
+     2
+    ],
+    "robot_left": [
+     10,
+     9,
+     7
+    ],
+    "tool_left": [
+     8,
+     7,
+     2
+    ],
+    "tools_opened": [
+     0,
+     0,
+     6
+    ],
+    "reason": "工具用完",
+    "action": "复用类型2"
+   },
+   {
+    "k": 64,
+    "ok": true,
+    "obj": [
+     9.0,
+     5.106561178793533
+    ]
+   },
+   {
+    "k": 65,
+    "ok": true,
+    "obj": [
+     14.0,
+     38.177488412474176
+    ]
+   },
+   {
+    "k": 66,
+    "ok": true,
+    "obj": [
+     14.0,
+     36.875553170226596
+    ]
+   }
+  ]
+ }
+}
