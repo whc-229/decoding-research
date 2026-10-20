@@ -1,0 +1,3 @@
+[submodule "排班_本地完整版/实验0_表示分析/bench/fjsp-instances"]
+	path = 排班_本地完整版/实验0_表示分析/bench/fjsp-instances
+	url = https://github.com/SchedulingLab/fjsp-instances.git

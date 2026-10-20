@@ -1,0 +1,47 @@
+{
+ "instance": "E23_1080h",
+ "T": 1080,
+ "nmax": 108,
+ "n_robot_types": 1,
+ "n_tool_types": 1,
+ "LB": 12,
+ "rule_res": null,
+ "rule_gap": null,
+ "rule_bal": null,
+ "rule_fixes": 0,
+ "supply": {
+  "0.1": {
+   "p_lb": 0.0,
+   "p_lb1": 0.0,
+   "res_min": 999.0,
+   "bal_at_min": 999.0,
+   "res_mean": 999.0,
+   "feasible": 0.0
+  },
+  "0.25": {
+   "p_lb": 0.0,
+   "p_lb1": 0.0,
+   "res_min": 999.0,
+   "bal_at_min": 999.0,
+   "res_mean": 999.0,
+   "feasible": 0.0
+  },
+  "0.5": {
+   "p_lb": 0.0,
+   "p_lb1": 0.0,
+   "res_min": 999.0,
+   "bal_at_min": 999.0,
+   "res_mean": 999.0,
+   "feasible": 0.0
+  },
+  "1.0": {
+   "p_lb": 0.0,
+   "p_lb1": 0.0,
+   "res_min": 999.0,
+   "bal_at_min": 999.0,
+   "res_mean": 999.0,
+   "feasible": 0.0
+  }
+ },
+ "secs": 0.13530850410461426
+}

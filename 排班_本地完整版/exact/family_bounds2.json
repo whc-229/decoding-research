@@ -1,0 +1,482 @@
+{
+ "E11_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "E12_1080h": {
+  "robot_lb": null,
+  "robot_exact": true,
+  "robot_note": "上限内都不可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -10,
+  "total_lb": null,
+  "secs": 0.0
+ },
+ "E13_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -10,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "E14_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "E15_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -10,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "E16_720h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "E17_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "E18_480h": {
+  "robot_lb": 8,
+  "robot_exact": true,
+  "robot_note": "8 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 14,
+  "secs": 0.0
+ },
+ "E19_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "E20_480h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "E21_720h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "E22_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "E23_1080h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -11,
+  "total_lb": 12,
+  "secs": 0.0
+ },
+ "E24_480h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -11,
+  "total_lb": 11,
+  "secs": 0.0
+ },
+ "E25_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -5,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "E26_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -10,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "H11_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H12_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H13_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -5,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H14_720h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 9,
+  "secs": 0.1
+ },
+ "H15_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -12,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "H16_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H17_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H18_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 8,
+  "secs": 0.1
+ },
+ "H19_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -5,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H20_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H21_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 8,
+  "secs": 0.3
+ },
+ "H22_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H23_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -11,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H24_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 8,
+  "secs": 0.1
+ },
+ "H25_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "H26_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 9,
+  "secs": 0.4
+ },
+ "M11_1080h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -11,
+  "total_lb": 10,
+  "secs": 0.8
+ },
+ "M12_1080h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 10,
+  "secs": 0.6
+ },
+ "M13_480h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "M14_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -3,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "M15_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "M16_1080h": {
+  "robot_lb": 7,
+  "robot_exact": true,
+  "robot_note": "7 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 11,
+  "secs": 18.7
+ },
+ "M17_480h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 10,
+  "secs": 0.8
+ },
+ "M18_480h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 10,
+  "secs": 2.7
+ },
+ "M19_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -4,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "M20_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 9,
+  "secs": 0.4
+ },
+ "M21_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "M22_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -4,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "M23_1080h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -4,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "M24_720h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -5,
+  "total_lb": 11,
+  "secs": 0.0
+ },
+ "M25_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -2,
+  "total_lb": 8,
+  "secs": 0.2
+ },
+ "M26_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 6,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 11,
+  "secs": 0.8
+ }
+}

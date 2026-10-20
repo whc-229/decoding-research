@@ -1,0 +1,166 @@
+{
+    "Custom": {
+        "remain_work_time": 36
+    },
+    "ID": 1,
+    "category": "Robot",
+    "list_property": {
+        "cargo_type_list": [
+            0
+        ]
+    },
+    "normal_property": {
+        "cargo_type_num": 1,
+        "carry_num": 2,
+        "charge_time": 4,
+        "continue_max_work": 36,
+        "limit_num": 10,
+        "maintenance_time": 72,
+        "out_travel_time": 1,
+        "remain_work_time": 36,
+        "return_travel_time": 1,
+        "single_work_time": 12,
+        "work_time": 10
+    },
+    "type": 0,
+    "workflow": {
+        "-2": {
+            "Name": "结束",
+            "Successors": [],
+            "Workflow_Type": "End"
+        },
+        "0": {
+            "Name": "开始",
+            "Successors": [
+                "1"
+            ],
+            "Workflow_Type": "Start"
+        },
+        "1": {
+            "Name": "安装工具",
+            "Successors": [
+                "2"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "other_max",
+                "other": "install_time"
+            }
+        },
+        "10": {
+            "Name": "更新剩余工时",
+            "Successors": [
+                "1000"
+            ],
+            "Workflow_Type": "Action",
+            "category": {
+                "Relationship": "-",
+                "left": {
+                    "Robot": "remain_work_time"
+                },
+                "right": {
+                    "Robot": "single_work_time"
+                }
+            }
+        },
+        "1000": {
+            "Name": "判断剩余工时",
+            "Successors": [
+                "7",
+                "8"
+            ],
+            "Workflow_Type": "Decision",
+            "category": {
+                "Relationship": ">=",
+                "left": {
+                    "Robot": "remain_work_time"
+                },
+                "right": {
+                    "Robot": "single_work_time"
+                }
+            }
+        },
+        "11": {
+            "Name": "更新2",
+            "Successors": [
+                "-2"
+            ],
+            "Workflow_Type": "Action",
+            "category": {
+                "Relationship": "=",
+                "left": {
+                    "Robot": "remain_work_time"
+                },
+                "right": {
+                    "Robot": "continue_max_work"
+                }
+            }
+        },
+        "2": {
+            "Name": "去程",
+            "Successors": [
+                "3"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "out_travel_time"
+            }
+        },
+        "3": {
+            "Name": "值班",
+            "Successors": [
+                "4"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "work_time"
+            }
+        },
+        "4": {
+            "Name": "返程",
+            "Successors": [
+                "5"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "return_travel_time"
+            }
+        },
+        "5": {
+            "Name": "拆卸工具",
+            "Successors": [
+                "10"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "other_max",
+                "other": "removal_time"
+            }
+        },
+        "7": {
+            "Name": "充电",
+            "Successors": [
+                "-2"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "charge_time"
+            }
+        },
+        "8": {
+            "Name": "维修",
+            "Successors": [
+                "11"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "maintenance_time"
+            }
+        }
+    }
+}

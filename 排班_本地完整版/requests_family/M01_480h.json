@@ -1,0 +1,5052 @@
+{
+ "questName": "robot",
+ "entityDataList": [
+  {
+   "englishName": "Robot",
+   "entityCategoryName": "机器人",
+   "entityName": "G1型号",
+   "exampleList": [
+    {
+     "exampleName": "实例1",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 105
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 7
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 9
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例2",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 105
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 7
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 9
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例3",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 105
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 7
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 9
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例4",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 105
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 7
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 9
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例5",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 105
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 7
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 9
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例6",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 105
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 7
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 9
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例7",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 105
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 7
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 9
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 36
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例1",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 12
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 92
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 4
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 14
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例2",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 12
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 92
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 4
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 14
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例3",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 12
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 92
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 4
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 14
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例4",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 12
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 92
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 4
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 14
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例5",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 12
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 92
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 4
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 14
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例6",
+     "paramList": [
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "out_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "return_travel_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "work_time",
+       "inputValue": 12
+      },
+      {
+       "paramEnglishName": "maintenance_time",
+       "inputValue": 92
+      },
+      {
+       "paramEnglishName": "charge_time",
+       "inputValue": 4
+      },
+      {
+       "paramEnglishName": "carry_num",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "cargo_type_list",
+       "inputValue": [
+        0,
+        1,
+        2
+       ]
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "single_work_time",
+       "inputValue": 14
+      },
+      {
+       "paramEnglishName": "continue_max_work",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "remain_work_time",
+       "inputValue": 42
+      },
+      {
+       "paramEnglishName": "cargo_type_num",
+       "inputValue": 3
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "out_travel_time"
+       },
+       "Name": "去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "work_time"
+       },
+       "Name": "值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "return_travel_time"
+       },
+       "Name": "返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "other_max",
+        "other": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "-",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "更新剩余工时"
+      },
+      "7": {
+       "Workflow_Type": "Decision",
+       "Successors": [
+        "8",
+        "9"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": ">=",
+        "right": {
+         "Robot": "single_work_time"
+        }
+       },
+       "Name": "判断剩余工时"
+      },
+      "8": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "charge_time"
+       },
+       "Name": "充电"
+      },
+      "9": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "10"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Robot": "maintenance_time"
+       },
+       "Name": "维修"
+      },
+      "10": {
+       "Workflow_Type": "Action",
+       "Successors": [
+        "11"
+       ],
+       "category": {
+        "left": {
+         "Robot": "remain_work_time"
+        },
+        "Relationship": "=",
+        "right": {
+         "Robot": "continue_max_work"
+        }
+       },
+       "Name": "更新2"
+      },
+      "11": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "englishName": "Tool",
+   "entityCategoryName": "工具",
+   "entityName": "工具1",
+   "exampleList": [
+    {
+     "exampleName": "实例1",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例2",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例3",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例4",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例5",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例6",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 0
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例1",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例2",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例3",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例4",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例5",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例6",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 6
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 3
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例1",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例2",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例3",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例4",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例5",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例6",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例7",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    },
+    {
+     "exampleName": "实例8",
+     "paramList": [
+      {
+       "paramEnglishName": "install_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "removal_time",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "tool_work_time",
+       "inputValue": 10
+      },
+      {
+       "paramEnglishName": "type",
+       "inputValue": 2
+      },
+      {
+       "paramEnglishName": "limit_num",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_rest_time",
+       "inputValue": 8
+      },
+      {
+       "paramEnglishName": "tool_out_time",
+       "inputValue": 1
+      },
+      {
+       "paramEnglishName": "tool_return_time",
+       "inputValue": 1
+      }
+     ],
+     "workflow": {
+      "0": {
+       "Workflow_Type": "Start",
+       "Successors": [
+        "1"
+       ],
+       "Name": "开始"
+      },
+      "1": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "2"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "install_time"
+       },
+       "Name": "安装工具"
+      },
+      "2": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "3"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_out_time"
+       },
+       "Name": "工具去程"
+      },
+      "3": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "4"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_work_time"
+       },
+       "Name": "工具值班"
+      },
+      "4": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "5"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_return_time"
+       },
+       "Name": "工具返程"
+      },
+      "5": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "6"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "removal_time"
+       },
+       "Name": "拆卸工具"
+      },
+      "6": {
+       "Workflow_Type": "Time",
+       "Successors": [
+        "7"
+       ],
+       "category": {
+        "Relationship": "self",
+        "Tool": "tool_rest_time"
+       },
+       "Name": "工具休息"
+      },
+      "7": {
+       "Workflow_Type": "End",
+       "Successors": [],
+       "Name": "结束"
+      }
+     }
+    }
+   ]
+  },
+  {
+   "entityCategoryName": "任务",
+   "entityName": "任务实体",
+   "exampleList": [
+    {
+     "exampleName": "实例1",
+     "paramList": [
+      {
+       "paramEnglishName": "task_duration",
+       "inputValue": 480
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "globalParamList": [
+  {
+   "paramName": "POPSIZE",
+   "paramValue": "30"
+  },
+  {
+   "paramName": "max_iterations",
+   "paramValue": "10"
+  },
+  {
+   "paramName": "Nvar",
+   "paramValue": "240"
+  },
+  {
+   "paramName": "Lbound",
+   "paramValue": "0"
+  },
+  {
+   "paramName": "Ubound",
+   "paramValue": "0.99"
+  }
+ ],
+ "parameterList": [
+  {
+   "name": "operator_list",
+   "dataType": "vector<string>",
+   "value": [
+    "select",
+    "crossover",
+    "mutate"
+   ],
+   "description": "算子调用列表"
+  },
+  {
+   "name": "operator_generation",
+   "dataType": "matrix<int>",
+   "value": [
+    [
+     0,
+     500
+    ],
+    [
+     0,
+     500
+    ],
+    [
+     0,
+     500
+    ]
+   ],
+   "description": "算子作用代数"
+  },
+  {
+   "name": "pc",
+   "dataType": "double",
+   "value": 0.8,
+   "description": "交叉算子"
+  },
+  {
+   "name": "pm",
+   "dataType": "double",
+   "value": 0.15,
+   "description": "变异算子"
+  }
+ ]
+}

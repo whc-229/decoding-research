@@ -1,0 +1,3518 @@
+{
+"BCE": {
+"method": "BCE",
+"file": "BCE.cpp",
+"size": 119,
+"gen": [],
+"sel": [
+"BCE_EnvironmentalSelection"
+],
+"arc": [
+"maintainEP"
+]
+},
+"BCE2": {
+"method": "BCE2",
+"file": "BCE.cpp",
+"size": 174,
+"gen": [],
+"sel": [
+"EnvironmentalSelection0",
+"EnvironmentalSelection1"
+],
+"arc": [
+"maintainEP"
+]
+},
+"HypE": {
+"method": "hypE",
+"file": "HypE.cpp",
+"size": 191,
+"gen": [],
+"sel": [
+"HypeEnvironmentalSelection"
+],
+"arc": []
+},
+"IBEA": {
+"method": "IBEA",
+"file": "IBEA.cpp",
+"size": 302,
+"gen": [],
+"sel": [
+"IBEA_environmentalSelection"
+],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"MOEAD": {
+"method": "MOEAD",
+"file": "MOEAD.cpp",
+"size": 172,
+"gen": [],
+"sel": [],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"NSGA": {
+"method": "NSGA",
+"file": "NSGA.cpp",
+"size": 206,
+"gen": [],
+"sel": [],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"NSGA_III": {
+"method": "NSGA_III",
+"file": "NSGA_III.cpp",
+"size": 245,
+"gen": [],
+"sel": [
+"NSGA_III_environmentalSelection"
+],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"PICEAg": {
+"method": "PICEAg",
+"file": "PICEAg.cpp",
+"size": 257,
+"gen": [],
+"sel": [],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"RVEA": {
+"method": "RVEA",
+"file": "RVEA.cpp",
+"size": 400,
+"gen": [],
+"sel": [],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"SPEA2+SDE": {
+"method": "SPEA2SDE",
+"file": "SPEA2_SDE.cpp",
+"size": 395,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSPEA2SDE"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOPSO-CD": {
+"method": "MOPSOCD",
+"file": "MOPSO_CD.cpp",
+"size": 326,
+"gen": [
+"GeneratePSOOffspringFromArchive"
+],
+"sel": [],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOPSO": {
+"method": "MOPSO",
+"file": "MOPSO.cpp",
+"size": 325,
+"gen": [
+"GeneratePSOOffspringFromArchive"
+],
+"sel": [],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"MOCell": {
+"method": "MOCell",
+"file": "MOCell.cpp",
+"size": 1122,
+"gen": [],
+"sel": [],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"PESA-II": {
+"method": "PESAII",
+"file": "PESAII.cpp",
+"size": 406,
+"gen": [
+"GeneratePESAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionPESA"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"MOEADD": {
+"method": "MOEADD",
+"file": "MOEADD.cpp",
+"size": 185,
+"gen": [],
+"sel": [],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"GrEA": {
+"method": "GrEA",
+"file": "GrEA.cpp",
+"size": 267,
+"gen": [],
+"sel": [
+"GrEA_EnvironmentalSelection"
+],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"R2HCA": {
+"method": "R2HCA",
+"file": "R2HCA.cpp",
+"size": 390,
+"gen": [],
+"sel": [],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"VaEA": {
+"method": "VaEA",
+"file": "VaEA.cpp",
+"size": 213,
+"gen": [],
+"sel": [
+"VaEA_environmentalSelection"
+],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"SRA": {
+"method": "SRA",
+"file": "SRA.cpp",
+"size": 193,
+"gen": [],
+"sel": [
+"SRA_environmentalSelection"
+],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"SPEA2": {
+"method": "SPEA2",
+"file": "SPEA2.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSPEA2"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"GDE3": {
+"method": "GDE3",
+"file": "GDE3.cpp",
+"size": 679,
+"gen": [
+"GenerateDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"SMS-EMOA": {
+"method": "SMSEMOA",
+"file": "SMS_EMOA.cpp",
+"size": 390,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSMS"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"SMPSO": {
+"method": "SMPSO",
+"file": "SMPSO.cpp",
+"size": 426,
+"gen": [
+"GeneratePSOOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-DE": {
+"method": "MOEADDE",
+"file": "MOEAD.cpp",
+"size": 1263,
+"gen": [
+"GenerateDEOffspring"
+],
+"sel": [],
+"arc": [
+"maintainEP",
+"updateEP"
+]
+},
+"AGE-MOEA": {
+"method": "AGEMOEA",
+"file": "AGE_MOEA.cpp",
+"size": 390,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionAGE"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"BiGE": {
+"method": "BiGE",
+"file": "BiGE.cpp",
+"size": 391,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionBiGE"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"RPD-NSGA-II": {
+"method": "RPDNSGAII",
+"file": "RPD_NSGA_II.cpp",
+"size": 394,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRPDNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"r-NSGA-II": {
+"method": "RNSGAII",
+"file": "r_NSGA_II.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"KnEA": {
+"method": "KnEA",
+"file": "KnEA.cpp",
+"size": 391,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionKnEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"RPEA": {
+"method": "RPEA",
+"file": "RPEA.cpp",
+"size": 391,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRPEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"AGE-MOEA-II": {
+"method": "AGEMOEAII",
+"file": "AGE_MOEA_II.cpp",
+"size": 396,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionAGEMOEAII"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"g-NSGA-II": {
+"method": "GNSGAII",
+"file": "g_NSGA_II.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionGNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"NSGA-II+ARSBX": {
+"method": "NSGAIIARSBX",
+"file": "NSGA_II_ARSBX.cpp",
+"size": 394,
+"gen": [
+"GenerateARSBXOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOMBI-II": {
+"method": "MOMBIII",
+"file": "MOMBI_II.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOMBI"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"RVEAa": {
+"method": "RVEAa",
+"file": "RVEAa.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"t-DEA": {
+"method": "TDEA",
+"file": "t_DEA.cpp",
+"size": 391,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTDEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"SIBEA": {
+"method": "SIBEA",
+"file": "SIBEA.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"SPEA-R": {
+"method": "SPEAR",
+"file": "SPEAR.cpp",
+"size": 725,
+"gen": [],
+"sel": [
+"EnvironmentalSelectionSPEAR"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-IGD-NS": {
+"method": "MOEAIGDNS",
+"file": "MOEA_IGD_NS.cpp",
+"size": 465,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"M-PAES": {
+"method": "MPAES",
+"file": "MPAES.cpp",
+"size": 626,
+"gen": [
+"GenerateArchiveGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionPESA"
+],
+"arc": [
+"UpdateArchiveByMPAES"
+]
+},
+"NMPSO": {
+"method": "NMPSO",
+"file": "NMPSO.cpp",
+"size": 800,
+"gen": [
+"GenerateArchiveGAOffspring",
+"GeneratePSOOffspringFromArchive"
+],
+"sel": [],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MPSO-D": {
+"method": "MPSOD",
+"file": "MPSOD.cpp",
+"size": 462,
+"gen": [
+"GenerateDecompositionPSOOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"AGE-II": {
+"method": "AGEII",
+"file": "AGE_II.cpp",
+"size": 473,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByEpsilon"
+]
+},
+"BCE-IBEA": {
+"method": "BCEIBEA",
+"file": "BCE_IBEA.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"BCE-MOEA-D": {
+"method": "BCEMOEAD",
+"file": "BCE_MOEAD.cpp",
+"size": 186,
+"gen": [
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-DRA": {
+"method": "MOEADDRA",
+"file": "MOEAD_DRA.cpp",
+"size": 205,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-STM": {
+"method": "MOEADSTM",
+"file": "MOEAD_STM.cpp",
+"size": 418,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-AWA": {
+"method": "MOEADAWA",
+"file": "MOEAD_AWA.cpp",
+"size": 255,
+"gen": [
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOEA-D-M2M": {
+"method": "MOEADM2M",
+"file": "MOEAD_M2M.cpp",
+"size": 426,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-UR": {
+"method": "MOEADUR",
+"file": "MOEAD_UR.cpp",
+"size": 472,
+"gen": [
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-PaS": {
+"method": "MOEADPaS",
+"file": "MOEAD_PaS.cpp",
+"size": 404,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"AdaW": {
+"method": "AdaW",
+"file": "AdaW.cpp",
+"size": 483,
+"gen": [
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"WASF-GA": {
+"method": "WASFGA",
+"file": "WASF_GA.cpp",
+"size": 411,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"GWASF-GA": {
+"method": "GWASFGA",
+"file": "GWASF_GA.cpp",
+"size": 412,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"I-SIBEA": {
+"method": "ISIBEA",
+"file": "I_SIBEA.cpp",
+"size": 735,
+"gen": [],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"Two_Arch2": {
+"method": "TwoArch2",
+"file": "Two_Arch2.cpp",
+"size": 563,
+"gen": [
+"GenerateArchiveGAOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"RSEA": {
+"method": "RSEA",
+"file": "RSEA.cpp",
+"size": 470,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"NSGA-II-SDR": {
+"method": "NSGAIISDR",
+"file": "NSGA_II_SDR.cpp",
+"size": 402,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-PC": {
+"method": "MOEAPC",
+"file": "MOEA_PC.cpp",
+"size": 397,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"e-MOEA": {
+"method": "EMOEA",
+"file": "e_MOEA.cpp",
+"size": 480,
+"gen": [
+"GenerateArchiveGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByEpsilon"
+]
+},
+"dMOPSO": {
+"method": "DMOPSO",
+"file": "dMOPSO.cpp",
+"size": 537,
+"gen": [
+"GenerateDecompositionPSOOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MO_Ring_PSO_SCD": {
+"method": "MORingPSOSCD",
+"file": "MO_Ring_PSO_SCD.cpp",
+"size": 429,
+"gen": [
+"GenerateRingPSOOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"ENS-MOEA-D": {
+"method": "ENSMOEAD",
+"file": "ENS_MOEAD.cpp",
+"size": 206,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-DU": {
+"method": "MOEADDU",
+"file": "MOEAD_DU.cpp",
+"size": 186,
+"gen": [
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-VOV": {
+"method": "MOEADVOV",
+"file": "MOEAD_VOV.cpp",
+"size": 394,
+"gen": [
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-CMA": {
+"method": "MOEADCMA",
+"file": "MOEAD_CMA.cpp",
+"size": 186,
+"gen": [
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MCEA-D": {
+"method": "MCEAD",
+"file": "MCEA_D.cpp",
+"size": 379,
+"gen": [
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"SFA-DE": {
+"method": "SFADE",
+"file": "SFA_DE.cpp",
+"size": 458,
+"gen": [
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOEA-D-DCWV": {
+"method": "MOEADDCWV",
+"file": "MOEAD_DCWV.cpp",
+"size": 400,
+"gen": [
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-MRDL": {
+"method": "MOEADMRDL",
+"file": "MOEAD_MRDL.cpp",
+"size": 415,
+"gen": [
+"GenerateARSBXOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-RE": {
+"method": "MOEARE",
+"file": "MOEA_RE.cpp",
+"size": 475,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MaOEA-IGD": {
+"method": "MaOEAIGD",
+"file": "MaOEA_IGD.cpp",
+"size": 465,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MaOEA-CSS": {
+"method": "MaOEACSS",
+"file": "MaOEA_CSS.cpp",
+"size": 400,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MaOEA-DDFC": {
+"method": "MaOEADDFC",
+"file": "MaOEA_DDFC.cpp",
+"size": 395,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"HEA": {
+"method": "HEA",
+"file": "HEA.cpp",
+"size": 406,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"HeE-MOEA": {
+"method": "HeEMOEA",
+"file": "HeE_MOEA.cpp",
+"size": 402,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"NSGA-II-conflict": {
+"method": "NSGAIIConflict",
+"file": "NSGA_II_conflict.cpp",
+"size": 395,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"TS-NSGA-II": {
+"method": "TSNSGAII",
+"file": "TS_NSGA_II.cpp",
+"size": 412,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"PeEA": {
+"method": "PeEA",
+"file": "PeEA.cpp",
+"size": 399,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"one-by-one EA": {
+"method": "OneByOneEA",
+"file": "one_by_one_EA.cpp",
+"size": 674,
+"gen": [],
+"sel": [],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"NRV-MOEA": {
+"method": "NRVMOEA",
+"file": "NRV_MOEA.cpp",
+"size": 475,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MSEA": {
+"method": "MSEA",
+"file": "MSEA.cpp",
+"size": 509,
+"gen": [
+"GenerateARSBXOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"A-NSGA-III": {
+"method": "ANSGAIII",
+"file": "A_NSGA_III.cpp",
+"size": 395,
+"gen": [
+"GenerateARSBXOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"AE-NSGA-II": {
+"method": "AENSGAII",
+"file": "AE_NSGA_II.cpp",
+"size": 570,
+"gen": [
+"GenerateARSBXOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByEpsilon"
+]
+},
+"AR-MOEA": {
+"method": "ARMOEA",
+"file": "AR_MOEA.cpp",
+"size": 568,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CCGDE3": {
+"method": "CCGDE3",
+"file": "CCGDE3.cpp",
+"size": 384,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DEA-GNG": {
+"method": "DEAGNG",
+"file": "DEA_GNG.cpp",
+"size": 413,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DGEA": {
+"method": "DGEA",
+"file": "DGEA.cpp",
+"size": 405,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DN-NSGA-II": {
+"method": "DNNSGAII",
+"file": "DN_NSGA_II.cpp",
+"size": 395,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DNSGA-II": {
+"method": "DNSGAII",
+"file": "DNSGA_II.cpp",
+"size": 403,
+"gen": [
+"GenerateARSBXOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"EAG-MOEA-D": {
+"method": "EAGMOEAD",
+"file": "EAG_MOEA_D.cpp",
+"size": 254,
+"gen": [
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"I-DBEA": {
+"method": "IDBEA",
+"file": "I_DBEA.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"KL-NSGA-II": {
+"method": "KLNSGAII",
+"file": "KL_NSGA_II.cpp",
+"size": 391,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionKnEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MaOEA-HAP": {
+"method": "MaOEAHAP",
+"file": "MaOEA_HAP.cpp",
+"size": 403,
+"gen": [
+"GenerateARSBXOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MaOEA-IT": {
+"method": "MaOEAIT",
+"file": "MaOEA_IT.cpp",
+"size": 391,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTDEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-2WA": {
+"method": "MOEAD2WA",
+"file": "MOEAD_2WA.cpp",
+"size": 190,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-FRRMAB": {
+"method": "MOEADFRRMAB",
+"file": "MOEAD_FRRMAB.cpp",
+"size": 415,
+"gen": [
+"GenerateNeighborhoodDEOffspring",
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-PFE": {
+"method": "MOEADPFE",
+"file": "MOEAD_PFE.cpp",
+"size": 419,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-DVA": {
+"method": "MOEADVA",
+"file": "MOEADVA.cpp",
+"size": 398,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-NZD": {
+"method": "MOEANZD",
+"file": "MOEA_NZD.cpp",
+"size": 402,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MSOPS-II": {
+"method": "MSOPSII",
+"file": "MSOPS_II.cpp",
+"size": 392,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"NNIA": {
+"method": "NNIA",
+"file": "NNIA.cpp",
+"size": 476,
+"gen": [
+"GenerateArchiveGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"RM-MEDA": {
+"method": "RMMEDA",
+"file": "RM_MEDA.cpp",
+"size": 397,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MO-CMA": {
+"method": "MOCMA",
+"file": "MO_CMA.cpp",
+"size": 438,
+"gen": [
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSMS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"HREA": {
+"method": "HREA",
+"file": "HREA.cpp",
+"size": 404,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSPEA2SDE"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"RVEA-iGNG": {
+"method": "RVEAiGNG",
+"file": "RVEA_iGNG.cpp",
+"size": 430,
+"gen": [
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"RMOEA-DVA": {
+"method": "RMOEADVA",
+"file": "RMOEA_DVA.cpp",
+"size": 404,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MaOEA-R&D": {
+"method": "MaOEARD",
+"file": "MaOEA_RD.cpp",
+"size": 400,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"SIBEA-kEMOSS": {
+"method": "SIBEAkEMOSS",
+"file": "SIBEA_kEMOSS.cpp",
+"size": 400,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"LMOCSO": {
+"method": "LMOCSO",
+"file": "LMOCSO.cpp",
+"size": 442,
+"gen": [
+"GenerateCompetitiveSwarmOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"LMEA": {
+"method": "LMEA",
+"file": "LMEA.cpp",
+"size": 467,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"LSMOF": {
+"method": "LSMOF",
+"file": "LSMOF.cpp",
+"size": 382,
+"gen": [
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-D-URAW": {
+"method": "MOEADURAW",
+"file": "MOEAD_URAW.cpp",
+"size": 429,
+"gen": [
+"GenerateNeighborhoodDEOffspring",
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOEA-D-DYTS": {
+"method": "MOEADDYTS",
+"file": "MOEAD_DYTS.cpp",
+"size": 477,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateCMAStyleOffspring",
+"GenerateNeighborhoodDEOffspring",
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"SMEA": {
+"method": "SMEA",
+"file": "SMEA.cpp",
+"size": 396,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"NSLS": {
+"method": "NSLS",
+"file": "NSLS.cpp",
+"size": 391,
+"gen": [
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MyO-DEMR": {
+"method": "MyODEMR",
+"file": "MyO_DEMR.cpp",
+"size": 392,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MMOPSO": {
+"method": "MMOPSO",
+"file": "MMOPSO.cpp",
+"size": 523,
+"gen": [
+"GenerateCompetitiveSwarmOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOBCA": {
+"method": "MOBCA",
+"file": "MOBCA.cpp",
+"size": 392,
+"gen": [
+"GenerateBesiegeOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"CA-MOEA": {
+"method": "CAMOEA",
+"file": "CA_MOEA.cpp",
+"size": 401,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"DWU": {
+"method": "DWU",
+"file": "DWU.cpp",
+"size": 546,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"EFR-RR": {
+"method": "EFRRR",
+"file": "EFR_RR.cpp",
+"size": 420,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"C-MOEA-D": {
+"method": "CMOEAD",
+"file": "C_MOEAD.cpp",
+"size": 199,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"C-TAEA": {
+"method": "CTAEA",
+"file": "C_TAEA.cpp",
+"size": 406,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"C-TSEA": {
+"method": "CTSEA",
+"file": "C_TSEA.cpp",
+"size": 624,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore",
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DCNSGA-III": {
+"method": "DCNSGAIII",
+"file": "DCNSGA_III.cpp",
+"size": 522,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict",
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DMOEA-eC": {
+"method": "DMOEAeC",
+"file": "DMOEA_eC.cpp",
+"size": 419,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"ICMA": {
+"method": "ICMA",
+"file": "ICMA.cpp",
+"size": 400,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MSCEA": {
+"method": "MSCEA",
+"file": "MSCEA.cpp",
+"size": 833,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA",
+"EnvironmentalSelectionRegionExplore",
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"PREA": {
+"method": "PREA",
+"file": "PREA.cpp",
+"size": 399,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"SGEA": {
+"method": "SGEA",
+"file": "SGEA.cpp",
+"size": 411,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"SSCEA": {
+"method": "SSCEA",
+"file": "SSCEA.cpp",
+"size": 401,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"hpaEA": {
+"method": "HPAEA",
+"file": "hpaEA.cpp",
+"size": 412,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"tDEA-CPBI": {
+"method": "TDEACPBI",
+"file": "tDEA_CPBI.cpp",
+"size": 391,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTDEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"K-RVEA": {
+"method": "KRVEA",
+"file": "K_RVEA.cpp",
+"size": 380,
+"gen": [
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"IM-MOEA-D": {
+"method": "IMMOEAD",
+"file": "IM_MOEAD.cpp",
+"size": 194,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"IM-MOEA": {
+"method": "IMMOEA",
+"file": "IM_MOEA.cpp",
+"size": 390,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"LMOEA-DS": {
+"method": "LMOEADS",
+"file": "LMOEA_DS.cpp",
+"size": 390,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"LRMOEA": {
+"method": "LRMOEA",
+"file": "LRMOEA.cpp",
+"size": 503,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MO-EGS": {
+"method": "MOEGS",
+"file": "MO_EGS.cpp",
+"size": 397,
+"gen": [
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOSD": {
+"method": "MOSD",
+"file": "MOSD.cpp",
+"size": 391,
+"gen": [
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"FLEA": {
+"method": "FLEA",
+"file": "FLEA.cpp",
+"size": 385,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"BiCo": {
+"method": "BiCo",
+"file": "BiCo.cpp",
+"size": 406,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"NSBiDiCo": {
+"method": "NSBiDiCo",
+"file": "NSBiDiCo.cpp",
+"size": 536,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict",
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"C3M": {
+"method": "C3M",
+"file": "C3M.cpp",
+"size": 394,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CAEAD": {
+"method": "CAEAD",
+"file": "CAEAD.cpp",
+"size": 199,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CCMO": {
+"method": "CCMO",
+"file": "CCMO.cpp",
+"size": 397,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CGLP": {
+"method": "CGLP",
+"file": "CGLP.cpp",
+"size": 405,
+"gen": [
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CLIA": {
+"method": "CLIA",
+"file": "CLIA.cpp",
+"size": 386,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CMDEIPCM": {
+"method": "CMDEIPCM",
+"file": "CMDEIPCM.cpp",
+"size": 419,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMEGL": {
+"method": "CMEGL",
+"file": "CMEGL.cpp",
+"size": 451,
+"gen": [
+"GenerateCompetitiveSwarmOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CMME": {
+"method": "CMME",
+"file": "CMME.cpp",
+"size": 378,
+"gen": [
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMMO": {
+"method": "CMMO",
+"file": "CMMO.cpp",
+"size": 390,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMPSOD"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMOBR": {
+"method": "CMOBR",
+"file": "CMOBR.cpp",
+"size": 396,
+"gen": [
+"GenerateBesiegeOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"CMOCSO": {
+"method": "CMOCSO",
+"file": "CMOCSO.cpp",
+"size": 455,
+"gen": [
+"GenerateCompetitiveSwarmOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CMODE-FTR": {
+"method": "CMODEFTR",
+"file": "CMODE_FTR.cpp",
+"size": 405,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMOEA-2S": {
+"method": "CMOEA2S",
+"file": "CMOEA_2S.cpp",
+"size": 634,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore",
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CMOEA-AOP": {
+"method": "CMOEAAOP",
+"file": "CMOEA_AOP.cpp",
+"size": 688,
+"gen": [
+"GenerateCMAStyleOffspring",
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMOEA-CD": {
+"method": "CMOEACD",
+"file": "CMOEA_CD.cpp",
+"size": 411,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CMOEA-MS": {
+"method": "CMOEAMS",
+"file": "CMOEA_MS.cpp",
+"size": 489,
+"gen": [
+"GenerateGAOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMOEA-MSG": {
+"method": "CMOEAMSG",
+"file": "CMOEA_MSG.cpp",
+"size": 399,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"CMOES": {
+"method": "CMOES",
+"file": "CMOES.cpp",
+"size": 378,
+"gen": [
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSMS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"AC-MMEA": {
+"method": "ACMMEA",
+"file": "AC_MMEA.cpp",
+"size": 393,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"AFSEA": {
+"method": "AFSEA",
+"file": "AFSEA.cpp",
+"size": 409,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"AGSEA": {
+"method": "AGSEA",
+"file": "AGSEA.cpp",
+"size": 398,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"APSEA": {
+"method": "APSEA",
+"file": "APSEA.cpp",
+"size": 411,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMOEA-MOP": {
+"method": "CMOEAMOP",
+"file": "CMOEA_MOP.cpp",
+"size": 523,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CNSDE-DVC": {
+"method": "CNSDEDVC",
+"file": "CNSDE_DVC.cpp",
+"size": 402,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CoMMEA": {
+"method": "CoMMEA",
+"file": "CoMMEA.cpp",
+"size": 497,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"DKCA": {
+"method": "DKCA",
+"file": "DKCA.cpp",
+"size": 392,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"DM-MOEA": {
+"method": "DMMOEA",
+"file": "DM_MOEA.cpp",
+"size": 624,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DP-PPS": {
+"method": "DPPPS",
+"file": "DP_PPS.cpp",
+"size": 291,
+"gen": [
+"GenerateNeighborhoodDEOffspring",
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"DPCPRA": {
+"method": "DPCPRA",
+"file": "DPCPRA.cpp",
+"size": 410,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DPVAPS": {
+"method": "DPVAPS",
+"file": "DPVAPS.cpp",
+"size": 380,
+"gen": [
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"DSPCMDE": {
+"method": "DSPCMDE",
+"file": "DSPCMDE.cpp",
+"size": 404,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"DSSEA": {
+"method": "DSSEA",
+"file": "DSSEA.cpp",
+"size": 402,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"DVCEA": {
+"method": "DVCEA",
+"file": "DVCEA.cpp",
+"size": 394,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"FDV": {
+"method": "FDV",
+"file": "FDV.cpp",
+"size": 400,
+"gen": [
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"GFM-MOEA": {
+"method": "GFMMOEA",
+"file": "GFM_MOEA.cpp",
+"size": 399,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"GLMO": {
+"method": "GLMO",
+"file": "GLMO.cpp",
+"size": 480,
+"gen": [
+"GenerateLocalSearchOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"GPSO-M": {
+"method": "GPSOM",
+"file": "GPSO_M.cpp",
+"size": 452,
+"gen": [
+"GeneratePSOOffspringFromArchive"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"HHC-MMEA": {
+"method": "HHCMMEA",
+"file": "HHC_MMEA.cpp",
+"size": 612,
+"gen": [
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"ADSAPSO": {
+"method": "ADSAPSO",
+"file": "ADSAPSO.cpp",
+"size": 661,
+"gen": [
+"GenerateCompetitiveSwarmOffspring",
+"GeneratePSOOffspringFromArchive"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"CI-EMO": {
+"method": "CIEMO",
+"file": "CI_EMO.cpp",
+"size": 404,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CMOPSO": {
+"method": "CMOPSO",
+"file": "CMOPSO.cpp",
+"size": 452,
+"gen": [
+"GeneratePSOOffspringFromArchive"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"CPS-MOEA": {
+"method": "CPSMOEA",
+"file": "CPS_MOEA.cpp",
+"size": 524,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"DAEA": {
+"method": "DAEA",
+"file": "DAEA.cpp",
+"size": 624,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"EGES": {
+"method": "EGES",
+"file": "EGES.cpp",
+"size": 629,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByEpsilon"
+]
+},
+"FRCG-M": {
+"method": "FRCGM",
+"file": "FRCG_M.cpp",
+"size": 409,
+"gen": [
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"GDVTSF": {
+"method": "GDVTSF",
+"file": "GDVTSF.cpp",
+"size": 401,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"ILCMO": {
+"method": "ILCMO",
+"file": "ILCMO.cpp",
+"size": 517,
+"gen": [
+"GenerateArchiveGAOffspring",
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"IM-C-MOEA-D": {
+"method": "IMCMOEAD",
+"file": "IM_C_MOEAD.cpp",
+"size": 306,
+"gen": [
+"GenerateNeighborhoodDEOffspring",
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"KLEA": {
+"method": "KLEA",
+"file": "KLEA.cpp",
+"size": 400,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionKnEA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"LCMEA": {
+"method": "LCMEA",
+"file": "LCMEA.cpp",
+"size": 400,
+"gen": [
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"LMPFE": {
+"method": "LMPFE",
+"file": "LMPFE.cpp",
+"size": 400,
+"gen": [
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MCCMO": {
+"method": "MCCMO",
+"file": "MCCMO.cpp",
+"size": 394,
+"gen": [
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"MFFS": {
+"method": "MFFS",
+"file": "MFFS.cpp",
+"size": 395,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MFO-SPEA2": {
+"method": "MFOSPEA2",
+"file": "MFO_SPEA2.cpp",
+"size": 401,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSPEA2"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOCGDE": {
+"method": "MOCGDE",
+"file": "MOCGDE.cpp",
+"size": 378,
+"gen": [
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MOEA-CKF": {
+"method": "MOEACKF",
+"file": "MOEA_CKF.cpp",
+"size": 485,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateCMAStyleOffspring"
+],
+"sel": [
+"EnvironmentalSelectionKnEA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOEA-D-CMT": {
+"method": "MOEADCMT",
+"file": "MOEAD_CMT.cpp",
+"size": 200,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOEA-D-DAE": {
+"method": "MOEADDAE",
+"file": "MOEAD_DAE.cpp",
+"size": 398,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateNeighborhoodDEOffspring",
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"DecompositionReplacement"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"CMOSMA": {
+"method": "CMOSMA",
+"file": "CMOSMA.cpp",
+"size": 500,
+"gen": [
+"GenerateBesiegeOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"CMaDPPs": {
+"method": "CMaDPPs",
+"file": "CMaDPPs.cpp",
+"size": 406,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"EMCMO": {
+"method": "EMCMO",
+"file": "EMCMO.cpp",
+"size": 630,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByEpsilon"
+]
+},
+"EMMOEA": {
+"method": "EMMOEA",
+"file": "EMMOEA.cpp",
+"size": 628,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateRandomImmigrantOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"EMCMMS": {
+"method": "EMCMMS",
+"file": "EMCMMS.cpp",
+"size": 392,
+"gen": [
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"EMyO-C": {
+"method": "EMyOC",
+"file": "EMyO_C.cpp",
+"size": 626,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MGCEA": {
+"method": "MGCEA",
+"file": "MGCEA.cpp",
+"size": 521,
+"gen": [
+"GenerateGAOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MMEA-ARM": {
+"method": "MMEAARM",
+"file": "MMEA_ARM.cpp",
+"size": 617,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MMEA-WI": {
+"method": "MMEAWI",
+"file": "MMEA_WI.cpp",
+"size": 421,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MMEAPSL": {
+"method": "MMEAPSL",
+"file": "MMEAPSL.cpp",
+"size": 501,
+"gen": [
+"GenerateLocalSearchOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MMOEA-BH": {
+"method": "MMOEABH",
+"file": "MMOEA_BH.cpp",
+"size": 387,
+"gen": [
+"GenerateBesiegeOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MO-L2SMEA": {
+"method": "MOL2SMEA",
+"file": "MO_L2SMEA.cpp",
+"size": 634,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MOEA-IB": {
+"method": "MOEAIB",
+"file": "MOEA_IB.cpp",
+"size": 499,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionSIBEA"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"MP-MMEA": {
+"method": "MPMMEA",
+"file": "MP_MMEA.cpp",
+"size": 611,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MSCMO": {
+"method": "MSCMO",
+"file": "MSCMO.cpp",
+"size": 645,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict",
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"NUCEA": {
+"method": "NUCEA",
+"file": "NUCEA.cpp",
+"size": 623,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"OSP-NSDE": {
+"method": "OSPNSDE",
+"file": "OSP_NSDE.cpp",
+"size": 632,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"PB-NSGA-III": {
+"method": "PBNSGAIII",
+"file": "PB_NSGA_III.cpp",
+"size": 420,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"PB-RVEA": {
+"method": "PBRVEA",
+"file": "PB_RVEA.cpp",
+"size": 624,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"PIEA": {
+"method": "PIEA",
+"file": "PIEA.cpp",
+"size": 630,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateGAOffspring",
+"GenerateRandomImmigrantOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"EDN-ARMOEA": {
+"method": "EDNARMOEA",
+"file": "EDN_ARMOEA.cpp",
+"size": 733,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionAGEMOEAII",
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"IMTCMO": {
+"method": "IMTCMO",
+"file": "IMTCMO.cpp",
+"size": 644,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict",
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"IMTCMO_BS": {
+"method": "IMTCMOBS",
+"file": "IMTCMO_BS.cpp",
+"size": 493,
+"gen": [
+"GenerateBesiegeOffspring",
+"GenerateBestGuidedDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"LCSA": {
+"method": "LCSA",
+"file": "LCSA.cpp",
+"size": 405,
+"gen": [
+"GenerateCompetitiveSwarmOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"LDS-AF": {
+"method": "LDSAF",
+"file": "LDS_AF.cpp",
+"size": 632,
+"gen": [
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"LERD": {
+"method": "LERD",
+"file": "LERD.cpp",
+"size": 634,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRegionExplore"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"NBLEA": {
+"method": "NBLEA",
+"file": "NBLEA.cpp",
+"size": 413,
+"gen": [
+"GenerateNeighborhoodDEOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"NNDREA-MO": {
+"method": "NNDREAMO",
+"file": "NNDREA_MO.cpp",
+"size": 717,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS",
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"POCEA": {
+"method": "POCEA",
+"file": "POCEA.cpp",
+"size": 604,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateCMAStyleOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"PPS": {
+"method": "PPS",
+"file": "PPS.cpp",
+"size": 576,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByEpsilon"
+]
+},
+"PRCEA": {
+"method": "PRCEA",
+"file": "PRCEA.cpp",
+"size": 527,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"PRDH": {
+"method": "PRDH",
+"file": "PRDH.cpp",
+"size": 622,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateDirectionRestrictedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionRPDNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"RGA-M1-2": {
+"method": "RGAM12",
+"file": "RGA_M1_2.cpp",
+"size": 401,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionGNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"RGA-M2-2": {
+"method": "RGAM22",
+"file": "RGA_M2_2.cpp",
+"size": 630,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateGAOffspring",
+"GenerateRandomImmigrantOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"S-CDAS": {
+"method": "SCDAS",
+"file": "S_CDAS.cpp",
+"size": 395,
+"gen": [
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveFromPopulation"
+]
+},
+"S-ECSO": {
+"method": "SECSO",
+"file": "S_ECSO.cpp",
+"size": 458,
+"gen": [
+"GenerateCompetitiveSwarmOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEntropy"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"S-NSGA-II": {
+"method": "SNSGAII",
+"file": "S_NSGA_II.cpp",
+"size": 634,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionShiftedDistance"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"SCEA": {
+"method": "SCEA",
+"file": "SCEA.cpp",
+"size": 514,
+"gen": [
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring"
+],
+"sel": [
+"EnvironmentalSelectionConflict"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"SGECF": {
+"method": "SGECF",
+"file": "SGECF.cpp",
+"size": 635,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateBestGuidedDEOffspring",
+"GenerateGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionEpsilonGrid"
+],
+"arc": [
+"UpdateArchiveByGrid"
+]
+},
+"SLMEA": {
+"method": "SLMEA",
+"file": "SLMEA.cpp",
+"size": 501,
+"gen": [
+"GenerateLocalSearchOffspring",
+"GenerateModelGaussianOffspring"
+],
+"sel": [
+"EnvironmentalSelectionMOEAIGDNS"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"MTS": {
+"method": "MTS",
+"file": "MTS.cpp",
+"size": 687,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateLocalSearchOffspring",
+"GenerateRandomImmigrantOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"WV-MOEA-P": {
+"method": "WVMOEAP",
+"file": "WVMOEA_P.cpp",
+"size": 619,
+"gen": [
+"GenerateBestGuidedDEOffspring",
+"GenerateNeighborhoodDEOffspring",
+"GenerateNeighborhoodGAOffspring"
+],
+"sel": [
+"EnvironmentalSelectionReferencePreference"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"WOF": {
+"method": "WOF",
+"file": "WOF.cpp",
+"size": 806,
+"gen": [
+"GenerateGAOffspring",
+"GenerateLocalSearchOffspring",
+"GenerateNeighborhoodDEOffspring",
+"GenerateRandomImmigrantOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA",
+"EnvironmentalSelectionRVEAa"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"TriMOEA-TA&R": {
+"method": "TriMOEATAR",
+"file": "TriMOEA_TAR.cpp",
+"size": 891,
+"gen": [
+"GenerateArchiveGAOffspring",
+"GenerateGAOffspring",
+"GenerateRandomImmigrantOffspring"
+],
+"sel": [
+"EnvironmentalSelectionTwoArchive"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+},
+"NSGA-II-DTI": {
+"method": "NSGAIIDTI",
+"file": "NSGA_II_DTI.cpp",
+"size": 1114,
+"gen": [
+"GenerateARSBXOffspring",
+"GenerateGAOffspring",
+"GenerateRandomImmigrantOffspring"
+],
+"sel": [
+"EnvironmentalSelectionNSGA"
+],
+"arc": [
+"UpdateArchiveByCrowding"
+]
+}
+}

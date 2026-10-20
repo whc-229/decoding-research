@@ -1,0 +1,6 @@
+Python 3.10.19 Linux-6.8.0-138-generic-x86_64-with-glibc2.35
+CPU 核数 16 → auto 会用 15 个进程
+numpy 2.2.6
+缺 scipy（分析脚本需要）：pip install scipy
+训练实例 15 测试实例 47
+LLM 接口可以访问（HTTP 401 ，属正常）： https://api.deepseek.com

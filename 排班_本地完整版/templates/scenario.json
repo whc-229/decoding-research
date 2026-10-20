@@ -1,0 +1,165 @@
+{
+    "installation_type": "separate",
+    "objective_mod": 1,
+    "objects_num": 1,
+    "objects_type": {
+        "Robot": 1,
+        "Tool": 1
+    },
+    "task_duration": 700,
+    "workflow_set": {
+        "-2": {
+            "Name": "End",
+            "Process_No": "-2",
+            "Workflow_Type": "Time",
+            "category": {}
+        },
+        "0": {
+            "Name": "Start",
+            "Process_No": "0",
+            "Workflow_Type": "Start",
+            "category": {}
+        },
+        "1": {
+            "Name": "Installation",
+            "Process_No": "1",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "other_sum",
+                "Tool": "install_time"
+            }
+        },
+        "10": {
+            "Name": "Update",
+            "Process_No": "10",
+            "Workflow_Type": "Action",
+            "category": {
+                "Relationship": "-",
+                "left": {
+                    "Custom": "remain_work_time"
+                },
+                "right": {
+                    "Robot": "single_work_time"
+                }
+            }
+        },
+        "11": {
+            "Name": "Update2",
+            "Process_No": "11",
+            "Workflow_Type": "Action",
+            "category": {
+                "Relationship": "=",
+                "left": {
+                    "Custom": "remain_work_time"
+                },
+                "right": {
+                    "Robot": "continue_max_work"
+                }
+            }
+        },
+        "12": {
+            "Name": "Out",
+            "Process_No": "12",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "other",
+                "other": "out_travel_time"
+            }
+        },
+        "13": {
+            "Name": "Work",
+            "Process_No": "13",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "other",
+                "other": "work_time"
+            }
+        },
+        "14": {
+            "Name": "Back",
+            "Process_No": "14",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "other",
+                "other": "return_travel_time"
+            }
+        },
+        "2": {
+            "Name": "Out",
+            "Process_No": "2",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "out_travel_time"
+            }
+        },
+        "3": {
+            "Name": "Work",
+            "Process_No": "3",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "work_time"
+            }
+        },
+        "4": {
+            "Name": "Back",
+            "Process_No": "4",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "return_travel_time"
+            }
+        },
+        "5": {
+            "Name": "Remove",
+            "Process_No": "5",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "other_sum",
+                "Tool": "removal_time"
+            }
+        },
+        "6": {
+            "Name": "Decision",
+            "Process_No": "6",
+            "Workflow_Type": "Decision",
+            "category": {
+                "Relationship": ">=",
+                "left": {
+                    "Custom": "remain_work_time"
+                },
+                "right": {
+                    "Robot": "single_work_time"
+                }
+            }
+        },
+        "7": {
+            "Name": "Charge",
+            "Process_No": "7",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "charge_time"
+            }
+        },
+        "8": {
+            "Name": "Maintenance",
+            "Process_No": "8",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Robot": "maintenance_time"
+            }
+        },
+        "9": {
+            "Name": "Service",
+            "Process_No": "9",
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Tool": "tool_rest_time"
+            }
+        }
+    }
+}

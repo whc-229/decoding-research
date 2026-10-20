@@ -1,0 +1,1410 @@
+{
+ "原请求_paiban": [
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding has the highest random-initial share at the resource lower bound (0.76) and already finds better imbalance (6.21) while matching the best resources (9); sparse encodings do not improve over the pure rule. This suggests good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding dominates the diagnostics: 76% of random genomes reach the resource lower bound and best imbalance is 6.21, while sparse encodings rarely reach the lower bound and do not improve imbalance beyond 9.85. The pure rule is already resource-optimal but imbalanced, so many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding produces far more random initial genomes at the resource lower bound and a much better best imbalance (6.21 vs 9.85), indicating good rosters need many deviations from the default rule, so sparse encodings are too restricted."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound but has high imbalance 9.85, while the per-shift encoding has many random genomes at the lower bound and improves best imbalance to 6.21. This suggests many deviations from the rule are needed to reduce imbalance, so full per-shift freedom is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding has the best random initial quality, with 0.76 at the resource lower bound and best imbalance 6.21 versus 9.85 for the sparse encodings. Sparse deviations are not advantageous here because improving the pure-rule roster likely requires many per-shift choices."
+  }
+ ],
+ "B_三类型720h": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound of 9, but its imbalance 8.11 can likely be improved by deviating; per-shift random genomes found 9 resources with better imbalance 6.60, while 0.5 is poor and 0.25 shows no improvement. Thus full per-shift freedom is best for balancing the two objectives."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound (9), so the key remaining gain is reducing imbalance; the per-shift encoding found the same best resource count with better imbalance (6.60 vs 8.11), while 0.5 is clearly poor and 0.25 is too restrictive to reliably improve imbalance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound, but the per-shift encoding can also reach 9 resources with better imbalance (6.60 vs 8.11), while 0.25 cannot beat the rule and 0.5 performs poorly. Thus the instance benefits from per-shift freedom to improve balance without increasing resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound (9 resources), so the main search challenge is improving imbalance. The per-shift encoding found the best random-initial imbalance at that lower bound (6.60 vs. 8.11 for 0.25), while 0.5 is clearly poor."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound (9), but its imbalance is 8.11; the 0.25 encoding shows no random improvement, while per-shift random genomes find 9-resource rosters with lower imbalance 6.60. Thus good rosters need more freedom than sparse deviations, and 0.5 is clearly worse."
+  }
+ ],
+ "C_三类型1440h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound of 9 with low imbalance and only 2 repairs, so the best solutions should be close to the default rule. A sparse 0.25 encoding gives limited deviation freedom and avoids the larger, more disruptive search spaces of 0.5 and 1.0."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound (9) with low imbalance (10.21), so only minor deviations are likely needed. The 0.25 sparse encoding preserves this good rule-based structure and has much better random-initial quality than 0.5, while 1.0 is unnecessarily disruptive."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound (9) with low imbalance (10.21), so good solutions are likely close to the default rule. Sparse deviations (0.25) let the GA refine near this strong starting point without the larger disruption risk of 0.5 or per-shift encodings."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the proven resource lower bound (9) with low imbalance (10.21), so good solutions are likely close to the rule. Sparse deviations with 0.25 allow limited refinement without disrupting the strong default behavior, while 0.5/1.0 add unnecessary freedom for this instance."
+  },
+  {
+   "d": 0.25,
+   "reason": "Pure-rule already achieves the resource lower bound (9) with low imbalance, so good rosters are very close to the default rule; sparse deviations (0.25) suffice and avoid the larger, less reliable search spaces of 0.5 or 1.0."
+  }
+ ],
+ "D_三类型资源紧": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound, but improving the imbalance objective requires more flexibility: 0.25 only matches the rule’s imbalance, while 1.0 finds the lower bound with better imbalance (6.60). The poor 0.5 results also indicate that partial deviation around this rule is not effective."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding is best here because pure-rule already achieves the resource lower bound, but better imbalance requires flexible deviations; the diagnostics show 1.0 random genomes already find 9 resources with imbalance 6.60, while 0.25 only matches the rule and 0.5 degrades resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster already hits the resource lower bound but has high imbalance (8.11), and per-shift random genomes found the same 9-resource level with better imbalance (6.60), suggesting many deviations are needed; sparse 0.25 showed no imbalance improvement and 0.5 was poor."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound (9) but has imbalance 8.11, while the per-shift encoding’s random population also finds 9 resources with better imbalance 6.60, suggesting useful deviations exist. The 0.5 encoding is poor here, and 0.25 offers little ability to improve beyond the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster already reaches the resource lower bound, but its imbalance is worse than the best per-shift random solution at the same resource count. This indicates improving the second objective needs many deviations, so the per-shift encoding is preferable."
+  }
+ ],
+ "E01_1080h": [
+  {
+   "d": 1.0,
+   "reason": "Pure-rule is 3 resources above the lower bound, and neither sparse encoding finds better than 12 resources in random initialization; per-shift encoding already finds 11 resources with much lower imbalance, indicating many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is 3 resources above the lower bound and sparse encodings only reach 12 resources in random diagnostics, while per-shift sampling already finds 11 resources with much better imbalance (10.26). This indicates good rosters require many deviations from the default rule, so the 1.0 per-shift encoding is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding already finds 11 resources with imbalance 10.26 in random diagnostics, outperforming the pure rule (12, 14.90) and sparse encodings, suggesting good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (+3 resources over the lower bound), and per-shift random genomes already find better solutions (11 resources, imbalance 10.26) than sparse encodings or the pure rule, indicating many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (12 vs. 9) and has high imbalance, while random per-shift genomes already find better solutions (11 resources, imbalance 10.26) than the sparse encodings. This suggests good rosters require many deviations, so the per-shift encoding is preferable."
+  }
+ ],
+ "E02_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule is 3 resources above the lower bound, and sparse encodings have poor random initial quality, while per-shift sampling already finds lower-bound rosters with much better imbalance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 3 resources above the lower bound, so the default rule is a poor starting point; the per-shift encoding already finds lower-bound and near-lower-bound solutions in random sampling while sparse encodings do not."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 3 resources above the lower bound, and sparse encodings perform poorly in random diagnostics (best 10 or 13 resources, almost never within +1 of the bound). The per-shift encoding reaches the lower bound and many near-bound solutions with much better imbalance, indicating good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (12 resources vs. lower bound 9), and only the per-shift encoding gives random initial genomes near or at the lower bound with much better imbalance. This indicates good rosters require many deviations from the default rule, so sparse deviation encodings are not suitable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 3 resources above the lower bound, and sparse encodings have poor random coverage (best resources 10 or worse, mostly within LB+1 rarely or never). The per-shift encoding already samples lower-bound and near-lower-bound rosters with much better imbalance, indicating many deviations are needed."
+  }
+ ],
+ "E03_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound with zero repairs, so good solutions are close to the rule; 0.25 gives sparse, focused deviations while 0.5 has poor random quality and 1.0 is unnecessarily large for the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound and the best observed imbalance, so good solutions are close to the rule; 0.25 gives enough sparse deviation freedom while avoiding the poor random-initial quality of 0.5 and the unnecessarily large search space of 1.0."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound with low imbalance, so good solutions are close to the rule; 0.25 keeps the search near this feasible region while allowing limited deviations. The 0.5 diagnostic is poor, and full per-shift freedom is unnecessary under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound (10) with no repairs, so good solutions are close to the rule and sparse deviations offer a smaller search space to improve imbalance. The 0.5 setting has poor random feasibility/quality, while 1.0 is unnecessarily large for a rule-near optimum."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound with no repairs and a good imbalance, so the best solutions are close to the rule. Sparse 0.25 keeps the search near this strong starting point, while 0.5 randomizations degrade badly and 1.0 gives unnecessary extra freedom for the limited evaluation budget."
+  }
+ ],
+ "H01_720h": [
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster already reaches the resource lower bound with no repairs, so a sparse deviation encoding is appropriate; 0.5 gives the highest random-initial share at the lower bound while allowing more flexibility than 0.25 to improve the imbalance objective."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule already reaches the resource lower bound, so the search should mainly refine imbalance with limited deviations. The 0.5 encoding gives more flexibility than 0.25 while still having the best initial share of resource-optimal solutions, whereas 1.0 over-expands the search and yields fewer exact lower-bound candidates."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster already reaches the resource lower bound with no repairs, indicating good solutions are near the rule. Among the choices, 0.5 gives the highest share of lower-bound individuals in the initial population while allowing enough deviations to improve imbalance."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule already reaches the resource lower bound 8, so the search mainly needs limited deviations to improve imbalance without wasting resources. The 0.5 sparse encoding has the highest random-initial share at the lower bound and is less disruptive than per-shift 1.0."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster already reaches the resource lower bound of 8, so the main gain is reducing imbalance via moderate deviations without opening extra resources. A 0.5 sparse encoding gives enough flexibility to rebalance robot assignments while staying close to the rule; 0.25 is too restrictive and 1.0 risks too many resource-increasing deviations."
+  }
+ ],
+ "H02_720h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound of 8, so good solutions are likely close to the rule; 0.25 has the highest random share at or near the lower bound and can fine-tune imbalance without destabilizing resource usage."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already achieves the resource lower bound of 8, so only limited deviations are likely needed to improve imbalance; 0.25 also has the best random-initial quality, with the highest share at the lower bound and within +1."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already attains the proven resource lower bound (8) with zero repairs, so only imbalance needs improvement, favoring sparse deviations near the rule. Among the choices, 0.25 also has the best random-initial quality near the lower bound, making it the safest encoding for this instance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the resource lower bound of 8 with zero repairs, so good solutions are likely close to the default rule. The 0.25 sparse encoding also has the best random-initial-population quality, with the highest share at or near the lower bound."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already attains the resource lower bound 8, so the search only needs to fine-tune imbalance, and the 0.25 sparse encoding has the best random-initial quality near the lower bound. Per-shift or larger sparse freedom is more likely to waste the small evaluation budget without improving the already-optimal resource count."
+  }
+ ],
+ "H03_720h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (13 resources vs. lower bound 8, imbalance 26.56), so good rosters likely require many deviations from the default rule; the per-shift encoding gives the necessary freedom, whereas sparse encodings may not have enough deviation slots."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is poor on resources, but 0.25 sparse deviations already find the best random-initial resources (10) with much better imbalance (2.94) than 0.5 or 1.0. With only about 465 evaluations, the smaller deviation space is more efficient and preserves the rule's balancing tendency."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is poor (13 resources, imbalance 26.56), but the 0.25 sparse encoding already finds resource 10 with the best imbalance 2.94 using few deviations. With a small NSGA-II budget, the lower-dimensional sparse search is likely more effective than 0.5 or 1.0."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is poor, but the 0.25 sparse encoding's random genomes already achieve the same best resource count (10) with far lower imbalance (2.94 vs 7.24/13.35), so with only ~465 evaluations the smaller deviation space is more effective and less disruptive."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding has the best random-initial quality: same best resource count (10) as the others but much lower imbalance (2.94), and its smaller genome is preferable given the limited NSGA-II evaluation budget."
+  }
+ ],
+ "H04_480h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is only 2 resources above the lower bound and 0.25 gives the highest share of near-lower-bound random solutions, indicating that only a few deviations are needed. With only ~465 evaluations, the smaller sparse search space is more efficient than the per-shift 1.0 encoding despite its better random imbalance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is a poor starting point: it uses 10 resources with imbalance 5.66, while the per-shift encoding already finds an 8-resource solution with better imbalance (4.45) in random samples, outperforming both sparse encodings. This suggests good rosters need many deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound and has only moderate imbalance, indicating the rule is a poor starting point. Per-shift encoding already finds lower-bound resource rosters with much better imbalance (4.45) in random initialization, so many deviations from the rule are likely needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is suboptimal (10 resources vs. lower bound 8), and the per-shift 1.0 encoding finds lower-bound resource rosters with much better imbalance (4.45 vs. 7.87/8.49 for sparse), indicating good rosters require full per-shift flexibility rather than only a few deviations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is not Pareto-optimal (10 resources, imbalance 5.66), while random per-shift genomes already achieve 8 resources with better imbalance 4.45, suggesting good rosters need many deviations to balance maintenance intervals. Sparse encodings find low resource counts but with much worse imbalance, so per-shift freedom is preferable."
+  }
+ ],
+ "M01_480h": [
+  {
+   "d": 0.25,
+   "reason": "Despite the pure rule being poor, the 0.25 sparse encoding has the best random initial quality: highest share at the lower resource bound and within +1, and its best imbalance is only slightly worse than 0.5. With a small evaluation budget, this more compact search space is preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "0.25 gives the best random-initial resource coverage (0.13 at the lower bound, 0.23 within +1) while still reaching best resources 9; 1.0 is too high-dimensional and 0.5 offers slightly better imbalance but weaker resource coverage under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is poor, but the 0.25 sparse encoding already gives the highest random-initial share at the resource lower bound and within +1, with competitive imbalance, so it offers the best search efficiency for only 465 evaluations. Per-shift freedom expands the search space and lowers initial quality without clear benefit."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives the best random initial quality (highest share at or near the resource lower bound) while still allowing deviations from the poor pure-rule roster, and its smaller search space is advantageous for the small NSGA-II budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "Although the pure rule is poor, the 0.25 sparse encoding already yields the highest random-initial share at the resource lower bound and within +1, giving the small NSGA-II budget more good feasible seeds; 0.5/1.0 trade away too much feasibility for little imbalance gain."
+  }
+ ],
+ "M02_480h": [
+  {
+   "d": 0.25,
+   "reason": "The pure rule is far from the lower bound, but the 0.25 sparse encoding already reaches 11 resources with the best imbalance (3.51) in random sampling, so it gives the most promising restricted search under the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "Although the pure-rule roster is poor, the 0.25 sparse encoding gives the best random-initial quality: resources 11 with imbalance 3.51, matching the best resource count of 1.0 and beating 0.5, so it offers the best starting search region."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is poor (20 vs lower bound 9), so deviations are needed, but 0.25 already gives the best random-genome quality (resources 11, imbalance 3.51) while 0.5/1.0 do not improve resources and worsen imbalance. With a small evaluation budget, the smaller targeted search space is preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "Sparse 0.25 has the best random-population quality (resources 11, imbalance 3.51), matching per-shift's best resources while giving much lower imbalance, and the small evaluation budget favors its smaller search space."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding already reaches the best random-initial resource count (11) with much lower imbalance (3.51) than 1.0, and the small evaluation budget favors its smaller, rule-anchored search space."
+  }
+ ],
+ "M03_720h": [
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding is the only choice whose random initial genomes reach the resource lower bound of 8 and it has the best share within lower bound +1, indicating that good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is two resources above the lower bound, so good rosters require substantial deviation from the default rule; the per-shift encoding is the only random setup that already finds a lower-bound 8-resource roster, making it best suited for this instance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound, so good solutions likely require many deviations. The per-shift encoding is the only option whose random initial genomes already reach the lower bound of 8 resources, while sparse encodings only reach 9."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule start is +2 resources above the lower bound, and sparse encodings never reached 8 resources in random sampling while the per-shift encoding did. This suggests good rosters need many deviations from the default rule, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound, and the sparse encodings never reach the lower bound in random samples, while the per-shift encoding does find a resource-8 solution. This indicates the instance benefits from many deviations from the default rule."
+  }
+ ],
+ "M04_720h": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule already achieves the resource lower bound, but its imbalance is relatively high; per-shift encoding gives both the highest share of lower-bound solutions and the best initial imbalance at the lower bound, indicating that reducing imbalance requires many deviations from the fewest-duties rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster already hits the resource lower bound, so the search mainly needs freedom to improve imbalance; per-shift encoding gives the best random lower-bound imbalance (2.34) and the highest share at the lower bound (0.08)."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule already reaches the resource lower bound, but its imbalance is relatively high; per-shift random sampling finds a lower-bound solution with substantially better imbalance (2.34 vs 2.65/2.94), indicating many shift-level deviations are needed to balance robot types and maintenance intervals. Thus full per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "Pure-rule already reaches the resource lower bound, but its imbalance is 2.94; the per-shift encoding can keep default choices while allowing unrestricted deviations, and its random population already finds much better imbalance (2.34) with similar lower-bound feasibility. Sparse encodings force deviations and show worse imbalance potential."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster already hits the resource lower bound, so the main gain is reducing imbalance; the per-shift encoding achieves the best random-initial imbalance (2.34) with comparable lower-bound feasibility, while sparse encodings are more limited and 0.5 performs worst."
+  }
+ ],
+ "M05_480h": [
+  {
+   "d": 0.25,
+   "reason": "The pure rule already reaches the resource lower bound of 8, so the search mainly needs a few targeted deviations to improve imbalance; 0.25 gives the best random-population quality and even found a lower imbalance than the pure rule, while larger encodings dilute near-rule solutions and perform worse."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already attains the resource lower bound of 8, and 0.25 has the best random-genome diagnostics: highest share at the lower bound and best imbalance 12.81. This suggests only sparse deviations are needed to improve imbalance without losing resource efficiency."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already reaches the resource lower bound (8), so useful search mainly needs small deviations to reduce imbalance; sparse 0.25 has the best random-initial quality (highest share at the lower bound and best imbalance 12.81). More permissive encodings dilute this advantage without improving the best-known resource count."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound with zero repairs, so only small deviations are likely needed to improve imbalance; 0.25 has the highest random share at the lower bound and the best observed imbalance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already reaches the resource lower bound, so good rosters are likely close to it. The 0.25 sparse encoding has the best random-population quality and improves imbalance, making it the most suitable."
+  }
+ ],
+ "E11_480h": [
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has far better random initial quality, with 85% of genomes at the resource lower bound and best imbalance 6.68, while sparse encodings rarely reach the lower bound. Given the small population/evaluation budget, 1.0 gives the search much more useful starting diversity and avoids dependence on a pure-rule roster that is 2 resources worse."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound, so good rosters need many deviations. The per-shift encoding gives far better random initial quality (85% at lower bound, best imbalance 6.68) than sparse encodings."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding clearly performs best: 85% of random genomes reach the resource lower bound and 99% are within +1, with much better imbalance than the sparse encodings. This indicates good rosters require many deviations from the pure rule, so maximum genome freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound and has poor imbalance, so many deviations are likely needed. The per-shift encoding has by far the best random initial quality, with 85% at the lower bound and the best imbalance (6.68), while sparse encodings rarely reach the lower bound."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (+2 resources and high imbalance), while the per-shift encoding's random initial population overwhelmingly reaches the resource lower bound and has the best imbalance, indicating many deviations from the rule are needed."
+  }
+ ],
+ "E12_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible, so the search must deviate substantially from the default rule; sparse encodings limit deviations and may be too restrictive. The per-shift encoding gives maximum freedom to find feasible rosters when the rule is a poor starting point."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible and the instance has tight robot/maintenance constraints, so good schedules will require many deviations from the default rule and benefit from per-shift capacity look-ahead."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible, so the search cannot start near a valid rule-based solution; the instance likely requires many deviations to satisfy robot maintenance and tool-rest constraints. Per-shift encoding gives the necessary freedom to arrange those deviations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible, so the default rule is a poor starting point and many shifts likely need deviation. Per-shift encoding provides the necessary freedom, whereas sparse encodings would restrict the search around an infeasible rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible, so the rule is a poor starting point and good feasible rosters likely require many deviations from it. Per-shift encoding gives maximum flexibility to repair coverage and resource constraints."
+  }
+ ],
+ "E13_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound, and 1.0 random genomes already achieve the lower bound 84% of the time with much better imbalance, whereas sparse encodings never reach it and best at 11. This indicates good rosters require many deviations, so per-shift encoding is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding clearly dominates: 84% of random genomes hit the resource lower bound and 99% are within +1, while sparse encodings never hit it. The pure-rule roster is poor (+2 resources), so good solutions require many deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding is clearly best here: random diagnostics show 84% of genomes at the resource lower bound and 99% within +1, with best imbalance 8.09, while sparse encodings never reach the lower bound and the pure rule uses 12 resources. Good rosters therefore require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding already produces many lower-bound resource rosters with much better imbalance, while both sparse encodings never reach the resource lower bound and have worse best imbalance. This instance appears to need frequent deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound, while per-shift random genomes already find the lower bound in 84% of cases with much lower imbalance, indicating that good rosters require many deviations from the default rule. Therefore the per-shift encoding is the best choice."
+  }
+ ],
+ "E14_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (11 vs 9), and sparse encodings rarely reach good regions in random sampling. The per-shift encoding already samples lower-bound solutions with much lower imbalance, so this instance likely needs many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has a random initial population that already reaches the lower bound of 9 resources in 32% of cases and is within +1 in 86%, whereas both sparse encodings never reach the lower bound and are much worse; this instance likely needs many deviations from the poor pure-rule starting point."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding already produces high-quality random initial solutions: 32% attain the lower bound of 9 resources and 86% are within +1, whereas both sparse encodings never reach the lower bound and have much worse imbalance. This instance likely requires many deviations from the pure rule, so giving every shift a gene is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 2 resources above the lower bound and sparse encodings have almost no random genomes near the lower bound, while the per-shift encoding frequently starts at or near the lower bound with much lower imbalance. This indicates good rosters require many deviations from the default rule, so d=1.0 is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (11 resources vs. lower bound 9) and sparse encodings rarely find good solutions, while the per-shift encoding already samples lower-bound and near-lower-bound rosters with much better imbalance. This indicates good rosters require many deviations from the default rule."
+  }
+ ],
+ "E15_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from optimal (12 vs. lower bound 10), and sparse encodings almost never reach the lower bound in random samples, while the per-shift encoding reaches 10 in 84% of random genomes with much better imbalance. Thus this instance needs many deviations from the default rule, favoring the 1.0 per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding already produces many lower-bound rosters in the random initial population (84% at 10 resources, best imbalance 8.09), whereas sparse encodings never reach the lower bound and only reach 11 resources. This instance needs many deviations from the pure rule, which is 12 resources, so full per-shift freedom is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding's random initial population already contains many rosters at the proven lower bound and far better imbalance, whereas sparse encodings rarely even reach lower bound +1. This indicates good rosters require many deviations from the default rule, so the 1.0 encoding is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding overwhelmingly dominates here: 84% of random genomes already reach the resource lower bound and nearly all are within +1, while sparse encodings never reach the lower bound and start much worse. The pure-rule roster is 2 resources above the lower bound, so more deviation freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "Random initial genomes for 1.0 mostly reach the resource lower bound with much better imbalance, while 0.25/0.5 rarely do and the pure rule is 2 resources above the bound. This indicates good rosters require many deviations from the default rule, so the per-shift encoding is best."
+  }
+ ],
+ "E16_720h": [
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding already finds lower-bound resource rosters with much better imbalance (4.74) than sparse 0.25 or the pure rule, while matching the best resource level; this suggests good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding has the highest random share at the resource lower bound (0.28) and the best lower-bound imbalance (4.74), while 0.5 never reaches the bound and 0.25 is less balanced."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding has the highest share of random genomes reaching the lower resource bound (0.28) and the best imbalance (4.74), while 0.5 never reaches the bound and 0.25 reaches it less often with much worse imbalance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding gives the strongest random initial population: it reaches the resource lower bound more often (0.28 vs 0.10 for 0.25 and 0.00 for 0.5) and has the best lower-bound roster imbalance (4.74), suggesting the rule-based starting point is not sufficient for this instance."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding gives the best random-population diagnostics: 28% at the resource lower bound with best imbalance 4.74, while 0.5 never reaches the lower bound and 0.25 reaches it but with much worse imbalance. This suggests good rosters need many deviations from the default rule."
+  }
+ ],
+ "E17_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding already produces many rosters at the resource lower bound with much better imbalance (best 5.56), whereas sparse encodings struggle or show weaker balance. This suggests the instance benefits from many deviations rather than staying close to the pure rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has the best random initial population: 89% at the resource lower bound, 99% within lower bound +1, and best imbalance 5.56, clearly outperforming sparse encodings. Since the pure rule already reaches 9 resources but with higher imbalance 9.44, more deviation freedom is useful for improving imbalance without sacrificing resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound, but its imbalance is 9.44; per-shift random genomes achieve 89% at the lower bound and a much better best imbalance of 5.56, indicating many deviations are needed to improve balance while preserving 9 resources. Sparse 0.5 is poor and 0.25 gives less improvement."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound, but its imbalance is relatively high; the per-shift encoding has excellent random-initial quality (0.89 at lower bound) and finds much better imbalance (5.56) than sparse encodings, so extra freedom is beneficial for balancing without sacrificing resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound of 9, so the main search goal is improving imbalance; the per-shift encoding has by far the best random initial quality (89% at lower bound, best imbalance 5.56), while 0.5 is poor and 0.25 gives little freedom."
+  }
+ ],
+ "E18_480h": [
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding gives the strongest random initial population: 0.87 share at the lower bound and best imbalance 2.50, while sparse encodings have lower lower-bound coverage and worse imbalance. Although the pure rule already reaches 14 resources, many shift-level deviations can improve imbalance without increasing resources, so the extra freedom is worth it."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound 14, but its imbalance is relatively poor (2.97); the per-shift encoding produces many random rosters at 14 resources with better imbalance (best 2.50), so broader deviation freedom is useful for improving the second objective without sacrificing resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound of 14, so the main search goal is reducing imbalance; the per-shift encoding has the best initial lower-bound share (0.87) and best random imbalance (2.50), while still keeping all samples within +1 resource."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound, so the main search target is lowering imbalance; the per-shift encoding gives the most freedom to deviate and its random initial population has the highest share at the resource lower bound and the best imbalance (2.50 vs. 2.78)."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound, so the main goal is reducing imbalance; the per-shift encoding's random genomes have both a much higher share at the lower bound (0.87) and a better best imbalance (2.50 vs 2.78), indicating it can exploit full freedom without losing resource optimality."
+  }
+ ],
+ "E19_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (12 vs. 9 resources), and sparse 0.25/0.5 random genomes never reach within +1 while per-shift 1.0 already finds 10-resource solutions with much lower imbalance. This indicates good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding is clearly superior here: random 1.0 genomes already reach 10 resources with much lower imbalance, while sparse encodings never improve on the pure-rule 12-resource rosters. This indicates good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (12 resources, imbalance 34.15), and only the per-shift encoding finds better random solutions near the lower bound (best 10 resources, imbalance 9.53), indicating many deviations from the rule are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding clearly dominates here: random genomes already reach 10 resources and 50% within lower-bound+1, while sparse encodings remain stuck at 12 resources. This indicates good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (12 resources, imbalance 34.15), while per-shift random genomes already find 10 resources with much lower imbalance and 50% within the lower bound +1; good solutions likely require many deviations, so the per-shift encoding is best."
+  }
+ ],
+ "E20_480h": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule is already +1 resource with high imbalance, and per-shift random genomes dominate sparse encodings (29% at lower bound and best imbalance 6.17), indicating good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is suboptimal (+1 resource, high imbalance), and the per-shift encoding has much better random initial quality: 29% at the lower bound, 88% within +1, and best imbalance 6.17. This indicates good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is above the resource lower bound, so good solutions require many deviations; the per-shift encoding's random population shows far more lower-bound rosters and much better imbalance than the sparse encodings."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has much better random initial population quality: 29% at the lower bound, 88% within +1, and best imbalance 6.17 versus 10.84 for sparse encodings. Since reaching the lower bound likely requires multiple deviations from the rule, 1.0 gives the needed freedom."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has much better random initial quality (29% at the lower bound, 88% within +1, best imbalance 6.17), whereas sparse encodings perform poorly and the pure rule is suboptimal at 11 resources. This indicates the instance benefits from many deviations, so 1.0 is best."
+  }
+ ],
+ "E21_720h": [
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding has much better random initial quality, with 27% of genomes already reaching the resource lower bound of 9 and 90% within +1, while sparse encodings rarely reach 9. Since the pure rule uses 10 resources and improving to 9 appears to require many deviations, the per-shift genome is the best choice."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is already suboptimal on resources (10 vs lower bound 9), and the per-shift encoding has by far the best random-population quality, with 27% at the lower bound and 90% within +1. Sparse encodings are unlikely to reach enough deviations from the weak default rule within the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has by far the best random initial quality, with 27% of genomes already at the resource lower bound and 90% within +1, while sparse encodings rarely reach the lower bound; with only 30 population and ~465 evaluations, this stronger starting diversity is more likely to find good trade-offs."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding gives the best initial population quality, with 27% at the resource lower bound and 90% within +1, while also achieving better imbalance than the sparse encodings; this indicates good rosters need many deviations from the pure rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has by far the best random initial population quality: 27% achieve the resource lower bound and 90% are within +1, whereas sparse 0.25/0.5 rarely reach lower bound and have worse imbalance. Since the pure-rule roster is already +1 resources, allowing many deviations is more promising."
+  }
+ ],
+ "E22_720h": [
+  {
+   "d": 1.0,
+   "reason": "Although the pure rule already reaches the resource lower bound, its imbalance is 12.79, while the per-shift encoding's random genomes already include 64% at the lower bound and a much better best imbalance of 6.80. With only 30 population and ~465 evaluations, the per-shift encoding gives the strongest initial quality and flexibility to find a more balanced roster."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster already reaches the resource lower bound but has relatively high imbalance, and the per-shift encoding's random initial population shows the best quality: 64% at the lower bound and best imbalance 6.80. The sparse 0.25/0.5 encodings restrict deviations too much and give much weaker random coverage, so 1.0 is most likely to find low-imbalance rosters within the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding gives much better random initial quality, with 64% at the resource lower bound and best imbalance 6.80, while the pure rule already has 8 resources but higher imbalance 12.79 and 0.25 only marginally improves it. This suggests reducing imbalance requires many deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding gives by far the best random initial quality: 64% at the resource lower bound and best imbalance 6.80, while sparse encodings are much weaker or only marginally improve the already-good rule. This suggests the instance benefits from broad deviation freedom rather than sparse overrides."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding has the best random-initialization quality: 64% at the resource lower bound, 98% within +1, and best imbalance 6.80, much better than the pure-rule imbalance 12.79; sparse 0.25/0.5 are weaker, especially 0.5. This instance benefits from many deviations rather than staying close to the default rule."
+  }
+ ],
+ "E23_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible, so the default rule is a poor starting point and feasible rosters require many deviations; the per-shift encoding gives maximum freedom to satisfy coverage, maintenance, and tool-rest constraints."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible and the default rule is a poor starting point because it synchronizes maintenance intervals; feasible rosters require many deviations to stagger robots and tools, so per-shift encoding offers the needed freedom."
+  },
+  {
+   "d": 1.0,
+   "reason": "Pure-rule is infeasible and good rosters likely need many deviations to stagger maintenance and approach the resource lower bound, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "Pure-rule is infeasible, so the default rule is a poor starting point and sparse encodings near it likely cannot reach feasible regions; the per-shift encoding provides full freedom to discover the necessary coordinated deviations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible and the instance is tightly constrained by maintenance and tool-rest limits, so good rosters likely require many deviations from the default rule; per-shift encoding provides the necessary flexibility."
+  }
+ ],
+ "E24_480h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far above the resource lower bound (15 vs 11), so the rule is a poor starting point and many deviations are likely needed; per-shift gives full flexibility, while 0.5 shows no random-initial advantage over 1.0."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule is far from the lower bound, so 0.25 is too restrictive, but 0.5 random genomes already match 1.0 in best resources and imbalance, giving enough deviation freedom with a smaller search space."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (+4 resources vs lower bound and high imbalance), so good rosters likely require many deviations; the per-shift encoding provides the necessary flexibility."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster is only one resource worse than the best random rosters, so good solutions are near the rule; 0.5 matches the per-shift encoding's initial best while keeping a smaller search space, whereas 0.25 is too sparse for good imbalance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (15 vs. 11 resources) and has high imbalance, so the rule is a poor starting point. Reaching near-optimal rosters likely requires many deviations, favoring the fully flexible per-shift encoding."
+  }
+ ],
+ "E25_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule uses 12 resources, 2 above the proven lower bound, while the per-shift encoding already finds the lower bound in 84% of random genomes and achieves best resources 10; sparse encodings never reach the lower bound and mostly remain worse. This indicates good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding is clearly best here: 84% of random genomes already reach the resource lower bound of 10 and 99% are within +1, while both sparse encodings never reach the lower bound and have best resources 11. This indicates good rosters require many deviations from the default rule, so maximum genome freedom is appropriate."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is poor here (12 resources vs. lower bound 10), and sparse encodings never reach the lower bound in random init. Per-shift encoding performs best, with 84% of random genomes at the lower bound and best imbalance 8.09, so many deviations from the rule are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding dramatically outperforms sparse encodings: 84% of random genomes already reach the resource lower bound of 10, while sparse encodings only reach 11 at best and are far from the lower bound. This indicates good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding is clearly best here: random genomes already reach the resource lower bound (10) with 84% frequency and much lower imbalance, while sparse encodings never reach it and start around 11 resources. This indicates good rosters require many deviations from the default rule or the rule is too suboptimal."
+  }
+ ],
+ "E26_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has by far the best random initial quality, with 89% at the resource lower bound and best imbalance 5.56, while the pure rule is already at 9 resources but with worse imbalance. Sparse 0.25/0.5 do not improve enough and 0.5 is especially poor on this instance."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding is best because the pure rule already reaches the resource lower bound but its imbalance can be improved, and random per-shift genomes show 89% at the lower bound with the best imbalance 5.56, far better than the sparse encodings."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding has the highest random-initial share at the resource lower bound (0.89), nearly all within +1, and the best observed imbalance (5.56), indicating full flexibility is most effective here despite the pure rule also reaching 9 resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has by far the best random initial population (89% at the resource lower bound, 99% within +1, and best imbalance 5.56), indicating this instance benefits from many deviations from the pure rule. The sparse options are much weaker, especially 0.5."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has the best random initialization here (89% at the resource lower bound and best imbalance 5.56), while sparse encodings, especially 0.5, often miss the lower bound; since the rule already reaches 9 resources but imbalance can still improve, full per-shift freedom is most promising."
+  }
+ ],
+ "H11_480h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (15 vs. 8), so good rosters likely require many deviations from the default rule. Although per-shift random genomes have worse imbalance, full per-shift freedom is better suited to this poorly starting rule than sparse deviation encodings."
+  },
+  {
+   "d": 0.25,
+   "reason": "Although the pure rule is poor (15 vs lower bound 8), the 0.25 sparse encoding already reaches the same best random resource level (10) as 0.5/1.0 while producing much lower imbalance (17.00 vs 18.80/24.14). With only ~465 evaluations, its smaller search space and better initial trade-off make it the most effective choice."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already has good imbalance, and 0.25 gives the best random-initial trade-off with the same best resources as more flexible encodings but much lower imbalance. With only ~465 evaluations, the smaller sparse genome is more effective than 0.5 or 1.0."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is poor for resources (15 vs. lower bound 8) but gives good imbalance; 0.25 deviations already reach 10 resources with the best imbalance (17.00) among the random-initial options, and the small evaluation budget favors the smaller search space over 0.5 or 1.0."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster uses 15 resources, far above the lower bound of 8, indicating the default rule is a poor starting point and good rosters require many deviations. The per-shift encoding provides the flexibility needed, whereas sparse encodings would be too constrained."
+  }
+ ],
+ "H12_720h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the proven resource lower bound 8 with imbalance 5.66, so good solutions are close to the default rule. Sparse 0.25 focuses search on small deviations that may reduce imbalance without losing resource optimality, while per-shift and 0.5 random populations show worse resource quality."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the resource lower bound (8), so only sparse deviations are needed to improve imbalance without disrupting feasibility. The 0.25 encoding also has the best random-population quality and starts closest to this good rule-based solution."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the 8-resource lower bound, so good solutions are likely close to the rule and only need sparse imbalance-improving deviations; 0.25 also has the best random initial diagnostics."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound of 8 with imbalance 5.66, so only sparse deviations are needed. The 0.25 encoding has the best random initial quality (4% at lower bound vs. 1% or 0%) and still reaches the same best resources/imbalance, making it the safest choice."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound of 8 with reasonable imbalance, so only sparse deviations are needed to refine imbalance without disrupting a near-optimal structure. The 0.25 sparse encoding also has the best random-initial quality (highest share at/near the lower bound), while per-shift and 0.5 are weaker starting points."
+  }
+ ],
+ "H13_720h": [
+  {
+   "d": 0.25,
+   "reason": "The pure rule is already near-optimal (+1 resource with good imbalance), and the sparse 0.25 encoding gives the highest random share within the lower bound +1 while avoiding the worse imbalance seen with full per-shift freedom. With only ~465 evaluations, staying close to the good default rule is preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already only +1 above the resource lower bound with decent imbalance, so good solutions are likely close to the rule. The 0.25 sparse encoding also gives the best random-initialization quality (highest share within LB+1), while 0.5/1.0 do not improve best resources and per-shift worsens initial imbalance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already near-good at 9 resources and imbalance 5.11, so only sparse deviations are likely needed; 0.25 gives the best random initial quality, with highest share within lower-bound+1 and same best resources/imbalance as 0.5, while 1.0 starts much worse."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close to optimal at 9 resources versus lower bound 8, so sparse deviations are appropriate; 0.25 has the best random-initial share within lower bound +1 and preserves the pure-rule imbalance of 5.11, while 1.0 worsens imbalance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close to the lower bound, and the 0.25 sparse encoding has the best random-initial quality (highest share within lower bound +1) while preserving the good 5.11 imbalance; per-shift encoding worsens initial imbalance and is unnecessary here."
+  }
+ ],
+ "H14_720h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (14 vs. 9), so the search needs many deviations from the default rule. The per-shift encoding also gives the best random-population share at the lower bound (0.04), supporting 1.0 over the sparse options."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (14 vs 9), so many deviations are likely needed. The per-shift encoding has the highest random share at the lower bound (0.04), while sparse 0.25/0.5 encodings overly restrict the search."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is 5 resources above the lower bound, so the default rule is a poor starting point and many deviations are likely needed. The 1.0 per-shift encoding also has the highest random-population share at the resource lower bound, making it the best choice."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (14 vs 9 resources), so good solutions likely require many deviations; the per-shift encoding also has the highest random-initialization share at the lower bound (0.04), supporting its greater flexibility here."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (14 vs 9), so the rule is a poor starting point and many deviations are needed. The per-shift encoding provides the needed freedom and has the highest random share at the lower bound."
+  }
+ ],
+ "H15_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (17 vs 9) and random genomes improve most under per-shift freedom (best 13 resources, imbalance 19.64), indicating good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (17 vs 9), so the default rule is a poor starting point. Per-shift encoding's random initial genomes already find much better rosters (13 resources, imbalance 19.64) than sparse encodings, indicating many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (+8 resources), and random genomes with per-shift encoding give the best initial resource count (13) and imbalance (19.64), indicating that good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far above the lower bound (17 vs 9), and sparse encodings start poorly (best resources 14/16), while the per-shift encoding gives the best random-initial quality (13 resources, imbalance 19.64), indicating many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound and has high imbalance, so good solutions likely require many deviations. The per-shift encoding also gives the best random-initial quality (13 resources, imbalance 19.64), outperforming the sparse encodings."
+  }
+ ],
+ "H16_480h": [
+  {
+   "d": 0.5,
+   "reason": "The 0.5 encoding is the only tested option whose random initial genomes reach the proven resource lower bound of 8, while still preserving enough rule guidance to control imbalance. 0.25 never reaches 8, and 1.0 has very poor random-initial quality, so 0.5 offers the best balance for this instance."
+  },
+  {
+   "d": 0.5,
+   "reason": "The 0.5 sparse encoding is the only choice whose random initial population reaches the resource lower bound of 8, and it maintains better within-+1 coverage than 1.0 while allowing more deviation than 0.25; the pure rule starts near-feasible but has poor imbalance, so moderate freedom is best."
+  },
+  {
+   "d": 0.5,
+   "reason": "The 0.5 sparse encoding is the only one whose random initial genomes reach the resource lower bound of 8, while 0.25 lacks enough deviations and 1.0 dilutes the strong rule-based search. It balances flexibility to improve the pure-rule 9-resource roster with exploitation of the good default rule."
+  },
+  {
+   "d": 0.5,
+   "reason": "Random genomes for 0.5 are the only ones that reach the proven lower bound of 8 resources, while still providing enough deviation freedom to improve on the pure-rule roster; 0.25 never reaches 8 and 1.0 has very poor lower-bound/+1 coverage."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster is one resource above the lower bound, and achieving 8 resources requires deviations; only the 0.5 encoding already reaches the lower bound in random sampling while keeping useful rule proximity. The 0.25 encoding misses 8 entirely in the sample, and 1.0 is too unconstrained with almost no near-lower-bound rosters."
+  }
+ ],
+ "H17_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the resource lower bound of 8 with good imbalance, so only small sparse deviations are needed to tune balance without disrupting feasibility. Given the limited evaluation budget, 0.25 starts closest to this strong rule-based solution, while 0.5 and 1.0 show worse random initial quality."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound of 8 with the best observed imbalance, so only a few targeted deviations are likely needed to improve balance; 0.25 keeps the search close to this strong solution, while 0.5 starts poorly and 1.0's extra freedom did not improve initial quality."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound (8) with low imbalance (19.91), so the search should stay close to this strong rule. The 0.25 sparse encoding gives limited room to improve imbalance without disrupting the near-optimal resource usage, while 0.5 and 1.0 show worse random initial quality."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already reaches the resource lower bound with good imbalance, and the 0.25 encoding keeps most shifts rule-guided while allowing limited deviation, giving the best random-initial share at the lower bound. The 0.5 encoding starts poorly, and 1.0 offers no clear advantage over sparse deviation for this instance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound with imbalance 19.91, so the search should stay close to the rule and only allow sparse deviations; 0.5 performs poorly on random initial genomes and 1.0 offers no clear advantage here."
+  }
+ ],
+ "H18_480h": [
+  {
+   "d": 0.25,
+   "reason": "With a small evaluation budget and population, initial quality dominates; 0.25 has the highest share of lower-bound and near-lower-bound rosters while still allowing targeted deviations from the poor pure-rule solution. Larger freedom (0.5 or 1.0) expands the search space and reduces lower-bound hits without improving the best imbalance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is poor, but the 0.25 sparse encoding already reaches the resource lower bound and has the highest random-initial share at lower bound/within +1, while using fewer genes for the limited NSGA-II budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The sparse 0.25 encoding gives the best random initial population quality, with the highest share at the resource lower bound and within +1, indicating that few deviations from the rule are sufficient to reach good rosters. This is preferable over 0.5 or 1.0, which have much lower lower-bound attainment despite more genomic freedom."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is poor (12 resources vs. lower bound 8), but 0.25 sparse deviations already give the best random initial quality (11% at lower bound and 22% within +1) and a smaller search space, which is important under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule is far from the resource lower bound (12 vs 8), but 0.25 deviations already reach 8 resources with the highest random-population share at/within the bound, while extra freedom degrades initialization quality. With only ~465 evaluations, the sparser encoding preserves useful rule structure and searches the needed repairs efficiently."
+  }
+ ],
+ "H19_480h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster already reaches the resource lower bound but has high imbalance, and per-shift encoding produces substantially better low-imbalance feasible rosters in random diagnostics. This suggests good rosters need many deviations from the default rule, so the per-shift genome is the best choice."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already reaches the resource lower bound but leaves high imbalance, and per-shift random genomes achieve much lower imbalance (9.56 vs 17.00/15.08) while still finding lower-bound rosters, indicating good rosters need many deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule already reaches the resource lower bound 8, so the main bottleneck is imbalance; the per-shift encoding gives the best random initial imbalance (9.56) while still finding lower-bound resource rosters, indicating many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule already attains the resource lower bound of 8, so the main gain is reducing imbalance; per-shift encoding gives much better random imbalance (9.56 vs 17.00/15.08) while still finding lower-bound-resource solutions, indicating many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster already reaches the lower-bound resources (8) but has high imbalance (19.91), and random per-shift genomes achieve much better imbalance (9.56) while still reaching 8 resources. This suggests good rosters require many deviations from the fewest-duties rule, so the per-shift encoding is preferable."
+  }
+ ],
+ "H20_480h": [
+  {
+   "d": 0.5,
+   "reason": "The pure rule is close on resources (9 vs. lower bound 8) but poor on imbalance (38.28), so some deviation is needed. 0.5 gives the best random-population imbalance (3.74) while keeping good lower-bound resource frequency, outperforming both the too-restricted 0.25 and the larger, less efficient 1.0 search space."
+  },
+  {
+   "d": 0.5,
+   "reason": "0.5 gives the best balance: its random population already reaches resource lower bound with the lowest best imbalance (3.74), while still having a reasonable share within lower bound +1. More freedom (1.0) worsens imbalance, and less (0.25) is too close to the poor pure-rule roster."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule is close on resources but poor on imbalance, so moderate deviations are needed; 0.5 offers enough freedom while keeping the search space small, and its random initial pool finds the best resource-8 imbalance (3.74 vs. 7.87/8.53)."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster is resource-close but has very high imbalance, so some deviation is needed; 0.5 offers enough freedom to correct imbalance while preserving rule structure. It also gives the best random-initial imbalance (3.74) with a comparable share of lower-bound resource solutions."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule is already near the resource lower bound but highly imbalanced, so moderate deviation freedom is useful. The 0.5 encoding gives the best random initial imbalance (3.74) while still reaching the resource lower bound, better balancing the need to repair the rule without losing its resource efficiency."
+  }
+ ],
+ "H21_720h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (19 vs. 8) and has high imbalance, so good solutions likely require many deviations. The per-shift encoding also gives the best random-initial imbalance at the same best resource count."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (19 vs 8), so good solutions likely require many deviations rather than minor repairs. The per-shift encoding provides the needed flexibility, and its random initial population already gives the best imbalance at resources 10."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (19 vs. 8), so good solutions require many deviations from the default rule; the per-shift encoding also matches the best random-initial resource count with the lowest imbalance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (19 vs 8), so many deviations are needed; per-shift 1.0 gives the most flexibility and has the best random-initial quality (resources 10, imbalance 14.67)."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (19 vs 8), indicating good solutions need many deviations from the default rule. The per-shift encoding offers the required flexibility and had the best random-initial imbalance among the choices."
+  }
+ ],
+ "H22_720h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound of 8, so only small deviations are needed to improve imbalance. The 0.25 encoding has the best random initial population at the lower bound, whereas per-shift (1.0) starts with best resources 9."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule already attains the proven resource lower bound of 8 with zero repairs, and the 0.25 encoding has the best random initial quality at/near this bound; its 18 deviation slots give enough freedom to improve imbalance while preserving the optimal-resource baseline."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already reaches the resource lower bound of 8 with no repairs, so the search should stay near this good basin while allowing limited deviations to improve imbalance. The 0.25 encoding preserves more lower-bound rosters than 0.5, whereas 1.0 loses the 8-resource basin in random initialization."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already attains the resource lower bound of 8, so sparse deviations are preferable; 0.25 gives the best initial share at or near the lower bound while allowing enough deviations to tune imbalance without disrupting resource-optimal structure."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the resource lower bound of 8, so good solutions are likely close to the rule; 0.25 has the best random initial share at or near the lower bound, while more freedom (especially 1.0) risks losing the optimal resource count."
+  }
+ ],
+ "H23_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule is poor (+3 resources vs. the bound), and the per-shift encoding already finds much better random rosters (10 resources, imbalance 24.68) while sparse encodings do not improve beyond 11/13. This suggests good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is 3 resources above the lower bound, and random per-shift genomes already improve to 10 resources with much lower imbalance, while sparse encodings cannot match even the rule's resource count. This instance likely needs many deviations from the default rule, so the per-shift encoding is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (11 resources vs. lower bound 8), and sparse encodings cannot reach better solutions: random 0.5 genomes best at 13 resources and 0.25 only matches 11. The per-shift encoding is the only one finding 10-resource rosters with much lower imbalance, indicating good rosters require many deviations from the default rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding gives the best random-initial quality (10 resources, imbalance 24.68), improving on the pure rule’s 11 resources/39.02, while sparse encodings show no advantage and 0.5 is much worse; good rosters likely require many deviations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding is clearly superior here: random genomes already achieve 10 resources and imbalance 24.68, while both sparse encodings cannot improve beyond 11+ resources. This suggests good rosters require many deviations from the default rule rather than being close to it."
+  }
+ ],
+ "H24_480h": [
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives the best random initial quality: it reaches the lower bound of 8 resources with the lowest imbalance 3.74 and has the highest shares at lower bound and within +1. With only 465 evaluations, the smaller search space is preferable because good rosters appear close to the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is only 2 resources above the lower bound, so sparse deviation is appropriate. 0.25 gives the best initial population quality by far, reaching resource 8 with imbalance 3.74, while 1.0 never reaches the bound in random samples."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is only 2 resources above the lower bound, and 0.25 has the best random initial-population quality: highest share at/within lower bound+1 and best imbalance at the lower-bound resource count. Per-shift encoding is unnecessary because good rosters appear reachable with few deviations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 encoding has the best random initial diagnostics: highest share at/near the resource lower bound and best found imbalance, while 1.0 performs worst and needs many deviations. With limited evaluations, sparse deviations near the strong default rule are most promising."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives the best cheap diagnostics: highest share of random genomes at or near the lower bound and the best best-found imbalance (3.74), while 1.0 is too unconstrained and 0.5 is weaker. With only ~465 evaluations, exploiting the rule with a few targeted deviations is preferable."
+  }
+ ],
+ "H25_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible, so the search cannot rely on sparse deviations near the default rule; the per-shift encoding finds the resource lower bound (10) with much better imbalance, while sparse encodings perform poorly and fail to reach the lower bound."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is infeasible, so sparse deviations are unlikely to reach good feasible rosters; the per-shift encoding's random population already finds the resource lower bound with much better imbalance, while 0.25 and 0.5 perform poorly."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible and sparse encodings start far from good solutions, with best random resources 11 and 19 for d=0.25 and 0.5. The per-shift encoding (d=1.0) already reaches the lower bound of 10 with much better imbalance, so many deviations from the rule are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is infeasible, so good solutions likely require many deviations; the per-shift encoding’s random initial population already reaches the lower bound of 10 resources with much better imbalance, while sparse encodings do not."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is infeasible, and the random diagnostics show the per-shift encoding is much better: it reaches the resource lower bound with far lower imbalance, while sparse encodings cannot even hit the lower bound and 0.5 performs poorly."
+  }
+ ],
+ "H26_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding gives far more random initial rosters at the 9-resource lower bound (0.09 vs 0.01/0.00) and within +1 (0.32 vs 0.10/0.01), indicating good rosters require many deviations from the repair rule. Sparse encodings are too constrained for this instance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule gives 10 resources versus lower bound 9, so good rosters need deviations from the rule; the per-shift encoding has the best random initial quality with 9% at the lower bound and 32% within +1, while sparse encodings are weaker or overly restrictive."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding has by far the best random initial population quality, with 9% already at the lower bound and 32% within lower bound +1, while pure-rule is stuck at 10 resources. This suggests good rosters require many deviations from the default rule, so more genome freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding gives much better random initial coverage: 9% at the resource lower bound and 32% within +1, while sparse encodings are near 0-1% at the lower bound. Since the pure rule is already +1 resource with high imbalance, more freedom helps NSGA-II find lower-resource rosters within the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is one resource above the lower bound, and the 1.0 per-shift encoding has far more random samples at or near the lower bound (9% at LB, 32% within +1) than 0.25 or 0.5, indicating many deviations are useful."
+  }
+ ],
+ "M11_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (19 resources, imbalance 68.04, 6 repairs), so the search likely needs many deviations from the default rule. The per-shift encoding also gives much better random initial solutions (best 15 resources, imbalance 10.85) than the sparse encodings."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is far from the lower bound (19 vs 10) and sparse encodings only reach 17/19 resources with high imbalance, while per-shift random genomes already reach 15 resources and much lower imbalance. This indicates good rosters require many deviations from the rule, so maximum freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (19 vs 10) and sparse random populations are much worse, while per-shift genomes already find substantially better rosters (15 resources, imbalance 10.85). This indicates good solutions require many deviations from the default rule, favoring full per-shift freedom."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (19 vs 10) and sparse encodings start poorly, while per-shift random genomes already achieve best resources 15 and imbalance 10.85, indicating many deviations from the default rule are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is far from good (19 resources vs lower bound 10), and random per-shift genomes already find much better rosters (15 resources, imbalance 10.85) than sparse encodings, indicating many deviations are needed."
+  }
+ ],
+ "M12_1080h": [
+  {
+   "d": 0.25,
+   "reason": "Although the pure-rule roster is infeasible, 0.25 deviations already give the best random-population diagnostics: highest share at the lower bound, best resources 10, and much lower imbalance (6.60) than 1.0; 0.5 is clearly worse."
+  },
+  {
+   "d": 0.25,
+   "reason": "Pure-rule is infeasible, but the diagnostics show 0.25 gives the best random initial quality: highest lower-bound share and best resources-imbalance tradeoff. Small sparse deviations are enough to repair the rule, while 0.5/1.0 increase search difficulty and start worse."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is infeasible, but the 0.25 sparse encoding already gives the best random initial quality: many genomes reach the resource lower bound 10 with much lower imbalance than 0.5 or 1.0. This suggests good rosters require only a modest number of deviations from the rule, making 0.25 the best fit under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding has the best random-population diagnostics: highest share at the resource lower bound and the best feasible imbalance among encodings reaching 10 resources. Although the pure rule is infeasible, modest deviations appear sufficient, and sparse encoding is better for the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives the best random initial quality (highest share at the resource lower bound and best imbalance) while still allowing enough deviations to overcome pure-rule infeasibility, and its smaller search space is advantageous with only ~465 evaluations."
+  }
+ ],
+ "M13_480h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound, so only limited deviations are needed to improve imbalance. The 0.25 encoding gives the best random-initial quality at/near the lower bound and best imbalance, while 0.5 and 1.0 more often lose resource feasibility."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the resource lower bound (9) but has high imbalance, so the best choice is a sparse encoding that preserves near-rule resource quality while allowing targeted imbalance reductions. The 0.25 setting has the strongest random-initial quality: highest share at the lower bound and best observed imbalance (3.92), whereas 0.5 and 1.0 degrade initial feasibility and imbalance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound of 9, so the main benefit is searching nearby for lower imbalance; 0.25 has the best random initial quality and best imbalance among the tested sparse encodings, while more freedom degrades initial solutions."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound (9), so only sparse deviations are needed to improve imbalance. The 0.25 encoding has the best random-initial quality: highest share at the lower bound and best imbalance among the choices."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already reaches the resource lower bound of 9, so sparse deviations are enough to reduce imbalance while preserving good resource usage. The 0.25 encoding has the best random-initial quality and best imbalance (3.92), whereas per-shift and 0.5 perform worse."
+  }
+ ],
+ "M14_1080h": [
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster already reaches the resource lower bound but has high imbalance, so some deviations are needed to rebalance assignments. The 0.5 sparse encoding offers the best diagnostic trade-off, with random genomes reaching 8 resources and the lowest best imbalance 10.19 without the larger search space of per-shift encoding."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule already achieves the resource lower bound of 8, so the main search need is reducing imbalance; among random genomes, 0.5 found the best lower-bound roster with imbalance 10.19, better than 0.25 (15.15) and 1.0 (19.59), while still occasionally reaching 8 resources."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule roster already achieves the resource lower bound, so the search only needs moderate deviation to improve imbalance; 0.5 gives the best random-initial imbalance at 8 resources, while 1.0 is too unconstrained and 0.25 likely has too few slots to balance well."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure-rule already hits the resource lower bound, so the main gain is imbalance; 0.5 gives the best random initial imbalance (10.19) while still reaching 8 resources, whereas 0.25 is too restrictive and 1.0 is noisier under the small evaluation budget."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule already attains the resource lower bound, so the main gain is moderate deviation to reduce imbalance; 0.5 gives the best random imbalance (10.19) while keeping enough rule structure for the small 465-evaluation search, whereas 1.0 over-parameterizes and 0.25 is too restrictive."
+  }
+ ],
+ "M15_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (16 vs 8 resources) with 9 repairs, indicating the default rule is a poor starting point and good rosters likely require many deviations. The per-shift encoding also has the best random initial quality, reaching resources 9 with imbalance 15.99 and some solutions within lower bound +1, while sparse encodings perform much worse."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (16 vs. 8 resources), so good solutions likely require many deviations rather than sparse overrides. The per-shift encoding also gives the best random initial quality by far, with resources 9 and imbalance 15.99."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is far from good (16 resources vs lower bound 8), so many deviations are likely needed; per-shift random genomes already achieve 9 resources with much better imbalance (15.99), while sparse encodings are worse or highly imbalanced."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the lower bound (16 vs 8 resources), so many deviations from the default rule are likely needed. The per-shift encoding has the best random initial quality (best resources 9 with imbalance 15.99), while 0.5 performs poorly and 0.25 reaches 9 resources but with very high imbalance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The per-shift encoding already finds 9 resources with imbalance 15.99 in random genomes, better than the pure rule and sparse encodings, indicating good rosters require many deviations from the rule. Sparse 0.25/0.5 perform much worse in imbalance or resources, so 1.0 is best."
+  }
+ ],
+ "M16_1080h": [
+  {
+   "d": 0.25,
+   "reason": "Sparse 0.25 already improves the pure-rule roster from 15 resources/imbalance 35.93 to best random 14 resources/imbalance 12.70, while 0.5 and 1.0 do not improve resources and have worse imbalance; with only 465 evaluations, a small number of deviation slots is more search-efficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is suboptimal, but 0.25 already matches 1.0's best random resource count (14) while giving better imbalance (12.70 vs 13.54), and its smaller search space is better suited to the limited 465-evaluation budget; 0.5 performs poorly."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is not far from good solutions, and the 0.25 sparse encoding already matches per-shift in best random resources (14) while achieving lower imbalance (12.70) and using fewer genes, which is better for the very small 465-evaluation NSGA-II budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already a reasonable starting point, and 0.25 gives the best random-initial quality (14 resources with low imbalance 12.70), while 0.5 is too disruptive and 1.0 gives no better resources with a larger search space under limited evaluations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already fairly good (15 resources, imbalance 35.93), and sparse 0.25 random genomes find the best observed tradeoff at 14 resources with low imbalance 12.70, while per-shift gains no resource improvement and has a larger search space. The 0.5 setting performs worse, so 0.25 best exploits the strong default rule."
+  }
+ ],
+ "M17_480h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close in resources (+2 vs lower bound), and 0.25 matches the best random sparse quality (12 resources, imbalance 2.78) of 0.5 while using a smaller search space; per-shift 1.0 is much worse. With only ~465 evaluations, the sparser 0.25 encoding is the better choice."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close to the resource lower bound (12 vs 10), and the 0.25 sparse encoding already matches the best random initial quality of 0.5 (12 resources, imbalance 2.78), so extra deviation freedom is unnecessary and would only enlarge the search space; per-shift 1.0 is clearly worse."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close to the resource lower bound, and sparse genomes at 0.25 match 0.5's best random-initial quality, so only a few deviations appear useful. With only 465 evaluations, the smaller 0.25 search space is more efficient, while per-shift 1.0 starts much worse."
+  },
+  {
+   "d": 0.5,
+   "reason": "Per-shift (1.0) has much worse random initial quality, while sparse 0.25 and 0.5 both start well; 0.5 gives more deviation capacity to reduce resources from 12 toward the lower bound of 10 while still staying near the good rule-based roster."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule is already close to the best observed resource level (12 vs. lower bound 10), and the sparsest encoding 0.25 matches 0.5 in random initial quality while offering a smaller, more focused search space for the limited 465 evaluations; the per-shift encoding performs much worse."
+  }
+ ],
+ "M18_480h": [
+  {
+   "d": 0.25,
+   "reason": "The pure rule is already strong on imbalance (2.97) and close in resources (12 vs. lower bound 10), so only a few targeted deviations are needed. The 0.25 sparse encoding also has the best random diagnostics, reaching the resource lower bound 10 and giving the highest share within bound+1, while 0.5 and 1.0 perform worse."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already strong and near the lower bound, so sparse deviations preserve this good structure while still allowing improvement; 0.25 also has the best random diagnostic, including some lower-bound rosters, whereas 0.5 and 1.0 have poorer random quality."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule is already close to the lower bound (12 vs 10), and the 0.25 encoding has the best random diagnostics, including the only observed lower-bound rosters. Higher freedom worsens initial resource quality and imbalance, so sparse deviations best preserve the good rule while allowing needed repairs."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already strong (12 resources vs. lower bound 10, low imbalance 2.97), so a sparse deviation encoding should suffice. The 0.25 option also has the best random-initialization diagnostics, including some genomes at the resource lower bound and the best coverage within +1."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already strong on imbalance but uses 12 resources, so only sparse deviations are needed; 0.25 gives the best random diagnostics (best resources 10 and highest shares at/near lower bound) while 0.5 and 1.0 degrade initial resource quality under the limited evaluation budget."
+  }
+ ],
+ "M19_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already achieves the resource lower bound of 8, so only sparse deviations are needed to improve imbalance without disrupting good structure. Diagnostic random genomes confirm 0.25 is the only sparse choice with samples at the lower bound and best resources 8, while 0.5 and 1.0 start worse."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already attains the resource lower bound of 8, so good rosters are close to the rule; 0.25 keeps this strong starting quality while allowing limited deviations to improve imbalance, whereas 0.5 and 1.0 degrade resource usage in random initial populations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the resource lower bound of 8 with zero repairs, so only sparse deviations are needed to fine-tune imbalance. The 0.25 encoding preserves this strong starting point, whereas 0.5 and 1.0 random populations perform worse and risk losing the optimal resource count."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster already attains the resource lower bound of 8, so the search should stay close to it; 0.25 has the best initial feasibility with best resources 8 and nonzero share near the bound, whereas 0.5 is poor and 1.0 often sacrifices resources for only limited imbalance improvement."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure rule already achieves the resource lower bound of 8 with zero repairs, so the best rosters are likely close to the rule; 0.25 sparse deviations let the GA refine imbalance while preserving the optimal resource count, whereas 0.5 and 1.0 perform worse in random initial quality."
+  }
+ ],
+ "M20_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close to the resource lower bound and has good imbalance, so only sparse deviations are needed; 0.25 also gives the best random-initial imbalance among the viable choices, while 0.5 and 1.0 degrade initial quality."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close to the lower bound (11 resources vs 9, imbalance 4.80), and the 0.25 sparse encoding preserves near-rule quality in random initials while 0.5 and 1.0 degrade imbalance/resources. With only ~465 evaluations, limited deviations around this good rule are the best trade-off."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already close to the lower bound (11 vs 9) with low imbalance 4.80, and the 0.25 sparse encoding has the best random-initial quality among the options; 0.5 and 1.0 introduce too much disruption and worsen imbalance/resources."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already near the lower bound with low imbalance, so only sparse deviations are needed to improve/repair it. Random initial quality is best for 0.25, while 0.5 and 1.0 disrupt the strong rule baseline."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already strong: 11 resources, only +2 over the lower bound, and the best imbalance 4.80, so the search should start near this rule. Sparse 0.25 deviations preserve that heuristic while allowing limited improvements; 0.5 and 1.0 show worse random initial quality, especially in imbalance."
+  }
+ ],
+ "M21_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The pure rule is poor (11 resources vs lower bound 8) and sparse random genomes never reach within +1 of the bound, while per-shift sampling already finds the lower bound and is better when many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is poor (11 resources vs. lower bound 8), while per-shift random genomes already find the lower bound and near-lower-bound solutions; sparse encodings start from the rule and fail to reach this quality. Thus good rosters require many deviations, favoring the per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure-rule roster is far from the resource lower bound (11 vs. 8) and sparse random genomes never reach or approach the bound, while the per-shift encoding already finds lower-bound rosters in random initialization. This indicates the instance needs many deviations from the default rule, so 1.0 is the best choice."
+  },
+  {
+   "d": 1.0,
+   "reason": "The pure rule is far from optimal (11 resources vs. lower bound 8), and only the per-shift encoding reaches the lower bound in random initial sampling, while sparse encodings never do. This indicates good rosters require many deviations from the default rule, so 1.0 offers the needed flexibility."
+  },
+  {
+   "d": 1.0,
+   "reason": "Per-shift encoding already finds the resource lower bound in random initial genomes, while the pure-rule roster uses 11 resources and sparse encodings do not reach the lower bound; good rosters likely require many deviations from the default rule."
+  }
+ ],
+ "M22_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding has by far the best random initial quality: 19% at the resource lower bound 8 and 22% within +1, with low imbalance, while 0.5 and 1.0 perform much worse. Although the pure rule is infeasible, a small number of deviations is sufficient to find near-optimal rosters."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives the best random initial quality (19% at the proven lower bound of 8 resources and best imbalance 5.94), while 0.5 and 1.0 are much worse despite the pure rule being infeasible. This suggests good rosters require only sparse deviations from the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding has by far the best random initial quality, including rosters at the proven lower bound of 8 resources, while 0.5 and 1.0 start much worse. With only about 465 evaluations, this strong starting point and limited need for deviations make 0.25 the most reliable choice."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives by far the best random initial quality, with 19% of genomes at the resource lower bound and the best imbalance 5.94, while 0.5 and 1.0 are much worse. Since the GA has only about 465 evaluations, starting near good low-resource rosters is decisive."
+  },
+  {
+   "d": 0.25,
+   "reason": "Although the pure rule alone is infeasible, the 0.25 sparse encoding already reaches the resource lower bound with good imbalance in random sampling, while 0.5 and 1.0 start much worse; with only about 465 evaluations, the near-rule sparse search is most effective."
+  }
+ ],
+ "M23_1080h": [
+  {
+   "d": 0.5,
+   "reason": "The pure rule already achieves the resource lower bound of 10 but has high imbalance, and the 0.5 sparse encoding shows the best random-genome imbalance (4.25) while still reaching 10 resources; 0.25 barely improves imbalance and 1.0 is too disruptive for the limited evaluation budget."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule already attains the resource lower bound but has high imbalance, so some deviation is useful; 0.5 offers enough freedom and its random genomes include a resource-optimal roster with much better imbalance (4.25) than 0.25 or 1.0."
+  },
+  {
+   "d": 0.5,
+   "reason": "Pure rule already reaches the resource lower bound, so the search mainly needs controlled deviations to reduce imbalance; the 0.5 sparse encoding finds much better lower-bound imbalance (4.25) than 0.25 or 1.0 while avoiding per-shift disruption."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule already reaches the resource lower bound, so the search mainly needs to improve imbalance; the 0.5 encoding gives the best lower-bound-resource random solution (imbalance 4.25), while 0.25 barely improves and 1.0 expands the search too much."
+  },
+  {
+   "d": 0.5,
+   "reason": "The pure rule already reaches the resource lower bound (10) but has high imbalance (16.13); the 0.5 encoding finds lower-bound samples with much better imbalance (4.25), while 0.25 is too restrictive and 1.0 is noisier and worse on initial quality."
+  }
+ ],
+ "M24_720h": [
+  {
+   "d": 0.25,
+   "reason": "0.25 gives the best random-initial quality: 10% at the resource lower bound and 29% within +1, with best resources 11 and much lower imbalance than 1.0. Under the small evaluation budget, this sparse-near-rule encoding is more likely to find good trade-offs than 0.5 or per-shift."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding has the strongest random-initial diagnostics: 10% at the resource lower bound and 29% within +1, with the best imbalance among lower-bound solutions. With only about 465 evaluations, starting near high-quality low-resource rosters is more valuable than the broader but less reliably good per-shift search."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is far from the lower bound, so deviations are needed, but 0.25 has the best random initial quality with 10% at the resource lower bound and 29% within +1, while 0.5 is poor and 1.0 gives weaker near-bound coverage under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "Despite the poor pure-rule roster, the 0.25 sparse encoding gives the best random-initial diagnostics: highest share at the lower bound (0.10), highest share within +1 (0.29), and best imbalance among lower-bound rosters (7.02). With only 30 population and ~465 evaluations, the smaller search space is more reliable than 1.0 or 0.5."
+  },
+  {
+   "d": 0.25,
+   "reason": "0.25 has the strongest random-initial quality, with 10% of genomes at the lower bound and 29% within lower bound +1, while still allowing enough deviations to escape the poor pure-rule roster. Its smaller search space is better suited to the limited 465 evaluations than 0.5 or 1.0."
+  }
+ ],
+ "M25_480h": [
+  {
+   "d": 0.25,
+   "reason": "The pure rule is poor (19 resources), but 0.25 deviations already yields random genomes at 9 resources with the best imbalance and some within lower-bound+1, while larger/per-shift encodings start worse or need more search. With only ~465 evaluations, the smaller sparse genome is most promising."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives the best random initial quality: best resources 9 with imbalance 4.49 and the highest share within lower bound +1 (0.14), while per-shift is much worse under the limited evaluation budget. Although the pure rule is poor, 0.25 deviations per shift appear sufficient to escape it here."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is poor, but the 0.25 sparse encoding already gives the best random initial quality (best resources 9 and 14% within lower bound+1), while the per-shift encoding reaches only 10 with no near-optimal samples. With only about 465 evaluations, the compact sparse encoding is the best trade-off for NSGA-II here."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding has the best diagnostic random-initial quality: best resources 9, highest share within lower bound +1 (0.14), and much lower imbalance (4.49) than 0.5 or 1.0. With only about 465 evaluations, this sparse deviation level is most likely to focus search near good rule-based rosters without per-shift search dilution."
+  },
+  {
+   "d": 0.25,
+   "reason": "The 0.25 sparse encoding gives the best random-initial quality (best resources 9 and highest within lower-bound+1 share), while pure rule is poor but sparse deviations already exploit rule-based structure; per-shift is worse (best 10) and likely over-frees the search."
+  }
+ ],
+ "M26_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already competitive (15 resources and imbalance 13.09), and the 0.25 encoding starts closest to this good region with much better random-initial imbalance than 1.0. With only about 465 evaluations, the smaller sparse search space is preferable to the larger per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already a strong starting point (15 resources, imbalance 13.09) and random per-shift genomes only match its resource count with much worse imbalance, so only a few targeted deviations are needed. With the small evaluation budget, the lower-dimensional 0.25 encoding searches more effectively while preserving the rule's balance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already reasonable (15 resources, imbalance 13.09), and only a few targeted deviations are likely needed to remove a small number of extra robots/tools; the 0.25 random initial population also preserves this quality best, while 0.5 and 1.0 disrupt the rule or worsen imbalance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already competitive (15 resources, imbalance 13.09), and the 0.25 sparse encoding preserves this quality with the best random-initial imbalance among the choices, while 0.5 and 1.0 degrade initial resource/imbalance quality."
+  },
+  {
+   "d": 0.25,
+   "reason": "The pure-rule roster is already the best observed resource level (15) with good imbalance, and 0.25 deviations preserve this while allowing targeted improvements; 0.5 and 1.0 produce worse random-initial quality and more disruption."
+  }
+ ]
+}

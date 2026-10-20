@@ -1,0 +1,122 @@
+{
+ "E01_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -10,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "E02_1080h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 9,
+  "secs": 0.0
+ },
+ "E03_1080h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -7,
+  "total_lb": 10,
+  "secs": 0.0
+ },
+ "H01_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H02_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -8,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H03_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "H04_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "M01_480h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -4,
+  "total_lb": 9,
+  "secs": 0.1
+ },
+ "M02_480h": {
+  "robot_lb": 5,
+  "robot_exact": true,
+  "robot_note": "5 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -9,
+  "total_lb": 9,
+  "secs": 0.1
+ },
+ "M03_720h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -4,
+  "total_lb": 8,
+  "secs": 0.0
+ },
+ "M04_720h": {
+  "robot_lb": 6,
+  "robot_exact": true,
+  "robot_note": "6 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -5,
+  "total_lb": 10,
+  "secs": 0.1
+ },
+ "M05_480h": {
+  "robot_lb": 4,
+  "robot_exact": true,
+  "robot_note": "4 可行",
+  "tool_lb": 4,
+  "tool_adjacent_disjoint": true,
+  "tool_slack": -6,
+  "total_lb": 8,
+  "secs": 0.0
+ }
+}

@@ -1,0 +1,251 @@
+{
+ "instance": "原请求_paiban",
+ "LB": 9,
+ "N": 1000,
+ "opt": 4.0185968934214635,
+ "dec": {
+  "dec0": {
+   "nvar": 140,
+   "feasible": 0.035,
+   "gene_used": 0.6012000000000001,
+   "distinct": 1.0,
+   "top_share": 0.02857142857142857,
+   "res_mean": 13.8,
+   "res_min": 12.0,
+   "p_lb": 0.0,
+   "p_lb1": 0.0,
+   "bal_lb_min": null,
+   "override_rate": 0.0,
+   "fixes_mean": 0.0,
+   "loc_random": {
+    "n": 175,
+    "neutral": 0.3028571428571429,
+    "dist": 0.24707259953161587,
+    "cascade": 0.5474650446283585,
+    "res_change": 0.16483516483516483,
+    "res_worse": 0.32786885245901637,
+    "dbal_same_res": 2.279313903105886
+   },
+   "loc_elite": {
+    "n": 150,
+    "neutral": 0.19333333333333333,
+    "dist": 0.24616292798110975,
+    "cascade": 0.5145438232484955,
+    "res_change": 0.20454545454545456,
+    "res_worse": 0.3884297520661157,
+    "dbal_same_res": 3.492375496455601
+   },
+   "opt_reachable": true,
+   "opt_fail_shift": null,
+   "opt_check": [
+    9.0,
+    4.01859712600708
+   ],
+   "secs": 0.4521605968475342
+  },
+  "dec1": {
+   "nvar": 140,
+   "feasible": 0.144,
+   "gene_used": 0.7296285714285714,
+   "distinct": 1.0,
+   "top_share": 0.006944444444444444,
+   "res_mean": 13.20138888888889,
+   "res_min": 10.0,
+   "p_lb": 0.0,
+   "p_lb1": 0.006944444444444444,
+   "bal_lb_min": null,
+   "override_rate": 0.0,
+   "fixes_mean": 0.0,
+   "loc_random": {
+    "n": 500,
+    "neutral": 0.42,
+    "dist": 0.19876847290640393,
+    "cascade": 0.4683116415415328,
+    "res_change": 0.2585551330798479,
+    "res_worse": 0.18620689655172415,
+    "dbal_same_res": 1.7530626150277944
+   },
+   "loc_elite": {
+    "n": 150,
+    "neutral": 0.3933333333333333,
+    "dist": 0.1659340659340659,
+    "cascade": 0.45264685544393374,
+    "res_change": 0.1978021978021978,
+    "res_worse": 0.16483516483516483,
+    "dbal_same_res": 1.8466604572452912
+   },
+   "opt_reachable": true,
+   "opt_fail_shift": null,
+   "opt_check": [
+    9.0,
+    4.01859712600708
+   ],
+   "secs": 0.678875207901001
+  },
+  "dec2": {
+   "nvar": 140,
+   "feasible": 0.144,
+   "gene_used": 0.7296571428571429,
+   "distinct": 1.0,
+   "top_share": 0.006944444444444444,
+   "res_mean": 13.20138888888889,
+   "res_min": 10.0,
+   "p_lb": 0.0,
+   "p_lb1": 0.006944444444444444,
+   "bal_lb_min": null,
+   "override_rate": 0.0,
+   "fixes_mean": 0.0,
+   "loc_random": {
+    "n": 500,
+    "neutral": 0.412,
+    "dist": 0.20986394557823126,
+    "cascade": 0.5024620973091045,
+    "res_change": 0.20220588235294118,
+    "res_worse": 0.1836734693877551,
+    "dbal_same_res": 1.285460414974371
+   },
+   "loc_elite": {
+    "n": 150,
+    "neutral": 0.41333333333333333,
+    "dist": 0.20681818181818176,
+    "cascade": 0.54328529473383,
+    "res_change": 0.2159090909090909,
+    "res_worse": 0.17045454545454544,
+    "dbal_same_res": 1.0527685414189878
+   },
+   "opt_reachable": true,
+   "opt_fail_shift": null,
+   "opt_check": [
+    9.0,
+    4.01859712600708
+   ],
+   "secs": 0.663966178894043
+  },
+  "dec3f": {
+   "nvar": 142,
+   "feasible": 1.0,
+   "gene_used": 0.9859154929577465,
+   "distinct": 1.0,
+   "top_share": 0.001,
+   "res_mean": 9.716,
+   "res_min": 9.0,
+   "p_lb": 0.367,
+   "p_lb1": 0.919,
+   "bal_lb_min": 5.346036911010742,
+   "override_rate": 0.11838571428571429,
+   "fixes_mean": 0.0,
+   "p_opt1.25": 0.0,
+   "p_opt1.5": 0.009,
+   "p_opt2.0": 0.046,
+   "loc_random": {
+    "n": 500,
+    "neutral": 0.608,
+    "dist": 0.2037900874635568,
+    "cascade": 0.4929396119443526,
+    "res_change": 0.15816326530612246,
+    "res_worse": 0.09183673469387756,
+    "dbal_same_res": 2.7075995416352243
+   },
+   "loc_elite": {
+    "n": 150,
+    "neutral": 0.6666666666666666,
+    "dist": 0.2917142857142857,
+    "cascade": 0.6106400597888612,
+    "res_change": 0.32,
+    "res_worse": 0.32,
+    "dbal_same_res": 0.6473443227655747
+   },
+   "opt_reachable": true,
+   "opt_fail_shift": null,
+   "opt_check": [
+    9.0,
+    4.01859712600708
+   ],
+   "secs": 1.3671605587005615
+  },
+  "dec4": {
+   "nvar": 142,
+   "feasible": 1.0,
+   "gene_used": 0.9859154929577465,
+   "distinct": 1.0,
+   "top_share": 0.001,
+   "res_mean": 9.695,
+   "res_min": 9.0,
+   "p_lb": 0.379,
+   "p_lb1": 0.929,
+   "bal_lb_min": 5.145074844360352,
+   "override_rate": 0.1182,
+   "fixes_mean": 0.0,
+   "p_opt1.25": 0.0,
+   "p_opt1.5": 0.004,
+   "p_opt2.0": 0.042,
+   "loc_random": {
+    "n": 500,
+    "neutral": 0.606,
+    "dist": 0.20210297316896303,
+    "cascade": 0.47042502411595183,
+    "res_change": 0.13705583756345177,
+    "res_worse": 0.08629441624365482,
+    "dbal_same_res": 1.6810498826644
+   },
+   "loc_elite": {
+    "n": 150,
+    "neutral": 0.78,
+    "dist": 0.229004329004329,
+    "cascade": 0.5159683967753611,
+    "res_change": 0.24242424242424243,
+    "res_worse": 0.24242424242424243,
+    "dbal_same_res": 0.24165576934814453
+   },
+   "opt_reachable": true,
+   "opt_fail_shift": null,
+   "opt_check": [
+    9.0,
+    4.01859712600708
+   ],
+   "secs": 1.5245068073272705
+  },
+  "dec5": {
+   "nvar": 142,
+   "feasible": 1.0,
+   "gene_used": 0.9859154929577465,
+   "distinct": 1.0,
+   "top_share": 0.001,
+   "res_mean": 9.19,
+   "res_min": 9.0,
+   "p_lb": 0.829,
+   "p_lb1": 0.981,
+   "bal_lb_min": 5.145075026976297,
+   "override_rate": 0.11905714285714286,
+   "fixes_mean": 0.947,
+   "p_opt1.25": 0.0,
+   "p_opt1.5": 0.017,
+   "p_opt2.0": 0.07,
+   "loc_random": {
+    "n": 500,
+    "neutral": 0.686,
+    "dist": 0.21455868971792538,
+    "cascade": 0.4724510444230835,
+    "res_change": 0.03821656050955414,
+    "res_worse": 0.025477707006369428,
+    "dbal_same_res": 0.4769061847637106
+   },
+   "loc_elite": {
+    "n": 150,
+    "neutral": 0.72,
+    "dist": 0.22210884353741495,
+    "cascade": 0.5414425853947664,
+    "res_change": 0.0,
+    "res_worse": 0.0,
+    "dbal_same_res": 0.8988905228163657
+   },
+   "opt_reachable": true,
+   "opt_fail_shift": null,
+   "opt_check": [
+    9.0,
+    4.018596893421465
+   ],
+   "secs": 31.094075202941895
+  }
+ }
+}

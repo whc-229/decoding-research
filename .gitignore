@@ -1,0 +1,16 @@
+# 含 API 密钥，绝不能提交
+**/llm_config.json
+
+# 论文 PDF，有版权，不上传
+paper/
+
+# C++ 编译产物，服务器上重新编译
+**/paiban_dec*
+!**/paiban_dec*.py
+
+# Python 缓存、打包文件、临时运行目录、备份
+__pycache__/
+*.pyc
+*.tgz
+**/_临时运行/
+**/backups/

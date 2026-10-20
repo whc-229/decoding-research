@@ -1,0 +1,144 @@
+{
+    "category": "Robot",
+    "type": 0,
+    "ID": 1,
+    "normal_property":
+    {
+        "single_work_time": 12, 
+        "out_travel_time": 1,
+        "return_travel_time": 1,
+        "work_time": 10,
+        "continue_max_work": 36,
+        "maintenance_time": 72,
+        "carry_num": 2,
+        "charge_time": 0,
+        "cargo_type_num": 1,
+        "remain_work_time": 36
+    },
+    "list_property":
+    {
+        "cargo_type_list": [0]
+    },
+    "Custom":
+    {
+        "remain_work_time": 36
+    },
+    "workflow": {
+  "0": {
+    "Name": "开始",
+    "Workflow_Type": "Start",
+    "Successors": ["1"]
+  },
+  "1": {
+    "Name": "安装工具",
+    "Workflow_Type": "Time",
+    "category": {
+      "Relationship": "other_sum",
+      "Tool": "install_time"
+    },
+    "Successors": ["2"]
+  },
+  "2": {
+    "Name": "去程",
+    "Workflow_Type": "Time",
+    "category": {
+      "Relationship": "self",
+      "Robot": "out_travel_time"
+    },
+    "Successors": ["3"]
+  },
+  "3": {
+    "Name": "值班",
+    "Workflow_Type": "Time",
+    "category": {
+      "Relationship": "self",
+      "Robot": "work_time"
+    },
+    "Successors": ["4"]
+  },
+  "4": {
+    "Name": "返程",
+    "Workflow_Type": "Time",
+    "category": {
+      "Relationship": "self",
+      "Robot": "return_travel_time"
+    },
+    "Successors": ["5"]
+  },
+  "5": {
+    "Name": "拆卸工具",
+    "Workflow_Type": "Time",
+    "category": {
+      "Relationship": "other_sum",
+      "Tool": "removal_time"
+    },
+    "Successors": ["10"]
+  },
+  "10": {
+    "Name": "更新剩余工时",
+    "Workflow_Type": "Action",
+    "category": {
+      "Relationship": "-",
+      "left": {
+        "Custom": "remain_work_time"
+      },
+      "right": {
+        "Robot": "single_work_time"
+      }
+    },
+    "Successors": ["6"]
+  },
+  "6": {
+    "Name": "判断剩余工时",
+    "Workflow_Type": "Decision",
+    "category": {
+      "Relationship": "<=",
+      "left": {
+        "Custom": "remain_work_time"
+      },
+      "right": {
+        "Robot": "single_work_time"
+      }
+    },
+    "Successors": ["8", "7"]
+  },
+  "7": {
+    "Name": "充电",
+    "Workflow_Type": "Time",
+    "category": {
+      "Relationship": "self",
+      "Robot": "charge_time"
+    },
+    "Successors": ["-2"]
+  },
+  "8": {
+    "Name": "维修",
+    "Workflow_Type": "Time",
+    "category": {
+      "Relationship": "self",
+      "Robot": "maintenance_time"
+    },
+    "Successors": ["11"]
+  },
+  "11": {
+    "Name": "更新2",
+    "Workflow_Type": "Action",
+    "category": {
+      "Relationship": "=",
+      "left": {
+        "Custom": "remain_work_time"
+      },
+      "right": {
+        "Robot": "continue_max_work"
+      }
+    },
+    "Successors": ["-2"]
+  },
+  "-2": {
+    "Name": "结束",
+    "Workflow_Type": "End",
+    "Successors": []
+  }
+}
+
+}

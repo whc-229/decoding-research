@@ -1,0 +1,96 @@
+{
+    "Custom": {},
+    "ID": 10,
+    "category": "Tool",
+    "list_property": {},
+    "normal_property": {
+        "install_time": 1,
+        "limit_num": 10,
+        "removal_time": 1,
+        "tool_out_time": 1,
+        "tool_rest_time": 4,
+        "tool_return_time": 1,
+        "tool_work_time": 10
+    },
+    "type": 0,
+    "workflow": {
+        "-2": {
+            "Name": "结束",
+            "Successors": [],
+            "Workflow_Type": "End"
+        },
+        "0": {
+            "Name": "开始",
+            "Successors": [
+                "1"
+            ],
+            "Workflow_Type": "Start"
+        },
+        "1": {
+            "Name": "安装工具",
+            "Successors": [
+                "12"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Tool": "install_time"
+            }
+        },
+        "12": {
+            "Name": "工具去程",
+            "Successors": [
+                "13"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Tool": "tool_out_time"
+            }
+        },
+        "13": {
+            "Name": "工具值班",
+            "Successors": [
+                "14"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Tool": "tool_work_time"
+            }
+        },
+        "14": {
+            "Name": "工具返程",
+            "Successors": [
+                "5"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Tool": "tool_return_time"
+            }
+        },
+        "17": {
+            "Name": "工具休息",
+            "Successors": [
+                "-2"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Tool": "tool_rest_time"
+            }
+        },
+        "5": {
+            "Name": "拆卸工具",
+            "Successors": [
+                "17"
+            ],
+            "Workflow_Type": "Time",
+            "category": {
+                "Relationship": "self",
+                "Tool": "removal_time"
+            }
+        }
+    }
+}

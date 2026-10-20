@@ -1,0 +1,1410 @@
+{
+ "原请求_paiban": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will naturally use all 10 robots, but the resource objective favors fewer robots (minimum feasible is about 5), requiring many deviations to keep unused robots idle. Sparse encodings cannot override enough shifts, so per-shift freedom is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields a near-optimal resource-minimal schedule with necessary maintenance staggering; only a few early overrides are needed to fine-tune first-maintenance intervals, so sparse 0.25 encoding is sufficient and reduces search space for the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "With 70 shifts and repeated 72h maintenance, the default fewest-duties rule synchronizes maintenance and opens extra robots, so good rosters need many deliberate deviations to stagger maintenance and reduce resources; full per-shift freedom is therefore preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves the minimum 5 robots by staggering maintenance through on-demand opening; good rosters require only minor adjustments to balance first-maintenance intervals, so a sparse encoding is sufficient."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default least-duties rule spreads duties too evenly, synchronizing maintenance and likely opening extra robots; with frequent 72h maintenance over a long horizon, resource-minimizing rosters need many proactive deviations to pack robot duties and stagger maintenance, so the per-shift encoding with capacity look-ahead is preferable."
+  }
+ ],
+ "B_三类型720h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already matches the imbalance objective and can reach the minimum-resource schedule with about 5 type-0 robots and 2 tools, so the good rosters are close to the rule and only sparse deviations are needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields near-optimal resource usage and balanced duties for this instance; only a few deviations are needed to control initial robot openings and minor maintenance staggering, and the small evaluation budget favors a sparse encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already balances type-0 robots well (3 shifts per maintenance), and the optimal resource solution likely uses only type 0; only a few early deviations are needed to open robots earlier for better first-maintenance balance. Sparse deviation keeps the genome small for the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule balances duties, which synchronizes robot maintenance and causes extra robots to be opened; achieving low resource counts requires many deviations to stagger maintenance and coordinate tool rests, so per-shift encoding is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance has multiple robot types with different resource efficiency and tool dependencies; the fewest-duties rule ignores type, so good low-resource rosters require frequent deviations to prefer efficient robots and coordinate maintenance/tool rest. Per-shift encoding gives the needed freedom."
+  }
+ ],
+ "C_三类型1440h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and opens robots only when necessary; with 5 type-0 robots being optimal and tool rest constraints easily satisfied, few deviations are needed. A sparse 0.25 encoding gives enough freedom to fine-tune maintenance staggering while keeping the search space small for the limited 465 evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight maintenance cycles over the long horizon make the default fewest-duties rule synchronize robot maintenance, which would force extra resources; achieving the minimal 5-robot roster requires many proactive deviations to stagger maintenance, so full per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance has heterogeneous robot types with different duty lengths and maintenance intervals, and the resource objective favors concentrating shifts on fewer robots (e.g., type 0) while staggering maintenance. The default fewest-duties rule balances counts and ignores these factors, so good rosters require many deviations, making the per-shift encoding preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already achieves the minimum resource usage (5 robots + 4 tools) and naturally balances duties and maintenance intervals, so good rosters are very close to the rule; sparse deviations suffice and 0.25 is best for the small evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to synchronize robot maintenance, creating long gaps that force many extra robots; minimizing resources over this 1440-hour horizon requires proactive, many-shift deviation to stagger maintenance. Sparse 0.25/0.5 slots are too limited for that, so the per-shift encoding with capacity look-ahead is best."
+  }
+ ],
+ "D_三类型资源紧": [
+  {
+   "d": 1.0,
+   "reason": "Frequent maintenance (every 3-5 shifts) with long durations makes the default fewest-duties rule synchronize maintenance and open extra robots; achieving good resource usage and balanced intervals requires many proactive deviations, so per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The heterogeneous robot types and tool constraints make the fewest-duties default rule a poor starting point, especially for minimizing resources and balancing duty hours. Per-shift control is needed to choose appropriate robots/tools and strategically open robots across many shifts."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with repair already handles continuous coverage and maintenance staggering well; only a few deviations are needed to control robot-type openings and fine-tune balance, so sparse 0.25 is sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is a strong balancer; the optimal 5-robot roster only needs a few early deviations to stagger maintenance, while most shifts can follow the rule. Sparse 0.25 reduces the search space, which is critical given the small evaluation budget (465)."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule likely synchronizes maintenance and ignores robot/tool efficiencies, requiring a moderate number of strategic deviations to achieve resource-optimal rosters; with only ~465 evaluations, a fully per-shift encoding is too large, so 0.5 provides enough flexibility while keeping the search tractable."
+  }
+ ],
+ "E01_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and handles maintenance well because the repair window (120h) exceeds maintenance time (104h), so good rosters require only a few early deviations to open extra robots and improve first-maintenance intervals. A sparse 25% deviation encoding is sufficient and more efficient under the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule with the 12-shift repair window is well-tuned to the 104h maintenance duration (≈10.4 shifts), so good rosters are likely close to the rule. A sparse encoding (0.25) reduces the search space, which is crucial given the small evaluation budget (~465), while still allowing fine-tuning of maintenance staggering."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule spreads work evenly across all 9 robots, causing synchronized maintenance and preventing the resource-minimizing, staggered schedules that this instance requires; good rosters need many deviations from the rule, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule spreads work across all 9 robots, which is poor for minimizing resources; near-optimal rosters require packing duties into about 4 robots with maintenance, needing deviations on most of the 108 shifts. Sparse budgets of 27 or 54 overrides are insufficient, so the per-shift encoding is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule with its 12-shift repair window (120h) can already manage the 104h maintenance staggering locally, making it a strong starting point. With only ~465 evaluations, a sparse 0.25 encoding reduces the search space while still allowing enough deviations to improve resource usage."
+  }
+ ],
+ "E02_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The long 98h maintenance and tight robot supply make the default fewest-duties rule myopic: it synchronizes maintenance and opens too many robots. Good rosters require many deviations to stagger maintenance and use closer to the minimum 5 robots, so the per-shift encoding is appropriate."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to synchronize maintenance and force an extra robot; reaching the minimum 5-robot roster requires many staggered deviations, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 0.5,
+   "reason": "The maintenance cycle is every 4 shifts, and achieving the resource-optimal 4-robot schedule requires systematically overriding the default fewest-duties rule about twice per 4-shift block (≈50% of shifts) to stagger maintenance. Thus 0.25 is too sparse to encode the needed deviations, while 1.0 is unnecessarily large for the given evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long 98h maintenance and 4-duty limit cause the greedy fewest-duties rule to synchronize robot maintenance and open extra robots; achieving the minimum feasible 5-robot rosters requires frequent deviations to stagger maintenance, so full per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long horizon and long maintenance (98h after every 4 duties) make the myopic fewest-duties rule poor: it causes overlapping maintenance and opens more robots than needed. Good rosters require coordinated deviations across many shifts to stagger maintenance and minimize resources, favoring the per-shift encoding."
+  }
+ ],
+ "E03_1080h": [
+  {
+   "d": 0.5,
+   "reason": "Maintenance forces robots to work in pairs of duties, but the default fewest-duties rule spreads duties, so about half of the 108 shifts (54) need overrides to pair duties efficiently; 0.5 provides exactly that many deviation slots without unnecessary search freedom."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance is tightly constrained (6 robots, 108 shifts, maintenance every 2 duties), so a feasible roster requires only a few initial deviations to stagger maintenance; afterward the default rule is essentially forced. Sparse deviation with 27 slots is sufficient and more efficient than per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance is tightly constrained: 108 shifts over 1080h require exactly 6 robots, each doing 18 duties in a forced 12-shift periodic pattern. A good roster is very close to the default rule, needing only a few early deviations to stagger maintenance, so sparse deviation with K=0.25 is sufficient and more efficient than per-shift."
+  },
+  {
+   "d": 0.25,
+   "reason": "The horizon and robot capacity force a tight pattern where all 6 robots must do exactly 18 duties; the default rule only needs a few initial deviations (e.g., to pair duties early) to enter the optimal staggered maintenance cycle, after which it follows the rule automatically. 0.25 provides enough deviation slots to correct the start without the larger search space of 0.5 or 1.0."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule spaces each robot's two duties evenly, causing maintenance synchronization and making it infeasible to cover 108 shifts with only 6 robots; good rosters require a tightly packed, staggered pattern with many deviations from the rule."
+  }
+ ],
+ "H01_720h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will keep selecting unused robots (especially type 1) because they have zero duties, which conflicts with minimizing resources. To force a small, efficient robot set and stagger maintenance, many shift-level overrides are needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already uses the minimum 4 type-0 robots and balances duty counts well; only a few early deviations are needed to improve first-maintenance staggering, so a sparse encoding with K=0.25 offers enough freedom while keeping the search focused."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already attains minimal resource usage (4 type-0 robots and 4 tools) and reasonably balances duties; only a few early deviations are needed to improve imbalance or explore higher-resource trade-offs, so a sparse encoding with 18 slots is sufficient and more efficient given the limited evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances robots, which synchronizes maintenance intervals and causes resource-inefficient gaps; covering 720h with minimal robots requires frequent deviations to stagger maintenance and balance the objectives, so per-shift freedom is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields the minimum 4 type-0 robots and good duty balance; only a few early deviations are needed to open all robots early and balance first-maintenance intervals, so a sparse 0.25 encoding is sufficient and more efficient for the limited evaluation budget."
+  }
+ ],
+ "H02_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already gives a strong resource-minimizing start, and only a few deviations are needed to adjust robot openings for the resource-imbalance trade-off; 18 slots are enough without enlarging the search space unnecessarily."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance's long horizon and resource constraints align well with the default rule, which naturally uses the minimal 4 type-0 robots and balances duties without many deviations. Sparse deviation at 0.25 provides enough flexibility to fine-tune while keeping the search focused near this good starting point."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default 'fewest duties' rule will equalize total duties across opened robots, causing maintenance intervals to clump and forcing extra robots; reaching the optimal low-resource roster requires many deliberate deviations to stagger maintenance, so the per-shift encoding is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long horizon spans many maintenance cycles, and the default fewest-duties rule naturally groups robots into pairs, causing imbalanced duty counts and first-maintenance intervals. Rebalancing while keeping the minimum 4 robots requires interleaving active/maintenance phases, which demands frequent deviations from the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already staggers maintenance well over the long horizon and, using type-0 robots, covers all 72 shifts with the minimum 4 robots and no gap; only minor tweaks are needed to reduce imbalance or explore extra-robot trade-offs, so a sparse deviation encoding suffices."
+  }
+ ],
+ "H03_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with repair is already near-optimal here, since type-0 robots are efficient and only a few early deviations are needed to open the fourth robot and stagger maintenance. With 72 shifts and a small evaluation budget, the sparse 0.25 encoding keeps the search space small while still allowing necessary adjustments."
+  },
+  {
+   "d": 1.0,
+   "reason": "Long, frequent maintenance makes the default fewest-duties rule synchronize maintenance, so many deviations are needed to stagger it and minimize resources; per-shift encoding gives the required flexibility."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will quickly use all available robots because any non-overridden shift tends to pick an unused robot, making it poor for minimizing robot count; achieving a low-resource roster requires packing work onto a few robots, which needs many per-shift deviations. Sparse 0.25/0.5 genomes cannot override enough shifts to avoid using all 18 robots."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default rule with repair is a strong starting point for this long-horizon instance, but the maintenance cycles require moderate scheduling adjustments to reduce resources; 0.5 provides enough deviation slots while keeping the search space manageable for the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duty counts, directly addressing the main imbalance objective and naturally staggering maintenance; good rosters are therefore close to the rule, so a sparse encoding is sufficient and more efficient for the small evaluation budget."
+  }
+ ],
+ "H04_480h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances work and synchronizes maintenance, but with short maintenance intervals (3-4 duties) over 480 h this causes simultaneous unavailability; low-resource rosters require many deliberate deviations to stagger maintenance and prefer type-1 robots. Thus the per-shift encoding is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The rule's fewest-duties balancing is a poor start for minimizing resources: it opens extra robots instead of staggering maintenance, so good low-resource rosters require many deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to synchronize maintenance across robots, causing blackouts that force extra robots; optimal resource rosters need staggered maintenance, requiring many per-shift deviations from the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields an optimal resource count (4 robots + 2 tools) and balanced duties for this tightly constrained instance, so good rosters are very close to the rule and only sparse deviations are needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default least-duties rule already provides a good starting point; only a few early deviations are needed to stagger maintenance and break symmetry. Once one robot pair enters maintenance, availability forces the rule to follow the efficient staggered pattern, so 12 deviation slots (0.25×48) are sufficient."
+  }
+ ],
+ "M01_480h": [
+  {
+   "d": 1.0,
+   "reason": "The long horizon and long maintenance times require deliberately staggered maintenance and selective use of fewer type-1 robots, while the default fewest-duty rule would balance work and cause synchronized maintenance. This needs many per-shift deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will favor the many unused type-0 robots, while resource-optimal rosters likely use only the more efficient type-1 robots; achieving that requires overriding the rule at nearly every shift, so the per-shift encoding is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will tend to equalize robot usage and synchronize maintenance cycles, which is a poor starting point for this long-horizon instance with frequent maintenance; the roster likely needs many deviations to stagger maintenance/charging and coordinate robot-type/tool availability, so per-shift encoding is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores the clear advantage of type-1 robots and tends to synchronize maintenance, so good rosters need many deviations; per-shift encoding with capacity look-ahead can better choose robot types and stagger maintenance periods."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already balances duty counts and maintenance well; only a few deviations are needed to force the more efficient type-1 robots at the initial openings, which 0.25 provides sufficiently without unnecessarily enlarging the search space."
+  }
+ ],
+ "M02_480h": [
+  {
+   "d": 1.0,
+   "reason": "The default rule ignores robot type, duty length, tool rest, and first-maintenance staggering, which are critical in this heterogeneous instance. Good rosters likely require many coordinated deviations to balance duty hours and maintenance intervals, so the per-shift encoding is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The heterogeneous robot types with different duty lengths, maintenance intervals, and tool requirements make the default fewest-duties rule a poor starting point; good rosters require many shift-specific decisions and capacity look-ahead to balance resources and maintenance, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The frequent maintenance after only 3–4 duties makes the load-balancing rule a poor starting point because it synchronizes maintenance outages; good rosters require many deliberate deviations to stagger maintenance and optimize robot/tool types, so the per-shift encoding is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The frequent, long maintenance intervals make the default fewest-duties rule poor: it synchronizes maintenance across robots and ignores type/tool efficiency, so good rosters need many shift-level deviations to stagger maintenance and favor efficient type-1/T2 assignments."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance has heterogeneous robot types where resource-optimal rosters should strongly favor type-1 robots, but the default fewest-duties rule would mix in less efficient type-0 robots and ignore tool/maintenance balance. Achieving a good type mix and tool assignment likely requires many deviations, so full per-shift encoding is appropriate."
+  }
+ ],
+ "M03_720h": [
+  {
+   "d": 0.25,
+   "reason": "The instance strongly favors using type-1 robots, and once a few type-1 robots are opened the default fewest-duties rule can balance the roster effectively. Thus only a small number of deviations are needed, so the sparse 0.25 encoding is sufficient and more efficient than per-shift freedom."
+  },
+  {
+   "d": 0.25,
+   "reason": "The fewest-duties default rule naturally balances load and staggers maintenance with few robots, so good rosters are close to the rule. With only ~465 evaluations, 0.25 gives enough targeted deviations to adjust robot-type openings and minor trade-offs without a large per-shift search space."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long horizon with multiple maintenance cycles makes the default fewest-duties rule synchronize maintenance, forcing extra robots; good resource-efficient rosters need many deliberate deviations to stagger maintenance and respect tool-rest/type constraints. Thus full per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long maintenance times relative to shift durations make the default fewest-duties rule synchronize maintenance, causing gaps and forcing extra robots; low-resource rosters require frequent deviations to stagger maintenance and accept imbalance, so per-shift encoding is better."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long maintenance intervals and multiple robot types make the default fewest-duties rule prone to simultaneous maintenance and inefficient type use, so good low-resource rosters need many deviations to stagger maintenance and select efficient robots; thus full per-shift control is preferable."
+  }
+ ],
+ "M04_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is already near-optimal: type-0 robots can cover the 72 shifts with 6 robots at 12 duties each, so good rosters are close to the rule and only sparse deviations are needed for fine-tuning."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields a perfectly balanced schedule with the minimum resources (6 type-0 robots and 4 type-0 tools) because all robots need maintenance after exactly two duties and type 0 is the most efficient. Thus good rosters are extremely close to the rule, so sparse deviations (0.25) suffice; per-shift freedom would only add unnecessary search noise."
+  },
+  {
+   "d": 0.5,
+   "reason": "The instance requires frequent deviations from the fewest-duties rule to stagger maintenance across 6 robots and respect tight tool limits, but the rule still provides a useful load-balancing baseline. With a limited evaluation budget, 0.5 gives enough deviation slots to encode the needed stagger without the excessively large search space of per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already reuses robots after maintenance and balances duties well; with type-0 robots the horizon can be covered by about 6 robots with near-perfect balance, so good rosters are very close to the rule. Sparse deviations are sufficient, while per-shift encoding would unnecessarily enlarge the search space."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule is a poor starting point because it ignores robot types, tool availability, and maintenance staggering; with maintenance every 2 shifts and long maintenance times, good rosters require frequent deviations to reduce resource count and balance maintenance intervals."
+  }
+ ],
+ "M05_480h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and naturally staggers maintenance for this instance, so only minor deviations are needed; with a small evaluation budget, the smaller search space of 0.25 converges more reliably than 0.5 or per-shift."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule misbalances duty hours and first-maintenance intervals due to mixed robot types and long maintenance, so moderate deviations are needed; 0.5 offers enough freedom to correct these imbalances while keeping the genome manageable for 465 evaluations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is near-optimal once initial maintenance staggering is established; only the first ~10 of 40 shifts need deviation to break symmetry, so a sparse 0.25 encoding suffices and keeps the search space small."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already naturally produces a near-optimal all-type-0 schedule (4 robots, 4 tools, balanced duties and first-maintenance intervals) for this long horizon, so only a few deviations are needed to force type-0 openings if the rule initially opens type 1."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule uses robots in sequential pairs, requiring 8 type0 robots for 480h, while the optimal schedule needs only 4 interleaved robots with staggered maintenance—a solution far from the rule that requires many per-shift deviations."
+  }
+ ],
+ "E11_480h": [
+  {
+   "d": 1.0,
+   "reason": "The 48-shift horizon forces frequent maintenances (every 5 duties), and the default fewest-duties rule balances work, which synchronizes maintenance and likely requires a fifth robot; reaching the 4-robot minimum needs many deviations to stagger maintenance and pack shifts, so per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The maintenance cycle (5 duties then 55h maintenance) causes the fewest-duties rule to synchronize robot maintenance, likely forcing extra robots; good 4-robot rosters require many deviations to stagger maintenance and balance first-maintenance intervals, so the per-shift encoding is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will spread work across all 8 robots, but minimizing resources likely requires using far fewer robots/tools over the 48 shifts. That needs deviations on most shifts, so the per-shift encoding is necessary."
+  },
+  {
+   "d": 1.0,
+   "reason": "The 480-hour horizon gives 48 shifts, and the default fewest-duties rule will spread work across all 8 robots to balance duties, which is poor for minimizing resources; reaching resource-optimal rosters with fewer robots requires overriding the rule on most shifts, so full per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight maintenance constraint (5 duties then 55 h) over 48 shifts makes the default fewest-duties rule prone to synchronizing maintenance, causing uncovered shifts or extra robots; the search needs many deviations to stagger maintenance and optimize first-maintenance intervals, which only the per-shift encoding allows."
+  }
+ ],
+ "E12_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The frequent maintenance after only 2 shifts and the tight robot limit require deliberate staggering of maintenance, which is far from the fewest-duties default rule; per-shift encoding gives the flexibility needed to find such non-greedy schedules."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance is tightly constrained with only 6 robots, frequent maintenance every 2 shifts, and many shifts (108); the default rule cannot easily plan maintenance and balance first-maintenance intervals, so many deviations are likely needed, making per-shift encoding preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight capacity (6 robots, maintenance every 2 duties, 116h maintenance) requires deliberately staggering robot maintenance, while the default fewest-duties rule tends to equalize duty counts and cluster maintenance periods. Per-shift encoding gives the freedom needed to create and maintain such staggered rosters."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance is long-horizon and tightly constrained by frequent, long maintenance and tool rest, so good rosters require many deviations from the default fewest-duties rule to stagger robot usage and first-maintenance intervals. Per-shift encoding provides the flexibility needed to find feasible, balanced schedules."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance has tight robot availability (long maintenance, only 6 robots for 108 shifts), so the default fewest-duties rule is a poor starting point and many deviations are needed to stagger maintenance and cover shifts."
+  }
+ ],
+ "E13_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with repair is already a strong heuristic for this regular maintenance/tool-constrained instance, and with only ~465 evaluations a compact sparse encoding will search more effectively than a larger per-shift genome."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default rule with repair is a reasonable but myopic heuristic; the long horizon and frequent maintenance require occasional corrections to stagger robots and avoid unnecessary openings, so a moderate number of deviation slots (0.5) provides enough freedom without the large search space of per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule with repair already balances duties and uses the minimum four robots required by the tight maintenance constraint, so good rosters are likely close to the rule and only sparse deviations are needed for fine-tuning imbalance."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default rule balances duties and causes simultaneous maintenance, requiring a 4th robot, while a 3-robot roster needs a staggered burst pattern with roughly 20–30 deviations. 0.25 (27 slots) is borderline, so 0.5 provides sufficient freedom without the full per-shift search space."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances robot duties, which synchronizes maintenance cycles and forces extra robots; optimal resource use requires intentionally staggered maintenance, needing many deviations from the rule, so full per-shift freedom is preferable."
+  }
+ ],
+ "E14_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes maintenance and tends to use all robots, which is a poor starting point for this long horizon; good rosters need many deviations to stagger maintenance and minimize robots/tools, so per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes maintenance cycles, causing all robots to hit the 5-duty limit together and leaving gaps; good rosters require many deviations to stagger maintenance, so per-shift encoding is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight maintenance constraint (5 duties then 107h maintenance) requires staggered maintenance to avoid simultaneous unavailability; the default fewest-duties rule tends to synchronize maintenance, so good low-resource rosters need many deviations, favoring the per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances robot utilization, causing maintenance periods to clump and forcing extra robots to be opened; a resource-minimal roster requires deliberately staggering maintenance and thus many deviations from the rule, so the per-shift encoding is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves the minimum resource count (4 robots + 4 tools) and maintains balanced duty counts; only minor strategic deviations are needed to fine-tune imbalance, so a sparse encoding is more efficient under the limited evaluation budget."
+  }
+ ],
+ "E15_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The fewest-duties rule synchronizes maintenance, forcing a fourth robot; reaching the optimal 3-robot staggered roster requires many non-myopic deviations, so per-shift encoding is best."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance is homogeneous and the default fewest-duties rule with repair already balances duty counts and minimizes robot openings, so good rosters are likely close to the rule. Sparse deviations (27 slots) are sufficient to fine-tune imbalance without the large search space of per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes maintenance and opens extra robots; reaching the minimal resource count requires a highly staggered schedule with many deviations, so full per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances duty counts and causes robots to hit maintenance thresholds nearly simultaneously, creating coverage gaps; this instance requires many deviations to stagger maintenance, so per-shift encoding is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule spreads work evenly, causing robots to reach the 5-shift maintenance limit simultaneously and forcing extra robots; minimizing resources requires concentrating shifts and staggering maintenance, which needs many deviations. Thus the per-shift encoding is preferable."
+  }
+ ],
+ "E16_720h": [
+  {
+   "d": 0.25,
+   "reason": "The instance requires at least 6 robots to cover the 720-hour horizon (5 robots cannot sustain the required rate due to the 3-shift maintenance cycle and shift spacing), so the default rule already achieves the minimum resource count. It also balances duties and first-maintenance intervals well, making good rosters close to the rule; sparse deviation with K=0.25 is sufficient and keeps the search space small for the limited evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will keep preferring unused robots and synchronize 3-shift maintenance windows, which is poor for this 72-shift horizon; minimizing resources requires many deliberate deviations from the start, so per-shift control is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule with repair is a strong heuristic; only a few early deviations are needed to stagger maintenance and avoid deadlocks, so a sparse 0.25 encoding offers sufficient flexibility while keeping the search space small for the limited evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will use all 6 available robots, but the resource objective can be improved by using only 5 robots (the minimum feasible). Reaching such a roster requires overriding the default robot choice on many shifts, which sparse encodings cannot do."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes maintenance across the limited robot fleet, causing gaps and requiring many deviations to stagger maintenance; per-shift encoding gives the search enough freedom to find a feasible, balanced roster."
+  }
+ ],
+ "E17_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duty counts and uses the minimum robot count; only a few early deviations are needed to open robots earlier and align first-maintenance intervals, so the sparsest encoding is best."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already achieves the minimum robot count (6) and naturally staggers maintenance into two waves, which is necessary for continuous coverage. Good rosters are likely very close to this rule, so the sparsest deviation encoding (0.25) keeps the search focused and efficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already constructs the minimum-robot staggered maintenance pattern (6 robots) with balanced duty counts; only a few early deviations are needed to explore trade-offs such as extra robots or maintenance-interval balance, so the sparsest deviation encoding is sufficient and more efficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves minimum resource usage (6 robots + 4 tools) and balances duty counts due to the 3-shift maintenance cycle; only a few early deviations are needed to tune first-maintenance spacing, so the sparsest encoding is best for the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and opens robots only when needed, likely achieving the minimum 6 robots; only a few early deviations are required to stagger maintenance, so the sparsest encoding (0.25) keeps the search focused near the good heuristic and suits the limited evaluations."
+  }
+ ],
+ "E18_480h": [
+  {
+   "d": 1.0,
+   "reason": "The default rule starts by using all available robots and always picks the fewest-duties robot, which would use all 9 robots, but the maintenance constraints make 8 robots sufficient and optimal for resource minimization. Achieving that requires overriding the rule on almost every shift to avoid the extra robot, so only the per-shift encoding has enough freedom."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already produces a feasible schedule using the minimum 8 robots with perfectly balanced duties (6 per robot, zero imbalance), so minimal deviation freedom is sufficient and avoids disrupting the optimal starting solution."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes robot maintenance and tends to open/use all available robots, while the tight 2-shift maintenance constraint requires deliberate staggering and avoiding extra resources. Full per-shift freedom allows the GA to discover the many necessary deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long 115h maintenance after every 2 duties on a 480h horizon makes the default fewest-duties rule a poor starting point: it spreads work across all robots and clusters maintenance, so many deviations are needed to concentrate duties and stagger maintenance to minimize resources. Per-shift encoding provides the required flexibility."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule's 12-shift repair window aligns with the ~11.5-shift maintenance duration, so it already handles the key staggering constraint; good rosters should be near the rule, and the small evaluation budget favors a sparse encoding."
+  }
+ ],
+ "E19_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The default rule uses 6 robots, but the resource-optimal solution requires only 5, which demands many carefully staggered maintenance deviations. Per-shift encoding provides the freedom needed to discover such coordinated schedules."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long 108h maintenance and only 4 shifts between maintenances make the default fewest-duties rule synchronize maintenance, forcing extra robots; a low-resource roster requires heavily staggering maintenance, which needs many deviations from the rule."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances duties and synchronizes maintenance, causing it to open all 8 robots, while the tight maintenance constraints likely require only 5 robots with deliberately staggered maintenance. Achieving this needs many shifts to deviate from the rule, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The fewest-duties rule synchronizes the long 108h maintenance and opens extra robots; achieving the minimal 4-robot roster requires forcing robots into 4-shift blocks, which needs many deviations (about 27 shifts, 25% of the horizon). Thus per-shift freedom is needed to discover the required block structure."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long maintenance (108h) and tight robot capacity mean the myopic default rule synchronizes maintenance and uses 6 robots, while 5 robots are feasible only with carefully staggered duty assignments. Achieving that requires many deviations from the rule, so full per-shift freedom is preferable."
+  }
+ ],
+ "E20_480h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will keep selecting unused robots, while minimizing resources requires concentrating duties on the minimum number of robots; this needs deviations on nearly every shift, exceeding the 24 slots allowed by d=0.5. Per-shift encoding provides the necessary freedom."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance has a rigid structure from the 3-duty maintenance cycle and long horizon; the default rule already attains minimal resources (6 robots, 4 tools) and a reasonably balanced roster. Only a few deviations are needed to fine-tune imbalance or open an extra robot, so the sparse 0.25 encoding (12 slots) is sufficient and more efficient than larger genomes."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves the minimum 6 robots and decent balance; reaching the perfect-balance 8-robot solution requires reassigning only 12 of the 48 shifts (exactly 0.25 x 48), so sparse encoding with 0.25 provides sufficient flexibility while keeping the search focused."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default rule already achieves minimal resources, but balancing duty counts under the long maintenance cycles requires restructuring multiple robot phases, needing more than a few deviations. A 0.5 sparse encoding gives sufficient flexibility while remaining tractable for the small evaluation budget."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule opens a 7th robot late and needs roughly 18 shift overrides to reach a 6-robot resource-optimal roster, which exceeds the 12 slots of 0.25 but fits within the 24 slots of 0.5; full per-shift freedom is unnecessary for this structured instance."
+  }
+ ],
+ "E21_720h": [
+  {
+   "d": 1.0,
+   "reason": "The greedy fewest-duties rule synchronizes maintenance and forces extra robots to be opened; with a 720 h horizon and long maintenance, resource-minimal rosters require many deliberate robot-choice deviations, so per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes robot maintenance, causing gaps and extra robots; achieving the minimum 4 robots requires many proactive deviations to stagger maintenance blocks, so full per-shift freedom is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule is a strong resource-minimizing heuristic here, and the main need is a few strategic deviations to open extra robots for better balance or to stagger maintenance. With 72 shifts, 0.25 gives 18 slots, which is sufficient and keeps the search tractable under the small evaluation budget."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default rule already gives near-minimal resource usage with staggered maintenance, but the 72-shift horizon causes an imbalance (20,20,16,16) that needs more than the ~18 deviations of 0.25 to correct; 0.5 provides enough freedom for the required retiming while still biasing the search toward the good default rule, unlike full per-shift 1.0 which is unnecessary and would slow the small budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long maintenance time (97 h) and 72 shifts cause the default fewest-duties rule to synchronize robot maintenance, forcing extra robots; good rosters require many deviations to stagger maintenance, so per-shift encoding provides the needed flexibility."
+  }
+ ],
+ "E22_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with repair is already a strong heuristic for this regular instance; sparse deviations suffice to adjust robot opening and maintenance staggering without enlarging the search space too much for the limited evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule would keep using unused robots, likely spreading over all 10 robots, while the resource objective strongly favors consolidating to far fewer robots. Since sparse overrides cannot suppress the rule at every shift where unused robots remain available, per-shift freedom is needed to reach low-resource rosters."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance is highly regular; only a few initial deviations are needed to stagger robot maintenance cycles and avoid opening a fifth robot, after which the default rule naturally maintains the pattern. Thus a sparse encoding with 0.25 provides sufficient freedom without expanding the search space unnecessarily."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default load-balancing rule is well-suited to this regular instance, likely achieving near-optimal resource usage (4 robots) and balanced duty counts; only minor deviations are needed to fine-tune maintenance staggering, so the sparsest encoding (0.25) offers sufficient flexibility with a smaller search space."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores the 65h maintenance constraint, causing synchronized maintenance that exceeds the 4-robot tool limit; good rosters require frequent deviations to stagger maintenance, so per-shift freedom is needed."
+  }
+ ],
+ "E23_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves minimum resources (6 robots + 6 tools) and balances duty counts; only early first-maintenance staggering needs adjustment, which requires deviating on roughly the first 18 of 108 shifts, so 0.25 (27 slots) provides sufficient freedom without excessively enlarging the search space."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will spread work over all 9 available robots, while minimizing resources likely needs only about 6 robots plus 6 tools; avoiding the unused robots requires overriding nearly every shift, which sparse encodings with 27 or 54 slots cannot do."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance has a highly regular structure: each robot can do exactly 3 shifts before a 96h maintenance, and with 108 shifts the default fewest-duties rule already staggers six robots into balanced 18-shift blocks using the minimum 6 robots and 6 tools. Good rosters are therefore very close to the default rule, so the sparsest deviation encoding (0.25) is sufficient."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight 3-duty maintenance cycle and long horizon require a specific staggered schedule to achieve the minimum 6 robots; the default fewest-duties rule (even with local repair) is a poor starting point and would need many deviations, so per-shift freedom is necessary."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will use all 9 available robots, while minimizing resources requires concentrating duties on far fewer robots, which demands overriding almost every shift. Sparse encodings with 27 or 54 deviations cannot suppress the many unused robots that always have fewer duties."
+  }
+ ],
+ "E24_480h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to spread duties evenly, which synchronizes the 3-duty maintenance cycles and creates gaps, forcing extra robots. Minimizing resources here requires many deviations to stagger maintenance blocks, so the per-shift encoding is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves minimum resources (6 robots + 6 tools) and balances duty counts well, so only minor deviations are needed to fine-tune the secondary imbalance objective; the small evaluation budget favors the sparsest encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already gives near-optimal resource use and balanced duty counts; only a few early deviations are needed to improve first-maintenance staggering, so a sparse 0.25 encoding provides sufficient freedom without needlessly enlarging the search space."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already achieves the minimum robot count (6) and a near-balanced schedule; only a few early deviations are needed to stagger first-maintenance intervals and adjust load, so sparse deviation is sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already uses near-minimal robots and balances duties well; only a few overrides (about 3 out of 48 shifts) are needed to stagger maintenance and avoid opening an extra robot, so a sparse encoding with 12 deviation slots is sufficient."
+  }
+ ],
+ "E25_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances duty counts, causing robots to hit maintenance nearly simultaneously. Given the long 53h maintenance, tight 1080h horizon, and need for continuous coverage, feasible rosters require deliberately staggered maintenance via many deviations from the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default load-balancing rule with local repair is already close to optimal for this instance: tools are not a bottleneck (rest times < duty period) and only 4 robots are needed. Good rosters require only minor deviations to stagger the first maintenance intervals, so the compact 0.25 encoding is sufficient and better suited to the small evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to balance robot usage, which synchronizes maintenance and forces extra robots to be opened; with a 1080-hour horizon and 108 shifts, good rosters need many deliberate deviations to stagger maintenance and keep the robot count low, so full per-shift freedom is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance has frequent maintenance (every 5 shifts) over a long 1080h horizon, so the default balancing rule synchronizes maintenance and forces extra robots; good resource-minimizing rosters require extensive proactive staggering, i.e., many deviations from the rule, favoring the per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule always picks the available robot with fewest duties, so with 10 available robots it will use all of them, which is poor for the resource objective. To use fewer robots optimally, the search must override the rule on nearly every shift, requiring per-shift freedom."
+  }
+ ],
+ "E26_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The long 73 h maintenance and 3-duty work limit make the default fewest-duties rule poor for minimizing robots: it spreads duties evenly and causes simultaneous maintenance, while good resource-minimal rosters need clustered duty bursts. Such rosters require many deviations from the rule, so the per-shift encoding is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes robot maintenance, causing gaps and forcing a 7th robot; achieving the optimal 6-robot schedule requires frequent overrides to stagger maintenance and balance duties."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes robot maintenance (all hit 3 duties together), causing gaps; good rosters require frequent deviations to stagger maintenance, so full per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule spreads shifts and synchronizes the long 73h maintenance, forcing extra robots; good rosters need to cluster three consecutive shifts per robot to stagger maintenance, which requires deviations on most shifts and exceeds sparse encoding capacity."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule will use all 7 robots by balancing duties, but the resource objective favors fewer robots. Excluding a robot requires overriding the rule on nearly every shift because an unused robot always has 0 duties and is always selected, so sparse encodings cannot explore the resource-imbalance trade-off."
+  }
+ ],
+ "H11_480h": [
+  {
+   "d": 0.5,
+   "reason": "The 48-shift horizon and heterogeneous robot types require mainly efficient type-1 robots with staggered maintenance, which the default fewest-duties rule tends to balance and synchronize; this needs more than 12 deviations but not full per-shift freedom."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already closely matches good rosters: it opens new robots only when necessary and balances duties. Only a few overrides are needed to fix maintenance timing (e.g., shifts 28-29) and ensure type-1 robots are used, so 12 deviation slots are sufficient; per-shift freedom is unnecessary."
+  },
+  {
+   "d": 0.25,
+   "reason": "Robot type 1 dominates (fewest robots and tools, high work budget), and the default fewest-duties rule already balances duty counts perfectly once type 1 is used; only a few early deviations are needed to select that type, so sparse 0.25 freedom is sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already naturally staggers maintenance by opening robots in pairs and achieves the minimal 4 type-1 robots; only a few early deviations are needed to select the efficient type-1 robots and adjust the resource/imbalance trade-off, so the sparse 0.25 encoding is sufficient and more sample-efficient."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores maintenance cycles and robot-type capacities, often causing overlapping maintenances and infeasible schedules; this instance requires careful per-shift staggering of work and maintenance, so full per-shift freedom is needed."
+  }
+ ],
+ "H12_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already produces a near-optimal balanced roster using only the dominant type-0 robots and minimal tools, so good solutions lie very close to the rule and sparse deviations are sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with the clearly dominant type-0 robots already achieves near-optimal resource use (4 robots + 4 tools) and perfectly balanced 18 duties per robot over 72 shifts, so good rosters require few deviations; the sparsest encoding keeps the search space small for the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The optimal 4-robot type-0 schedule needs only a few early deviations to stagger maintenance; afterward the default fewest-duties rule naturally follows the feasible staggered pattern, so a sparse 0.25 encoding gives enough freedom with a much smaller search space."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores robot-type efficiency and will keep using all 20 robots equally, so achieving low resource counts (e.g., using only efficient type-0 robots) requires overriding the rule on nearly every shift; per-shift encoding provides that freedom."
+  },
+  {
+   "d": 0.5,
+   "reason": "The long maintenances require substantial deviation from the fewest-duties rule to stagger robot usage, but the 12-shift repair window matches the natural maintenance cycle, so a half-sparse encoding gives enough overrides while keeping the search tractable under the tight evaluation budget."
+  }
+ ],
+ "H13_720h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances loads and synchronizes maintenance, which is poor for minimizing resources in this instance with long maintenance and heterogeneous robot/tool types; good rosters need many deviations to stagger maintenance and choose appropriate resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule strongly balances load, which is good for imbalance but poor for minimizing robots/tools; achieving good resource rosters requires concentrating duties and staggering maintenance, needing many deviations across shifts, so per-shift encoding is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule is poorly aligned with minimizing resources: with many unused robots available it will keep opening new robots and use nearly all 28, while good rosters likely need only a small robot subset. Preventing this requires overriding the rule on most shifts, so the per-shift encoding is best."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule's repair window covers the maintenance cycles, making it a strong starting point; sparse deviations are sufficient to fine-tune resource usage and imbalance without unnecessarily enlarging the search space."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default load-balancing rule with repair is a strong heuristic here, naturally staggering maintenance and minimizing openings; only a few deviations are needed to select the best robot type and fine-tune, so a sparse encoding (25% slots) is sufficient and more efficient under the limited evaluation budget."
+  }
+ ],
+ "H14_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and minimizes new openings, so only a few deviations are needed to force the superior type-1 robots and fine-tune maintenance; with 72 shifts, 18 sparse slots suffice and keep the search efficient under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already naturally opens the minimum number of type-1 robots and balances duties well; only a few deviations are needed to force the efficient robot type, so the sparsest encoding is sufficient and keeps the search feasible under the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances workload across robots, which synchronizes maintenance events for the type-1 robots (4 duties then 90h maintenance) and forces opening extra robots; minimizing resource count requires deliberately staggering maintenance by deviating on many shifts, exceeding the sparse limits of 0.25/0.5."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long horizon with frequent maintenance cycles makes the default fewest-duties rule poor at staggering maintenance and minimizing robots/tools; good low-resource rosters require many deviations, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is a good starting point for this instance: it naturally balances total duties and achieves the minimal resource count (5 type-1 robots + 3 tools). Only a few early deviations are needed to stagger first-maintenance intervals, so a sparse encoding with 0.25 is sufficient and keeps the search efficient."
+  }
+ ],
+ "H15_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default load-balancing rule with 12-shift repair aligns well with the ~117h maintenance duration, so good rosters are likely close to the rule; sparse deviations are sufficient and more sample-efficient under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duty counts and avoids extra robots, aligning with both objectives; the instance has a clearly dominant robot type (type 0) and only one relevant tool type, so good rosters are close to the rule and sparse deviations suffice."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is a strong balancing heuristic; only a small initial perturbation (about 8 of 108 shifts) is needed to stagger maintenance and achieve the optimal 5 robots + 4 tools. Sparse 0.25 provides enough deviation slots while keeping the search space small."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule balances well for the imbalance objective but tends to cause simultaneous maintenance, so resource-minimizing rosters need moderate deviations to stagger maintenance; 0.5 provides enough freedom without the large search space of per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duty counts and naturally staggers maintenance by opening new robots only when forced, so good rosters stay close to the rule. With only ~465 evaluations, sparse deviations (0.25) are sufficient and more efficient than per-shift encoding."
+  }
+ ],
+ "H16_480h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already achieves the minimum resource count (4 type-0 robots + 3 type-1 tools) and perfectly balances duty counts; only minor adjustments to first-maintenance intervals are needed, so a sparse encoding with 12 deviation slots is sufficient and better suits the small evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule spreads duties across all available robots, but the instance has many robots and a clearly efficient type-0 option; achieving the best resource count (4 type-0 robots + 4 tools) requires concentrating shifts on a few robots, which needs overriding the rule on almost every shift. Sparse encodings with only 12 or 24 deviation slots cannot enforce this concentration."
+  },
+  {
+   "d": 1.0,
+   "reason": "The optimal low-resource rosters need exactly 3 type-0 robots working staggered 5-shift blocks to avoid simultaneous maintenance and use all 6 type-1 tools, which requires overriding the balanced fewest-duties rule on most shifts; sparse encodings cannot encode enough deviations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to choose unused robots, so it opens nearly all 23 robots; minimizing resources requires overriding most shifts to reuse a small set of robots. With 48 shifts, even K=0.5 gives only 24 deviations, insufficient to prevent using all robots, so the per-shift encoding is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule only needs a few early deviations to break symmetry and stagger maintenance, after which it naturally follows a resource-efficient pattern; a sparse 0.25 encoding captures this with a smaller search space, which is preferable under the limited evaluation budget."
+  }
+ ],
+ "H17_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The tight resource limit (minimum ~5 type-0 robots) and long maintenance intervals (77h) require careful staggering of maintenance to avoid simultaneous shortages; the default balance rule tends to equalize duties and conflicts with optimal staggering, so many deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to synchronize maintenance by balancing workloads, which with long maintenance times and tight tool limits forces extra robots; achieving low-resource rosters requires many deliberate deviations to stagger maintenance, so per-shift freedom is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already balances loads and naturally staggers maintenance; only a few deviations are needed to select type-0 robots and fine-tune tool/maintenance choices. With only ~465 evaluations, the compact 0.25 encoding converges faster than larger encodings."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores robot-type/tool efficiency and tends to synchronize maintenance cycles, leading to extra robots; this long-horizon instance requires many deliberate deviations to stagger maintenance and select efficient resources, so full per-shift freedom is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule balances duties, which synchronizes maintenance and increases robot count; achieving the low-resource trade-off requires many deliberate deviations to stagger maintenance, so full per-shift freedom is needed."
+  }
+ ],
+ "H18_480h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already produces a near-optimal schedule, and the instance's optimal 4-robot type-1 solution is reached with only a few deviations (mainly overriding robot type at openings). Thus a sparse 0.25 deviation encoding is sufficient."
+  },
+  {
+   "d": 1.0,
+   "reason": "Type 1 robots are clearly more resource-efficient (shorter maintenance, fewer tools) and can cover the horizon with 4 robots, while the default rule likely opens type 0 first. Sparse encodings lack the capacity look-ahead to choose type 1 when opening new robots, so they cannot escape the suboptimal type 0-based rosters; per-shift encoding with look-ahead is needed to discover the type 1 solution."
+  },
+  {
+   "d": 1.0,
+   "reason": "Long maintenance (94/78 h) relative to the 10 h shifts makes the default balancing rule synchronize maintenance, forcing extra robots; good low-resource rosters require many deviations to stagger maintenance, so per-shift encoding is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "Resource-minimal rosters require concentrating duties into 4-shift blocks on very few robots (e.g., 3 type-1 robots can cover the 48 shifts), while the default fewest-duties rule spreads work and causes maintenance conflicts. Achieving this needs many deviations from the rule, so the per-shift encoding is appropriate."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields a strong minimum-resource schedule and handles maintenance/repair well; only a few early deviations are needed to explore trade-offs like extra robots or type choices, so the sparsest encoding best fits the limited evaluation budget."
+  }
+ ],
+ "H19_480h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to synchronize maintenance, making it hard to cover 48 shifts with only 3 robots without many deviations; achieving the balanced 16/16/16 schedule requires frequent overrides to stagger work blocks, so per-shift encoding is better."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule balances work but causes simultaneous maintenance because the 5-shift budget is exhausted at roughly the same time for all robots; achieving a resource-minimal roster needs moderate stagger deviations (around 20-30% of the 48 shifts), which 0.5 can encode while keeping the search space smaller than the per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "Good rosters are close to the default rule: only a few shift overrides are needed to stagger maintenance and keep resource count at 4 robots + 2 tools, so the sparse 0.25 encoding provides enough freedom while keeping the search focused."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is already close to good rosters; only a few deviations (e.g., forcing maintenance staggering) are needed to reach the minimum-resource 4-robot/4-tool solution, so 12 deviation slots (0.25×48) suffice while keeping the search focused."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields near-optimal staggered maintenance and low robot usage for this long horizon, so only sparse deviations are needed to explore the resource-imbalance trade-off; 0.25 keeps the search space small for the limited evaluation budget."
+  }
+ ],
+ "H20_480h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already matches the optimal 4-robot schedule for most of the 48 shifts; only about 11 localized overrides are needed to correct maintenance staggering, so 12 deviation slots (0.25 × 48) are sufficient and keep the search space small for the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already opens new robots only when necessary and balances duties, so good rosters are close to it; with only ~465 evaluations, a sparse 12-slot genome is sufficient to fine-tune imbalance without the large search space of per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields a near-optimal 4-robot schedule with perfectly balanced duty counts by naturally staggering maintenance; only small adjustments are needed for first-maintenance interval balance, so a sparse 0.25 encoding is sufficient and more search-efficient than denser alternatives."
+  },
+  {
+   "d": 0.5,
+   "reason": "The frequent maintenance intervals and multiple robot types make the default fewest-duty rule myopic, likely requiring regular deviations to stagger maintenance and minimize resources, but the limited evaluation budget makes per-shift encoding too large; 0.5 offers a balanced sparse search."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is already well-aligned with minimizing imbalance and uses resources greedily; only a few early deviations are needed to stagger maintenance cycles and avoid synchronized downtime, so a sparse encoding is sufficient and more efficient given the limited evaluation budget."
+  }
+ ],
+ "H21_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default least-loaded rule already balances duties well and naturally staggers maintenance when restricted to the right robot type; only a few targeted deviations (e.g., forcing type-2 openings and early openings to stagger maintenance) are needed, so a sparse encoding with 25% freedom is sufficient."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule spreads work across many robots, but minimizing resources requires concentrating shifts on a few suitable robots/tools over 72 shifts; maintenance and tool-rest constraints make many deviations necessary, so per-shift freedom is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule is type-agnostic and will repeatedly pick inefficient type-0 robots because they have fewer duties, while also synchronizing maintenance; minimizing resources requires overriding the rule on most shifts to use only efficient type-1 robots with staggered maintenance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances work, which synchronizes maintenance and forces extra robots; achieving the optimal 5-robot roster requires many deliberate deviations to stagger maintenance, so full per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores robot-type efficiency and maintenance staggering, so good rosters require many overrides to synchronize maintenance and balance first-maintenance intervals over the 72 shifts."
+  }
+ ],
+ "H22_720h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already gives a near-feasible schedule that staggers maintenance and uses few type-0 robots; good rosters are close to this heuristic, so sparse deviations (18 slots) suffice to tune residual imbalance while keeping the search space small for the limited 465 evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The fewest-duties rule evenly distributes shifts, causing robots to hit long maintenance simultaneously and forcing extra resources; optimal rosters require deliberate staggering, needing many deviations from the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties (matching the imbalance objective) and uses repair to avoid extra robots, while the instance has ample capacity of the most efficient robot type, so good rosters stay close to the rule. With only ~465 evaluations, sparse deviation at 0.25 gives enough flexibility without over-parameterizing."
+  },
+  {
+   "d": 1.0,
+   "reason": "The horizon requires 72 shifts, but the default fewest-duties rule will spread duties over many of the 29 available robots, while minimizing resources likely needs reusing only a few robots, which requires overriding the rule on almost every shift. Sparse encodings with 18 or 36 deviation slots are too restrictive for this instance."
+  },
+  {
+   "d": 0.5,
+   "reason": "The instance has a long horizon with tight maintenance and multiple robot/tool types, so good rosters likely require moderate deviations from the default balanced rule to stagger maintenance and coordinate resources; 0.5 provides enough flexibility while keeping the search space tractable for the limited evaluation budget."
+  }
+ ],
+ "H23_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule with repair already produces near-optimal rosters by using type-0 robots and staggering maintenance; only minor deviations are needed for imbalance tuning, and the small evaluation budget favors the sparser 0.25 encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule can reach near-optimal 4-robot staggered schedules with only about 8 initial deviations; 0.25 provides 27 slots, enough to encode these while keeping the search space small for the limited 465 evaluations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already finds the minimum robot count (4 type-0 robots) and balances duties well; only a few early deviations are needed to open all robots earlier and improve first-maintenance interval balance, so a sparse encoding with few slots is sufficient."
+  },
+  {
+   "d": 0.5,
+   "reason": "The fewest-duties rule tends to synchronize maintenance, so reaching the optimal 4-robot roster requires a substantial but structured set of deviations to stagger maintenance; 0.5 balances this need against the limited evaluation budget better than fully per-shift or very sparse encodings."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with repair already targets both objectives well, and type-0 robots dominate this instance, so good rosters should remain close to the rule. With only 465 evaluations, the sparser 0.25 encoding is more tractable than 0.5 or per-shift."
+  }
+ ],
+ "H24_480h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already produces a strong balanced schedule for this instance; only a few deviations are needed to select the efficient robot type and handle maintenance/tool constraints, so a sparse encoding is sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duty counts and achieves the optimal resource count (9) by using a single robot type; only a few deviations are needed to adjust first-maintenance intervals or switch robot types, so 12 slots (0.25) provide sufficient freedom without enlarging the search space for the limited 465 evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes maintenance and forces many new robots; good rosters require frequent deviations to stagger maintenance and reduce resources, so full per-shift freedom is needed."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule balances too aggressively, synchronizing maintenance and forcing extra robots; achieving the resource-optimal 4-robot schedule requires many deviations (~21), so 0.25 is too sparse, while 0.5 provides enough freedom without the larger search space of per-shift."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will spread work across many of the 24 available robots, while the resource-minimizing objective requires concentrating duties on a few robots/tools, so many per-shift deviations are needed."
+  }
+ ],
+ "H25_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already gives a strong resource-minimizing and duty-balancing starting point; only a few early deviations are needed to stagger maintenance or open extra robots. With a very small evaluation budget, the sparser 0.25 encoding keeps the search space manageable while still allowing the necessary tweaks."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already handles most shifts well; only about 20% of shifts need deviation to stagger maintenance and avoid using extra robots. A sparse 0.25 encoding provides enough freedom while keeping the search space small for the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances duty counts and therefore tends to synchronize maintenance after every 4 duties, causing availability gaps that force extra robots; with a 1080-hour horizon and significant maintenance times, good 4-robot rosters require many deliberate deviations to stagger maintenance, so the per-shift encoding is preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already yields near-minimal resources and balanced duties; the instance's tight constraints (type-0 robots working every other shift, 6 tools, long maintenance) make the default pair structure close to optimal, so only a few targeted deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default balancing rule tends to use many robots and mix types, whereas minimizing resources requires concentrating work on few robots of a single type, which needs many deviations. With 108 shifts, sparse encodings lack enough freedom to achieve these low-resource rosters."
+  }
+ ],
+ "H26_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already balances workloads and minimizes opened robots well; only a few early deviations are needed to stagger openings/maintenance, and with a small evaluation budget a sparser genome is easier to search."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already balances loads and the repair mechanism handles most maintenance conflicts, so good rosters are close to the rule. With only ~465 evaluations, a sparse encoding is more efficient than per-shift search."
+  },
+  {
+   "d": 1.0,
+   "reason": "The horizon has 108 shifts and three robot types with very different maintenance intervals; the fewest-duties rule ignores maintenance and type efficiency, so good rosters likely require many per-shift deviations to avoid inefficient robots and stagger maintenance."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already yields the optimal 5 type-0 robots for continuous coverage; only a few early deviations are needed to open extra robots sooner and balance first-maintenance intervals, so 27 deviation slots are sufficient and the smaller search space suits the limited evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to synchronize maintenance cycles across the mostly identical type-0 robots, causing overlapping maintenance gaps that force extra robot openings. Good rosters require proactive, shift-by-shift staggering of maintenance and duty assignments, so the per-shift encoding with full deviation freedom is more suitable."
+  }
+ ],
+ "M11_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The instance has long maintenance durations (74/102 h) and multiple robot/tool types, so good rosters require careful staggering and type mixing that the greedy fewest-duties rule cannot capture. Per-shift encoding with capacity look-ahead can coordinate these many deviations, whereas sparse encodings lack the freedom to avoid excessive robots/tools."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores maintenance staggering and robot-type trade-offs; with long maintenance and tight capacity, good rosters require many deviations from the rule, so per-shift freedom is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The resource-optimal rosters use only type-1 robots (7 robots + 6 tools = 13) with balanced duties, so the default fewest-duties rule is already close; only a few deviations (mainly to enforce type-1 over type-0 and fine-tune maintenance staggering) are needed. With ~465 evaluations, a sparse 0.25 encoding keeps the search space small enough to find these near-rule solutions efficiently."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will tend to balance duties across many robots, which is poor for minimizing total resources; good rosters here must concentrate on a small subset and choose robot types to reduce tool usage, requiring many deviations. Thus the per-shift encoding gives the search enough freedom."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields a near-optimal resource count and balance for this instance; only a few deviations (mainly robot-type choices at openings) are needed, so a sparse encoding with 0.25 is sufficient and keeps the search efficient under the small evaluation budget."
+  }
+ ],
+ "M12_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The tight maintenance cycles (especially 3 duties for type-1 robots) make the default fewest-duties rule synchronize maintenance and open extra robots; good low-resource rosters require deliberate staggering, i.e. many deviations from the rule. Thus per-shift encoding is preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with repair already achieves the minimum 6 type-1 robots and balances duty counts, and only a few early deviations are needed to even out the first-maintenance intervals, so a sparse 0.25 encoding is sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule can produce a balanced, resource-optimal type-1-only roster (6 robots and 6 tools) for this long horizon; only a few early deviations are needed to avoid inefficient type-0 openings, so sparse freedom is sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The optimal roster is close to the default rule: it mainly needs a few overrides at robot-opening events to select the longer-duty type-1 robots. Once the type is fixed, the fewest-duties rule already balances the schedule well, so sparse deviations at 0.25 provide enough freedom without unnecessarily enlarging the search space for the limited evaluations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already minimizes imbalance and reuses robots efficiently, needing only minor tweaks to improve resource usage; sparse deviations keep the search near this strong heuristic and are more effective given the small evaluation budget."
+  }
+ ],
+ "M13_480h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves the minimum number of robots (5 type-0) and perfectly balances duty counts; only a few deviations are needed to fine-tune maintenance-interval imbalance, so a sparse encoding with 25% deviation slots is sufficient and better suited to the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule is already close to a good roster; only a few early deviations are needed to stagger maintenance and avoid opening an extra robot. A sparse encoding with 0.25 provides enough freedom while keeping the search space small for the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields a near-optimal, perfectly balanced roster with the minimum likely resources (5 robots + 4 tools), so only sparse deviations are needed; 0.25 best preserves this good heuristic under the small evaluation budget."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule already handles resource reuse and basic balance well, but the two robot types with different duty lengths and maintenance thresholds may require some targeted deviations to avoid suboptimal type choices. A 0.5 sparse encoding provides enough flexibility while keeping the genome small for the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "Type-0 robots dominate for resource minimization, so the default duty-balancing rule is already a strong starting point. With a small evaluation budget, sparse deviations (0.25) suffice to adjust robot counts and maintenance staggering without the large search space of per-shift encoding."
+  }
+ ],
+ "M14_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The long horizon with frequent maintenance (every 3-5 duties) makes the default fewest-duties rule synchronize maintenance and waste resources; achieving low resource counts requires many deliberate deviations and global staggering, so per-shift encoding is better."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already naturally staggers robots into efficient pairs (e.g., 4 type-0 robots can cover the horizon with minimal resources), so good rosters are close to the rule. Only a few deviations are needed to explore trade-offs such as opening extra pairs for better balance, making 0.25 sufficient and better for the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight maintenance cycles and tool-rest constraints make the default fewest-duties rule a poor starting point; good rosters need many deliberate deviations to stagger maintenance and manage tool usage, so full per-shift control is preferable."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and opens new robots only when needed, so good rosters are close to it; only a few deviations are needed to select resource-efficient robot types (avoiding type 1) and fine-tune maintenance timing, making the sparse 0.25 encoding sufficient and more effective under the small evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule balances duties but poorly handles maintenance staggering and robot-type differences, which are critical for minimizing resources; good rosters require many shift-by-shift deviations, so the per-shift encoding is better."
+  }
+ ],
+ "M15_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances duties and can synchronize maintenance, forcing extra robots; minimizing resources here requires deliberate unbalancing, staggered maintenance, and type-1-only selection, which needs per-shift control."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long maintenance durations relative to the 4-shift work blocks require proactive staggering of robots; the fewest-duties default tends to synchronize maintenance, so good low-resource rosters need many deviations, favoring the per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances duty counts, which synchronizes maintenance and forces extra robots/tools; reaching the resource-minimizing 5-robot schedule requires many bursty, unbalanced deviations from the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and maintenance effectively; only a few deviations are needed to select the more efficient type-1 robots and stagger maintenance, so sparse 0.25 is sufficient."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight 4-shift maintenance cycles with long maintenance times (56–87 h) and two robot types with different duty/tool profiles mean the balanced fewest-duties rule tends to synchronize maintenance and waste resources; good rosters require deliberate imbalance, staggered maintenance, and type/tool choices, so full per-shift freedom is needed."
+  }
+ ],
+ "M16_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already gives good resource and count balance; optimal rosters for this instance need only modest deviations (around 10-15% of shifts) to balance duty hours with mixed robot types, so a sparse encoding with K=0.25 is sufficient and keeps the search efficient under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already respects maintenance-driven availability and naturally balances the fleet; only a few deviations are needed to select the resource-efficient type-0/type-2 mix and fine-tune hour imbalance, making the smaller sparse genome sufficient."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already balances duty counts and handles maintenance availability well; only a modest number of deviations are needed to adjust robot-type mix and first-maintenance staggering, so a sparse encoding with 25% deviation slots is sufficient and keeps the search tractable under limited evaluations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already minimizes robot openings and balances duties, and the resource-optimal mix (6 type0 + 1 type2) is reachable with only a few deviations, so the sparse 0.25 encoding provides enough freedom while keeping the search focused."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule only balances duty counts, but this instance has robot types with very different duty lengths (12/8/6 h), so good rosters need many deviations to also balance duty hours and first-maintenance intervals. Sparse encodings would be too constrained; per-shift freedom is better suited."
+  }
+ ],
+ "M17_480h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already balances duties and opens robots as needed, so good rosters are close to it; 25% deviation slots are enough to switch robot types or open extra robots while keeping the search space small for the limited evaluation budget."
+  },
+  {
+   "d": 1.0,
+   "reason": "The tight maintenance limits cause the greedy fewest-duties rule to synchronize robot downtime, so good rosters require many deviations to stagger maintenance and minimize resources; per-shift freedom is therefore better than sparse encodings."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long maintenance times relative to the short duty periods make the fewest-duties default prone to synchronized maintenance and poor resource usage; good rosters need many deviations from the rule, so per-shift encoding is appropriate."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance favors a pure type-1 roster for perfect balance (48 shifts over 6 robots = 8 each) at the same resource count, but the default fewest-duties rule will tend to use type-0 robots; switching to type-1 requires many overrides, so per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long maintenance periods relative to the horizon and tight robot/time budget require intentional staggering of maintenance across robots; the default fewest-duties rule tends to equalize counts and cluster maintenance, so many per-shift deviations are needed to find feasible, resource-efficient rosters."
+  }
+ ],
+ "M18_480h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will tend to open new robots and use most of the 24 available units, which is poor for the resource-count objective; reaching low-resource rosters requires overriding robot choice on many shifts, so per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "Good rosters likely need many deviations because the default fewest-duties rule ignores robot-type maintenance and tool-rest differences, and sparse encodings would still be forced to use inefficient unused robots by the rule. The per-shift encoding gives the freedom needed to select the best robot/tool combinations and balance maintenance."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores maintenance timing and will exhaust robots into synchronized maintenance gaps, while this tight 480-hour instance likely requires carefully staggered assignments and many deviations to achieve good resource/imbalance trade-offs."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance has heterogeneous robot types with very different duty lengths, maintenance intervals, and tool requirements, so the default fewest-duties rule is a poor start and good rosters likely need type-aware choices and staggered maintenance across many shifts. Per-shift encoding (1.0) gives the search enough freedom to select suitable robots and tools rather than being limited to a few sparse deviations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will spread duties across the many available robots, while minimizing resources requires concentrating work on a small subset with many deviations. With about 50 shifts, sparse 0.25/0.5 encodings would not allow enough overrides, so per-shift freedom 1.0 is better."
+  }
+ ],
+ "M19_1080h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to balance duties and synchronize maintenance, leading to extra robots; the resource-minimal solution requires deliberately staggered maintenance and type selection, i.e., many deviations from the rule."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already produces a near-optimal, balanced schedule if type-2 robots are used; only a few openings/deviations are needed to enforce that type, so the sparsest deviation encoding is sufficient."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long horizon and long, type-dependent maintenance intervals require deliberate staggering of robot maintenance; the default fewest-duties rule tends to equalize duty counts and can make many robots unavailable simultaneously. Thus good rosters likely need many per-shift deviations, favoring the 1.0 per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default rule balances duties, which synchronizes the long maintenance periods (74-103 h) and forces extra robots; minimizing resources requires many systematic deviations to stagger maintenance and handle heterogeneous robot types, so full per-shift freedom is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The horizon is long (1080 h) and the fewest-duties rule already balances counts well in steady state; only a small initial transient of deviations is needed to stagger maintenance and select robot types, so a sparse encoding is sufficient and faster than per-shift."
+  }
+ ],
+ "M20_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default rule already achieves the optimal resource count (6 type-0 robots + 6 tools) and balances duty counts; only a small number of early deviations are needed to improve first-maintenance interval balance without breaking coverage. Sparse deviation is sufficient and keeps the search space manageable for the limited 465 evaluations."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already handles resource minimization and duty balancing; this instance mainly needs a few early overrides to choose the better robot type and stagger first maintenance. With only 465 evaluations, a sparse 0.25 encoding keeps the search space small while still allowing these critical deviations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule will spread work across the many available robots, which is poor for minimizing resources; achieving low-resource rosters here requires overriding many shifts to concentrate duties, so per-shift freedom is needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already provides a strong starting point for resource minimization and duty-count balance, and the main deviations needed are only for selecting robot types and staggering early maintenance, which can be handled by a sparse set of overrides. With the limited evaluation budget, the smaller 0.25 genome avoids unnecessary search-space expansion."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to synchronize maintenance cycles, especially for type-0 robots that need maintenance every 3 shifts, causing simultaneous unavailability and extra robots/tools. Good rosters need many deviations to stagger maintenance and consistently choose efficient robot types, so the per-shift encoding is preferable."
+  }
+ ],
+ "M21_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The optimal roster can use only type-2 robots, yielding 4 robots + 4 tools with perfect imbalance since all robots are identical. The default rule already balances duties well; only a few initial deviations are needed to open the right robot type, so sparse 0.25 suffices."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances robots but ignores the tight maintenance staggering and tool rest constraints, leading to synchronized maintenance and more robots/tools than necessary. Good rosters likely need many shift-specific robot/type choices, so the per-shift encoding is preferable."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances robot usage and tends to synchronize maintenance periods, which increases resource count; achieving a low resource count requires deliberately staggered maintenance and many shifts that deviate from the rule, so the per-shift encoding gives the necessary freedom."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule synchronizes maintenance for robots, leading to more robots than necessary; achieving the resource-optimal staggered schedules requires many deviations, so full per-shift freedom is preferable."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default rule with repair is a strong starting point, but the instance's long horizon, mixed robot types, and maintenance synchronization require moderate proactive deviations for type selection and staggering maintenance; 0.25 may be too restrictive, while 1.0 is unnecessarily large for the limited evaluation budget."
+  }
+ ],
+ "M22_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is already close to good rosters; only a few initial deviations are needed to force robot pairing and select efficient type 2 units, after which maintenance and availability constraints naturally guide the rule to the low-resource schedule. A sparse 0.25 encoding therefore suffices while keeping the search tractable for the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance has a clear optimal strategy: use only type-2 robots in a repetitive 4-robot rotation, which the fewest-duties default rule already balances well. Sparse deviations are sufficient to select the robot type and handle any minor tool-rest adjustments."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule is already close to optimal here: type-2 robots give the most efficient duty/maintenance cycle, and the rule naturally staggers four such robots to cover the horizon. Only a few deviations are needed to force type-2 openings or refine maintenance staggering, so the sparsest encoding is best with the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule naturally uses the efficient type-2 robots, opens new robots only when forced, and produces balanced duty counts and first-maintenance intervals, so good rosters are close to the rule and only sparse deviations are needed."
+  },
+  {
+   "d": 0.25,
+   "reason": "Type-2 robots dominate the instance and a resource-minimal roster can use just four of them; the default fewest-duties rule with only a couple of early deviations already produces a near-perfectly balanced schedule, so good solutions are very close to the rule. Thus the sparsest deviation encoding is sufficient."
+  }
+ ],
+ "M23_1080h": [
+  {
+   "d": 0.25,
+   "reason": "The horizon yields ~90 shifts for the efficient type-0 robots, and only the initial ~15 shifts need deviation to stagger maintenance; the default rule then maintains the optimal 3-robot pattern. A 25% deviation budget is sufficient and reduces the search space for the limited evaluations."
+  },
+  {
+   "d": 1.0,
+   "reason": "The maintenance cycle is tight: with type-0 robots, 3 robots is the theoretical minimum for 1080 h, but the default fewest-duties rule tends to synchronize maintenance and open a 4th robot. Finding a staggered 3-robot schedule requires many shifts to deviate from the rule, so per-shift encoding is preferable."
+  },
+  {
+   "d": 0.5,
+   "reason": "The default balancing rule is good for imbalance but likely poor for minimizing robots/tools, since resource-optimal rosters require intentional duty imbalance to stagger maintenance cycles. With a long horizon and a small evaluation budget, 0.5 provides enough freedom to encode these strategic deviations without the excessive search space of per-shift encoding."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule equalizes workloads, which causes robots to hit maintenance near-simultaneously and creates coverage gaps; achieving the resource-optimal rosters requires many coordinated deviations to stagger maintenance and choose efficient robot types, so the full per-shift freedom is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The long horizon and 5-shift maintenance cycles cause the default fewest-duties rule to synchronize maintenance and potentially mix robot types, which harms both resource minimization and feasibility. Extensive per-shift deviations are needed to stagger maintenance and enforce low-resource robot/tool usage."
+  }
+ ],
+ "M24_720h": [
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to balance work too evenly, causing robots to hit long maintenance periods simultaneously and forcing extra robots to be opened. This instance has short maintenance intervals but long maintenance durations over many shifts, so good rosters likely require many deliberate deviations to stagger maintenance and use fewer resources."
+  },
+  {
+   "d": 1.0,
+   "reason": "The instance favors type-1 robots and a staggered maintenance schedule to minimize robots, but the default rule balances duties across all available robots, causing synchronized maintenance and poor resource usage. This requires many per-shift deviations, so full per-shift freedom (1.0) is best."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule tends to use all available robots, but minimizing resources favors concentrating duties on a smaller subset (especially type-1 robots with longer duty and lower maintenance ratio). Escaping this rule requires overriding most shifts, so sparse deviation encodings are too limited."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default rule already minimizes resources by reusing active robots and balances duties, so good rosters are close to it; only a few early deviations are needed to choose the more efficient type-1 robots, and sparse 0.25 keeps the search focused under the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already yields good balance and can cover the horizon with the minimum 6 type-1 robots; only the initial robot-type choices (a few openings) need overriding, so a sparse deviation budget of 0.25 suffices and best exploits the small evaluation budget."
+  }
+ ],
+ "M25_480h": [
+  {
+   "d": 1.0,
+   "reason": "Optimal low-resource rosters likely need mostly type-2 robots, but the fewest-duties default will keep selecting unused type-0/1 robots, so many shift-level deviations are needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule ignores robot type, maintenance timing, and tool rest, so good rosters for this heterogeneous 480-hour instance likely require many per-shift deviations to use longer-duty robots and balance maintenance intervals. Sparse 0.25/0.5 encodings would leave too many shifts rule-bound."
+  },
+  {
+   "d": 0.25,
+   "reason": "The resource-optimal roster is close to the default rule: the long duty lengths and short tool rests let the rule naturally stagger maintenance and open only the necessary robots, so few deviations are needed. Sparse 0.25 provides enough freedom for type/open choices while keeping the search focused."
+  },
+  {
+   "d": 1.0,
+   "reason": "Long maintenance times and heterogeneous robot types make the fewest-duties default rule poorly aligned with resource minimization; optimal rosters likely require many deliberate deviations to stagger maintenance and select efficient robot types, so per-shift freedom with capacity look-ahead is needed."
+  },
+  {
+   "d": 1.0,
+   "reason": "The default fewest-duties rule balances duty counts across all robot types, which causes simultaneous maintenance and inefficient resource use; reaching the resource-optimal all-type-2 roster requires many deliberate staggering and type-selection deviations, so full per-shift freedom is preferable."
+  }
+ ],
+ "M26_1080h": [
+  {
+   "d": 0.5,
+   "reason": "The default fewest-duties rule is a reasonable starting point but tends to synchronize maintenance and underuse cheaper robot types, so substantial deviations are needed; however, with only ~465 evaluations, a fully per-shift genome is too large to search effectively, making 0.5 a balanced compromise between flexibility and search efficiency."
+  },
+  {
+   "d": 0.25,
+   "reason": "The instance has a clear structure where the default fewest-duties rule with repair is a good heuristic; optimal rosters likely use homogeneous type-0 robots, and only minor deviations are needed to stagger maintenance. With only ~465 evaluations, the smaller search space of 0.25 is more effective than per-shift encoding."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already naturally staggers maintenance and favors the clearly superior type-0 robots (short 59h maintenance), yielding near-minimal resources; good rosters should stay close to this rule, so a sparse encoding is sufficient and more efficient under the small evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule already naturally staggers maintenance in waves and handles availability; only a few deviations are needed (e.g., choosing robot types at openings), so a sparse encoding is sufficient and more efficient under the limited evaluation budget."
+  },
+  {
+   "d": 0.25,
+   "reason": "The default fewest-duties rule with repair is a strong heuristic for this long-horizon instance, and capacity constraints force a near-optimal robot mix, so only a small number of deviations are needed to fine-tune the schedule and balance the objectives."
+  }
+ ]
+}

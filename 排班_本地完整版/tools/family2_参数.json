@@ -1,0 +1,2861 @@
+{
+ "E11_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 55,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 8
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E12_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 116,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 6
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E13_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 50,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E14_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 107,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E15_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 49,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E16_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 86,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 6
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E17_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 68,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 8,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E18_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 115,
+    "charge_time": 2,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     2
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 8,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 6,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E19_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 108,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 8
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E20_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 108,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E21_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 97,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 6,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E22_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 65,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 8,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 7,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E23_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 96,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E24_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 82,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E25_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 53,
+    "charge_time": 2,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 7,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "E26_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 73,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H11_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 118,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 80,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 94,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H12_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 58,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 7
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 109,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 114,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H13_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 51,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 107,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 55,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     2
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 7,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 8,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H14_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 111,
+    "charge_time": 2,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 90,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H15_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 117,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     2
+    ],
+    "limit_num": 7
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 110,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     2
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 10,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H16_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 70,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 48,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 103,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H17_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 77,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 102,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 104,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H18_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 94,
+    "charge_time": 2,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 78,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 10,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H19_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 81,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 7
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 77,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 7,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H20_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 51,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 62,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 85,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1,
+     2
+    ],
+    "limit_num": 8
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 10,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H21_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 120,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 7
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 120,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 67,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 6
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 8,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H22_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 87,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 111,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 106,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H23_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 66,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 86,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 81,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 7,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H24_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 118,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 57,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 50,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 8
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H25_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 62,
+    "charge_time": 2,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 51,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 6
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 7,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "H26_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 89,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 96,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 114,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M11_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 8,
+    "m": 3,
+    "maintenance_time": 74,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 6,
+    "m": 4,
+    "maintenance_time": 102,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 6,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M12_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 6,
+    "m": 2,
+    "maintenance_time": 77,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 12,
+    "m": 3,
+    "maintenance_time": 108,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 7,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M13_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 12,
+    "m": 4,
+    "maintenance_time": 115,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 6,
+    "m": 2,
+    "maintenance_time": 108,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 9,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M14_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 12,
+    "m": 5,
+    "maintenance_time": 110,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 8,
+    "m": 3,
+    "maintenance_time": 67,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 7
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 12,
+    "m": 4,
+    "maintenance_time": 79,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M15_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 6,
+    "m": 4,
+    "maintenance_time": 56,
+    "charge_time": 2,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 87,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 8,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 7,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M16_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 12,
+    "m": 2,
+    "maintenance_time": 115,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     2
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 8,
+    "m": 2,
+    "maintenance_time": 107,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 6,
+    "m": 3,
+    "maintenance_time": 89,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 8,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M17_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 6,
+    "m": 5,
+    "maintenance_time": 97,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 113,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 5,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M18_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 2,
+    "maintenance_time": 109,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 8,
+    "m": 2,
+    "maintenance_time": 56,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 110,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 8,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 10,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M19_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 103,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 10
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 8,
+    "m": 4,
+    "maintenance_time": 74,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 7
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 12,
+    "m": 3,
+    "maintenance_time": 90,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 10,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M20_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 8,
+    "m": 3,
+    "maintenance_time": 54,
+    "charge_time": 4,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 7
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 8,
+    "m": 3,
+    "maintenance_time": 99,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 6,
+    "m": 5,
+    "maintenance_time": 81,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 8,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 6,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M21_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 4,
+    "maintenance_time": 52,
+    "charge_time": 2,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 92,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 8,
+    "m": 4,
+    "maintenance_time": 50,
+    "charge_time": 5,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 6
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M22_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 8,
+    "m": 2,
+    "maintenance_time": 92,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 6,
+    "m": 2,
+    "maintenance_time": 56,
+    "charge_time": 2,
+    "carry_num": 2,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 12,
+    "m": 2,
+    "maintenance_time": 52,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 6,
+    "tool_rest_time": 4,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 7,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M23_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 12,
+    "m": 5,
+    "maintenance_time": 52,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 92,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     2
+    ],
+    "limit_num": 9
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 7,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 9,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M24_720h": {
+  "T": 720,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 8,
+    "m": 2,
+    "maintenance_time": 98,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1
+    ],
+    "limit_num": 9
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 74,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 6,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 7,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M25_480h": {
+  "T": 480,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 6,
+    "m": 4,
+    "maintenance_time": 107,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     2
+    ],
+    "limit_num": 8
+   },
+   {
+    "type": 1,
+    "out_travel_time": 1,
+    "return_travel_time": 1,
+    "work_time": 10,
+    "m": 3,
+    "maintenance_time": 63,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 2,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 12,
+    "m": 4,
+    "maintenance_time": 105,
+    "charge_time": 3,
+    "carry_num": 2,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 7
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 9,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 10,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 9,
+    "tool_rest_time": 3,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ },
+ "M26_1080h": {
+  "T": 1080,
+  "robots": [
+   {
+    "type": 0,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 8,
+    "m": 5,
+    "maintenance_time": 59,
+    "charge_time": 5,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     1,
+     2
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 1,
+    "out_travel_time": 2,
+    "return_travel_time": 1,
+    "work_time": 8,
+    "m": 5,
+    "maintenance_time": 120,
+    "charge_time": 3,
+    "carry_num": 3,
+    "cargo_type_list": [
+     1
+    ],
+    "limit_num": 6
+   },
+   {
+    "type": 2,
+    "out_travel_time": 1,
+    "return_travel_time": 2,
+    "work_time": 10,
+    "m": 5,
+    "maintenance_time": 117,
+    "charge_time": 4,
+    "carry_num": 3,
+    "cargo_type_list": [
+     0,
+     2
+    ],
+    "limit_num": 10
+   }
+  ],
+  "tools": [
+   {
+    "install_time": 2,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 0,
+    "limit_num": 7,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 2,
+    "removal_time": 2,
+    "tool_work_time": 10,
+    "type": 1,
+    "limit_num": 6,
+    "tool_rest_time": 8,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   },
+   {
+    "install_time": 1,
+    "removal_time": 1,
+    "tool_work_time": 10,
+    "type": 2,
+    "limit_num": 6,
+    "tool_rest_time": 7,
+    "tool_out_time": 1,
+    "tool_return_time": 1
+   }
+  ]
+ }
+}

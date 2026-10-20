@@ -1,0 +1,826 @@
+{
+ "原请求_paiban": {
+  "dec0": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.55,
+   "res_mean": 9.45,
+   "n_empty": 0,
+   "bal_lb_mean": 23.458000000000002,
+   "bal_lb_best": 10.464,
+   "bal_ratio": 5.837360805807941,
+   "hv_mean": 0.7567811077291294
+  },
+  "dec1": {
+   "n": 20,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 12.34245,
+   "bal_lb_best": 6.009,
+   "bal_ratio": 3.071333186019448,
+   "hv_mean": 0.9788871978979685
+  },
+  "dec2": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.95,
+   "res_mean": 9.05,
+   "n_empty": 0,
+   "bal_lb_mean": 8.77721052631579,
+   "bal_lb_best": 5.145,
+   "bal_ratio": 2.1841480395021176,
+   "hv_mean": 1.0799145659356384
+  },
+  "dec3f": {
+   "n": 20,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 5.243999999999999,
+   "bal_lb_best": 4.019,
+   "bal_ratio": 1.3049330746720451,
+   "hv_mean": 1.1800249746351363
+  },
+  "dec4": {
+   "n": 20,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 5.7197,
+   "bal_lb_best": 5.145,
+   "bal_ratio": 1.4233077244854495,
+   "hv_mean": 1.1621354613803692
+  },
+  "dec5": {
+   "n": 20,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 4.7147,
+   "bal_lb_best": 4.019,
+   "bal_ratio": 1.1732204361472716,
+   "hv_mean": 1.19014490491428
+  }
+ },
+ "B_三类型720h": {
+  "dec0": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 16.6,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.6894087595717816
+  },
+  "dec1": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.55,
+   "res_mean": 9.85,
+   "n_empty": 0,
+   "bal_lb_mean": 17.71390909090909,
+   "bal_lb_best": 7.69,
+   "bal_ratio": 5.231568349922152,
+   "hv_mean": 0.8708556669346701
+  },
+  "dec2": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.4,
+   "res_mean": 9.9,
+   "n_empty": 0,
+   "bal_lb_mean": 8.266625,
+   "bal_lb_best": 7.867,
+   "bal_ratio": 2.441438165270369,
+   "hv_mean": 1.0343521988930537
+  },
+  "dec3f": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.75,
+   "res_mean": 9.25,
+   "n_empty": 0,
+   "bal_lb_mean": 8.812866666666668,
+   "bal_lb_best": 5.877,
+   "bal_ratio": 2.6027634041025287,
+   "hv_mean": 1.0968074350225538
+  },
+  "dec4": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.75,
+   "res_mean": 9.25,
+   "n_empty": 0,
+   "bal_lb_mean": 9.405533333333334,
+   "bal_lb_best": 7.807,
+   "bal_ratio": 2.7777996515775953,
+   "hv_mean": 1.0872840640754358
+  },
+  "dec5": {
+   "n": 20,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 7.4982,
+   "bal_lb_best": 3.406,
+   "bal_ratio": 2.214494022751762,
+   "hv_mean": 1.1273849119522772
+  }
+ },
+ "C_三类型1440h": {
+  "dec0": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 20.8,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.7371004464787045
+  },
+  "dec1": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.1,
+   "res_mean": 13.95,
+   "n_empty": 0,
+   "bal_lb_mean": 22.9895,
+   "bal_lb_best": 18.706,
+   "bal_ratio": 5.217713411193046,
+   "hv_mean": 0.8929885641423378
+  },
+  "dec2": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.05,
+   "res_mean": 11.65,
+   "n_empty": 0,
+   "bal_lb_mean": 11.643,
+   "bal_lb_best": 11.643,
+   "bal_ratio": 2.6425036319415662,
+   "hv_mean": 1.0327922981475528
+  },
+  "dec3f": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.35,
+   "res_mean": 9.8,
+   "n_empty": 0,
+   "bal_lb_mean": 9.96985714285714,
+   "bal_lb_best": 6.314,
+   "bal_ratio": 2.262765928879031,
+   "hv_mean": 1.1514508268183574
+  },
+  "dec4": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.85,
+   "res_mean": 9.15,
+   "n_empty": 0,
+   "bal_lb_mean": 10.330117647058824,
+   "bal_lb_best": 7.613,
+   "bal_ratio": 2.3445309113404282,
+   "hv_mean": 1.17548474674504
+  },
+  "dec5": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.95,
+   "res_mean": 9.05,
+   "n_empty": 0,
+   "bal_lb_mean": 8.679894736842106,
+   "bal_lb_best": 5.512,
+   "bal_ratio": 1.9699951358735506,
+   "hv_mean": 1.1965359835817648
+  }
+ },
+ "D_三类型资源紧": {
+  "dec0": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 16.1,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.6178022166457551
+  },
+  "dec1": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.7,
+   "res_mean": 9.6,
+   "n_empty": 0,
+   "bal_lb_mean": 18.930000000000003,
+   "bal_lb_best": 12.666,
+   "bal_ratio": 5.590724687350412,
+   "hv_mean": 0.8853058343789213
+  },
+  "dec2": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.4,
+   "res_mean": 10.2,
+   "n_empty": 0,
+   "bal_lb_mean": 8.617125,
+   "bal_lb_best": 7.025,
+   "bal_ratio": 2.5449536963277555,
+   "hv_mean": 1.048538247595149
+  },
+  "dec3f": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.65,
+   "res_mean": 9.35,
+   "n_empty": 0,
+   "bal_lb_mean": 8.481692307692306,
+   "bal_lb_best": 4.705,
+   "bal_ratio": 2.5049554450673774,
+   "hv_mean": 1.1158427436219158
+  },
+  "dec4": {
+   "n": 20,
+   "evals": 465,
+   "reach": 0.95,
+   "res_mean": 9.05,
+   "n_empty": 0,
+   "bal_lb_mean": 8.852052631578948,
+   "bal_lb_best": 5.877,
+   "bal_ratio": 2.614336459645726,
+   "hv_mean": 1.1061109995817648
+  },
+  "dec5": {
+   "n": 20,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 7.49255,
+   "bal_lb_best": 3.386,
+   "bal_ratio": 2.2128253701113216,
+   "hv_mean": 1.1304145127561689
+  }
+ },
+ "E01_1080h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 12.0,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.4872900063439199
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 11.0,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 1.0588878315689307
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 11.0,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 1.1009517366480317
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 11.0,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 1.1104772808373977
+  }
+ },
+ "E02_1080h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 11.5,
+   "n_empty": 2,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.2798253264626809
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.5,
+   "res_mean": 9.5,
+   "n_empty": 0,
+   "bal_lb_mean": 13.85225,
+   "bal_lb_best": 10.256,
+   "bal_ratio": null,
+   "hv_mean": 0.964430930738702
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.875,
+   "res_mean": 9.125,
+   "n_empty": 0,
+   "bal_lb_mean": 11.218000000000002,
+   "bal_lb_best": 9.034,
+   "bal_ratio": null,
+   "hv_mean": 1.0685649244654973
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 11.708375,
+   "bal_lb_best": 9.102,
+   "bal_ratio": null,
+   "hv_mean": 1.0970618358724877
+  }
+ },
+ "E03_1080h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.875,
+   "res_mean": 10.0,
+   "n_empty": 1,
+   "bal_lb_mean": 2.939,
+   "bal_lb_best": 2.939,
+   "bal_ratio": null,
+   "hv_mean": 1.0587500000000003
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": 2.939,
+   "bal_lb_best": 2.939,
+   "bal_ratio": null,
+   "hv_mean": 1.2100000000000002
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": 2.939,
+   "bal_lb_best": 2.939,
+   "bal_ratio": null,
+   "hv_mean": 1.2100000000000002
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": 2.939,
+   "bal_lb_best": 2.939,
+   "bal_ratio": null,
+   "hv_mean": 1.2100000000000002
+  }
+ },
+ "H01_720h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.17882634834050415
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.4095923286724034
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.3386810464044255
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.35780750614628165
+  }
+ },
+ "H02_720h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.3444839755818392
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.5565919496375431
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.6560291873330792
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.5985244181610074
+  }
+ },
+ "H03_720h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 10.25,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.5391066735432094
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 9.875,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.8799198659074212
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.8580597905951508
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.9722227010682192
+  }
+ },
+ "H04_480h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 9.75,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.6377631265135395
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.75,
+   "res_mean": 8.25,
+   "n_empty": 0,
+   "bal_lb_mean": 8.298499999999999,
+   "bal_lb_best": 6.782,
+   "bal_ratio": null,
+   "hv_mean": 0.8517548800176122
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.875,
+   "res_mean": 8.125,
+   "n_empty": 0,
+   "bal_lb_mean": 7.6822857142857135,
+   "bal_lb_best": 3.041,
+   "bal_ratio": null,
+   "hv_mean": 0.9512708914287813
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 7.718125,
+   "bal_lb_best": 5.49,
+   "bal_ratio": null,
+   "hv_mean": 1.0289669406325679
+  }
+ },
+ "M01_480h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 12.375,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.5560998004583533
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.875,
+   "res_mean": 9.125,
+   "n_empty": 0,
+   "bal_lb_mean": 10.678,
+   "bal_lb_best": 8.251,
+   "bal_ratio": null,
+   "hv_mean": 1.0410550270665404
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.75,
+   "res_mean": 9.25,
+   "n_empty": 0,
+   "bal_lb_mean": 8.2485,
+   "bal_lb_best": 7.146,
+   "bal_ratio": null,
+   "hv_mean": 1.091479361763079
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 9.0,
+   "n_empty": 0,
+   "bal_lb_mean": 11.213125,
+   "bal_lb_best": 10.051,
+   "bal_ratio": null,
+   "hv_mean": 1.0267966897818872
+  }
+ },
+ "M02_480h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 15.375,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.6113037844586245
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 11.875,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 1.0039303954702516
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 12.125,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.9632465825115388
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 12.0,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 1.030573595803173
+  }
+ },
+ "M03_720h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.0,
+   "res_mean": 9.75,
+   "n_empty": 0,
+   "bal_lb_mean": null,
+   "bal_lb_best": null,
+   "bal_ratio": null,
+   "hv_mean": 0.5646684487864919
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.375,
+   "res_mean": 8.625,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.8242172535482135
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.900442420862341
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 0.625,
+   "res_mean": 8.5,
+   "n_empty": 0,
+   "bal_lb_mean": 17.085,
+   "bal_lb_best": 17.085,
+   "bal_ratio": null,
+   "hv_mean": 0.8872392688180316
+  }
+ },
+ "M04_720h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": 2.645375,
+   "bal_lb_best": 2.553,
+   "bal_ratio": null,
+   "hv_mean": 0.35392361111111137
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": 2.53025,
+   "bal_lb_best": 2.253,
+   "bal_ratio": null,
+   "hv_mean": 0.5138194444444446
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": 2.450625,
+   "bal_lb_best": 2.172,
+   "bal_ratio": null,
+   "hv_mean": 0.6244097222222225
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 10.0,
+   "n_empty": 0,
+   "bal_lb_mean": 2.36875,
+   "bal_lb_best": 2.029,
+   "bal_ratio": null,
+   "hv_mean": 0.7381250000000003
+  }
+ },
+ "M05_480h": {
+  "dec2": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 11.470125,
+   "bal_lb_best": 7.777,
+   "bal_ratio": null,
+   "hv_mean": 0.4591761543327011
+  },
+  "dec3f": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 9.99925,
+   "bal_lb_best": 7.777,
+   "bal_ratio": null,
+   "hv_mean": 0.6637476280834917
+  },
+  "dec4": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 11.208375,
+   "bal_lb_best": 7.777,
+   "bal_ratio": null,
+   "hv_mean": 0.5021410499683747
+  },
+  "dec5": {
+   "n": 8,
+   "evals": 465,
+   "reach": 1.0,
+   "res_mean": 8.0,
+   "n_empty": 0,
+   "bal_lb_mean": 8.521374999999999,
+   "bal_lb_best": 7.777,
+   "bal_ratio": null,
+   "hv_mean": 0.8706672991777359
+  }
+ }
+}

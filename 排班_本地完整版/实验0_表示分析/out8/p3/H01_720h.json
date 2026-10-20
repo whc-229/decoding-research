@@ -1,0 +1,22 @@
+{
+ "instance": "H01_720h",
+ "T": 720,
+ "nmax": 72,
+ "n_robot_types": 2,
+ "n_tool_types": 2,
+ "LB": 8,
+ "rule_res": 8.0,
+ "rule_gap": 0.0,
+ "rule_bal": 17.08528137423857,
+ "rule_fixes": 0,
+ "supply": {
+  "0.2": {
+   "p_lb": 1.0,
+   "p_lb1": 1.0,
+   "res_min": 8.0,
+   "bal_at_min": 17.08528137423857,
+   "res_mean": 8.0
+  }
+ },
+ "secs": 0.1976325511932373
+}

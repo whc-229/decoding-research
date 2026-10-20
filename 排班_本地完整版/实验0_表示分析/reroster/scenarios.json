@@ -1,0 +1,5830 @@
+{
+ "B_三类型720h|breakdown|0.3": {
+  "inst": "B_三类型720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   10.697316588384666
+  ],
+  "split": "test"
+ },
+ "B_三类型720h|breakdown|0.6": {
+  "inst": "B_三类型720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   10.697316588384666
+  ],
+  "split": "test"
+ },
+ "B_三类型720h|early_maint|0.3": {
+  "inst": "B_三类型720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 72 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   10.697316588384666
+  ],
+  "split": "test"
+ },
+ "B_三类型720h|early_maint|0.6": {
+  "inst": "B_三类型720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 72 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   10.697316588384666
+  ],
+  "split": "test"
+ },
+ "B_三类型720h|delay|0.3": {
+  "inst": "B_三类型720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   10.697316588384666
+  ],
+  "split": "test"
+ },
+ "B_三类型720h|delay|0.6": {
+  "inst": "B_三类型720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   10.697316588384666
+  ],
+  "split": "test"
+ },
+ "C_三类型1440h|breakdown|0.3": {
+  "inst": "C_三类型1440h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 4) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 101,
+  "plan_obj": [
+   10.0,
+   5.271811832757312
+  ],
+  "split": "test"
+ },
+ "C_三类型1440h|breakdown|0.6": {
+  "inst": "C_三类型1440h",
+  "k": 86,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 4) 故障停用 48 h",
+  "t0": 863,
+  "n_left": 58,
+  "plan_obj": [
+   10.0,
+   5.271811832757312
+  ],
+  "split": "test"
+ },
+ "C_三类型1440h|early_maint|0.3": {
+  "inst": "C_三类型1440h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 4) 提前维修 120 h",
+  "t0": 433,
+  "n_left": 101,
+  "plan_obj": [
+   10.0,
+   5.271811832757312
+  ],
+  "split": "test"
+ },
+ "C_三类型1440h|early_maint|0.6": {
+  "inst": "C_三类型1440h",
+  "k": 86,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 4) 提前维修 120 h",
+  "t0": 863,
+  "n_left": 58,
+  "plan_obj": [
+   10.0,
+   5.271811832757312
+  ],
+  "split": "test"
+ },
+ "C_三类型1440h|delay|0.3": {
+  "inst": "C_三类型1440h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 4) 延误 8 h",
+  "t0": 433,
+  "n_left": 101,
+  "plan_obj": [
+   10.0,
+   5.271811832757312
+  ],
+  "split": "test"
+ },
+ "C_三类型1440h|delay|0.6": {
+  "inst": "C_三类型1440h",
+  "k": 86,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 4) 延误 8 h",
+  "t0": 863,
+  "n_left": 58,
+  "plan_obj": [
+   10.0,
+   5.271811832757312
+  ],
+  "split": "test"
+ },
+ "D_三类型资源紧|breakdown|0.3": {
+  "inst": "D_三类型资源紧",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   8.939386363151758
+  ],
+  "split": "test"
+ },
+ "D_三类型资源紧|breakdown|0.6": {
+  "inst": "D_三类型资源紧",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   8.939386363151758
+  ],
+  "split": "test"
+ },
+ "D_三类型资源紧|early_maint|0.3": {
+  "inst": "D_三类型资源紧",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 72 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   8.939386363151758
+  ],
+  "split": "test"
+ },
+ "D_三类型资源紧|early_maint|0.6": {
+  "inst": "D_三类型资源紧",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 72 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   8.939386363151758
+  ],
+  "split": "test"
+ },
+ "D_三类型资源紧|delay|0.3": {
+  "inst": "D_三类型资源紧",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   8.939386363151758
+  ],
+  "split": "test"
+ },
+ "D_三类型资源紧|delay|0.6": {
+  "inst": "D_三类型资源紧",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   8.939386363151758
+  ],
+  "split": "test"
+ },
+ "E01_1080h|breakdown|0.3": {
+  "inst": "E01_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   11.0,
+   9.101977993143237
+  ],
+  "split": "test"
+ },
+ "E01_1080h|breakdown|0.6": {
+  "inst": "E01_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   11.0,
+   9.101977993143237
+  ],
+  "split": "test"
+ },
+ "E01_1080h|early_maint|0.3": {
+  "inst": "E01_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 104 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   11.0,
+   9.101977993143237
+  ],
+  "split": "test"
+ },
+ "E01_1080h|early_maint|0.6": {
+  "inst": "E01_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 104 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   11.0,
+   9.101977993143237
+  ],
+  "split": "test"
+ },
+ "E01_1080h|delay|0.3": {
+  "inst": "E01_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   11.0,
+   9.101977993143237
+  ],
+  "split": "test"
+ },
+ "E01_1080h|delay|0.6": {
+  "inst": "E01_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   11.0,
+   9.101977993143237
+  ],
+  "split": "test"
+ },
+ "E02_1080h|breakdown|0.3": {
+  "inst": "E02_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 5) 故障停用 48 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "test"
+ },
+ "E02_1080h|breakdown|0.6": {
+  "inst": "E02_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "test"
+ },
+ "E02_1080h|early_maint|0.3": {
+  "inst": "E02_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 5) 提前维修 98 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "test"
+ },
+ "E02_1080h|early_maint|0.6": {
+  "inst": "E02_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 98 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "test"
+ },
+ "E02_1080h|delay|0.3": {
+  "inst": "E02_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 5) 延误 8 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "test"
+ },
+ "E02_1080h|delay|0.6": {
+  "inst": "E02_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "test"
+ },
+ "E03_1080h|breakdown|0.3": {
+  "inst": "E03_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 5) 故障停用 48 h",
+  "t0": 324,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   2.9393876913398134
+  ],
+  "split": "test"
+ },
+ "E03_1080h|breakdown|0.6": {
+  "inst": "E03_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 644,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   2.9393876913398134
+  ],
+  "split": "test"
+ },
+ "E03_1080h|early_maint|0.3": {
+  "inst": "E03_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 5) 提前维修 82 h",
+  "t0": 324,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   2.9393876913398134
+  ],
+  "split": "test"
+ },
+ "E03_1080h|early_maint|0.6": {
+  "inst": "E03_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 82 h",
+  "t0": 644,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   2.9393876913398134
+  ],
+  "split": "test"
+ },
+ "E03_1080h|delay|0.3": {
+  "inst": "E03_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 5) 延误 8 h",
+  "t0": 324,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   2.9393876913398134
+  ],
+  "split": "test"
+ },
+ "E03_1080h|delay|0.6": {
+  "inst": "E03_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 644,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   2.9393876913398134
+  ],
+  "split": "test"
+ },
+ "E11_480h|breakdown|0.3": {
+  "inst": "E11_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   5.714213562373095
+  ],
+  "split": "train"
+ },
+ "E11_480h|breakdown|0.6": {
+  "inst": "E11_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   5.714213562373095
+  ],
+  "split": "train"
+ },
+ "E11_480h|early_maint|0.3": {
+  "inst": "E11_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 55 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   5.714213562373095
+  ],
+  "split": "train"
+ },
+ "E11_480h|early_maint|0.6": {
+  "inst": "E11_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 55 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   5.714213562373095
+  ],
+  "split": "train"
+ },
+ "E11_480h|delay|0.3": {
+  "inst": "E11_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   5.714213562373095
+  ],
+  "split": "train"
+ },
+ "E11_480h|delay|0.6": {
+  "inst": "E11_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   5.714213562373095
+  ],
+  "split": "train"
+ },
+ "E13_1080h|breakdown|0.3": {
+  "inst": "E13_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "test"
+ },
+ "E13_1080h|breakdown|0.6": {
+  "inst": "E13_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "test"
+ },
+ "E13_1080h|early_maint|0.3": {
+  "inst": "E13_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 50 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "test"
+ },
+ "E13_1080h|early_maint|0.6": {
+  "inst": "E13_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 50 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "test"
+ },
+ "E13_1080h|delay|0.3": {
+  "inst": "E13_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "test"
+ },
+ "E13_1080h|delay|0.6": {
+  "inst": "E13_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "test"
+ },
+ "E14_1080h|breakdown|0.3": {
+  "inst": "E14_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   8.556971048810823
+  ],
+  "split": "test"
+ },
+ "E14_1080h|breakdown|0.6": {
+  "inst": "E14_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   8.556971048810823
+  ],
+  "split": "test"
+ },
+ "E14_1080h|early_maint|0.3": {
+  "inst": "E14_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 107 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   8.556971048810823
+  ],
+  "split": "test"
+ },
+ "E14_1080h|early_maint|0.6": {
+  "inst": "E14_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 107 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   8.556971048810823
+  ],
+  "split": "test"
+ },
+ "E14_1080h|delay|0.3": {
+  "inst": "E14_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   8.556971048810823
+  ],
+  "split": "test"
+ },
+ "E14_1080h|delay|0.6": {
+  "inst": "E14_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   8.556971048810823
+  ],
+  "split": "test"
+ },
+ "E15_1080h|breakdown|0.3": {
+  "inst": "E15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E15_1080h|breakdown|0.6": {
+  "inst": "E15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E15_1080h|early_maint|0.3": {
+  "inst": "E15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 49 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E15_1080h|early_maint|0.6": {
+  "inst": "E15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 49 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E15_1080h|delay|0.3": {
+  "inst": "E15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E15_1080h|delay|0.6": {
+  "inst": "E15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E16_720h|breakdown|0.3": {
+  "inst": "E16_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   3.405599284470191
+  ],
+  "split": "test"
+ },
+ "E16_720h|breakdown|0.6": {
+  "inst": "E16_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   3.405599284470191
+  ],
+  "split": "test"
+ },
+ "E16_720h|early_maint|0.3": {
+  "inst": "E16_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 86 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   3.405599284470191
+  ],
+  "split": "test"
+ },
+ "E16_720h|early_maint|0.6": {
+  "inst": "E16_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 86 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   3.405599284470191
+  ],
+  "split": "test"
+ },
+ "E16_720h|delay|0.3": {
+  "inst": "E16_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   3.405599284470191
+  ],
+  "split": "test"
+ },
+ "E16_720h|delay|0.6": {
+  "inst": "E16_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   3.405599284470191
+  ],
+  "split": "test"
+ },
+ "E17_1080h|breakdown|0.3": {
+  "inst": "E17_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E17_1080h|breakdown|0.6": {
+  "inst": "E17_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E17_1080h|early_maint|0.3": {
+  "inst": "E17_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 68 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E17_1080h|early_maint|0.6": {
+  "inst": "E17_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 68 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E17_1080h|delay|0.3": {
+  "inst": "E17_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E17_1080h|delay|0.6": {
+  "inst": "E17_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E18_480h|breakdown|0.3": {
+  "inst": "E18_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 7) 故障停用 48 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   14.0,
+   2.641891715558133
+  ],
+  "split": "train"
+ },
+ "E18_480h|breakdown|0.6": {
+  "inst": "E18_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 8) 故障停用 48 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   14.0,
+   2.641891715558133
+  ],
+  "split": "train"
+ },
+ "E18_480h|early_maint|0.3": {
+  "inst": "E18_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 7) 提前维修 115 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   14.0,
+   2.641891715558133
+  ],
+  "split": "train"
+ },
+ "E18_480h|early_maint|0.6": {
+  "inst": "E18_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 8) 提前维修 115 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   14.0,
+   2.641891715558133
+  ],
+  "split": "train"
+ },
+ "E18_480h|delay|0.3": {
+  "inst": "E18_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 7) 延误 8 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   14.0,
+   2.641891715558133
+  ],
+  "split": "train"
+ },
+ "E18_480h|delay|0.6": {
+  "inst": "E18_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 8) 延误 8 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   14.0,
+   2.641891715558133
+  ],
+  "split": "train"
+ },
+ "E19_1080h|breakdown|0.3": {
+  "inst": "E19_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   8.759945507232837
+  ],
+  "split": "test"
+ },
+ "E19_1080h|breakdown|0.6": {
+  "inst": "E19_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   8.759945507232837
+  ],
+  "split": "test"
+ },
+ "E19_1080h|early_maint|0.3": {
+  "inst": "E19_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 108 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   8.759945507232837
+  ],
+  "split": "test"
+ },
+ "E19_1080h|early_maint|0.6": {
+  "inst": "E19_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 108 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   8.759945507232837
+  ],
+  "split": "test"
+ },
+ "E19_1080h|delay|0.3": {
+  "inst": "E19_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   8.759945507232837
+  ],
+  "split": "test"
+ },
+ "E19_1080h|delay|0.6": {
+  "inst": "E19_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   8.759945507232837
+  ],
+  "split": "test"
+ },
+ "E20_480h|breakdown|0.3": {
+  "inst": "E20_480h",
+  "k": 15,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 5) 故障停用 48 h",
+  "t0": 152,
+  "n_left": 33,
+  "plan_obj": [
+   10.0,
+   6.165212315030782
+  ],
+  "split": "test"
+ },
+ "E20_480h|breakdown|0.6": {
+  "inst": "E20_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 5) 故障停用 48 h",
+  "t0": 282,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   6.165212315030782
+  ],
+  "split": "test"
+ },
+ "E20_480h|early_maint|0.3": {
+  "inst": "E20_480h",
+  "k": 15,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 5) 提前维修 108 h",
+  "t0": 152,
+  "n_left": 33,
+  "plan_obj": [
+   10.0,
+   6.165212315030782
+  ],
+  "split": "test"
+ },
+ "E20_480h|early_maint|0.6": {
+  "inst": "E20_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 5) 提前维修 108 h",
+  "t0": 282,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   6.165212315030782
+  ],
+  "split": "test"
+ },
+ "E20_480h|delay|0.3": {
+  "inst": "E20_480h",
+  "k": 15,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 5) 延误 8 h",
+  "t0": 152,
+  "n_left": 33,
+  "plan_obj": [
+   10.0,
+   6.165212315030782
+  ],
+  "split": "test"
+ },
+ "E20_480h|delay|0.6": {
+  "inst": "E20_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 5) 延误 8 h",
+  "t0": 282,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   6.165212315030782
+  ],
+  "split": "test"
+ },
+ "E21_720h|breakdown|0.3": {
+  "inst": "E21_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.131841891164388
+  ],
+  "split": "train"
+ },
+ "E21_720h|breakdown|0.6": {
+  "inst": "E21_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.131841891164388
+  ],
+  "split": "train"
+ },
+ "E21_720h|early_maint|0.3": {
+  "inst": "E21_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 97 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.131841891164388
+  ],
+  "split": "train"
+ },
+ "E21_720h|early_maint|0.6": {
+  "inst": "E21_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 97 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.131841891164388
+  ],
+  "split": "train"
+ },
+ "E21_720h|delay|0.3": {
+  "inst": "E21_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.131841891164388
+  ],
+  "split": "train"
+ },
+ "E21_720h|delay|0.6": {
+  "inst": "E21_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.131841891164388
+  ],
+  "split": "train"
+ },
+ "E22_720h|breakdown|0.3": {
+  "inst": "E22_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   8.0,
+   6.081118318204309
+  ],
+  "split": "test"
+ },
+ "E22_720h|breakdown|0.6": {
+  "inst": "E22_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   8.0,
+   6.081118318204309
+  ],
+  "split": "test"
+ },
+ "E22_720h|early_maint|0.3": {
+  "inst": "E22_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 65 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   8.0,
+   6.081118318204309
+  ],
+  "split": "test"
+ },
+ "E22_720h|early_maint|0.6": {
+  "inst": "E22_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 65 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   8.0,
+   6.081118318204309
+  ],
+  "split": "test"
+ },
+ "E22_720h|delay|0.3": {
+  "inst": "E22_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   8.0,
+   6.081118318204309
+  ],
+  "split": "test"
+ },
+ "E22_720h|delay|0.6": {
+  "inst": "E22_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   8.0,
+   6.081118318204309
+  ],
+  "split": "test"
+ },
+ "E24_480h|breakdown|0.3": {
+  "inst": "E24_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   14.0,
+   4.7390381056766575
+  ],
+  "split": "test"
+ },
+ "E24_480h|breakdown|0.6": {
+  "inst": "E24_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   14.0,
+   4.7390381056766575
+  ],
+  "split": "test"
+ },
+ "E24_480h|early_maint|0.3": {
+  "inst": "E24_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 82 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   14.0,
+   4.7390381056766575
+  ],
+  "split": "test"
+ },
+ "E24_480h|early_maint|0.6": {
+  "inst": "E24_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 82 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   14.0,
+   4.7390381056766575
+  ],
+  "split": "test"
+ },
+ "E24_480h|delay|0.3": {
+  "inst": "E24_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   14.0,
+   4.7390381056766575
+  ],
+  "split": "test"
+ },
+ "E24_480h|delay|0.6": {
+  "inst": "E24_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   14.0,
+   4.7390381056766575
+  ],
+  "split": "test"
+ },
+ "E25_1080h|breakdown|0.3": {
+  "inst": "E25_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E25_1080h|breakdown|0.6": {
+  "inst": "E25_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E25_1080h|early_maint|0.3": {
+  "inst": "E25_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 53 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E25_1080h|early_maint|0.6": {
+  "inst": "E25_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 53 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E25_1080h|delay|0.3": {
+  "inst": "E25_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E25_1080h|delay|0.6": {
+  "inst": "E25_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   4.3
+  ],
+  "split": "train"
+ },
+ "E26_1080h|breakdown|0.3": {
+  "inst": "E26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E26_1080h|breakdown|0.6": {
+  "inst": "E26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E26_1080h|early_maint|0.3": {
+  "inst": "E26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 73 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E26_1080h|early_maint|0.6": {
+  "inst": "E26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 73 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E26_1080h|delay|0.3": {
+  "inst": "E26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "E26_1080h|delay|0.6": {
+  "inst": "E26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   3.606561178793533
+  ],
+  "split": "test"
+ },
+ "H01_720h|breakdown|0.3": {
+  "inst": "H01_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   8.0,
+   17.08528137423857
+  ],
+  "split": "test"
+ },
+ "H01_720h|breakdown|0.6": {
+  "inst": "H01_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   8.0,
+   17.08528137423857
+  ],
+  "split": "test"
+ },
+ "H01_720h|early_maint|0.3": {
+  "inst": "H01_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 84 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   8.0,
+   17.08528137423857
+  ],
+  "split": "test"
+ },
+ "H01_720h|early_maint|0.6": {
+  "inst": "H01_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 84 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   8.0,
+   17.08528137423857
+  ],
+  "split": "test"
+ },
+ "H01_720h|delay|0.3": {
+  "inst": "H01_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   8.0,
+   17.08528137423857
+  ],
+  "split": "test"
+ },
+ "H01_720h|delay|0.6": {
+  "inst": "H01_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   8.0,
+   17.08528137423857
+  ],
+  "split": "test"
+ },
+ "H02_720h|breakdown|0.3": {
+  "inst": "H02_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.64746859276655
+  ],
+  "split": "test"
+ },
+ "H02_720h|breakdown|0.6": {
+  "inst": "H02_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.64746859276655
+  ],
+  "split": "test"
+ },
+ "H02_720h|early_maint|0.3": {
+  "inst": "H02_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 76 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.64746859276655
+  ],
+  "split": "test"
+ },
+ "H02_720h|early_maint|0.6": {
+  "inst": "H02_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 76 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.64746859276655
+  ],
+  "split": "test"
+ },
+ "H02_720h|delay|0.3": {
+  "inst": "H02_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.64746859276655
+  ],
+  "split": "test"
+ },
+ "H02_720h|delay|0.6": {
+  "inst": "H02_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.64746859276655
+  ],
+  "split": "test"
+ },
+ "H03_720h|breakdown|0.3": {
+  "inst": "H03_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 2) 故障停用 48 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   5.165887730515139
+  ],
+  "split": "test"
+ },
+ "H03_720h|breakdown|0.6": {
+  "inst": "H03_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 5) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   5.165887730515139
+  ],
+  "split": "test"
+ },
+ "H03_720h|early_maint|0.3": {
+  "inst": "H03_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 2) 提前维修 66 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   5.165887730515139
+  ],
+  "split": "test"
+ },
+ "H03_720h|early_maint|0.6": {
+  "inst": "H03_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 5) 提前维修 66 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   5.165887730515139
+  ],
+  "split": "test"
+ },
+ "H03_720h|delay|0.3": {
+  "inst": "H03_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 2) 延误 8 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   5.165887730515139
+  ],
+  "split": "test"
+ },
+ "H03_720h|delay|0.6": {
+  "inst": "H03_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 5) 延误 8 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   5.165887730515139
+  ],
+  "split": "test"
+ },
+ "H04_480h|breakdown|0.3": {
+  "inst": "H04_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   7.874007874011811
+  ],
+  "split": "test"
+ },
+ "H04_480h|breakdown|0.6": {
+  "inst": "H04_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 4) 故障停用 48 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   7.874007874011811
+  ],
+  "split": "test"
+ },
+ "H04_480h|early_maint|0.3": {
+  "inst": "H04_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 62 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   7.874007874011811
+  ],
+  "split": "test"
+ },
+ "H04_480h|early_maint|0.6": {
+  "inst": "H04_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 4) 提前维修 62 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   7.874007874011811
+  ],
+  "split": "test"
+ },
+ "H04_480h|delay|0.3": {
+  "inst": "H04_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   7.874007874011811
+  ],
+  "split": "test"
+ },
+ "H04_480h|delay|0.6": {
+  "inst": "H04_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 4) 延误 8 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   7.874007874011811
+  ],
+  "split": "test"
+ },
+ "H11_480h|breakdown|0.3": {
+  "inst": "H11_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   18.11260546834678
+  ],
+  "split": "train"
+ },
+ "H11_480h|breakdown|0.6": {
+  "inst": "H11_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   18.11260546834678
+  ],
+  "split": "train"
+ },
+ "H11_480h|early_maint|0.3": {
+  "inst": "H11_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 80 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   18.11260546834678
+  ],
+  "split": "train"
+ },
+ "H11_480h|early_maint|0.6": {
+  "inst": "H11_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 80 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   18.11260546834678
+  ],
+  "split": "train"
+ },
+ "H11_480h|delay|0.3": {
+  "inst": "H11_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   18.11260546834678
+  ],
+  "split": "train"
+ },
+ "H11_480h|delay|0.6": {
+  "inst": "H11_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   18.11260546834678
+  ],
+  "split": "train"
+ },
+ "H12_720h|breakdown|0.3": {
+  "inst": "H12_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   10.924763655172692
+  ],
+  "split": "test"
+ },
+ "H12_720h|breakdown|0.6": {
+  "inst": "H12_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   10.924763655172692
+  ],
+  "split": "test"
+ },
+ "H12_720h|early_maint|0.3": {
+  "inst": "H12_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 58 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   10.924763655172692
+  ],
+  "split": "test"
+ },
+ "H12_720h|early_maint|0.6": {
+  "inst": "H12_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 58 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   10.924763655172692
+  ],
+  "split": "test"
+ },
+ "H12_720h|delay|0.3": {
+  "inst": "H12_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   10.924763655172692
+  ],
+  "split": "test"
+ },
+ "H12_720h|delay|0.6": {
+  "inst": "H12_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   10.924763655172692
+  ],
+  "split": "test"
+ },
+ "H13_720h|breakdown|0.3": {
+  "inst": "H13_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   5.7807957929683
+  ],
+  "split": "test"
+ },
+ "H13_720h|breakdown|0.6": {
+  "inst": "H13_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   5.7807957929683
+  ],
+  "split": "test"
+ },
+ "H13_720h|early_maint|0.3": {
+  "inst": "H13_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 51 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   5.7807957929683
+  ],
+  "split": "test"
+ },
+ "H13_720h|early_maint|0.6": {
+  "inst": "H13_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 51 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   5.7807957929683
+  ],
+  "split": "test"
+ },
+ "H13_720h|delay|0.3": {
+  "inst": "H13_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   5.7807957929683
+  ],
+  "split": "test"
+ },
+ "H13_720h|delay|0.6": {
+  "inst": "H13_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   5.7807957929683
+  ],
+  "split": "test"
+ },
+ "H14_720h|breakdown|0.3": {
+  "inst": "H14_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 5) 故障停用 48 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "train"
+ },
+ "H14_720h|breakdown|0.6": {
+  "inst": "H14_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 2) 故障停用 48 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "train"
+ },
+ "H14_720h|early_maint|0.3": {
+  "inst": "H14_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 5) 提前维修 90 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "train"
+ },
+ "H14_720h|early_maint|0.6": {
+  "inst": "H14_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 2) 提前维修 90 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "train"
+ },
+ "H14_720h|delay|0.3": {
+  "inst": "H14_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 5) 延误 8 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "train"
+ },
+ "H14_720h|delay|0.6": {
+  "inst": "H14_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 2) 延误 8 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   9.789752671500864
+  ],
+  "split": "train"
+ },
+ "H15_1080h|breakdown|0.3": {
+  "inst": "H15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   11.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "H15_1080h|breakdown|0.6": {
+  "inst": "H15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   11.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "H15_1080h|early_maint|0.3": {
+  "inst": "H15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 117 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   11.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "H15_1080h|early_maint|0.6": {
+  "inst": "H15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 117 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   11.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "H15_1080h|delay|0.3": {
+  "inst": "H15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   11.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "H15_1080h|delay|0.6": {
+  "inst": "H15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   11.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "H16_480h|breakdown|0.3": {
+  "inst": "H16_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   11.0,
+   10.24086354592988
+  ],
+  "split": "test"
+ },
+ "H16_480h|breakdown|0.6": {
+  "inst": "H16_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 1) 故障停用 48 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   11.0,
+   10.24086354592988
+  ],
+  "split": "test"
+ },
+ "H16_480h|early_maint|0.3": {
+  "inst": "H16_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 48 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   11.0,
+   10.24086354592988
+  ],
+  "split": "test"
+ },
+ "H16_480h|early_maint|0.6": {
+  "inst": "H16_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 1) 提前维修 48 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   11.0,
+   10.24086354592988
+  ],
+  "split": "test"
+ },
+ "H16_480h|delay|0.3": {
+  "inst": "H16_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   11.0,
+   10.24086354592988
+  ],
+  "split": "test"
+ },
+ "H16_480h|delay|0.6": {
+  "inst": "H16_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 1) 延误 8 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   11.0,
+   10.24086354592988
+  ],
+  "split": "test"
+ },
+ "H17_1080h|breakdown|0.3": {
+  "inst": "H17_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 1) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   8.0,
+   21.38528137423857
+  ],
+  "split": "train"
+ },
+ "H17_1080h|breakdown|0.6": {
+  "inst": "H17_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 1) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   8.0,
+   21.38528137423857
+  ],
+  "split": "train"
+ },
+ "H17_1080h|early_maint|0.3": {
+  "inst": "H17_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 1) 提前维修 104 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   8.0,
+   21.38528137423857
+  ],
+  "split": "train"
+ },
+ "H17_1080h|early_maint|0.6": {
+  "inst": "H17_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 1) 提前维修 104 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   8.0,
+   21.38528137423857
+  ],
+  "split": "train"
+ },
+ "H17_1080h|delay|0.3": {
+  "inst": "H17_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 1) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   8.0,
+   21.38528137423857
+  ],
+  "split": "train"
+ },
+ "H17_1080h|delay|0.6": {
+  "inst": "H17_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 1) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   8.0,
+   21.38528137423857
+  ],
+  "split": "train"
+ },
+ "H18_480h|breakdown|0.3": {
+  "inst": "H18_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   8.48528137423857
+  ],
+  "split": "test"
+ },
+ "H18_480h|breakdown|0.6": {
+  "inst": "H18_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   8.48528137423857
+  ],
+  "split": "test"
+ },
+ "H18_480h|early_maint|0.3": {
+  "inst": "H18_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 78 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   8.48528137423857
+  ],
+  "split": "test"
+ },
+ "H18_480h|early_maint|0.6": {
+  "inst": "H18_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 78 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   8.48528137423857
+  ],
+  "split": "test"
+ },
+ "H18_480h|delay|0.3": {
+  "inst": "H18_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   8.48528137423857
+  ],
+  "split": "test"
+ },
+ "H18_480h|delay|0.6": {
+  "inst": "H18_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   8.48528137423857
+  ],
+  "split": "test"
+ },
+ "H19_480h|breakdown|0.3": {
+  "inst": "H19_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 1) 故障停用 48 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   11.360434748368451
+  ],
+  "split": "test"
+ },
+ "H19_480h|breakdown|0.6": {
+  "inst": "H19_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   11.360434748368451
+  ],
+  "split": "test"
+ },
+ "H19_480h|early_maint|0.3": {
+  "inst": "H19_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 1) 提前维修 77 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   11.360434748368451
+  ],
+  "split": "test"
+ },
+ "H19_480h|early_maint|0.6": {
+  "inst": "H19_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 81 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   11.360434748368451
+  ],
+  "split": "test"
+ },
+ "H19_480h|delay|0.3": {
+  "inst": "H19_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 1) 延误 8 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   11.360434748368451
+  ],
+  "split": "test"
+ },
+ "H19_480h|delay|0.6": {
+  "inst": "H19_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   11.360434748368451
+  ],
+  "split": "test"
+ },
+ "H20_480h|breakdown|0.3": {
+  "inst": "H20_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   4.4547727214752495
+  ],
+  "split": "train"
+ },
+ "H20_480h|breakdown|0.6": {
+  "inst": "H20_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   4.4547727214752495
+  ],
+  "split": "train"
+ },
+ "H20_480h|early_maint|0.3": {
+  "inst": "H20_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 51 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   4.4547727214752495
+  ],
+  "split": "train"
+ },
+ "H20_480h|early_maint|0.6": {
+  "inst": "H20_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 51 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   4.4547727214752495
+  ],
+  "split": "train"
+ },
+ "H20_480h|delay|0.3": {
+  "inst": "H20_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 144,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   4.4547727214752495
+  ],
+  "split": "train"
+ },
+ "H20_480h|delay|0.6": {
+  "inst": "H20_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 284,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   4.4547727214752495
+  ],
+  "split": "train"
+ },
+ "H21_720h|breakdown|0.3": {
+  "inst": "H21_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 4) 故障停用 48 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   10.690703535488229
+  ],
+  "split": "test"
+ },
+ "H21_720h|breakdown|0.6": {
+  "inst": "H21_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 4) 故障停用 48 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   10.690703535488229
+  ],
+  "split": "test"
+ },
+ "H21_720h|early_maint|0.3": {
+  "inst": "H21_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 4) 提前维修 120 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   10.690703535488229
+  ],
+  "split": "test"
+ },
+ "H21_720h|early_maint|0.6": {
+  "inst": "H21_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 4) 提前维修 120 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   10.690703535488229
+  ],
+  "split": "test"
+ },
+ "H21_720h|delay|0.3": {
+  "inst": "H21_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 4) 延误 8 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   10.690703535488229
+  ],
+  "split": "test"
+ },
+ "H21_720h|delay|0.6": {
+  "inst": "H21_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 4) 延误 8 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   10.690703535488229
+  ],
+  "split": "test"
+ },
+ "H22_720h|breakdown|0.3": {
+  "inst": "H22_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.715054863443578
+  ],
+  "split": "test"
+ },
+ "H22_720h|breakdown|0.6": {
+  "inst": "H22_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 2) 故障停用 48 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.715054863443578
+  ],
+  "split": "test"
+ },
+ "H22_720h|early_maint|0.3": {
+  "inst": "H22_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 87 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.715054863443578
+  ],
+  "split": "test"
+ },
+ "H22_720h|early_maint|0.6": {
+  "inst": "H22_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 2) 提前维修 111 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.715054863443578
+  ],
+  "split": "test"
+ },
+ "H22_720h|delay|0.3": {
+  "inst": "H22_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 213,
+  "n_left": 51,
+  "plan_obj": [
+   9.0,
+   7.715054863443578
+  ],
+  "split": "test"
+ },
+ "H22_720h|delay|0.6": {
+  "inst": "H22_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 2) 延误 8 h",
+  "t0": 433,
+  "n_left": 29,
+  "plan_obj": [
+   9.0,
+   7.715054863443578
+  ],
+  "split": "test"
+ },
+ "H23_1080h|breakdown|0.3": {
+  "inst": "H23_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   9.458776943937071
+  ],
+  "split": "train"
+ },
+ "H23_1080h|breakdown|0.6": {
+  "inst": "H23_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   9.458776943937071
+  ],
+  "split": "train"
+ },
+ "H23_1080h|early_maint|0.3": {
+  "inst": "H23_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 66 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   9.458776943937071
+  ],
+  "split": "train"
+ },
+ "H23_1080h|early_maint|0.6": {
+  "inst": "H23_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 66 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   9.458776943937071
+  ],
+  "split": "train"
+ },
+ "H23_1080h|delay|0.3": {
+  "inst": "H23_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   9.458776943937071
+  ],
+  "split": "train"
+ },
+ "H23_1080h|delay|0.6": {
+  "inst": "H23_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   9.458776943937071
+  ],
+  "split": "train"
+ },
+ "H24_480h|breakdown|0.3": {
+  "inst": "H24_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 2) 故障停用 48 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   6.7822165458760955
+  ],
+  "split": "test"
+ },
+ "H24_480h|breakdown|0.6": {
+  "inst": "H24_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   6.7822165458760955
+  ],
+  "split": "test"
+ },
+ "H24_480h|early_maint|0.3": {
+  "inst": "H24_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 2) 提前维修 57 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   6.7822165458760955
+  ],
+  "split": "test"
+ },
+ "H24_480h|early_maint|0.6": {
+  "inst": "H24_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 57 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   6.7822165458760955
+  ],
+  "split": "test"
+ },
+ "H24_480h|delay|0.3": {
+  "inst": "H24_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 2) 延误 8 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   8.0,
+   6.7822165458760955
+  ],
+  "split": "test"
+ },
+ "H24_480h|delay|0.6": {
+  "inst": "H24_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   8.0,
+   6.7822165458760955
+  ],
+  "split": "test"
+ },
+ "H25_1080h|breakdown|0.3": {
+  "inst": "H25_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 324,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   7.283199846221439
+  ],
+  "split": "test"
+ },
+ "H25_1080h|breakdown|0.6": {
+  "inst": "H25_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 644,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   7.283199846221439
+  ],
+  "split": "test"
+ },
+ "H25_1080h|early_maint|0.3": {
+  "inst": "H25_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 51 h",
+  "t0": 324,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   7.283199846221439
+  ],
+  "split": "test"
+ },
+ "H25_1080h|early_maint|0.6": {
+  "inst": "H25_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 51 h",
+  "t0": 644,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   7.283199846221439
+  ],
+  "split": "test"
+ },
+ "H25_1080h|delay|0.3": {
+  "inst": "H25_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 324,
+  "n_left": 76,
+  "plan_obj": [
+   10.0,
+   7.283199846221439
+  ],
+  "split": "test"
+ },
+ "H25_1080h|delay|0.6": {
+  "inst": "H25_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 644,
+  "n_left": 44,
+  "plan_obj": [
+   10.0,
+   7.283199846221439
+  ],
+  "split": "test"
+ },
+ "H26_1080h|breakdown|0.3": {
+  "inst": "H26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   9.66
+  ],
+  "split": "test"
+ },
+ "H26_1080h|breakdown|0.6": {
+  "inst": "H26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   9.66
+  ],
+  "split": "test"
+ },
+ "H26_1080h|early_maint|0.3": {
+  "inst": "H26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 89 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   9.66
+  ],
+  "split": "test"
+ },
+ "H26_1080h|early_maint|0.6": {
+  "inst": "H26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 89 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   9.66
+  ],
+  "split": "test"
+ },
+ "H26_1080h|delay|0.3": {
+  "inst": "H26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   9.66
+  ],
+  "split": "test"
+ },
+ "H26_1080h|delay|0.6": {
+  "inst": "H26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   9.66
+  ],
+  "split": "test"
+ },
+ "M01_480h|breakdown|0.3": {
+  "inst": "M01_480h",
+  "k": 12,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 5) 故障停用 48 h",
+  "t0": 146,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   8.455805169823723
+  ],
+  "split": "test"
+ },
+ "M01_480h|breakdown|0.6": {
+  "inst": "M01_480h",
+  "k": 24,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 5) 故障停用 48 h",
+  "t0": 290,
+  "n_left": 16,
+  "plan_obj": [
+   9.0,
+   8.455805169823723
+  ],
+  "split": "test"
+ },
+ "M01_480h|early_maint|0.3": {
+  "inst": "M01_480h",
+  "k": 12,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 5) 提前维修 92 h",
+  "t0": 146,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   8.455805169823723
+  ],
+  "split": "test"
+ },
+ "M01_480h|early_maint|0.6": {
+  "inst": "M01_480h",
+  "k": 24,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 5) 提前维修 92 h",
+  "t0": 290,
+  "n_left": 16,
+  "plan_obj": [
+   9.0,
+   8.455805169823723
+  ],
+  "split": "test"
+ },
+ "M01_480h|delay|0.3": {
+  "inst": "M01_480h",
+  "k": 12,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 5) 延误 8 h",
+  "t0": 146,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   8.455805169823723
+  ],
+  "split": "test"
+ },
+ "M01_480h|delay|0.6": {
+  "inst": "M01_480h",
+  "k": 24,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 5) 延误 8 h",
+  "t0": 290,
+  "n_left": 16,
+  "plan_obj": [
+   9.0,
+   8.455805169823723
+  ],
+  "split": "test"
+ },
+ "M02_480h|breakdown|0.3": {
+  "inst": "M02_480h",
+  "k": 18,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 141,
+  "n_left": 45,
+  "plan_obj": [
+   16.0,
+   9.232533444577141
+  ],
+  "split": "test"
+ },
+ "M02_480h|breakdown|0.6": {
+  "inst": "M02_480h",
+  "k": 37,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 5) 故障停用 48 h",
+  "t0": 285,
+  "n_left": 26,
+  "plan_obj": [
+   16.0,
+   9.232533444577141
+  ],
+  "split": "test"
+ },
+ "M02_480h|early_maint|0.3": {
+  "inst": "M02_480h",
+  "k": 18,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 66 h",
+  "t0": 141,
+  "n_left": 45,
+  "plan_obj": [
+   16.0,
+   9.232533444577141
+  ],
+  "split": "test"
+ },
+ "M02_480h|early_maint|0.6": {
+  "inst": "M02_480h",
+  "k": 37,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 5) 提前维修 62 h",
+  "t0": 285,
+  "n_left": 26,
+  "plan_obj": [
+   16.0,
+   9.232533444577141
+  ],
+  "split": "test"
+ },
+ "M02_480h|delay|0.3": {
+  "inst": "M02_480h",
+  "k": 18,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 141,
+  "n_left": 45,
+  "plan_obj": [
+   16.0,
+   9.232533444577141
+  ],
+  "split": "test"
+ },
+ "M02_480h|delay|0.6": {
+  "inst": "M02_480h",
+  "k": 37,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 5) 延误 8 h",
+  "t0": 285,
+  "n_left": 26,
+  "plan_obj": [
+   16.0,
+   9.232533444577141
+  ],
+  "split": "test"
+ },
+ "M03_720h|breakdown|0.3": {
+  "inst": "M03_720h",
+  "k": 20,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 218,
+  "n_left": 48,
+  "plan_obj": [
+   9.0,
+   9.380398941091073
+  ],
+  "split": "test"
+ },
+ "M03_720h|breakdown|0.6": {
+  "inst": "M03_720h",
+  "k": 40,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 1) 故障停用 48 h",
+  "t0": 432,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   9.380398941091073
+  ],
+  "split": "test"
+ },
+ "M03_720h|early_maint|0.3": {
+  "inst": "M03_720h",
+  "k": 20,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 120 h",
+  "t0": 218,
+  "n_left": 48,
+  "plan_obj": [
+   9.0,
+   9.380398941091073
+  ],
+  "split": "test"
+ },
+ "M03_720h|early_maint|0.6": {
+  "inst": "M03_720h",
+  "k": 40,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 1) 提前维修 82 h",
+  "t0": 432,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   9.380398941091073
+  ],
+  "split": "test"
+ },
+ "M03_720h|delay|0.3": {
+  "inst": "M03_720h",
+  "k": 20,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 218,
+  "n_left": 48,
+  "plan_obj": [
+   9.0,
+   9.380398941091073
+  ],
+  "split": "test"
+ },
+ "M03_720h|delay|0.6": {
+  "inst": "M03_720h",
+  "k": 40,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 1) 延误 8 h",
+  "t0": 432,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   9.380398941091073
+  ],
+  "split": "test"
+ },
+ "M04_720h|breakdown|0.3": {
+  "inst": "M04_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   2.8737432035587314
+  ],
+  "split": "test"
+ },
+ "M04_720h|breakdown|0.6": {
+  "inst": "M04_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 4) 故障停用 48 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   2.8737432035587314
+  ],
+  "split": "test"
+ },
+ "M04_720h|early_maint|0.3": {
+  "inst": "M04_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 62 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   2.8737432035587314
+  ],
+  "split": "test"
+ },
+ "M04_720h|early_maint|0.6": {
+  "inst": "M04_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 4) 提前维修 73 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   2.8737432035587314
+  ],
+  "split": "test"
+ },
+ "M04_720h|delay|0.3": {
+  "inst": "M04_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 212,
+  "n_left": 51,
+  "plan_obj": [
+   10.0,
+   2.8737432035587314
+  ],
+  "split": "test"
+ },
+ "M04_720h|delay|0.6": {
+  "inst": "M04_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 4) 延误 8 h",
+  "t0": 432,
+  "n_left": 29,
+  "plan_obj": [
+   10.0,
+   2.8737432035587314
+  ],
+  "split": "test"
+ },
+ "M05_480h|breakdown|0.3": {
+  "inst": "M05_480h",
+  "k": 12,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 147,
+  "n_left": 28,
+  "plan_obj": [
+   8.0,
+   13.576450198781712
+  ],
+  "split": "test"
+ },
+ "M05_480h|breakdown|0.6": {
+  "inst": "M05_480h",
+  "k": 24,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 291,
+  "n_left": 16,
+  "plan_obj": [
+   8.0,
+   13.576450198781712
+  ],
+  "split": "test"
+ },
+ "M05_480h|early_maint|0.3": {
+  "inst": "M05_480h",
+  "k": 12,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 115 h",
+  "t0": 147,
+  "n_left": 28,
+  "plan_obj": [
+   8.0,
+   13.576450198781712
+  ],
+  "split": "test"
+ },
+ "M05_480h|early_maint|0.6": {
+  "inst": "M05_480h",
+  "k": 24,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 115 h",
+  "t0": 291,
+  "n_left": 16,
+  "plan_obj": [
+   8.0,
+   13.576450198781712
+  ],
+  "split": "test"
+ },
+ "M05_480h|delay|0.3": {
+  "inst": "M05_480h",
+  "k": 12,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 147,
+  "n_left": 28,
+  "plan_obj": [
+   8.0,
+   13.576450198781712
+  ],
+  "split": "test"
+ },
+ "M05_480h|delay|0.6": {
+  "inst": "M05_480h",
+  "k": 24,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 291,
+  "n_left": 16,
+  "plan_obj": [
+   8.0,
+   13.576450198781712
+  ],
+  "split": "test"
+ },
+ "M11_1080h|breakdown|0.3": {
+  "inst": "M11_1080h",
+  "k": 51,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 4) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 122,
+  "plan_obj": [
+   16.0,
+   9.11148038544798
+  ],
+  "split": "train"
+ },
+ "M11_1080h|breakdown|0.6": {
+  "inst": "M11_1080h",
+  "k": 103,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 6) 故障停用 48 h",
+  "t0": 651,
+  "n_left": 70,
+  "plan_obj": [
+   16.0,
+   9.11148038544798
+  ],
+  "split": "train"
+ },
+ "M11_1080h|early_maint|0.3": {
+  "inst": "M11_1080h",
+  "k": 51,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 4) 提前维修 102 h",
+  "t0": 323,
+  "n_left": 122,
+  "plan_obj": [
+   16.0,
+   9.11148038544798
+  ],
+  "split": "train"
+ },
+ "M11_1080h|early_maint|0.6": {
+  "inst": "M11_1080h",
+  "k": 103,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 6) 提前维修 102 h",
+  "t0": 651,
+  "n_left": 70,
+  "plan_obj": [
+   16.0,
+   9.11148038544798
+  ],
+  "split": "train"
+ },
+ "M11_1080h|delay|0.3": {
+  "inst": "M11_1080h",
+  "k": 51,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 4) 延误 8 h",
+  "t0": 323,
+  "n_left": 122,
+  "plan_obj": [
+   16.0,
+   9.11148038544798
+  ],
+  "split": "train"
+ },
+ "M11_1080h|delay|0.6": {
+  "inst": "M11_1080h",
+  "k": 103,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 6) 延误 8 h",
+  "t0": 651,
+  "n_left": 70,
+  "plan_obj": [
+   16.0,
+   9.11148038544798
+  ],
+  "split": "train"
+ },
+ "M12_1080h|breakdown|0.3": {
+  "inst": "M12_1080h",
+  "k": 27,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 1) 故障停用 48 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   10.0,
+   7.551423706825092
+  ],
+  "split": "test"
+ },
+ "M12_1080h|breakdown|0.6": {
+  "inst": "M12_1080h",
+  "k": 54,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   10.0,
+   7.551423706825092
+  ],
+  "split": "test"
+ },
+ "M12_1080h|early_maint|0.3": {
+  "inst": "M12_1080h",
+  "k": 27,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 1) 提前维修 108 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   10.0,
+   7.551423706825092
+  ],
+  "split": "test"
+ },
+ "M12_1080h|early_maint|0.6": {
+  "inst": "M12_1080h",
+  "k": 54,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 108 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   10.0,
+   7.551423706825092
+  ],
+  "split": "test"
+ },
+ "M12_1080h|delay|0.3": {
+  "inst": "M12_1080h",
+  "k": 27,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 1) 延误 8 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   10.0,
+   7.551423706825092
+  ],
+  "split": "test"
+ },
+ "M12_1080h|delay|0.6": {
+  "inst": "M12_1080h",
+  "k": 54,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   10.0,
+   7.551423706825092
+  ],
+  "split": "test"
+ },
+ "M13_480h|breakdown|0.3": {
+  "inst": "M13_480h",
+  "k": 12,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 147,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   4.676537180435969
+  ],
+  "split": "test"
+ },
+ "M13_480h|breakdown|0.6": {
+  "inst": "M13_480h",
+  "k": 24,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 291,
+  "n_left": 16,
+  "plan_obj": [
+   9.0,
+   4.676537180435969
+  ],
+  "split": "test"
+ },
+ "M13_480h|early_maint|0.3": {
+  "inst": "M13_480h",
+  "k": 12,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 115 h",
+  "t0": 147,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   4.676537180435969
+  ],
+  "split": "test"
+ },
+ "M13_480h|early_maint|0.6": {
+  "inst": "M13_480h",
+  "k": 24,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 115 h",
+  "t0": 291,
+  "n_left": 16,
+  "plan_obj": [
+   9.0,
+   4.676537180435969
+  ],
+  "split": "test"
+ },
+ "M13_480h|delay|0.3": {
+  "inst": "M13_480h",
+  "k": 12,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 147,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   4.676537180435969
+  ],
+  "split": "test"
+ },
+ "M13_480h|delay|0.6": {
+  "inst": "M13_480h",
+  "k": 24,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 291,
+  "n_left": 16,
+  "plan_obj": [
+   9.0,
+   4.676537180435969
+  ],
+  "split": "test"
+ },
+ "M14_1080h|breakdown|0.3": {
+  "inst": "M14_1080h",
+  "k": 27,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 4) 故障停用 48 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   8.0,
+   8.641361033964278
+  ],
+  "split": "train"
+ },
+ "M14_1080h|breakdown|0.6": {
+  "inst": "M14_1080h",
+  "k": 54,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 2) 故障停用 48 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   8.0,
+   8.641361033964278
+  ],
+  "split": "train"
+ },
+ "M14_1080h|early_maint|0.3": {
+  "inst": "M14_1080h",
+  "k": 27,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 4) 提前维修 79 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   8.0,
+   8.641361033964278
+  ],
+  "split": "train"
+ },
+ "M14_1080h|early_maint|0.6": {
+  "inst": "M14_1080h",
+  "k": 54,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 2) 提前维修 79 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   8.0,
+   8.641361033964278
+  ],
+  "split": "train"
+ },
+ "M14_1080h|delay|0.3": {
+  "inst": "M14_1080h",
+  "k": 27,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 4) 延误 8 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   8.0,
+   8.641361033964278
+  ],
+  "split": "train"
+ },
+ "M14_1080h|delay|0.6": {
+  "inst": "M14_1080h",
+  "k": 54,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 2) 延误 8 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   8.0,
+   8.641361033964278
+  ],
+  "split": "train"
+ },
+ "M15_1080h|breakdown|0.3": {
+  "inst": "M15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 2) 故障停用 48 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   13.875657756560436
+  ],
+  "split": "test"
+ },
+ "M15_1080h|breakdown|0.6": {
+  "inst": "M15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 3) 故障停用 48 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   13.875657756560436
+  ],
+  "split": "test"
+ },
+ "M15_1080h|early_maint|0.3": {
+  "inst": "M15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 2) 提前维修 87 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   13.875657756560436
+  ],
+  "split": "test"
+ },
+ "M15_1080h|early_maint|0.6": {
+  "inst": "M15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 3) 提前维修 87 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   13.875657756560436
+  ],
+  "split": "test"
+ },
+ "M15_1080h|delay|0.3": {
+  "inst": "M15_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 2) 延误 8 h",
+  "t0": 322,
+  "n_left": 76,
+  "plan_obj": [
+   9.0,
+   13.875657756560436
+  ],
+  "split": "test"
+ },
+ "M15_1080h|delay|0.6": {
+  "inst": "M15_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 3) 延误 8 h",
+  "t0": 642,
+  "n_left": 44,
+  "plan_obj": [
+   9.0,
+   13.875657756560436
+  ],
+  "split": "test"
+ },
+ "M16_1080h|breakdown|0.3": {
+  "inst": "M16_1080h",
+  "k": 30,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 1) 故障停用 48 h",
+  "t0": 326,
+  "n_left": 72,
+  "plan_obj": [
+   13.0,
+   9.484521581937322
+  ],
+  "split": "test"
+ },
+ "M16_1080h|breakdown|0.6": {
+  "inst": "M16_1080h",
+  "k": 61,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 6) 故障停用 48 h",
+  "t0": 650,
+  "n_left": 41,
+  "plan_obj": [
+   13.0,
+   9.484521581937322
+  ],
+  "split": "test"
+ },
+ "M16_1080h|early_maint|0.3": {
+  "inst": "M16_1080h",
+  "k": 30,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 1) 提前维修 89 h",
+  "t0": 326,
+  "n_left": 72,
+  "plan_obj": [
+   13.0,
+   9.484521581937322
+  ],
+  "split": "test"
+ },
+ "M16_1080h|early_maint|0.6": {
+  "inst": "M16_1080h",
+  "k": 61,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 6) 提前维修 115 h",
+  "t0": 650,
+  "n_left": 41,
+  "plan_obj": [
+   13.0,
+   9.484521581937322
+  ],
+  "split": "test"
+ },
+ "M16_1080h|delay|0.3": {
+  "inst": "M16_1080h",
+  "k": 30,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 1) 延误 8 h",
+  "t0": 326,
+  "n_left": 72,
+  "plan_obj": [
+   13.0,
+   9.484521581937322
+  ],
+  "split": "test"
+ },
+ "M16_1080h|delay|0.6": {
+  "inst": "M16_1080h",
+  "k": 61,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 6) 延误 8 h",
+  "t0": 650,
+  "n_left": 41,
+  "plan_obj": [
+   13.0,
+   9.484521581937322
+  ],
+  "split": "test"
+ },
+ "M17_480h|breakdown|0.3": {
+  "inst": "M17_480h",
+  "k": 15,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 5) 故障停用 48 h",
+  "t0": 133,
+  "n_left": 38,
+  "plan_obj": [
+   14.0,
+   10.296604667338453
+  ],
+  "split": "train"
+ },
+ "M17_480h|breakdown|0.6": {
+  "inst": "M17_480h",
+  "k": 31,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 285,
+  "n_left": 22,
+  "plan_obj": [
+   14.0,
+   10.296604667338453
+  ],
+  "split": "train"
+ },
+ "M17_480h|early_maint|0.3": {
+  "inst": "M17_480h",
+  "k": 15,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 5) 提前维修 113 h",
+  "t0": 133,
+  "n_left": 38,
+  "plan_obj": [
+   14.0,
+   10.296604667338453
+  ],
+  "split": "train"
+ },
+ "M17_480h|early_maint|0.6": {
+  "inst": "M17_480h",
+  "k": 31,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 97 h",
+  "t0": 285,
+  "n_left": 22,
+  "plan_obj": [
+   14.0,
+   10.296604667338453
+  ],
+  "split": "train"
+ },
+ "M17_480h|delay|0.3": {
+  "inst": "M17_480h",
+  "k": 15,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 5) 延误 8 h",
+  "t0": 133,
+  "n_left": 38,
+  "plan_obj": [
+   14.0,
+   10.296604667338453
+  ],
+  "split": "train"
+ },
+ "M17_480h|delay|0.6": {
+  "inst": "M17_480h",
+  "k": 31,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 285,
+  "n_left": 22,
+  "plan_obj": [
+   14.0,
+   10.296604667338453
+  ],
+  "split": "train"
+ },
+ "M18_480h|breakdown|0.3": {
+  "inst": "M18_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   11.0,
+   9.553881117206986
+  ],
+  "split": "test"
+ },
+ "M18_480h|breakdown|0.6": {
+  "inst": "M18_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   11.0,
+   9.553881117206986
+  ],
+  "split": "test"
+ },
+ "M18_480h|early_maint|0.3": {
+  "inst": "M18_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 109 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   11.0,
+   9.553881117206986
+  ],
+  "split": "test"
+ },
+ "M18_480h|early_maint|0.6": {
+  "inst": "M18_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 109 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   11.0,
+   9.553881117206986
+  ],
+  "split": "test"
+ },
+ "M18_480h|delay|0.3": {
+  "inst": "M18_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   11.0,
+   9.553881117206986
+  ],
+  "split": "test"
+ },
+ "M18_480h|delay|0.6": {
+  "inst": "M18_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   11.0,
+   9.553881117206986
+  ],
+  "split": "test"
+ },
+ "M19_1080h|breakdown|0.3": {
+  "inst": "M19_1080h",
+  "k": 27,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 5) 故障停用 48 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   9.0,
+   5.9016946718718
+  ],
+  "split": "test"
+ },
+ "M19_1080h|breakdown|0.6": {
+  "inst": "M19_1080h",
+  "k": 54,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 4) 故障停用 48 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   9.0,
+   5.9016946718718
+  ],
+  "split": "test"
+ },
+ "M19_1080h|early_maint|0.3": {
+  "inst": "M19_1080h",
+  "k": 27,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 5) 提前维修 90 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   9.0,
+   5.9016946718718
+  ],
+  "split": "test"
+ },
+ "M19_1080h|early_maint|0.6": {
+  "inst": "M19_1080h",
+  "k": 54,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 4) 提前维修 90 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   9.0,
+   5.9016946718718
+  ],
+  "split": "test"
+ },
+ "M19_1080h|delay|0.3": {
+  "inst": "M19_1080h",
+  "k": 27,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 5) 延误 8 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   9.0,
+   5.9016946718718
+  ],
+  "split": "test"
+ },
+ "M19_1080h|delay|0.6": {
+  "inst": "M19_1080h",
+  "k": 54,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 4) 延误 8 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   9.0,
+   5.9016946718718
+  ],
+  "split": "test"
+ },
+ "M20_1080h|breakdown|0.3": {
+  "inst": "M20_1080h",
+  "k": 49,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 3) 故障停用 48 h",
+  "t0": 318,
+  "n_left": 116,
+  "plan_obj": [
+   12.0,
+   8.230257529140216
+  ],
+  "split": "train"
+ },
+ "M20_1080h|breakdown|0.6": {
+  "inst": "M20_1080h",
+  "k": 99,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 3) 故障停用 48 h",
+  "t0": 646,
+  "n_left": 66,
+  "plan_obj": [
+   12.0,
+   8.230257529140216
+  ],
+  "split": "train"
+ },
+ "M20_1080h|early_maint|0.3": {
+  "inst": "M20_1080h",
+  "k": 49,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 3) 提前维修 81 h",
+  "t0": 318,
+  "n_left": 116,
+  "plan_obj": [
+   12.0,
+   8.230257529140216
+  ],
+  "split": "train"
+ },
+ "M20_1080h|early_maint|0.6": {
+  "inst": "M20_1080h",
+  "k": 99,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 3) 提前维修 81 h",
+  "t0": 646,
+  "n_left": 66,
+  "plan_obj": [
+   12.0,
+   8.230257529140216
+  ],
+  "split": "train"
+ },
+ "M20_1080h|delay|0.3": {
+  "inst": "M20_1080h",
+  "k": 49,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 3) 延误 8 h",
+  "t0": 318,
+  "n_left": 116,
+  "plan_obj": [
+   12.0,
+   8.230257529140216
+  ],
+  "split": "train"
+ },
+ "M20_1080h|delay|0.6": {
+  "inst": "M20_1080h",
+  "k": 99,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 3) 延误 8 h",
+  "t0": 646,
+  "n_left": 66,
+  "plan_obj": [
+   12.0,
+   8.230257529140216
+  ],
+  "split": "train"
+ },
+ "M21_1080h|breakdown|0.3": {
+  "inst": "M21_1080h",
+  "k": 40,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 1) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 95,
+  "plan_obj": [
+   10.0,
+   3.81403657559809
+  ],
+  "split": "test"
+ },
+ "M21_1080h|breakdown|0.6": {
+  "inst": "M21_1080h",
+  "k": 81,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 2) 故障停用 48 h",
+  "t0": 651,
+  "n_left": 54,
+  "plan_obj": [
+   10.0,
+   3.81403657559809
+  ],
+  "split": "test"
+ },
+ "M21_1080h|early_maint|0.3": {
+  "inst": "M21_1080h",
+  "k": 40,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 1) 提前维修 50 h",
+  "t0": 323,
+  "n_left": 95,
+  "plan_obj": [
+   10.0,
+   3.81403657559809
+  ],
+  "split": "test"
+ },
+ "M21_1080h|early_maint|0.6": {
+  "inst": "M21_1080h",
+  "k": 81,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 2) 提前维修 50 h",
+  "t0": 651,
+  "n_left": 54,
+  "plan_obj": [
+   10.0,
+   3.81403657559809
+  ],
+  "split": "test"
+ },
+ "M21_1080h|delay|0.3": {
+  "inst": "M21_1080h",
+  "k": 40,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 1) 延误 8 h",
+  "t0": 323,
+  "n_left": 95,
+  "plan_obj": [
+   10.0,
+   3.81403657559809
+  ],
+  "split": "test"
+ },
+ "M21_1080h|delay|0.6": {
+  "inst": "M21_1080h",
+  "k": 81,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 2) 延误 8 h",
+  "t0": 651,
+  "n_left": 54,
+  "plan_obj": [
+   10.0,
+   3.81403657559809
+  ],
+  "split": "test"
+ },
+ "M22_1080h|breakdown|0.3": {
+  "inst": "M22_1080h",
+  "k": 31,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 2) 故障停用 48 h",
+  "t0": 322,
+  "n_left": 75,
+  "plan_obj": [
+   12.0,
+   26.6738093251045
+  ],
+  "split": "test"
+ },
+ "M22_1080h|breakdown|0.6": {
+  "inst": "M22_1080h",
+  "k": 63,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 1) 故障停用 48 h",
+  "t0": 650,
+  "n_left": 43,
+  "plan_obj": [
+   12.0,
+   26.6738093251045
+  ],
+  "split": "test"
+ },
+ "M22_1080h|early_maint|0.3": {
+  "inst": "M22_1080h",
+  "k": 31,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 2) 提前维修 92 h",
+  "t0": 322,
+  "n_left": 75,
+  "plan_obj": [
+   12.0,
+   26.6738093251045
+  ],
+  "split": "test"
+ },
+ "M22_1080h|early_maint|0.6": {
+  "inst": "M22_1080h",
+  "k": 63,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 1) 提前维修 52 h",
+  "t0": 650,
+  "n_left": 43,
+  "plan_obj": [
+   12.0,
+   26.6738093251045
+  ],
+  "split": "test"
+ },
+ "M22_1080h|delay|0.3": {
+  "inst": "M22_1080h",
+  "k": 31,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 2) 延误 8 h",
+  "t0": 322,
+  "n_left": 75,
+  "plan_obj": [
+   12.0,
+   26.6738093251045
+  ],
+  "split": "test"
+ },
+ "M22_1080h|delay|0.6": {
+  "inst": "M22_1080h",
+  "k": 63,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 1) 延误 8 h",
+  "t0": 650,
+  "n_left": 43,
+  "plan_obj": [
+   12.0,
+   26.6738093251045
+  ],
+  "split": "test"
+ },
+ "M23_1080h|breakdown|0.3": {
+  "inst": "M23_1080h",
+  "k": 27,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 3) 故障停用 48 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   10.0,
+   11.814026362863409
+  ],
+  "split": "train"
+ },
+ "M23_1080h|breakdown|0.6": {
+  "inst": "M23_1080h",
+  "k": 54,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 4) 故障停用 48 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   10.0,
+   11.814026362863409
+  ],
+  "split": "train"
+ },
+ "M23_1080h|early_maint|0.3": {
+  "inst": "M23_1080h",
+  "k": 27,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 3) 提前维修 52 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   10.0,
+   11.814026362863409
+  ],
+  "split": "train"
+ },
+ "M23_1080h|early_maint|0.6": {
+  "inst": "M23_1080h",
+  "k": 54,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 4) 提前维修 52 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   10.0,
+   11.814026362863409
+  ],
+  "split": "train"
+ },
+ "M23_1080h|delay|0.3": {
+  "inst": "M23_1080h",
+  "k": 27,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 3) 延误 8 h",
+  "t0": 327,
+  "n_left": 63,
+  "plan_obj": [
+   10.0,
+   11.814026362863409
+  ],
+  "split": "train"
+ },
+ "M23_1080h|delay|0.6": {
+  "inst": "M23_1080h",
+  "k": 54,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 4) 延误 8 h",
+  "t0": 651,
+  "n_left": 36,
+  "plan_obj": [
+   10.0,
+   11.814026362863409
+  ],
+  "split": "train"
+ },
+ "M24_720h|breakdown|0.3": {
+  "inst": "M24_720h",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 2) 故障停用 48 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   11.0,
+   7.4626325002006695
+  ],
+  "split": "test"
+ },
+ "M24_720h|breakdown|0.6": {
+  "inst": "M24_720h",
+  "k": 43,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 5) 故障停用 48 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   11.0,
+   7.4626325002006695
+  ],
+  "split": "test"
+ },
+ "M24_720h|early_maint|0.3": {
+  "inst": "M24_720h",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 2) 提前维修 74 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   11.0,
+   7.4626325002006695
+  ],
+  "split": "test"
+ },
+ "M24_720h|early_maint|0.6": {
+  "inst": "M24_720h",
+  "k": 43,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 5) 提前维修 74 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   11.0,
+   7.4626325002006695
+  ],
+  "split": "test"
+ },
+ "M24_720h|delay|0.3": {
+  "inst": "M24_720h",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 2) 延误 8 h",
+  "t0": 214,
+  "n_left": 51,
+  "plan_obj": [
+   11.0,
+   7.4626325002006695
+  ],
+  "split": "test"
+ },
+ "M24_720h|delay|0.6": {
+  "inst": "M24_720h",
+  "k": 43,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 5) 延误 8 h",
+  "t0": 434,
+  "n_left": 29,
+  "plan_obj": [
+   11.0,
+   7.4626325002006695
+  ],
+  "split": "test"
+ },
+ "M25_480h|breakdown|0.3": {
+  "inst": "M25_480h",
+  "k": 14,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 1) 故障停用 48 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   5.37401153701776
+  ],
+  "split": "test"
+ },
+ "M25_480h|breakdown|0.6": {
+  "inst": "M25_480h",
+  "k": 28,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(1, 1) 故障停用 48 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   5.37401153701776
+  ],
+  "split": "test"
+ },
+ "M25_480h|early_maint|0.3": {
+  "inst": "M25_480h",
+  "k": 14,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 1) 提前维修 63 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   5.37401153701776
+  ],
+  "split": "test"
+ },
+ "M25_480h|early_maint|0.6": {
+  "inst": "M25_480h",
+  "k": 28,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(1, 1) 提前维修 63 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   5.37401153701776
+  ],
+  "split": "test"
+ },
+ "M25_480h|delay|0.3": {
+  "inst": "M25_480h",
+  "k": 14,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 1) 延误 8 h",
+  "t0": 143,
+  "n_left": 34,
+  "plan_obj": [
+   10.0,
+   5.37401153701776
+  ],
+  "split": "test"
+ },
+ "M25_480h|delay|0.6": {
+  "inst": "M25_480h",
+  "k": 28,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(1, 1) 延误 8 h",
+  "t0": 283,
+  "n_left": 20,
+  "plan_obj": [
+   10.0,
+   5.37401153701776
+  ],
+  "split": "test"
+ },
+ "M26_1080h|breakdown|0.3": {
+  "inst": "M26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 2) 故障停用 48 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   14.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "M26_1080h|breakdown|0.6": {
+  "inst": "M26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(2, 4) 故障停用 48 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   14.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "M26_1080h|early_maint|0.3": {
+  "inst": "M26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 2) 提前维修 117 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   14.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "M26_1080h|early_maint|0.6": {
+  "inst": "M26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(2, 4) 提前维修 117 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   14.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "M26_1080h|delay|0.3": {
+  "inst": "M26_1080h",
+  "k": 32,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 2) 延误 8 h",
+  "t0": 323,
+  "n_left": 76,
+  "plan_obj": [
+   14.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "M26_1080h|delay|0.6": {
+  "inst": "M26_1080h",
+  "k": 64,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(2, 4) 延误 8 h",
+  "t0": 643,
+  "n_left": 44,
+  "plan_obj": [
+   14.0,
+   9.474141620753477
+  ],
+  "split": "test"
+ },
+ "原请求_paiban|breakdown|0.3": {
+  "inst": "原请求_paiban",
+  "k": 21,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 1) 故障停用 48 h",
+  "t0": 212,
+  "n_left": 49,
+  "plan_obj": [
+   9.0,
+   5.145075026976297
+  ],
+  "split": "test"
+ },
+ "原请求_paiban|breakdown|0.6": {
+  "inst": "原请求_paiban",
+  "k": 42,
+  "ev": {
+   "type": "breakdown",
+   "D": 48
+  },
+  "desc": "(0, 5) 故障停用 48 h",
+  "t0": 422,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   5.145075026976297
+  ],
+  "split": "test"
+ },
+ "原请求_paiban|early_maint|0.3": {
+  "inst": "原请求_paiban",
+  "k": 21,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 1) 提前维修 72 h",
+  "t0": 212,
+  "n_left": 49,
+  "plan_obj": [
+   9.0,
+   5.145075026976297
+  ],
+  "split": "test"
+ },
+ "原请求_paiban|early_maint|0.6": {
+  "inst": "原请求_paiban",
+  "k": 42,
+  "ev": {
+   "type": "early_maint"
+  },
+  "desc": "(0, 5) 提前维修 72 h",
+  "t0": 422,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   5.145075026976297
+  ],
+  "split": "test"
+ },
+ "原请求_paiban|delay|0.3": {
+  "inst": "原请求_paiban",
+  "k": 21,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 1) 延误 8 h",
+  "t0": 212,
+  "n_left": 49,
+  "plan_obj": [
+   9.0,
+   5.145075026976297
+  ],
+  "split": "test"
+ },
+ "原请求_paiban|delay|0.6": {
+  "inst": "原请求_paiban",
+  "k": 42,
+  "ev": {
+   "type": "delay",
+   "d": 8
+  },
+  "desc": "(0, 5) 延误 8 h",
+  "t0": 422,
+  "n_left": 28,
+  "plan_obj": [
+   9.0,
+   5.145075026976297
+  ],
+  "split": "test"
+ }
+}
