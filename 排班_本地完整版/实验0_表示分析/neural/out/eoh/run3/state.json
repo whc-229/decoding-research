@@ -1,0 +1,2754 @@
+{
+ "samples": [
+  {
+   "id": "e0",
+   "op": "i1",
+   "parents": [],
+   "algorithm": " The default opens a new robot of the best-scoring type when existing capacity is insufficient or no robot is available; otherwise it reuses available robots ordered by a combined projected count-and-hours load, preferring duty lengths that divide the remaining horizon and larger remaining maintenance budget, and appends the best new type as fallback. ",
+   "code": "def rule(ctx):\n    def get_work(r):\n        typ = ctx.types[r.type]\n        return typ.get('work_time', 10) if typ is not None else 10\n\n    best_type = ctx.gene_type\n    best_key = None\n    for k in range(len(ctx.types)):\n        typ = ctx.types[k]\n        if typ is None or ctx.left[k] <= 0:\n            continue\n        work = typ.get('work_time', 10)\n        if work > ctx.remaining:\n            continue\n        single = typ.get('single_work_time', work)\n        if single <= 0:\n            single = 1.0\n        cmw = typ.get('continue_max_work', 1)\n        maint = typ.get('maintenance_time', 0)\n        charge = typ.get('charge_time', 0)\n        duties = cmw / single\n        cover = duties * work\n        divides = 1 if ctx.remaining % work == 0 else 0\n        key = (divides, work, cover, -maint, -charge)\n        if best_key is None or key > best_key:\n            best_key = key\n            best_type = k\n\n    has_new = best_key is not None\n\n    avail = []\n    for r in ctx.available:\n        work = get_work(r)\n        if work <= ctx.remaining:\n            avail.append(r)\n\n    def load_key(r):\n        typ = ctx.types[r.type]\n        work = typ.get('work_time', 10) if typ is not None else 10\n        divides = 1 if ctx.remaining % work == 0 else 0\n        proj_count = r.count + 1\n        proj_hours = r.hours + work\n        load = proj_count + proj_hours / 10.0\n        return (-divides, load, -r.duties_left, r.idx)\n\n    sorted_avail = sorted(avail, key=load_key)\n    reuse_actions = [(\"reuse\", r) for r in sorted_avail]\n\n    actions = []\n    if (ctx.capacity < ctx.remaining and has_new) or not sorted_avail:\n        if has_new:\n            actions.append((\"new\", best_type))\n        actions.extend(reuse_actions)\n    else:\n        actions.extend(reuse_actions)\n        if has_new:\n            actions.append((\"new\", best_type))\n    return actions\n",
+   "objective": -0.54576,
+   "score": 0.5457633752025011,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.4249,
+     "vs_default": -0.2641,
+     "rule_only_extra_resources": 2.0,
+     "rule_only_imbalance": 9.82,
+     "rule_only_feasible_instances": "4/5",
+     "best_sample_extra_resources": 2.6,
+     "random_genome_feasible_rate": 0.8,
+     "rule_opens_new_while_robots_available_per_decode": 8.76
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.654,
+     "vs_default": -0.1522,
+     "rule_only_extra_resources": 3.2,
+     "rule_only_imbalance": 7.9,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 2.6,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 8.63
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.5584,
+     "vs_default": -0.2355,
+     "rule_only_extra_resources": 6.6,
+     "rule_only_imbalance": 39.08,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 4.2,
+     "random_genome_feasible_rate": 0.997,
+     "rule_opens_new_while_robots_available_per_decode": 11.7
+    }
+   }
+  },
+  {
+   "id": "e1",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "I rank available robots by a balance-aware score combining duty count and normalized duty hours with tie-breakers for remaining maintenance budget, and when estimated capacity is short I place a new robot of the best available (or genome-specified) type first to add capacity early.",
+   "code": "def rule(ctx):\n    def type_score(k):\n        info = ctx.types[k] if k < len(ctx.types) else None\n        if info is None:\n            return -1e9\n        wt = info.get(\"work_time\", 10.0)\n        swt = info.get(\"single_work_time\", wt)\n        cmw = info.get(\"continue_max_work\", 1.0)\n        mt = info.get(\"maintenance_time\", 1.0)\n        ct = info.get(\"charge_time\", 1.0)\n        ot = info.get(\"out_travel_time\", 0.0)\n        rt = info.get(\"return_travel_time\", 0.0)\n        duties_per_cycle = cmw / swt if swt > 0 else 1.0\n        cycle_hours = wt * duties_per_cycle\n        downtime = mt + ct + ot + rt\n        return cycle_hours / (downtime + 1.0)\n\n    n_types = len(ctx.types)\n    valid_new = [k for k in range(n_types) if ctx.left[k] > 0 and ctx.types[k] is not None]\n    sorted_new = sorted(valid_new, key=lambda k: (-type_score(k), k))\n    if ctx.gene_type is not None and ctx.gene_type in valid_new:\n        sorted_new = [ctx.gene_type] + [k for k in sorted_new if k != ctx.gene_type]\n    new_actions = [(\"new\", k) for k in sorted_new]\n\n    avail = list(ctx.available)\n    if avail:\n        total_wt = 0.0\n        for r in avail:\n            info = ctx.types[r.type] if r.type < n_types else None\n            if info is not None:\n                total_wt += info.get(\"work_time\", 10.0)\n            else:\n                total_wt += 10.0\n        avg_wt = total_wt / len(avail) if avail else 10.0\n        if avg_wt <= 0:\n            avg_wt = 1.0\n        def robot_key(r):\n            score = r.count + r.hours / avg_wt\n            return (score, -r.duties_left, -r.budget, r.idx)\n        sorted_avail = sorted(avail, key=robot_key)\n        reuse_actions = [(\"reuse\", r) for r in sorted_avail]\n    else:\n        reuse_actions = []\n\n    try:\n        cap = ctx.capacity\n    except Exception:\n        cap = ctx.remaining\n    need_new = cap < ctx.remaining\n\n    if not reuse_actions:\n        return new_actions if new_actions else []\n    if need_new and new_actions:\n        return [new_actions[0]] + reuse_actions + new_actions[1:]\n    else:\n        return reuse_actions + new_actions\n",
+   "objective": null,
+   "score": null,
+   "error": "E11_480h: 编译失败：不允许的语法：Try"
+  },
+  {
+   "id": "e2",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Select the available robot that minimizes the combined variance of per-robot duty counts and duty hours after the shift, adding a penalty for robots close to their first maintenance, and order new robot types by estimated duty-hour efficiency per maintenance cycle.",
+   "code": "def rule(ctx):\n    actions = []\n    robots = ctx.robots\n    n = len(robots)\n    if n == 0:\n        new_candidates = []\n        for k in range(len(ctx.types)):\n            if ctx.types[k] is not None and ctx.left[k] > 0:\n                p = ctx.types[k]\n                single = p.get('single_work_time', 1.0) or 1.0\n                cont = p.get('continue_max_work', 1.0) or 1.0\n                wt = p.get('work_time', 0.0) or 0.0\n                out = p.get('out_travel_time', 0.0) or 0.0\n                ret = p.get('return_travel_time', 0.0) or 0.0\n                ch = p.get('charge_time', 0.0) or 0.0\n                maint = p.get('maintenance_time', 0.0) or 0.0\n                dpm = cont / single if single > 0 else 1.0\n                cycle = out + wt + ret + ch\n                total_time = dpm * cycle + maint\n                eff = (dpm * wt) / total_time if total_time > 0 else 0.0\n                new_candidates.append((-eff, -dpm, -wt, k))\n        new_candidates.sort()\n        for cand in new_candidates:\n            actions.append((\"new\", cand[3]))\n        if not actions:\n            actions.append((\"new\", ctx.gene_type))\n        return actions\n\n    total_count = 0\n    total_count_sq = 0\n    total_hours = 0.0\n    total_hours_sq = 0.0\n    for r in robots:\n        total_count += r.count\n        total_count_sq += r.count * r.count\n        total_hours += r.hours\n        total_hours_sq += r.hours * r.hours\n    avg_duty = total_hours / total_count if total_count > 0 else 10.0\n    if avg_duty <= 0:\n        avg_duty = 10.0\n\n    def get_wt(r):\n        p = ctx.types[r.type]\n        return p.get('work_time', 0.0) if p is not None else 0.0\n\n    scores = []\n    for r in ctx.available:\n        wt = get_wt(r)\n        new_count = r.count + 1\n        new_hours = r.hours + wt\n        new_total_count = total_count + 1\n        new_total_count_sq = total_count_sq - r.count * r.count + new_count * new_count\n        var_count = new_total_count_sq / n - (new_total_count / n) ** 2\n        new_total_hours = total_hours + wt\n        new_total_hours_sq = total_hours_sq - r.hours * r.hours + new_hours * new_hours\n        var_hours = new_total_hours_sq / n - (new_total_hours / n) ** 2\n        score = var_count + var_hours / (avg_duty * avg_duty)\n        if r.first_maint is None:\n            dl = r.duties_left if r.duties_left > 0 else 0.1\n            score += 0.5 / (dl + 0.1)\n        scores.append((score, r))\n    scores.sort(key=lambda x: x[0])\n    for _, r in scores:\n        actions.append((\"reuse\", r))\n\n    new_candidates = []\n    for k in range(len(ctx.types)):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            p = ctx.types[k]\n            single = p.get('single_work_time', 1.0) or 1.0\n            cont = p.get('continue_max_work', 1.0) or 1.0\n            wt = p.get('work_time', 0.0) or 0.0\n            out = p.get('out_travel_time', 0.0) or 0.0\n            ret = p.get('return_travel_time', 0.0) or 0.0\n            ch = p.get('charge_time', 0.0) or 0.0\n            maint = p.get('maintenance_time', 0.0) or 0.0\n            dpm = cont / single if single > 0 else 1.0\n            cycle = out + wt + ret + ch\n            total_time = dpm * cycle + maint\n            eff = (dpm * wt) / total_time if total_time > 0 else 0.0\n            new_candidates.append((-eff, -dpm, -wt, k))\n    new_candidates.sort()\n    for cand in new_candidates:\n        actions.append((\"new\", cand[3]))\n\n    if not actions:\n        actions.append((\"new\", ctx.gene_type))\n    return actions\n",
+   "objective": -0.7487,
+   "score": 0.7487023376301314,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7949,
+     "vs_default": -0.0113,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7623,
+     "vs_default": -0.0316,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 22.82,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e3",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "A balance-aware rule that prioritizes available robots by work-time fit, count, hours, and remaining budget, while ordering new robot types by minimizing overshoot and maximizing total duty hours before maintenance.",
+   "code": "def rule(ctx):\n    actions = []\n    if ctx.available:\n        best_r = ctx.available[0]\n        best_score = None\n        for r in ctx.available:\n            wt = ctx.types[r.type]['work_time']\n            overshoot = max(0, wt - ctx.remaining)\n            score = (1 if overshoot > 0 else 0, overshoot, r.count, r.hours, -r.budget, -wt)\n            if best_score is None or score < best_score:\n                best_score = score\n                best_r = r\n        actions.append((\"reuse\", best_r))\n        for r in ctx.available:\n            if r is not best_r:\n                actions.append((\"reuse\", r))\n    else:\n        allowed = []\n        for k in range(len(ctx.types)):\n            if ctx.types[k] is not None and ctx.left[k] > 0:\n                typ = ctx.types[k]\n                wt = typ['work_time']\n                overshoot = max(0, wt - ctx.remaining)\n                total_duty = (typ['continue_max_work'] / max(1, typ['single_work_time'])) * wt\n                score = (1 if overshoot > 0 else 0, overshoot, -total_duty, -wt, typ['maintenance_time'], typ['charge_time'])\n                allowed.append((score, k))\n        allowed.sort()\n        if allowed:\n            for _, k in allowed:\n                actions.append((\"new\", k))\n        else:\n            actions.append((\"new\", ctx.gene_type))\n    return actions\n",
+   "objective": -0.68718,
+   "score": 0.6871765116775319,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7054,
+     "vs_default": -0.1008,
+     "rule_only_extra_resources": 1.6,
+     "rule_only_imbalance": 26.76,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.6671,
+     "vs_default": -0.1268,
+     "rule_only_extra_resources": 3.8,
+     "rule_only_imbalance": 35.44,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 2.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e4",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Use existing available robots first, ranked by a balance of duty count and hours with maintenance risk prioritized when capacity is tight; when forced to open a new robot, choose the type that maximizes long-term duty availability accounting for maintenance and charging.",
+   "code": "def rule(ctx):\n    def type_score(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return -1e9\n        work = p['work_time']\n        out = p['out_travel_time']\n        ret = p['return_travel_time']\n        charge = p['charge_time']\n        maint = p['maintenance_time']\n        cmax = p['continue_max_work']\n        cycle = work + out + ret + charge\n        if cycle <= 0:\n            cycle = 1\n        duty_frac = work / cycle\n        if duty_frac <= 0:\n            return -1e9\n        time_for_cmax = cmax / duty_frac\n        total_period = time_for_cmax + maint\n        if total_period <= 0:\n            return duty_frac\n        return cmax / total_period\n\n    best_type = ctx.gene_type\n    best_score = -1e9\n    for k in range(len(ctx.types)):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            sc = type_score(k)\n            if sc > best_score + 1e-12 or (abs(sc - best_score) <= 1e-12 and k == ctx.gene_type):\n                best_score = sc\n                best_type = k\n\n    avail = ctx.available\n    if not avail:\n        return [(\"new\", best_type)]\n\n    tight = ctx.capacity < ctx.remaining\n\n    def robot_key(r):\n        risk = 0 if r.duties_left > 1 else 1\n        if tight:\n            return (risk, -r.budget, r.count, r.hours, r.idx)\n        else:\n            return (r.count, r.hours, -r.budget, -r.duties_left, r.idx)\n\n    sorted_avail = sorted(avail, key=robot_key)\n    actions = [(\"reuse\", r) for r in sorted_avail]\n\n    type_options = []\n    for k in range(len(ctx.types)):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            type_options.append(k)\n    type_options.sort(key=lambda k: (-type_score(k), 0 if k == ctx.gene_type else 1, k))\n    for k in type_options:\n        actions.append((\"new\", k))\n\n    return actions\n",
+   "objective": -0.74873,
+   "score": 0.7487336246838263,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7951,
+     "vs_default": -0.0112,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7622,
+     "vs_default": -0.0317,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 22.99,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e5",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Balance existing robots by a composite score of duty count, duty hours, remaining maintenance budget, and first-maintenance status; order new robot types by cycle and maintenance cost while preferring already-opened and gene types.",
+   "code": "def rule(ctx):\n    def type_cost(k):\n        d = ctx.types[k]\n        if d is None:\n            return 1e9\n        wt = max(1.0, d.get(\"work_time\", 10.0))\n        out = d.get(\"out_travel_time\", 0.0)\n        ret = d.get(\"return_travel_time\", 0.0)\n        ch = d.get(\"charge_time\", 0.0)\n        mt = d.get(\"maintenance_time\", 0.0)\n        sw = max(1e-6, d.get(\"single_work_time\", wt))\n        cm = max(1e-6, d.get(\"continue_max_work\", sw))\n        duties = cm / sw\n        cycle_cost = (out + ret + ch) / wt\n        maint_cost = mt / max(1.0, duties)\n        return cycle_cost + 0.5 * maint_cost\n\n    opened = {}\n    for r in ctx.robots:\n        opened[r.type] = opened.get(r.type, 0) + 1\n\n    avail = list(ctx.available)\n\n    def robot_score(r):\n        d = ctx.types[r.type]\n        wt = max(1.0, d.get(\"work_time\", 10.0)) if d else 10.0\n        s = r.count + 0.1 * r.hours\n        s -= 0.15 * r.duties_left\n        if r.first_maint is None:\n            s -= 0.05\n        s += 1e-4 * r.idx\n        return s\n\n    avail.sort(key=robot_score)\n    actions = [(\"reuse\", r) for r in avail]\n\n    candidates = []\n    for k, d in enumerate(ctx.types):\n        if d is None:\n            continue\n        if ctx.left[k] <= 0:\n            continue\n        cost = type_cost(k)\n        if opened.get(k, 0) > 0:\n            cost -= 0.2\n        if k == ctx.gene_type:\n            cost -= 0.1\n        cost -= 0.001 * ctx.left[k]\n        candidates.append((cost, k))\n\n    candidates.sort()\n    for _, k in candidates:\n        actions.append((\"new\", k))\n\n    if not candidates:\n        actions.append((\"new\", ctx.gene_type))\n\n    return actions\n",
+   "objective": -0.72122,
+   "score": 0.7212212383636751,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7943,
+     "vs_default": -0.0119,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.6804,
+     "vs_default": -0.1135,
+     "rule_only_extra_resources": 3.4,
+     "rule_only_imbalance": 27.24,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 2.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e6",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Reuse available robots in ascending duty count (then descending remaining budget) and otherwise open a new robot of the gene-chosen type.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e7",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Order available robots by a composite score of projected duty count and duty hours (with tie-breakers favoring more remaining maintenance budget), and order new robot types by larger maintenance-cycle work budget, shorter maintenance, and longer duty length.",
+   "code": "def rule(ctx):\n    actions = []\n    if ctx.available:\n        best = None\n        best_key = None\n        for r in ctx.available:\n            p = ctx.types[r.type]\n            wt = p[\"work_time\"] if p is not None else 10\n            s = 10 * (r.count + 1) + (r.hours + wt)\n            key = (s, -r.duties_left, r.idx)\n            if best is None or key < best_key:\n                best = r\n                best_key = key\n        actions.append((\"reuse\", best))\n        for r in ctx.available:\n            if r is not best:\n                actions.append((\"reuse\", r))\n    candidates = []\n    for k in range(len(ctx.types)):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            p = ctx.types[k]\n            key = (-p[\"continue_max_work\"], p[\"maintenance_time\"], -p[\"work_time\"], -ctx.left[k])\n            candidates.append((key, k))\n    candidates.sort(key=lambda x: x[0])\n    for _, k in candidates:\n        actions.append((\"new\", k))\n    return actions\n",
+   "objective": -0.68714,
+   "score": 0.6871388578668366,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7045,
+     "vs_default": -0.1018,
+     "rule_only_extra_resources": 1.6,
+     "rule_only_imbalance": 26.76,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.668,
+     "vs_default": -0.1259,
+     "rule_only_extra_resources": 3.4,
+     "rule_only_imbalance": 29.51,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 2.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e8",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Prefer reusing the available robot with the fewest completed duties, breaking ties by the most remaining work budget, and open a new robot of the genome-specified type when no existing robot is available.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e9",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Reuse the available robot with the lowest duty count (ties broken by highest remaining budget), and if none is available, open a new robot of the genome-selected type.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e10",
+   "op": "e2",
+   "parents": [
+    "e4",
+    "e4"
+   ],
+   "algorithm": "Always use the decoder’s available-order robot to minimize duty count with remaining budget as tie-breaker, and fall back to the genome-preferred new type only when none are available.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e11",
+   "op": "m1",
+   "parents": [
+    "e6"
+   ],
+   "algorithm": "Use a lexicographic balance of duty count, duty hours, absence of first maintenance, and remaining duties before maintenance for reusing robots, and order new types by remaining-horizon fit, gene type, waste, and maintenance efficiency.",
+   "code": "def rule(ctx):\n    def avail_key(r):\n        return (r.count, r.hours, r.first_maint is not None, -r.duties_left, r.ready, r.idx)\n    sorted_avail = sorted(ctx.available, key=avail_key)\n    actions = [(\"reuse\", r) for r in sorted_avail]\n    remaining = ctx.remaining\n    if remaining < 0:\n        remaining = 0\n    candidates = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            continue\n        wt = p[\"work_time\"]\n        cmw = p[\"continue_max_work\"]\n        mt = p[\"maintenance_time\"]\n        ct = p[\"charge_time\"]\n        if remaining > 0 and wt > remaining:\n            fit_penalty = 1\n        else:\n            fit_penalty = 0\n        if remaining > 0 and wt > 0 and wt <= remaining:\n            waste = remaining % wt\n        else:\n            waste = 0\n        denom = mt + ct + 1.0\n        efficiency = cmw / denom if denom > 0 else cmw\n        gene_penalty = 0 if k == ctx.gene_type else 1\n        key = (fit_penalty, gene_penalty, waste, -efficiency, k)\n        candidates.append((key, k))\n    candidates.sort()\n    for _, k in candidates:\n        actions.append((\"new\", k))\n    if not actions:\n        actions.append((\"new\", ctx.gene_type))\n    return actions\n",
+   "objective": -0.76222,
+   "score": 0.7622179742998529,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8038,
+     "vs_default": -0.0024,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e12",
+   "op": "m2",
+   "parents": [
+    "e11"
+   ],
+   "algorithm": "优先复用出勤次数最少、并列时剩余工时最多的可用机器人；无可用机器人时新开基因指定类型的机器人。",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e13",
+   "op": "e2",
+   "parents": [
+    "e4",
+    "e6"
+   ],
+   "algorithm": "Use a soft, capacity-adjusted composite score combining maintenance-trigger risk, count-and-hour fairness, projected first-maintenance alignment, and remaining maintenance runway for existing robots, while ranking new robot types by whether they avoid maintenance before the horizon and by amortized travel-charging-maintenance overhead.",
+   "code": "def rule(ctx):\n    robots = ctx.robots\n    n_robots = len(robots)\n    total_count = 0\n    total_hours = 0.0\n    for r in robots:\n        total_count += r.count\n        total_hours += r.hours\n\n    if n_robots > 0:\n        avg_count = total_count / float(n_robots)\n        avg_hours = total_hours / float(n_robots)\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    if total_count > 0:\n        avg_duty = total_hours / float(total_count)\n    else:\n        avg_duty = 10.0\n    if avg_duty < 1e-9:\n        avg_duty = 10.0\n\n    tight = ctx.capacity < ctx.remaining\n    risk_weight = 1.05 if tight else 0.55\n\n    def robot_key(r):\n        p = ctx.types[r.type]\n        if p is None:\n            cycle = 10.0\n            maint = 48.0\n        else:\n            cycle = p['work_time'] + p['out_travel_time'] + p['return_travel_time'] + p['charge_time']\n            maint = p['maintenance_time']\n        if cycle <= 1e-9:\n            cycle = 1.0\n\n        if r.duties_left > 1:\n            risk = 0.0\n        else:\n            left = r.duties_left if r.duties_left > 0 else 1\n            risk = risk_weight * (1.0 + maint / (maint + cycle * left))\n\n        fair = (r.count - avg_count) + 0.55 * ((r.hours - avg_hours) / avg_duty)\n\n        if r.first_maint is None:\n            left = r.duties_left if r.duties_left > 0 else 1\n            est = ctx.t + left * cycle\n            maint_bias = -0.25 * est / (ctx.T + 1.0)\n        else:\n            maint_bias = 0.0\n\n        runway = -0.02 * r.duties_left\n        return (risk + fair + maint_bias + runway, -r.duties_left, r.idx)\n\n    sorted_avail = sorted(ctx.available, key=robot_key)\n\n    def type_key(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (9.0, 1e9, 1e9, k)\n\n        duty = p['work_time']\n        if duty <= 1e-9:\n            duty = 1.0\n\n        swork = p['single_work_time']\n        if swork <= 1e-9:\n            swork = 1.0\n\n        duties_cycle = p['continue_max_work'] / swork\n        if duties_cycle < 1.0:\n            duties_cycle = 1.0\n\n        cycle = duty + p['out_travel_time'] + p['return_travel_time'] + p['charge_time']\n        if cycle <= 1e-9:\n            cycle = 1.0\n\n        time_to_maint = duties_cycle * cycle\n        maint_before = 0.0 if time_to_maint >= ctx.remaining else 1.0\n\n        overhead = (p['out_travel_time'] + p['return_travel_time'] + p['charge_time']) / duty\n        overhead += p['maintenance_time'] / (duties_cycle * duty)\n\n        gene_pen = 0.0 if k == ctx.gene_type else 0.05\n        return (maint_before, overhead + gene_pen, -time_to_maint, k)\n\n    type_options = []\n    for k in range(len(ctx.types)):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            type_options.append(k)\n    type_options.sort(key=type_key)\n    if not type_options:\n        type_options = [ctx.gene_type]\n\n    actions = [(\"reuse\", r) for r in sorted_avail]\n    for k in type_options:\n        actions.append((\"new\", k))\n    return actions\n",
+   "objective": -0.74882,
+   "score": 0.7488159449910909,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7953,
+     "vs_default": -0.0109,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7622,
+     "vs_default": -0.0317,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 22.99,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e14",
+   "op": "e2",
+   "parents": [
+    "e4",
+    "e4"
+   ],
+   "algorithm": "The common backbone is to reuse an available robot chosen for balanced workload and maintenance safety, falling back to a new robot of a promising type; the new rule simply reuses ctx.available in its given balance order and otherwise opens ctx.gene_type.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e15",
+   "op": "m1",
+   "parents": [
+    "e13"
+   ],
+   "algorithm": "Favor available robots with the fewest completed duties and, on ties, the most remaining work budget; when none can go, open the gene-specified robot type.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e16",
+   "op": "m2",
+   "parents": [
+    "e11"
+   ],
+   "algorithm": "Reuse available robots in the decoder’s default least-duty/most-budget order, then open the gene-selected new robot type when no robot is available.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e17",
+   "op": "m1",
+   "parents": [
+    "e2"
+   ],
+   "algorithm": "优先按可用机器人的默认最少出勤顺序复用，并在没有更优复用或需要时新开基因指定的机器人类型。",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e18",
+   "op": "e2",
+   "parents": [
+    "e4",
+    "e13"
+   ],
+   "algorithm": "Use the decoder’s presorted available robots directly, preferring the least-used robot with the most remaining budget, and open the genome-chosen type only when no robot is available.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e19",
+   "op": "m2",
+   "parents": [
+    "e6"
+   ],
+   "algorithm": "Balance robots by fewest duties, fit to remaining horizon, lowest duty hours, and largest remaining maintenance budget; for new robots prefer the gene type, then types with low maintenance/cycle cost and high duties per maintenance.",
+   "code": "def rule(ctx):\n    def rkey(r):\n        p = ctx.types[r.type]\n        wt = p[\"work_time\"] if p is not None else 0\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0\n        return (r.count, over, r.hours, -r.budget, r.idx)\n\n    actions = [(\"reuse\", r) for r in sorted(ctx.available, key=rkey)]\n\n    def tkey(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (1, 0, 0, 0, 0, 0, k)\n        wt = p[\"work_time\"]\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0\n        dpm = p[\"continue_max_work\"] / max(p[\"single_work_time\"], 1e-9)\n        cycle = (p[\"out_travel_time\"] + p[\"return_travel_time\"] + p[\"charge_time\"]) / max(wt, 1e-9)\n        maint = p[\"maintenance_time\"] / max(dpm, 1e-9)\n        return (over, maint, cycle, -dpm, -wt, -ctx.left[k], k)\n\n    order = []\n    gt = ctx.gene_type\n    if 0 <= gt < len(ctx.types):\n        p = ctx.types[gt]\n        if p is not None and ctx.left[gt] > 0:\n            order.append(gt)\n\n    for k in sorted(range(len(ctx.types)), key=tkey):\n        if k not in order:\n            p = ctx.types[k]\n            if p is not None and ctx.left[k] > 0:\n                order.append(k)\n\n    if order:\n        actions += [(\"new\", k) for k in order]\n    else:\n        actions.append((\"new\", gt))\n\n    return actions\n",
+   "objective": -0.76281,
+   "score": 0.7628120225577536,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8056,
+     "vs_default": -0.0007,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e20",
+   "op": "m1",
+   "parents": [
+    "e13"
+   ],
+   "algorithm": "A capacity-aware soft lexicographic scheduler that ranks available robots by normalized workload plus maintenance-trigger pressure, and ranks new robot types by horizon survival with lowest amortized travel-charge-maintenance overhead and a small gene-type bias.",
+   "code": "def rule(ctx):\n    robots = ctx.robots\n    n_robots = len(robots)\n    total_count = 0\n    total_hours = 0.0\n    for r in robots:\n        total_count += r.count\n        total_hours += r.hours\n\n    if n_robots > 0:\n        avg_count = total_count / float(n_robots)\n        avg_hours = total_hours / float(n_robots)\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    if total_count > 0:\n        avg_duty = total_hours / float(total_count)\n    else:\n        avg_duty = 10.0\n    if avg_duty < 1e-9:\n        avg_duty = 10.0\n\n    tight = ctx.capacity < ctx.remaining\n\n    def robot_key(r):\n        p = ctx.types[r.type]\n        if p is None:\n            cycle = 10.0\n        else:\n            cycle = p['work_time'] + p['out_travel_time'] + p['return_travel_time'] + p['charge_time']\n        if cycle <= 1e-9:\n            cycle = 1.0\n\n        fair = (r.count - avg_count) + 0.55 * ((r.hours - avg_hours) / avg_duty)\n\n        if r.duties_left <= 1:\n            risk = 2.0 if tight else 0.9\n        elif r.duties_left == 2:\n            risk = 0.35 if tight else 0.18\n        else:\n            risk = 0.0\n\n        runway = -0.025 * (r.duties_left if r.duties_left > 0 else 0)\n        score = fair + risk + runway\n        return (score, -r.duties_left, r.idx)\n\n    sorted_avail = sorted(ctx.available, key=robot_key)\n\n    def type_key(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (9.0, 1e9, 1e9, k)\n\n        duty = p['work_time']\n        if duty <= 1e-9:\n            duty = 1.0\n\n        swork = p['single_work_time']\n        if swork <= 1e-9:\n            swork = 1.0\n\n        duties_cycle = p['continue_max_work'] / swork\n        if duties_cycle < 1.0:\n            duties_cycle = 1.0\n\n        cycle = duty + p['out_travel_time'] + p['return_travel_time'] + p['charge_time']\n        if cycle <= 1e-9:\n            cycle = 1.0\n\n        time_to_maint = duties_cycle * cycle\n        survival = 0.0 if time_to_maint >= ctx.remaining else 1.0\n\n        overhead = (p['out_travel_time'] + p['return_travel_time'] + p['charge_time']) / duty\n        overhead += p['maintenance_time'] / (duties_cycle * duty)\n\n        gene_pen = 0.0 if k == ctx.gene_type else 0.03\n        return (survival, overhead + gene_pen, -time_to_maint, k)\n\n    type_options = []\n    for k in range(len(ctx.types)):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            type_options.append(k)\n    type_options.sort(key=type_key)\n    if not type_options:\n        type_options = [ctx.gene_type]\n\n    actions = [(\"reuse\", r) for r in sorted_avail]\n    for k in type_options:\n        actions.append((\"new\", k))\n    return actions\n",
+   "objective": -0.74848,
+   "score": 0.7484849122650007,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7943,
+     "vs_default": -0.0119,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7622,
+     "vs_default": -0.0317,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 22.99,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e21",
+   "op": "m1",
+   "parents": [
+    "e4"
+   ],
+   "algorithm": "使用“维护安全优先、负载归一化平衡”的可用机器人排序，并在容量紧张时前置低维护风险机器人；新开机型按每维护周期可提供 duty 次数与充电/维护惩罚的综合得分选择。",
+   "code": "def rule(ctx):\n    def type_value(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return -1e18\n        w = p['work_time']\n        out = p['out_travel_time']\n        ret = p['return_travel_time']\n        ch = p['charge_time']\n        mt = p['maintenance_time']\n        cmax = p['continue_max_work']\n        sw = p['single_work_time']\n        if sw <= 0 or w <= 0:\n            return -1e18\n        slots = cmax / sw\n        cycle = w + out + ret + ch\n        if cycle < 1:\n            cycle = 1\n        duty_rate = w / cycle\n        maint_penalty = mt / (cmax + mt + 1)\n        return slots * duty_rate * (1.0 - 0.35 * maint_penalty) + ctx.left[k] * 0.01\n\n    best_type = ctx.gene_type\n    if best_type is None or ctx.types[best_type] is None or ctx.left[best_type] <= 0:\n        best_type = None\n\n    best_val = -1e18\n    ntypes = len(ctx.types)\n    for k in range(ntypes):\n        val = type_value(k)\n        if val > best_val + 1e-12 or (abs(val - best_val) <= 1e-12 and k == ctx.gene_type):\n            best_val = val\n            best_type = k\n\n    if best_type is None:\n        for k in range(ntypes):\n            if ctx.types[k] is not None:\n                best_type = k\n                break\n    if best_type is None:\n        best_type = ctx.gene_type\n\n    avail = ctx.available\n    if not avail:\n        order = []\n        for k in range(ntypes):\n            if ctx.types[k] is not None and ctx.left[k] > 0:\n                order.append(k)\n        order.sort(key=lambda k: (-type_value(k), 0 if k == ctx.gene_type else 1, k))\n        if not order:\n            return [(\"new\", best_type)]\n        return [(\"new\", k) for k in order]\n\n    tight = ctx.capacity < ctx.remaining\n\n    def robo_key(r):\n        p = ctx.types[r.type]\n        w = p['work_time'] if p is not None else 1.0\n        if w <= 0:\n            w = 1.0\n        load = r.count + (r.hours / w) * 0.35\n        maint_risk = 1 if r.duties_left <= 1 else 0\n        budget_short = -r.budget\n        if tight:\n            return (maint_risk, -r.duties_left, load, budget_short, r.ready, r.idx)\n        else:\n            return (maint_risk, load, budget_short, -r.duties_left, r.ready, r.idx)\n\n    sorted_avail = sorted(avail, key=robo_key)\n    actions = [(\"reuse\", r) for r in sorted_avail]\n\n    type_order = []\n    for k in range(ntypes):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            type_order.append(k)\n    type_order.sort(key=lambda k: (-type_value(k), 0 if k == ctx.gene_type else 1, k))\n    for k in type_order:\n        actions.append((\"new\", k))\n    if not type_order:\n        actions.append((\"new\", best_type))\n    return actions\n",
+   "objective": -0.65778,
+   "score": 0.6577827608357522,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.7151,
+     "vs_default": 0.0261,
+     "rule_only_extra_resources": 0.2,
+     "rule_only_imbalance": 20.09,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.6931,
+     "vs_default": -0.1131,
+     "rule_only_extra_resources": 1.2,
+     "rule_only_imbalance": 22.5,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.2,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.5651,
+     "vs_default": -0.2288,
+     "rule_only_extra_resources": 4.4,
+     "rule_only_imbalance": 29.64,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 3.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e22",
+   "op": "e2",
+   "parents": [
+    "e4",
+    "e4"
+   ],
+   "algorithm": "Dispatch the available robot with the fewest prior duties, breaking ties by most remaining budget, and if none is available, directly open the genome-chosen robot type without separate type scoring or capacity-risk switching.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e23",
+   "op": "m2",
+   "parents": [
+    "e19"
+   ],
+   "algorithm": "Balance available robots by fewest duties, highest remaining maintenance budget, lower duty hours, and best horizon fit, while ordering new robots by smallest horizon overrun, lowest maintenance and cycle overhead, highest duties per maintenance, larger remaining type limit, and preferring the gene type only when it fits.",
+   "code": "def rule(ctx):\n    def reuse_key(r):\n        p = ctx.types[r.type]\n        wt = p[\"work_time\"] if p is not None else 0\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0\n        return (r.count, -r.budget, r.hours, over, r.idx)\n\n    actions = [(\"reuse\", r) for r in sorted(ctx.available, key=reuse_key)]\n\n    def new_key(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (1, float('inf'), float('inf'), float('inf'), float('inf'), k)\n        wt = p[\"work_time\"]\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0\n        dpm = p[\"continue_max_work\"] / max(p[\"single_work_time\"], 1e-9)\n        cycle = (p[\"out_travel_time\"] + p[\"return_travel_time\"] + p[\"charge_time\"]) / max(wt, 1e-9)\n        maint = p[\"maintenance_time\"] / max(dpm, 1e-9)\n        return (over, maint, cycle, -dpm, -ctx.left[k], k)\n\n    order = []\n    gt = ctx.gene_type\n    if 0 <= gt < len(ctx.types):\n        p = ctx.types[gt]\n        if p is not None and ctx.left[gt] > 0:\n            wt = p[\"work_time\"]\n            if wt <= ctx.remaining:\n                order.append(gt)\n\n    for k in sorted(range(len(ctx.types)), key=new_key):\n        if k not in order:\n            p = ctx.types[k]\n            if p is not None and ctx.left[k] > 0:\n                order.append(k)\n\n    if order:\n        actions += [(\"new\", k) for k in order]\n    else:\n        actions.append((\"new\", gt))\n    return actions\n",
+   "objective": -0.76281,
+   "score": 0.7628120225577536,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8056,
+     "vs_default": -0.0007,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e24",
+   "op": "e1",
+   "parents": [
+    "e11",
+    "e4"
+   ],
+   "algorithm": "Prioritize available robots in the decoder's pre-sorted order (least duties, then most remaining budget) and open the gene-specified type when none are available.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e25",
+   "op": "e1",
+   "parents": [
+    "e11",
+    "e11"
+   ],
+   "algorithm": "Reuse available robots in the pre-sorted least-duty/most-remaining-budget order, and fall back to opening a new robot of the gene-selected type.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e26",
+   "op": "e2",
+   "parents": [
+    "e19",
+    "e19"
+   ],
+   "algorithm": "The new algorithm simplifies this to always take the decoder’s pre-sorted least-loaded available robot and otherwise directly open the genome-chosen type as the only expansion action.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e27",
+   "op": "e2",
+   "parents": [
+    "e13",
+    "e11"
+   ],
+   "algorithm": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e28",
+   "op": "e1",
+   "parents": [
+    "e6",
+    "e6"
+   ],
+   "algorithm": "Maintenance-aware horizon-fit rule: score available robots by duty-count and duty-hour balance, remaining maintenance budget, first-maintenance status, and remaining-horizon fit, then order new types by capacity-per-resource and horizon fit with a gene-type bonus.",
+   "code": "def rule(ctx):\n    def get(p, key, default):\n        if p is None:\n            return default\n        return p.get(key, default)\n\n    def cycle_duties(p):\n        work = get(p, \"work_time\", 10.0)\n        single = get(p, \"single_work_time\", work)\n        cont = get(p, \"continue_max_work\", 1000.0)\n        if single <= 1e-9:\n            return 10.0\n        return max(1.0, cont / single)\n\n    robots = ctx.robots\n    n_all = len(robots)\n    if n_all > 0:\n        sum_count = 0\n        sum_hours = 0.0\n        for r in robots:\n            sum_count += r.count\n            sum_hours += r.hours\n        mean_count = sum_count / n_all\n        mean_hours = sum_hours / n_all\n    else:\n        mean_count = 0.0\n        mean_hours = 0.0\n\n    remaining = ctx.remaining\n\n    def avail_key(r):\n        p = ctx.types[r.type] if r.type < len(ctx.types) else None\n        work = get(p, \"work_time\", 10.0)\n        cd = cycle_duties(p)\n\n        if work > remaining + 1e-9:\n            fit = (work - remaining) * 50.0\n        else:\n            fit = (-0.05 * work + (remaining % work) * 0.1) if work > 0 else 0.0\n\n        balance = 3.0 * (r.count - mean_count) + 0.2 * (r.hours - mean_hours)\n        ratio = r.duties_left / cd if cd > 0 else 0.0\n        maint = -4.0 * ratio\n        if r.duties_left <= 1:\n            maint += 2.0\n\n        fm = -0.1 if r.first_maint is None else 0.1\n        score = balance + maint + fit + fm\n        return (score, r.count, -r.duties_left, r.hours, r.idx)\n\n    ordered = sorted(ctx.available, key=avail_key)\n\n    def type_key(k):\n        p = ctx.types[k] if k < len(ctx.types) else None\n        work = get(p, \"work_time\", 10.0)\n        single = get(p, \"single_work_time\", work)\n        cont = get(p, \"continue_max_work\", 1000.0)\n        charge = get(p, \"charge_time\", 0.0)\n        maint_time = get(p, \"maintenance_time\", 0.0)\n        out = get(p, \"out_travel_time\", 0.0)\n        ret = get(p, \"return_travel_time\", 0.0)\n        cd = cycle_duties(p)\n\n        if work > remaining + 1e-9:\n            fit = (work - remaining) * 50.0\n        else:\n            fit = (-0.1 * work + (remaining % work) * 0.2) if work > 0 else 0.0\n\n        cap_hours = cd * work\n        eff = -cap_hours / 100.0 + charge / 20.0 + maint_time / 200.0\n        left = ctx.left[k] if k < len(ctx.left) else 0\n        limit_bonus = -0.1 * left\n        gene_bonus = -1.0 if k == ctx.gene_type else 0.0\n        score = fit + eff + limit_bonus + gene_bonus\n        return (score, k)\n\n    new_types = []\n    for k, p in enumerate(ctx.types):\n        if p is not None and k < len(ctx.left) and ctx.left[k] > 0:\n            new_types.append(k)\n    new_types.sort(key=type_key)\n\n    actions = [(\"reuse\", r) for r in ordered]\n    actions.extend((\"new\", k) for k in new_types)\n    if not actions:\n        actions = [(\"new\", ctx.gene_type)]\n    return actions\n",
+   "objective": -0.72939,
+   "score": 0.7293929958411882,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8198,
+     "vs_default": 0.0136,
+     "rule_only_extra_resources": 1.6,
+     "rule_only_imbalance": 40.0,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.6794,
+     "vs_default": -0.1145,
+     "rule_only_extra_resources": 3.6,
+     "rule_only_imbalance": 29.62,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 2.6,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e29",
+   "op": "e2",
+   "parents": [
+    "e4",
+    "e19"
+   ],
+   "algorithm": "Trust the decoder’s pre-sorted available robots for reuse, and fall back to the gene-chosen type for a new robot without rescoring alternatives.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e30",
+   "op": "e2",
+   "parents": [
+    "e6",
+    "e6"
+   ],
+   "algorithm": "Whereas the shared rule lexicographically reuses the least-loaded available robot and then opens the gene-chosen type, score available robots by a continuous count/hour balance plus a maintenance-outage penalty, then fall back to ordered new types.",
+   "code": "def rule(ctx):\n    n_all = len(ctx.robots)\n    total_count = 0\n    total_hours = 0.0\n    if n_all:\n        for r in ctx.robots:\n            total_count += r.count\n            total_hours += r.hours\n        avg_count = total_count / float(n_all)\n        avg_hours = total_hours / float(n_all)\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    max_duty = 1.0\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is not None:\n            wt = p.get('work_time', 0.0)\n            if wt > max_duty:\n                max_duty = float(wt)\n\n    cap = ctx.capacity\n    slack = cap - ctx.remaining\n\n    def score(r):\n        p = ctx.types[r.type]\n        duty = float(p.get('work_time', 10.0)) if p is not None else 10.0\n        if n_all:\n            balance = (r.count - avg_count) + ((r.hours - avg_hours) / max_duty)\n        else:\n            balance = r.count + r.hours / max_duty\n        pen = 0.0\n        if r.duties_left <= 1:\n            maint_end = ctx.t + duty\n            if p is not None:\n                maint_end += float(p.get('out_travel_time', 0.0))\n                maint_end += float(p.get('return_travel_time', 0.0))\n                maint_end += float(p.get('maintenance_time', 0.0))\n            if maint_end < ctx.T:\n                if slack < duty:\n                    pen += 25.0\n                else:\n                    pen += 0.5\n            else:\n                pen -= 1.0\n        if slack < 0.0:\n            pen -= 0.2 * r.duties_left\n        return balance + pen, -r.budget, r.idx\n\n    ordered = sorted(list(ctx.available), key=score)\n    actions = [(\"reuse\", r) for r in ordered]\n\n    type_scores = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is not None and ctx.left[k] > 0:\n            cm = float(p.get('continue_max_work', 0.0))\n            mt = float(p.get('maintenance_time', 0.0))\n            wt = float(p.get('work_time', 0.0))\n            fit = 0.0\n            if wt > ctx.remaining:\n                fit = 1000.0\n            type_scores.append((fit - cm * 10.0 + mt * 0.1, k))\n    type_scores.sort()\n    new_order = [k for sc, k in type_scores]\n    gt = ctx.gene_type\n    if gt is not None and gt >= 0 and gt < len(ctx.types) and ctx.types[gt] is not None and ctx.left[gt] > 0:\n        if gt in new_order:\n            new_order.remove(gt)\n        new_order.insert(0, gt)\n    for k in new_order:\n        actions.append((\"new\", k))\n    return actions\n",
+   "objective": -0.7564,
+   "score": 0.7563950026238051,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7863,
+     "vs_default": -0.0199,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.2,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e31",
+   "op": "e2",
+   "parents": [
+    "e11",
+    "e11"
+   ],
+   "algorithm": "Reuse all available robots in the decoder-provided order before opening the genome-chosen new robot type.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e32",
+   "op": "m2",
+   "parents": [
+    "e6"
+   ],
+   "algorithm": "Maintenance-aware balanced reuse: sort available robots by duty count ascending, then duties-left descending, then remaining budget descending; when new capacity is needed, order new robot types by duty hours per maintenance cycle and recovery time, otherwise prefer the gene type.",
+   "code": "def rule(ctx):\n    def rkey(r):\n        return (r.count, -r.duties_left, -r.budget, r.idx)\n    ans = [(\"reuse\", r) for r in sorted(ctx.available, key=rkey)]\n    gt = ctx.gene_type\n    valid = []\n    for k in range(len(ctx.types)):\n        if ctx.types[k] is not None and ctx.left[k] > 0:\n            valid.append(k)\n    def tkey(k):\n        p = ctx.types[k]\n        sw = p.get(\"single_work_time\", 1.0)\n        if sw is None or sw <= 0:\n            sw = 1.0\n        cm = p.get(\"continue_max_work\", 0.0)\n        mt = p.get(\"maintenance_time\", 0.0)\n        ct = p.get(\"charge_time\", 0.0)\n        ot = p.get(\"out_travel_time\", 0.0)\n        rt = p.get(\"return_travel_time\", 0.0)\n        wt = p.get(\"work_time\", 0.0)\n        cycle_hours = (cm / sw) * wt if wt > 0 else cm / sw\n        recovery = mt + ct + ot + rt\n        return (-cycle_hours, recovery, -wt, k)\n    if ctx.capacity < ctx.remaining:\n        valid.sort(key=tkey)\n    else:\n        def tkey_gene(k):\n            return (0 if k == gt else 1, tkey(k))\n        valid.sort(key=tkey_gene)\n    for k in valid:\n        ans.append((\"new\", k))\n    if not valid:\n        ans.append((\"new\", gt))\n    return ans\n",
+   "objective": -0.68717,
+   "score": 0.6871735877076027,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7087,
+     "vs_default": -0.0975,
+     "rule_only_extra_resources": 1.6,
+     "rule_only_imbalance": 26.76,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.6639,
+     "vs_default": -0.13,
+     "rule_only_extra_resources": 3.2,
+     "rule_only_imbalance": 25.04,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 2.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e33",
+   "op": "e2",
+   "parents": [
+    "e11",
+    "e6"
+   ],
+   "algorithm": "New algorithm: rank available robots by one scalar balance-pressure score and rank new types by one scalar remaining-horizon coverage-efficiency score.",
+   "code": "def rule(ctx):\n    robots = ctx.robots\n    n = len(robots)\n    if n > 0:\n        total_count = 0\n        total_hours = 0.0\n        for r in robots:\n            total_count += r.count\n            total_hours += r.hours\n        avg_count = total_count / float(n)\n        avg_hours = total_hours / float(n)\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    def avail_score(r):\n        p = ctx.types[r.type] if r.type < len(ctx.types) else None\n        wt = p[\"work_time\"] if p is not None else 10.0\n        if wt <= 0:\n            wt = 1.0\n\n        score = (r.count - avg_count) + 0.35 * ((r.hours - avg_hours) / wt)\n\n        cmw = p[\"continue_max_work\"] if p is not None else 1.0\n        sw = p[\"single_work_time\"] if p is not None else 1.0\n        if sw <= 0:\n            sw = 1.0\n        max_duties = cmw / sw if cmw > 0 else 1.0\n        if max_duties <= 0:\n            max_duties = 1.0\n\n        score -= 0.12 * (r.duties_left / max_duties)\n\n        if r.first_maint is not None:\n            score += 0.20\n\n        if r.ready is not None and ctx.t > r.ready:\n            score += 0.05 * ((ctx.t - r.ready) / (ctx.T + 1.0))\n\n        return (score, r.idx)\n\n    sorted_avail = sorted(ctx.available, key=avail_score)\n    actions = [(\"reuse\", r) for r in sorted_avail]\n\n    remaining = ctx.remaining\n    if remaining < 0:\n        remaining = 0\n\n    candidates = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            continue\n\n        wt = p[\"work_time\"]\n        sw = p[\"single_work_time\"]\n        cmw = p[\"continue_max_work\"]\n        mt = p[\"maintenance_time\"]\n        ct = p[\"charge_time\"]\n        ot = p[\"out_travel_time\"]\n        rt = p[\"return_travel_time\"]\n\n        if wt <= 0:\n            wt = 1.0\n        if sw <= 0:\n            sw = 1.0\n\n        duties_cycle = cmw / sw\n        if duties_cycle < 1.0:\n            duties_cycle = 1.0\n\n        overhead = mt + ct + ot + rt + 1.0\n        cycle_time = wt + ot + rt + ct + mt / duties_cycle\n        coverage = wt / cycle_time if cycle_time > 0 else 0.0\n\n        fit = 0 if remaining <= 0 or wt <= remaining else 1\n        waste = (remaining % wt) if remaining > 0 else 0.0\n        gene_bonus = 0 if k == ctx.gene_type else 1\n\n        key = (fit, -coverage, waste, gene_bonus, k)\n        candidates.append((key, k))\n\n    candidates.sort()\n    for _, k in candidates:\n        actions.append((\"new\", k))\n\n    if not actions:\n        actions.append((\"new\", ctx.gene_type))\n\n    return actions\n",
+   "objective": -0.74871,
+   "score": 0.7487096374759898,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7949,
+     "vs_default": -0.0113,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7623,
+     "vs_default": -0.0316,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 22.91,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e34",
+   "op": "m1",
+   "parents": [
+    "e6"
+   ],
+   "algorithm": "The modified rule sorts available robots by projected duty count, a first-maintenance risk penalty, projected duty hours, and remaining budget, then prefers the gene-chosen new type followed by other available types sorted by fit to the remaining horizon.",
+   "code": "def rule(ctx):\n    def robot_key(r):\n        p = ctx.types[r.type]\n        w = p[\"work_time\"]\n        pc = r.count + 1\n        ph = r.hours + w\n        risk = 1 if (r.first_maint is None and r.duties_left <= 1) else 0\n        return (pc, risk, ph, -r.duties_left, -r.budget, r.idx)\n\n    reuses = sorted(ctx.available, key=robot_key)\n\n    new_types = []\n    if ctx.gene_type is not None and 0 <= ctx.gene_type < len(ctx.types):\n        if ctx.types[ctx.gene_type] is not None and ctx.left[ctx.gene_type] > 0:\n            new_types.append(ctx.gene_type)\n\n    others = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            continue\n        if k == ctx.gene_type:\n            continue\n        w = p[\"work_time\"]\n        rem = ctx.remaining\n        if w <= rem:\n            fit = 0\n            overshoot = -w\n        else:\n            fit = 1\n            overshoot = w\n        others.append((fit, overshoot, p[\"maintenance_time\"], p[\"charge_time\"], k))\n    others.sort()\n    for item in others:\n        new_types.append(item[4])\n\n    if not new_types and ctx.gene_type is not None and 0 <= ctx.gene_type < len(ctx.types):\n        new_types.append(ctx.gene_type)\n\n    return [(\"reuse\", r) for r in reuses] + [(\"new\", k) for k in new_types]\n",
+   "objective": -0.76312,
+   "score": 0.7631157272580666,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8056,
+     "vs_default": -0.0007,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7948,
+     "vs_default": 0.0009,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e35",
+   "op": "e1",
+   "parents": [
+    "e30",
+    "e6"
+   ],
+   "algorithm": "Use a maintenance-phase-aware least-recently-used dispatch: rank available robots by phase-weighted idle time, post-duty count/hour balance, and maintenance-outage risk, then order new types by horizon coverage efficiency while promoting the valid gene type.",
+   "code": "def rule(ctx):\n    n_all = len(ctx.robots)\n    if n_all:\n        total_count = 0\n        total_hours = 0.0\n        for r in ctx.robots:\n            total_count += r.count\n            total_hours += r.hours\n        avg_count = total_count / float(n_all)\n        avg_hours = total_hours / float(n_all)\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    max_duty = 1.0\n    min_duty = 1000000000.0\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is not None:\n            wt = float(p.get('work_time', 0.0))\n            if wt > max_duty:\n                max_duty = wt\n            if wt > 0.0 and wt < min_duty:\n                min_duty = wt\n    if min_duty > 100000000.0:\n        min_duty = max_duty\n\n    cap = ctx.capacity\n    slack = cap - ctx.remaining\n    tight = slack < (0.6 * max_duty)\n    progress = ctx.t / max(1.0, float(ctx.T))\n\n    if progress < 0.25:\n        w_load = 0.55\n        w_idle = 1.10\n        w_maint = 0.35\n    elif progress < 0.75:\n        w_load = 1.00\n        w_idle = 0.55\n        w_maint = 0.75\n    else:\n        w_load = 1.35\n        w_idle = 0.25\n        w_maint = 1.25\n\n    def robot_key(r):\n        p = ctx.types[r.type] if r.type >= 0 and r.type < len(ctx.types) else None\n        if p is not None:\n            duty = float(p.get('work_time', 10.0))\n            out = float(p.get('out_travel_time', 0.0))\n            ret = float(p.get('return_travel_time', 0.0))\n            charge = float(p.get('charge_time', 0.0))\n            maint = float(p.get('maintenance_time', 0.0))\n        else:\n            duty = 10.0\n            out = 0.0\n            ret = 0.0\n            charge = 0.0\n            maint = 0.0\n\n        if n_all:\n            load = (r.count - avg_count) + ((r.hours + duty) - avg_hours) / max_duty\n        else:\n            load = r.count + (r.hours + duty) / max_duty\n\n        if r.last_end is None:\n            idle = 1.6\n        else:\n            idle = (ctx.t - r.last_end) / max(1.0, float(ctx.T))\n            if idle < 0.0:\n                idle = 0.0\n            if idle > 1.5:\n                idle = 1.5\n\n        maint_pen = 0.0\n        if r.duties_left <= 1:\n            maint_end = ctx.t + out + duty + ret + maint\n            if maint_end < ctx.T:\n                if tight:\n                    maint_pen = 3.0 + (ctx.T - maint_end) / max(1.0, ctx.remaining)\n                else:\n                    maint_pen = -0.35 - 0.35 * (ctx.T - maint_end) / max(1.0, ctx.T)\n            else:\n                if ctx.remaining > duty * 2.0:\n                    maint_pen = 2.0 + (maint_end - ctx.T) / max(1.0, ctx.remaining)\n                else:\n                    maint_pen = -2.0\n\n        fit_pen = 0.0\n        if duty > ctx.remaining + 1e-9:\n            fit_pen = 8.0 + (duty - ctx.remaining) / max(1.0, ctx.remaining)\n\n        fm_pen = 0.0\n        if r.first_maint is not None:\n            fm_pen = -0.05\n\n        score = w_load * load + w_maint * maint_pen + fit_pen + fm_pen - w_idle * idle\n        return (score, -r.budget, -idle, r.idx)\n\n    ordered = sorted(list(ctx.available), key=robot_key)\n    actions = [(\"reuse\", r) for r in ordered]\n\n    type_scores = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is not None and ctx.left[k] > 0:\n            duty = float(p.get('work_time', 10.0))\n            cm = float(p.get('continue_max_work', 1.0))\n            sw = float(p.get('single_work_time', duty))\n            if sw <= 0.0:\n                sw = max(1.0, duty)\n            out = float(p.get('out_travel_time', 0.0))\n            ret = float(p.get('return_travel_time', 0.0))\n            charge = float(p.get('charge_time', 0.0))\n            maint = float(p.get('maintenance_time', 0.0))\n\n            dpm = cm / max(1.0, sw)\n            if dpm < 1.0:\n                dpm = 1.0\n            cycle_time = dpm * (duty + out + ret + charge) + maint\n            efficiency = (dpm * duty) / max(1.0, cycle_time)\n\n            over = 0.0\n            if duty > ctx.remaining + 1e-9:\n                over = 50.0 + (duty - ctx.remaining) / max(1.0, ctx.remaining)\n\n            remainder_pen = 0.0\n            after = ctx.remaining - duty\n            if after > 0.0 and after < min_duty:\n                remainder_pen = 2.0 + (min_duty - after) / max(1.0, min_duty)\n\n            score = over + remainder_pen - 4.0 * efficiency + 0.02 * maint / max(1.0, cm)\n            type_scores.append((score, k))\n\n    type_scores.sort()\n    new_order = [k for sc, k in type_scores]\n\n    gt = ctx.gene_type\n    if gt is not None and gt >= 0 and gt < len(ctx.types) and ctx.types[gt] is not None and ctx.left[gt] > 0:\n        if gt in new_order:\n            new_order.remove(gt)\n        new_order.insert(0, gt)\n\n    if not new_order:\n        if gt is not None:\n            new_order.append(gt)\n        elif len(ctx.types) > 0:\n            new_order.append(0)\n\n    for k in new_order:\n        actions.append((\"new\", k))\n    return actions\n",
+   "objective": -0.76245,
+   "score": 0.762454007200351,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.78,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8081,
+     "vs_default": 0.0019,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7903,
+     "vs_default": -0.0036,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.95,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e36",
+   "op": "m2",
+   "parents": [
+    "e35"
+   ],
+   "algorithm": "优先复用默认排序下出勤最少且剩余预算最多的可用机器人，若无可用机器人则新开基因指定类型，以简单确定的方式偏向减少新开资源。",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e37",
+   "op": "m1",
+   "parents": [
+    "e34"
+   ],
+   "algorithm": "The rule scores each available robot by normalized projected duty count, projected duty hours, first-maintenance urgency, and horizon overshoot, then orders new robot types by the gene preference, horizon fit, and maintenance-cycle efficiency.",
+   "code": "def rule(ctx):\n    n = len(ctx.robots)\n    if n > 0:\n        total_count = 0\n        total_hours = 0.0\n        for r in ctx.robots:\n            total_count += r.count\n            total_hours += r.hours\n        avg_count = total_count / n\n        avg_hours = total_hours / n\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    def reuse_key(r):\n        p = ctx.types[r.type]\n        w = p[\"work_time\"]\n        pc = r.count + 1\n        ph = r.hours + w\n\n        risk = 0.0\n        if r.first_maint is None:\n            if r.duties_left <= 1:\n                risk = 2.0\n            elif r.duties_left <= 2:\n                risk = 1.0\n\n        if w > ctx.remaining:\n            fit_pen = 10.0 + (w - ctx.remaining) * 0.01\n        else:\n            fit_pen = 0.0\n\n        score = (pc + 1.0) / (avg_count + 1.0)\n        score += 0.5 * (ph + 1.0) / (avg_hours + 1.0)\n        score += 0.25 * risk + fit_pen\n        score -= 0.002 * r.duties_left + 0.0001 * r.budget\n\n        return (score, pc, ph, -r.duties_left, -r.budget, r.idx)\n\n    reuses = sorted(ctx.available, key=reuse_key)\n\n    new_types = []\n    if ctx.gene_type is not None and 0 <= ctx.gene_type < len(ctx.types):\n        p = ctx.types[ctx.gene_type]\n        if p is not None and ctx.left[ctx.gene_type] > 0:\n            new_types.append(ctx.gene_type)\n\n    def type_key(k):\n        p = ctx.types[k]\n        w = p[\"work_time\"]\n        rem = ctx.remaining\n\n        if w <= rem:\n            fit = 0\n            over = rem - w\n        else:\n            fit = 1\n            over = w - rem\n\n        single = p[\"single_work_time\"]\n        if single > 0:\n            duties = p[\"continue_max_work\"] / single\n        else:\n            duties = 0.0\n\n        cycle_hours = duties * w\n        overhead = p[\"out_travel_time\"] + p[\"return_travel_time\"] + p[\"charge_time\"]\n        cycle_time = cycle_hours + duties * overhead + p[\"maintenance_time\"]\n        eff = cycle_hours / cycle_time if cycle_time > 0 else 0.0\n\n        return (fit, over, -eff, -cycle_hours,\n                p[\"maintenance_time\"] + p[\"charge_time\"], k)\n\n    others = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            continue\n        if k == ctx.gene_type:\n            continue\n        others.append(k)\n\n    others.sort(key=type_key)\n    for k in others:\n        new_types.append(k)\n\n    return [(\"reuse\", r) for r in reuses] + [(\"new\", k) for k in new_types]\n",
+   "objective": -0.75783,
+   "score": 0.7578252762181295,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6774,
+     "vs_default": -0.0116,
+     "rule_only_extra_resources": 1.0,
+     "rule_only_imbalance": 28.04,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8011,
+     "vs_default": -0.0052,
+     "rule_only_extra_resources": 1.2,
+     "rule_only_imbalance": 32.06,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.795,
+     "vs_default": 0.0011,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 24.11,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e38",
+   "op": "e1",
+   "parents": [
+    "e35",
+    "e11"
+   ],
+   "algorithm": "优先派遣当前可用机器人以复用出勤最少者，若无可用机器人则按基因指定类型新开一个。",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e39",
+   "op": "e1",
+   "parents": [
+    "e34",
+    "e11"
+   ],
+   "algorithm": "Prioritize available robots by a weighted balance score comparing their duty count and hours to the fleet average, penalizing imminent maintenance, and order new types by gene preference, horizon fit, and amortized maintenance overhead.",
+   "code": "def rule(ctx):\n    n = len(ctx.robots)\n    if n > 0:\n        total_count = sum(r.count for r in ctx.robots)\n        total_hours = sum(r.hours for r in ctx.robots)\n        avg_count = total_count / n\n        avg_hours = total_hours / n\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    def reuse_key(r):\n        p = ctx.types[r.type]\n        w = p[\"work_time\"] if p is not None else 10.0\n        if w <= 0:\n            w = 10.0\n        count_gap = r.count - avg_count\n        hours_gap = r.hours - avg_hours\n        maint_penalty = 0.0\n        if r.duties_left <= 1:\n            maint_penalty += 5.0\n        if r.first_maint is not None:\n            maint_penalty += 0.1\n        cost = count_gap + (hours_gap / w) - 0.2 * r.duties_left + maint_penalty\n        return (cost, r.ready, r.idx)\n\n    reuses = sorted(ctx.available, key=reuse_key)\n\n    remaining = ctx.remaining\n    if remaining < 0:\n        remaining = 0.0\n\n    new_candidates = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            continue\n        wt = p[\"work_time\"]\n        cmw = p[\"continue_max_work\"]\n        mt = p[\"maintenance_time\"]\n        ct = p[\"charge_time\"]\n        single = p[\"single_work_time\"]\n        if single > 0:\n            duties_per_cycle = cmw / single\n        else:\n            duties_per_cycle = 1.0\n        if duties_per_cycle < 1.0:\n            duties_per_cycle = 1.0\n        total_time = p[\"out_travel_time\"] + wt + p[\"return_travel_time\"] + ct + mt / duties_per_cycle\n        if wt > remaining:\n            fit_penalty = (wt - remaining) * 10.0\n        else:\n            fit_penalty = 0.0\n        if wt > 0:\n            waste = (remaining % wt) / wt\n        else:\n            waste = 0.0\n        gene_penalty = 0.0 if k == ctx.gene_type else 100.0\n        cost = gene_penalty + fit_penalty + total_time + waste * 5.0\n        new_candidates.append((cost, k))\n\n    new_candidates.sort()\n    new_types = [k for _, k in new_candidates]\n\n    if not new_types and ctx.gene_type is not None and 0 <= ctx.gene_type < len(ctx.types):\n        new_types.append(ctx.gene_type)\n\n    actions = [(\"reuse\", r) for r in reuses]\n    for k in new_types:\n        actions.append((\"new\", k))\n    return actions\n",
+   "objective": -0.78039,
+   "score": 0.7803924468673399,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.7464,
+     "vs_default": 0.0575,
+     "rule_only_extra_resources": 0.2,
+     "rule_only_imbalance": 18.17,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.815,
+     "vs_default": 0.0087,
+     "rule_only_extra_resources": 1.0,
+     "rule_only_imbalance": 24.33,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7798,
+     "vs_default": -0.0141,
+     "rule_only_extra_resources": 1.8,
+     "rule_only_imbalance": 12.75,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e40",
+   "op": "m2",
+   "parents": [
+    "e39"
+   ],
+   "algorithm": "Prefer available robots in the order of fewest prior duties and most remaining budget, and open the genome-preferred new type only after all reuse options.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e41",
+   "op": "m1",
+   "parents": [
+    "e35"
+   ],
+   "algorithm": "Always choose the available robot with the fewest duties (breaking ties by remaining work budget), and if none is available, open a new robot of the genome-selected type.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e42",
+   "op": "m1",
+   "parents": [
+    "e19"
+   ],
+   "algorithm": "Score available robots by horizon-fit penalty then by a projected combined duty-count/hours load with maintenance-slack and budget tie-breakers, and rank new robot types by gene type first, then horizon fit, amortized cycle/maintenance overhead, endurance, and remaining type capacity.",
+   "code": "def rule(ctx):\n    total_wt = 0.0\n    n_types = 0\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is not None:\n            total_wt += p[\"work_time\"]\n            n_types += 1\n    avg_wt = total_wt / n_types if n_types > 0 else 10.0\n\n    def rkey(r):\n        p = ctx.types[r.type]\n        wt = p[\"work_time\"] if p is not None else avg_wt\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0\n        load = avg_wt * (r.count + 1) + r.hours + wt\n        return (over, load, -r.duties_left, -r.budget, r.idx)\n\n    actions = [(\"reuse\", r) for r in sorted(ctx.available, key=rkey)]\n\n    def tkey(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (1e9, 0.0, 0.0, 0.0, k)\n        wt = p[\"work_time\"]\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0\n        single = max(p[\"single_work_time\"], 1e-9)\n        dpm = p[\"continue_max_work\"] / single\n        cycle = p[\"out_travel_time\"] + p[\"return_travel_time\"] + p[\"charge_time\"]\n        maint_per_duty = p[\"maintenance_time\"] / max(dpm, 1e-9)\n        overhead = (cycle + maint_per_duty) / max(wt, 1e-9)\n        return (over, overhead, -dpm, -ctx.left[k], k)\n\n    order = []\n    gt = ctx.gene_type\n    if 0 <= gt < len(ctx.types):\n        p = ctx.types[gt]\n        if p is not None and ctx.left[gt] > 0:\n            order.append(gt)\n\n    for k in sorted(range(len(ctx.types)), key=tkey):\n        if k not in order:\n            p = ctx.types[k]\n            if p is not None and ctx.left[k] > 0:\n                order.append(k)\n\n    if order:\n        actions += [(\"new\", k) for k in order]\n    else:\n        actions.append((\"new\", gt))\n\n    return actions\n",
+   "objective": -0.76281,
+   "score": 0.7628120225577536,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8056,
+     "vs_default": -0.0007,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e43",
+   "op": "e1",
+   "parents": [
+    "e6",
+    "e6"
+   ],
+   "algorithm": "Score each available robot by a horizon-pressure blend of normalized duty-count/hour balance, remaining maintenance budget, and last-duty penalty; queue them best-first, then queue feasible new robot types by effective work per maintenance cycle with a small genome-type bias.",
+   "code": "def rule(ctx):\n    robots = ctx.robots\n    n = len(robots)\n    mean_c = sum(r.count for r in robots) / float(n) if n else 0.0\n    mean_h = sum(r.hours for r in robots) / float(n) if n else 0.0\n\n    rem = ctx.remaining\n    cap = ctx.capacity\n    if rem > 0.0:\n        ratio = cap / rem\n        if ratio < 1.02:\n            pressure = 1.0\n        elif ratio < 1.18:\n            pressure = 0.65\n        elif ratio < 1.50:\n            pressure = 0.25\n        else:\n            pressure = 0.0\n    else:\n        pressure = 0.0\n\n    def score(r):\n        typ = ctx.types[r.type]\n        sw = 1.0\n        maint = 0.0\n        if typ is not None:\n            sw = typ.get(\"single_work_time\", 1.0) or 1.0\n            maint = typ.get(\"maintenance_time\", 0.0) or 0.0\n\n        bal = (r.count - mean_c) + 0.30 * (r.hours - mean_h)\n        preserve = -(r.duties_left * 1.0) * (0.15 + 1.40 * pressure)\n\n        last_pen = 0.0\n        if r.duties_left <= 1 and rem > maint * 0.75 + 2.0:\n            last_pen = 0.45 * (1.0 + pressure)\n\n        ready_tie = 0.002 * r.ready\n        return bal * (1.0 + 0.35 * pressure) + preserve + last_pen + ready_tie\n\n    available = sorted(ctx.available, key=score)\n    actions = [(\"reuse\", r) for r in available]\n\n    valid_new = []\n    for k in range(len(ctx.types)):\n        typ = ctx.types[k]\n        if typ is not None and ctx.left[k] > 0:\n            sw = typ.get(\"single_work_time\", 1.0) or 1.0\n            cm = typ.get(\"continue_max_work\", 1.0) or 1.0\n            wt = typ.get(\"work_time\", 1.0) or 1.0\n            mt = typ.get(\"maintenance_time\", 0.0) or 0.0\n            ct = typ.get(\"charge_time\", 0.0) or 1.0\n\n            duties = cm / sw if sw > 0.0 else 1.0\n            cycle_time = wt * duties + mt + ct\n            eff = (wt * duties) / cycle_time if cycle_time > 0.0 else 0.0\n\n            opened_same = sum(1 for r in robots if r.type == k)\n            gene_bonus = -0.35 if k == ctx.gene_type else 0.0\n            new_score = -eff + 0.02 * opened_same + gene_bonus\n            valid_new.append((new_score, k))\n\n    valid_new.sort()\n    for _, k in valid_new:\n        actions.append((\"new\", k))\n\n    if not valid_new:\n        actions.append((\"new\", ctx.gene_type))\n\n    return actions\n",
+   "objective": -0.76294,
+   "score": 0.7629405077896249,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8057,
+     "vs_default": -0.0005,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 31.55,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7942,
+     "vs_default": 0.0002,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e44",
+   "op": "m2",
+   "parents": [
+    "e6"
+   ],
+   "algorithm": "Use a weighted load score that favors available robots by lower count and duty-hour load, then by greater remaining maintenance budget and duties, and when opening a new robot prefer the feasible type with the highest continuous-work-to-maintenance-overhead ratio, using the gene-chosen type only as a tie-break.",
+   "code": "def rule(ctx):\n    def robot_key(r):\n        t = ctx.types[r.type]\n        cmw = t[\"continue_max_work\"] if t[\"continue_max_work\"] > 0 else 1.0\n        swt = t[\"single_work_time\"]\n        cycle_duties = cmw / (swt + 1.0) if swt > 0 else 1.0\n        budget_ratio = r.budget / (cmw + 1.0)\n        left_ratio = r.duties_left / (1.0 + cycle_duties)\n        load = 0.60 * r.count + 0.40 * (r.hours / 10.0)\n        return (load, -budget_ratio, -left_ratio, r.idx)\n\n    actions = []\n    if ctx.available:\n        best = min(ctx.available, key=robot_key)\n        actions.append((\"reuse\", best))\n        for r in ctx.available:\n            if r is not best:\n                actions.append((\"reuse\", r))\n\n    def new_key(k):\n        t = ctx.types[k]\n        overhead = (\n            t[\"maintenance_time\"]\n            + t[\"charge_time\"]\n            + t[\"out_travel_time\"]\n            + t[\"return_travel_time\"]\n            + 1.0\n        )\n        cycle = t[\"continue_max_work\"] if t[\"continue_max_work\"] > 0 else 1.0\n        return (-(cycle / overhead), -t[\"single_work_time\"], k != ctx.gene_type, k)\n\n    candidates = []\n    for k, t in enumerate(ctx.types):\n        if t is not None and ctx.left[k] > 0:\n            candidates.append(k)\n\n    if candidates:\n        best_new = min(candidates, key=new_key)\n        actions.append((\"new\", best_new))\n        others = []\n        for k in candidates:\n            if k != best_new:\n                others.append(k)\n        others.sort(key=lambda k: (k != ctx.gene_type, k))\n        for k in others:\n            actions.append((\"new\", k))\n\n    if not actions:\n        actions.append((\"new\", ctx.gene_type))\n\n    return actions\n",
+   "objective": -0.74837,
+   "score": 0.748371304904041,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": -0.0123,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7623,
+     "vs_default": -0.0316,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 22.99,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e45",
+   "op": "m2",
+   "parents": [
+    "e34"
+   ],
+   "algorithm": "Sort available robots by fewest completed duties with ties favoring more remaining work budget, reuse them in that order, and otherwise open the gene-selected new robot type.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e46",
+   "op": "m2",
+   "parents": [
+    "e39"
+   ],
+   "algorithm": "Use the decoder’s available-robot order (fewest duties, then most remaining budget) for reuse, and fall back to the gene-preferred new robot type to keep resource use low and duty counts balanced.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e47",
+   "op": "e1",
+   "parents": [
+    "e43",
+    "e34"
+   ],
+   "algorithm": "Use the pre-sorted available robots directly with the least-duties/most-budget robot first, and if no robot is available, open the genome-chosen new robot type.",
+   "code": "def rule(ctx):\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e48",
+   "op": "e1",
+   "parents": [
+    "e39",
+    "e19"
+   ],
+   "algorithm": "Use an accumulated blocking-time utilization balance with a maintenance-risk guard to order reusable robots, and rank new types by horizon fit plus amortized cycle-and-maintenance cost per duty hour with a mild genome-type bias.",
+   "code": "def rule(ctx):\n    def reuse_key(r):\n        p = ctx.types[r.type]\n        if p is None:\n            wt = 10.0\n            cyc = 10.0\n            mt = 0.0\n        else:\n            wt = p[\"work_time\"]\n            if wt <= 0:\n                wt = 1e-9\n            cyc = p[\"out_travel_time\"] + wt + p[\"return_travel_time\"] + p[\"charge_time\"]\n            mt = p[\"maintenance_time\"]\n\n        risk = 0\n        if p is not None:\n            if r.duties_left <= 1:\n                risk = 2\n            elif r.duties_left <= 2:\n                risk = 1\n            if ctx.remaining - wt <= mt:\n                risk = 0\n\n        block = (r.count + 1) * cyc\n        return (risk, block, cyc, r.hours / wt, -r.duties_left, r.idx)\n\n    reuses = sorted(ctx.available, key=reuse_key)\n\n    remaining = ctx.remaining\n    if remaining < 0:\n        remaining = 0.0\n\n    def new_key(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (1, 1e9, 1e9, 1e9, 1e9, k)\n\n        wt = p[\"work_time\"]\n        if wt <= 0:\n            wt = 1e-9\n\n        single = p[\"single_work_time\"]\n        if single <= 0:\n            single = 1e-9\n\n        cmw = p[\"continue_max_work\"]\n        if cmw <= 0:\n            cmw = 1.0\n\n        dpm = cmw / single\n        if dpm < 1.0:\n            dpm = 1.0\n\n        cyc = p[\"out_travel_time\"] + wt + p[\"return_travel_time\"] + p[\"charge_time\"]\n        maint = p[\"maintenance_time\"]\n        cost = (cyc + maint / dpm) / wt\n\n        over = wt - remaining\n        if over < 0:\n            over = 0.0\n\n        waste = (remaining % wt) / wt if wt > 0 else 0.0\n        gene_pen = 0.0 if k == ctx.gene_type else 0.5\n\n        return (over, cost + waste * 2.0 + gene_pen, -dpm, cyc, -ctx.left[k], k)\n\n    new_types = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is not None and ctx.left[k] > 0:\n            new_types.append(k)\n    new_types.sort(key=new_key)\n\n    actions = [(\"reuse\", r) for r in reuses]\n    for k in new_types:\n        actions.append((\"new\", k))\n\n    if not actions:\n        gt = ctx.gene_type\n        if gt is None or gt < 0 or gt >= len(ctx.types):\n            gt = 0\n        actions.append((\"new\", gt))\n\n    return actions\n",
+   "objective": -0.74266,
+   "score": 0.7426648878151781,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.7331,
+     "vs_default": 0.0442,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 26.28,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.7807,
+     "vs_default": -0.0255,
+     "rule_only_extra_resources": 1.2,
+     "rule_only_imbalance": 25.39,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7142,
+     "vs_default": -0.0798,
+     "rule_only_extra_resources": 1.8,
+     "rule_only_imbalance": 19.46,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e49",
+   "op": "m2",
+   "parents": [
+    "e39"
+   ],
+   "algorithm": "优先派出勤次数最少且并列时剩余预算最大的可用机器人，没有可用机器人时按基因偏好新开机器人。",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e50",
+   "op": "m2",
+   "parents": [
+    "e39"
+   ],
+   "algorithm": "优先派出勤次数最少且剩余工作预算最多的可用机器人；若无可用机器人，则新开基因指定的机器人类型。",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e51",
+   "op": "e1",
+   "parents": [
+    "e19",
+    "e43"
+   ],
+   "algorithm": "Use a three-level capacity-pressure policy that ranks available robots by horizon-fit and either maintenance runway or count/hour fairness, and ranks new types by horizon fit, maintenance-cycle work yield/efficiency, and a gene-type bias.",
+   "code": "def rule(ctx):\n    rem = ctx.remaining\n    cap = ctx.capacity\n    slack = cap - rem\n\n    if slack < 0.0:\n        mode = 2\n    elif slack < 0.15 * max(rem, 1.0):\n        mode = 1\n    else:\n        mode = 0\n\n    def rkey(r):\n        p = ctx.types[r.type]\n        wt = p[\"work_time\"] if p is not None else 0.0\n        over = wt - rem\n        if over < 0.0:\n            over = 0.0\n        if mode == 2:\n            return (over, -r.budget, -r.duties_left, r.count, r.hours, r.idx)\n        if mode == 1:\n            return (over, -r.duties_left, -r.budget, r.count, r.hours, r.idx)\n        return (over, r.count, r.hours, -r.duties_left, -r.budget, r.idx)\n\n    actions = [(\"reuse\", r) for r in sorted(ctx.available, key=rkey)]\n\n    def tkey(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (1, 0, 0, 0, 0, 0, 0, k)\n        wt = p[\"work_time\"]\n        sw = p[\"single_work_time\"]\n        cm = p[\"continue_max_work\"]\n        mt = p[\"maintenance_time\"]\n        ct = p[\"charge_time\"]\n        ot = p[\"out_travel_time\"]\n        rt = p[\"return_travel_time\"]\n\n        over = wt - rem\n        if over < 0.0:\n            over = 0.0\n\n        tail = 0.0\n        if wt > 0.0 and rem >= wt:\n            tail = (wt - (rem % wt)) % wt\n\n        dpm = cm / max(sw, 1e-9)\n        total = dpm * wt\n        cycle = total + mt + ct + ot + rt\n        eff = total / max(cycle, 1e-9) if total > 0.0 else 0.0\n        gene = 0 if k == ctx.gene_type else 1\n\n        if mode == 2:\n            return (over, -total, mt, gene, -eff, -ctx.left[k], k)\n        if mode == 1:\n            return (over, -dpm, -total, gene, mt, -eff, k)\n        return (over, gene, -eff, tail, mt, -ctx.left[k], k)\n\n    valid = [k for k in range(len(ctx.types)) if ctx.types[k] is not None and ctx.left[k] > 0]\n    valid.sort(key=tkey)\n    for k in valid:\n        actions.append((\"new\", k))\n    if not valid:\n        actions.append((\"new\", ctx.gene_type))\n    return actions\n",
+   "objective": -0.68301,
+   "score": 0.683013585935705,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.687,
+     "vs_default": -0.0019,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.6976,
+     "vs_default": -0.1086,
+     "rule_only_extra_resources": 1.6,
+     "rule_only_imbalance": 28.46,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.6644,
+     "vs_default": -0.1295,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 17.78,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 2.4,
+     "random_genome_feasible_rate": 0.997,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e52",
+   "op": "e1",
+   "parents": [
+    "e19",
+    "e39"
+   ],
+   "algorithm": "Maintenance-first fairness band: within one duty of the current minimum count, prefer robots closest to maintenance while still fitting the remaining horizon, and order new types by horizon fit, gene preference, and productive-cycle efficiency.",
+   "code": "def rule(ctx):\n    available = ctx.available\n    if available:\n        min_count = min(r.count for r in available)\n    else:\n        min_count = 0\n\n    def reuse_key(r):\n        p = ctx.types[r.type]\n        if p is not None:\n            wt = p[\"work_time\"]\n        else:\n            wt = 10.0\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0.0\n        band = r.count - min_count\n        if band < 0:\n            band = 0\n        if band <= 1:\n            band_pen = 0\n        else:\n            band_pen = band\n        return (band_pen, over, r.duties_left, r.hours, -r.budget, r.idx)\n\n    reuses = sorted(available, key=reuse_key)\n\n    remaining = ctx.remaining\n    if remaining < 0:\n        remaining = 0.0\n\n    def type_key(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (1, 0, 0, 0, 0, 0, 0, 0, k)\n        wt = p[\"work_time\"]\n        if wt <= 0:\n            wt = 1.0\n        over = wt - remaining\n        if over < 0:\n            over = 0.0\n        if remaining > 0:\n            waste = (remaining % wt) / wt\n        else:\n            waste = 0.0\n        single = p[\"single_work_time\"]\n        cmw = p[\"continue_max_work\"]\n        mt = p[\"maintenance_time\"]\n        ct = p[\"charge_time\"]\n        out = p[\"out_travel_time\"]\n        ret = p[\"return_travel_time\"]\n        if single > 0:\n            dpm = cmw / single\n        else:\n            dpm = 1.0\n        if dpm < 1.0:\n            dpm = 1.0\n        denom = out + wt + ret + ct + mt / dpm\n        if denom <= 0:\n            denom = 1.0\n        eff = wt / denom\n        gene_pen = 0 if k == ctx.gene_type else 1\n        return (1 if over > 0 else 0, over, gene_pen, waste, -eff, mt / dpm, -dpm, -wt, k)\n\n    new_order = []\n    for k in sorted(range(len(ctx.types)), key=type_key):\n        p = ctx.types[k]\n        if p is not None and ctx.left[k] > 0:\n            new_order.append(k)\n\n    actions = [(\"reuse\", r) for r in reuses]\n    for k in new_order:\n        actions.append((\"new\", k))\n\n    if not new_order:\n        gt = ctx.gene_type\n        if 0 <= gt < len(ctx.types):\n            actions.append((\"new\", gt))\n\n    return actions\n",
+   "objective": -0.81617,
+   "score": 0.8161749830769888,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.8215,
+     "vs_default": 0.1326,
+     "rule_only_extra_resources": 0.2,
+     "rule_only_imbalance": 12.79,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8306,
+     "vs_default": 0.0244,
+     "rule_only_extra_resources": 1.0,
+     "rule_only_imbalance": 21.13,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7964,
+     "vs_default": 0.0025,
+     "rule_only_extra_resources": 1.8,
+     "rule_only_imbalance": 9.8,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e53",
+   "op": "m2",
+   "parents": [
+    "e39"
+   ],
+   "algorithm": "Reuse all available robots in the decoder’s pre-sorted least-duty/highest-remaining-budget order, then fall back to opening a new robot of the genome-preferred type.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  }
+ ],
+ "pop": [
+  {
+   "id": "e52",
+   "op": "e1",
+   "parents": [
+    "e19",
+    "e39"
+   ],
+   "algorithm": "Maintenance-first fairness band: within one duty of the current minimum count, prefer robots closest to maintenance while still fitting the remaining horizon, and order new types by horizon fit, gene preference, and productive-cycle efficiency.",
+   "code": "def rule(ctx):\n    available = ctx.available\n    if available:\n        min_count = min(r.count for r in available)\n    else:\n        min_count = 0\n\n    def reuse_key(r):\n        p = ctx.types[r.type]\n        if p is not None:\n            wt = p[\"work_time\"]\n        else:\n            wt = 10.0\n        over = wt - ctx.remaining\n        if over < 0:\n            over = 0.0\n        band = r.count - min_count\n        if band < 0:\n            band = 0\n        if band <= 1:\n            band_pen = 0\n        else:\n            band_pen = band\n        return (band_pen, over, r.duties_left, r.hours, -r.budget, r.idx)\n\n    reuses = sorted(available, key=reuse_key)\n\n    remaining = ctx.remaining\n    if remaining < 0:\n        remaining = 0.0\n\n    def type_key(k):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            return (1, 0, 0, 0, 0, 0, 0, 0, k)\n        wt = p[\"work_time\"]\n        if wt <= 0:\n            wt = 1.0\n        over = wt - remaining\n        if over < 0:\n            over = 0.0\n        if remaining > 0:\n            waste = (remaining % wt) / wt\n        else:\n            waste = 0.0\n        single = p[\"single_work_time\"]\n        cmw = p[\"continue_max_work\"]\n        mt = p[\"maintenance_time\"]\n        ct = p[\"charge_time\"]\n        out = p[\"out_travel_time\"]\n        ret = p[\"return_travel_time\"]\n        if single > 0:\n            dpm = cmw / single\n        else:\n            dpm = 1.0\n        if dpm < 1.0:\n            dpm = 1.0\n        denom = out + wt + ret + ct + mt / dpm\n        if denom <= 0:\n            denom = 1.0\n        eff = wt / denom\n        gene_pen = 0 if k == ctx.gene_type else 1\n        return (1 if over > 0 else 0, over, gene_pen, waste, -eff, mt / dpm, -dpm, -wt, k)\n\n    new_order = []\n    for k in sorted(range(len(ctx.types)), key=type_key):\n        p = ctx.types[k]\n        if p is not None and ctx.left[k] > 0:\n            new_order.append(k)\n\n    actions = [(\"reuse\", r) for r in reuses]\n    for k in new_order:\n        actions.append((\"new\", k))\n\n    if not new_order:\n        gt = ctx.gene_type\n        if 0 <= gt < len(ctx.types):\n            actions.append((\"new\", gt))\n\n    return actions\n",
+   "objective": -0.81617,
+   "score": 0.8161749830769888,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.8215,
+     "vs_default": 0.1326,
+     "rule_only_extra_resources": 0.2,
+     "rule_only_imbalance": 12.79,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8306,
+     "vs_default": 0.0244,
+     "rule_only_extra_resources": 1.0,
+     "rule_only_imbalance": 21.13,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7964,
+     "vs_default": 0.0025,
+     "rule_only_extra_resources": 1.8,
+     "rule_only_imbalance": 9.8,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e39",
+   "op": "e1",
+   "parents": [
+    "e34",
+    "e11"
+   ],
+   "algorithm": "Prioritize available robots by a weighted balance score comparing their duty count and hours to the fleet average, penalizing imminent maintenance, and order new types by gene preference, horizon fit, and amortized maintenance overhead.",
+   "code": "def rule(ctx):\n    n = len(ctx.robots)\n    if n > 0:\n        total_count = sum(r.count for r in ctx.robots)\n        total_hours = sum(r.hours for r in ctx.robots)\n        avg_count = total_count / n\n        avg_hours = total_hours / n\n    else:\n        avg_count = 0.0\n        avg_hours = 0.0\n\n    def reuse_key(r):\n        p = ctx.types[r.type]\n        w = p[\"work_time\"] if p is not None else 10.0\n        if w <= 0:\n            w = 10.0\n        count_gap = r.count - avg_count\n        hours_gap = r.hours - avg_hours\n        maint_penalty = 0.0\n        if r.duties_left <= 1:\n            maint_penalty += 5.0\n        if r.first_maint is not None:\n            maint_penalty += 0.1\n        cost = count_gap + (hours_gap / w) - 0.2 * r.duties_left + maint_penalty\n        return (cost, r.ready, r.idx)\n\n    reuses = sorted(ctx.available, key=reuse_key)\n\n    remaining = ctx.remaining\n    if remaining < 0:\n        remaining = 0.0\n\n    new_candidates = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            continue\n        wt = p[\"work_time\"]\n        cmw = p[\"continue_max_work\"]\n        mt = p[\"maintenance_time\"]\n        ct = p[\"charge_time\"]\n        single = p[\"single_work_time\"]\n        if single > 0:\n            duties_per_cycle = cmw / single\n        else:\n            duties_per_cycle = 1.0\n        if duties_per_cycle < 1.0:\n            duties_per_cycle = 1.0\n        total_time = p[\"out_travel_time\"] + wt + p[\"return_travel_time\"] + ct + mt / duties_per_cycle\n        if wt > remaining:\n            fit_penalty = (wt - remaining) * 10.0\n        else:\n            fit_penalty = 0.0\n        if wt > 0:\n            waste = (remaining % wt) / wt\n        else:\n            waste = 0.0\n        gene_penalty = 0.0 if k == ctx.gene_type else 100.0\n        cost = gene_penalty + fit_penalty + total_time + waste * 5.0\n        new_candidates.append((cost, k))\n\n    new_candidates.sort()\n    new_types = [k for _, k in new_candidates]\n\n    if not new_types and ctx.gene_type is not None and 0 <= ctx.gene_type < len(ctx.types):\n        new_types.append(ctx.gene_type)\n\n    actions = [(\"reuse\", r) for r in reuses]\n    for k in new_types:\n        actions.append((\"new\", k))\n    return actions\n",
+   "objective": -0.78039,
+   "score": 0.7803924468673399,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.7464,
+     "vs_default": 0.0575,
+     "rule_only_extra_resources": 0.2,
+     "rule_only_imbalance": 18.17,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.815,
+     "vs_default": 0.0087,
+     "rule_only_extra_resources": 1.0,
+     "rule_only_imbalance": 24.33,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7798,
+     "vs_default": -0.0141,
+     "rule_only_extra_resources": 1.8,
+     "rule_only_imbalance": 12.75,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e34",
+   "op": "m1",
+   "parents": [
+    "e6"
+   ],
+   "algorithm": "The modified rule sorts available robots by projected duty count, a first-maintenance risk penalty, projected duty hours, and remaining budget, then prefers the gene-chosen new type followed by other available types sorted by fit to the remaining horizon.",
+   "code": "def rule(ctx):\n    def robot_key(r):\n        p = ctx.types[r.type]\n        w = p[\"work_time\"]\n        pc = r.count + 1\n        ph = r.hours + w\n        risk = 1 if (r.first_maint is None and r.duties_left <= 1) else 0\n        return (pc, risk, ph, -r.duties_left, -r.budget, r.idx)\n\n    reuses = sorted(ctx.available, key=robot_key)\n\n    new_types = []\n    if ctx.gene_type is not None and 0 <= ctx.gene_type < len(ctx.types):\n        if ctx.types[ctx.gene_type] is not None and ctx.left[ctx.gene_type] > 0:\n            new_types.append(ctx.gene_type)\n\n    others = []\n    for k in range(len(ctx.types)):\n        p = ctx.types[k]\n        if p is None or ctx.left[k] <= 0:\n            continue\n        if k == ctx.gene_type:\n            continue\n        w = p[\"work_time\"]\n        rem = ctx.remaining\n        if w <= rem:\n            fit = 0\n            overshoot = -w\n        else:\n            fit = 1\n            overshoot = w\n        others.append((fit, overshoot, p[\"maintenance_time\"], p[\"charge_time\"], k))\n    others.sort()\n    for item in others:\n        new_types.append(item[4])\n\n    if not new_types and ctx.gene_type is not None and 0 <= ctx.gene_type < len(ctx.types):\n        new_types.append(ctx.gene_type)\n\n    return [(\"reuse\", r) for r in reuses] + [(\"new\", k) for k in new_types]\n",
+   "objective": -0.76312,
+   "score": 0.7631157272580666,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8056,
+     "vs_default": -0.0007,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7948,
+     "vs_default": 0.0009,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e6",
+   "op": "i1",
+   "parents": [],
+   "algorithm": "Reuse available robots in ascending duty count (then descending remaining budget) and otherwise open a new robot of the gene-chosen type.",
+   "code": "def rule(ctx):\n    # 派出勤最少（并列时剩余工时多）的可用机器人；没有可用的就新开基因指定的类型\n    return [(\"reuse\", r) for r in ctx.available] + [(\"new\", ctx.gene_type)]\n",
+   "objective": -0.76303,
+   "score": 0.7630288869140679,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8062,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 30.42,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7939,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  },
+  {
+   "id": "e43",
+   "op": "e1",
+   "parents": [
+    "e6",
+    "e6"
+   ],
+   "algorithm": "Score each available robot by a horizon-pressure blend of normalized duty-count/hour balance, remaining maintenance budget, and last-duty penalty; queue them best-first, then queue feasible new robot types by effective work per maintenance cycle with a small genome-type bias.",
+   "code": "def rule(ctx):\n    robots = ctx.robots\n    n = len(robots)\n    mean_c = sum(r.count for r in robots) / float(n) if n else 0.0\n    mean_h = sum(r.hours for r in robots) / float(n) if n else 0.0\n\n    rem = ctx.remaining\n    cap = ctx.capacity\n    if rem > 0.0:\n        ratio = cap / rem\n        if ratio < 1.02:\n            pressure = 1.0\n        elif ratio < 1.18:\n            pressure = 0.65\n        elif ratio < 1.50:\n            pressure = 0.25\n        else:\n            pressure = 0.0\n    else:\n        pressure = 0.0\n\n    def score(r):\n        typ = ctx.types[r.type]\n        sw = 1.0\n        maint = 0.0\n        if typ is not None:\n            sw = typ.get(\"single_work_time\", 1.0) or 1.0\n            maint = typ.get(\"maintenance_time\", 0.0) or 0.0\n\n        bal = (r.count - mean_c) + 0.30 * (r.hours - mean_h)\n        preserve = -(r.duties_left * 1.0) * (0.15 + 1.40 * pressure)\n\n        last_pen = 0.0\n        if r.duties_left <= 1 and rem > maint * 0.75 + 2.0:\n            last_pen = 0.45 * (1.0 + pressure)\n\n        ready_tie = 0.002 * r.ready\n        return bal * (1.0 + 0.35 * pressure) + preserve + last_pen + ready_tie\n\n    available = sorted(ctx.available, key=score)\n    actions = [(\"reuse\", r) for r in available]\n\n    valid_new = []\n    for k in range(len(ctx.types)):\n        typ = ctx.types[k]\n        if typ is not None and ctx.left[k] > 0:\n            sw = typ.get(\"single_work_time\", 1.0) or 1.0\n            cm = typ.get(\"continue_max_work\", 1.0) or 1.0\n            wt = typ.get(\"work_time\", 1.0) or 1.0\n            mt = typ.get(\"maintenance_time\", 0.0) or 0.0\n            ct = typ.get(\"charge_time\", 0.0) or 1.0\n\n            duties = cm / sw if sw > 0.0 else 1.0\n            cycle_time = wt * duties + mt + ct\n            eff = (wt * duties) / cycle_time if cycle_time > 0.0 else 0.0\n\n            opened_same = sum(1 for r in robots if r.type == k)\n            gene_bonus = -0.35 if k == ctx.gene_type else 0.0\n            new_score = -eff + 0.02 * opened_same + gene_bonus\n            valid_new.append((new_score, k))\n\n    valid_new.sort()\n    for _, k in valid_new:\n        actions.append((\"new\", k))\n\n    if not valid_new:\n        actions.append((\"new\", ctx.gene_type))\n\n    return actions\n",
+   "objective": -0.76294,
+   "score": 0.7629405077896249,
+   "error": null,
+   "diag": {
+    "E": {
+     "instances": 5,
+     "score": 0.6889,
+     "vs_default": 0.0,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 20.07,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 0.4,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "H": {
+     "instances": 5,
+     "score": 0.8057,
+     "vs_default": -0.0005,
+     "rule_only_extra_resources": 1.4,
+     "rule_only_imbalance": 31.55,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.0,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    },
+    "M": {
+     "instances": 5,
+     "score": 0.7942,
+     "vs_default": 0.0002,
+     "rule_only_extra_resources": 2.6,
+     "rule_only_imbalance": 20.93,
+     "rule_only_feasible_instances": "5/5",
+     "best_sample_extra_resources": 1.8,
+     "random_genome_feasible_rate": 1.0,
+     "rule_opens_new_while_robots_available_per_decode": 0.0
+    }
+   }
+  }
+ ],
+ "calls": 99,
+ "tokens": {
+  "prompt": 183621,
+  "completion": 517372
+ },
+ "secs_llm": 2587.6132402420044,
+ "secs_eval": 3755.5167150497437
+}
