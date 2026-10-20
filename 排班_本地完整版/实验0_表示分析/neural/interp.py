@@ -9,7 +9,7 @@
 测试实例只用于事后分析，不参与任何训练或选择。
 用法: python interp.py [进程数]   输出: out/interp.md、out/interp.json
 """
-import json, multiprocessing as mp, os, sys
+import json, multiprocessing as mp, os, pickle, sys
 import numpy as np
 import common as C
 import evalrule as E
@@ -112,11 +112,16 @@ def main():
         gp.append({"run": r, "score": d["best_score"], "size": d["size"], "expr": d["expr"], "terms": used})
     res["gp"] = gp
     # C 与 B1 的状态
-    with mp.Pool(procs) as pool:
-        out = pool.map(states_job, sorted(te, key=lambda i: -C.L.nvar(C.I.load(i), "dec5")), chunksize=1)
-    names = out[0][1]
-    F_all = [row for _, _, f, _ in out for row in f]
-    mats = [m for _, _, _, ms in out for m in ms]
+    cache = os.path.join(C.OUT, "interp_states.pkl")
+    if os.path.exists(cache):
+        names, F_all, mats = pickle.load(open(cache, "rb"))
+    else:
+        with mp.Pool(procs) as pool:
+            out = pool.map(states_job, sorted(te, key=lambda i: -C.L.nvar(C.I.load(i), "dec5")), chunksize=1)
+        names = out[0][1]
+        F_all = [row for _, _, f, _ in out for row in f]
+        mats = [m for _, _, _, ms in out for m in ms]
+        pickle.dump((names, F_all, mats), open(cache, "wb"))
     n_all = len(mats)
     if len(mats) > 20000:                         # B1 只用随机抽的 2 万个多候选状态（省时间）
         sel = np.random.default_rng(1).choice(len(mats), 20000, replace=False)
@@ -132,21 +137,27 @@ def main():
     isnew_il = il[:, F.I_IS_NEW] > 0.5
     rng = np.random.default_rng(0)
     flip = {}
+    big = np.concatenate(mats)                                    # 所有状态拼成一个矩阵，gs = 各状态的起止
+    gs = np.concatenate([[0], np.cumsum([len(M) for M in mats])])
+
+    def firsts(p, X):
+        """每个状态里分数最高的候选（同分取第一个，与 argsort 稳定排序一致）"""
+        sc = N.forward(p, X)
+        mx = np.maximum.reduceat(sc, gs[:-1])
+        hit = sc == np.repeat(mx, np.diff(gs))
+        pos = np.where(hit, np.arange(len(sc)), len(sc))
+        return np.minimum.reduceat(pos, gs[:-1])
     for es in ES:
         p = SR.A.rule_of(dict(map(SR.A.parse, ARMS))[es]).p
-        base = [int(np.argmax(N.forward(p, M))) for M in mats]
+        base = firsts(p, big)
         fr = []
         for j in range(F.NF):
             if j == F.I_IS_NEW:
                 fr.append(None); continue
             vals = il[~isnew_il, j] if j in ROBOT_IDX else il[isnew_il, j] if j in NEW_IDX else il[:, j]
-            ch = 0
-            for M, b in zip(mats, base):
-                Mp = M.copy(); rows = rows_of(Mp, j)
-                if rows.any():
-                    Mp[rows, j] = rng.choice(vals, rows.sum())
-                ch += int(np.argmax(N.forward(p, Mp))) != b
-            fr.append(ch / len(mats))
+            Xp = big.copy(); rows = rows_of(Xp, j)
+            Xp[rows, j] = rng.choice(vals, rows.sum())
+            fr.append(float(np.mean(firsts(p, Xp) != base)))
         flip[es] = fr
     res["flip"] = flip; res["n_mats"] = len(mats); res["n_mats_all"] = n_all
     # B2：代理分下降（训练实例，3 + 16 个基因）

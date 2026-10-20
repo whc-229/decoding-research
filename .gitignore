@@ -14,3 +14,6 @@ __pycache__/
 *.tgz
 **/_临时运行/
 **/backups/
+
+# 可解释性分析的状态缓存（187 MB，可由 interp.py 重新生成）
+**/interp_states.pkl
