@@ -44,6 +44,10 @@
 ## 待确认
 （Claude Code 遇到需要决策的问题写在这里）
 
+- [2026-10-20 实验 5] **DeepSeek 余额用完（402）**：rulegen 消融 full_s2、EoH run2/run3 已完成；full_s3（21 个候选）、score_s2（19）、
+  score_s3（23）、EoH run1（34 个样本）停在半途，可从断点续跑。充值后在 实验0_表示分析/neural/ 下运行 `bash resume_llm.sh` 即可
+  （会把测试集验证临时降到 6 个进程）。参考用量：EoH 每次运行约 60～100 次调用、输入 12～18 万 token、输出 40～52 万 token。
+
 ## 已完成
 （移到这里）
 
