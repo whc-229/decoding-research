@@ -10,10 +10,6 @@
 本次提交改动了 bench/fjsp2.py（新增 q 参数）和 bench/moea_fjsp2.py（新增 MOEA/D），默认行为不变：开始前先跑 `cd bench && python check_v2.py`（必须 0 不一致），
 并抽查 `python moea_fjsp2.py rk,sp0.25 1 2 /tmp/x.csv mk01 2000` 的 465 次结果应与 v2_main.csv 中 mk01 第 0 次相同（rk：55:199;66:195;69:190；sp0.25：45:162;46:161;47:160;49:157）。
 
-### T4 [待做] 排班：测试集验证扩到 20 次（单机重跑）
-- 在 rulegen/ 下：`nohup python ga_rule.py dec5,K0.25:default,K0.25:out/full/best_rule.py,K0.25:out/score_best_rule.py 20 6 out/val20.csv test > out/val20.log 2>&1 &`
-- 完成后：`python analyze_val.py out/val20.csv out/val20.md`，在 `报告/T4_测试集20次.md` 摘录"全部"和各组的表。
-
 ### T5 [待做] FJSP：MOEA/D 对照（检验结论与搜索算法无关）
 - bench/ 下：`nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_moead.csv big 5000 moead > v3_moead.log 2>&1 &`
 - 完成后：`python analyze_fjsp2.py v3_moead.csv report_v3_moead.md`，汇总写 `报告/T5_MOEAD.md`。
@@ -42,6 +38,11 @@
 
 ## 已完成
 （移到这里）
+
+### T4 [完成] 排班：测试集验证扩到 20 次（单机重跑）
+- 在 rulegen/ 下：`nohup python ga_rule.py dec5,K0.25:default,K0.25:out/full/best_rule.py,K0.25:out/score_best_rule.py 20 6 out/val20.csv test > out/val20.log 2>&1 &`
+- 完成后：`python analyze_val.py out/val20.csv out/val20.md`，在 `报告/T4_测试集20次.md` 摘录"全部"和各组的表。
+- 结果：47 实例 × 4 臂 × 20 次全部完成（4 进程，350 分钟）；两条 LLM 规则对 dec5 +0.154/+0.155 HV。H01_720h dec5 第 11 次无可行解。见 `报告/T4_测试集20次.md`。2026-10-21
 
 ### T3 [完成] FJSP：槽数 × 生效概率扫描（检验解析模型，最优先）
 - 目的：理论预测①最好解的偏离数 ≈ qK；②大预算下最优槽数 K 与 q 成反比（K·q ≈ 常数）；③小预算下最优 K 更小。编码名 `sp{比例}q{q}`，q = 随机基因下每个槽生效的概率（默认 0.4）。
