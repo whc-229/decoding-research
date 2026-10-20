@@ -23,7 +23,10 @@ RULES = (["默认=K0.25:default", "LLM(r47)=K0.25:out/full/best_rule.py", "LLM(r
          + [f"IL16(s{s})=K0.25:nn:out/nn_il_h16{'' if s == 0 else f'_s{s}'}.npz" for s in range(5)]
          + [f"IL32-16(s{s})=K0.25:nn:out/nn_il{'' if s == 0 else f'_s{s}'}.npz" for s in range(5)]
          + [f"ES16(s{s})=K0.25:nn:out/es/il_h16{'' if s == 0 else f'_s{s}'}/best.npz" for s in range(3)]
-         + [f"GP(run{r})=K0.25:../neural/out/gp/run{r}/best_rule.py" for r in range(1, 6)])
+         + [f"GP(run{r})=K0.25:../neural/out/gp/run{r}/best_rule.py" for r in range(1, 6)]
+         + [f"LLM-full({t})=K0.25:out/full_{t}/best_rule.py" for t in ("s2", "s3")]
+         + [f"LLM-score({t})=K0.25:out/score_{t}/best_rule.py" for t in ("s2", "s3")]
+         + [f"EoH(run{r})=K0.25:../neural/out/eoh/run{r}/best_rule.py" for r in range(1, 4)])
 OUTJ = os.path.join(C.OUT, "fresh_scores.json")
 OUTM = os.path.join(C.OUT, "fresh_scores.md")
 
@@ -110,7 +113,8 @@ def report(res, specs, tr):
             "| 方法 | 运行数 | 原 | 新平均 | 乐观偏差 | 相对默认的乐观偏差 |", "|---|---|---|---|---|---|"]
     meth = {}
     for n, _ in specs:
-        meth.setdefault(n.split("(")[0] if not n.startswith("LLM") else n, []).append(n)
+        m = {"LLM(r47)": "LLM-full", "LLM(r35)": "LLM-score"}.get(n, n.split("(")[0])
+        meth.setdefault(m, []).append(n)
     for m, ns in meth.items():
         o = [rows[n][0][0] for n in ns]; f = [rows[n][1] for n in ns]; d = [a - b for a, b in zip(o, f)]
         rg = lambda v: f"{np.mean(v):.4f}" + (f"（{min(v):.4f}～{max(v):.4f}）" if len(v) > 1 else "")
