@@ -1,0 +1,7 @@
+# 含 API 密钥，绝不提交
+实验0_表示分析/llm_config.json
+__pycache__/
+*.pyc
+_临时运行/
+backups/
+*.tgz
