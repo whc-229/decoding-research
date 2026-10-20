@@ -13,7 +13,8 @@ R = collections.defaultdict(list)
 for r in csv.DictReader(open(inp)):
     fr = [tuple(map(float, p.split(":"))) for p in r["front(makespan:workload;...)"].split(";")] if r["front(makespan:workload;...)"] else []
     R[(r["instance"], r["encoding"], int(r["evals"]))].append(fr)
-insts = sorted({k[0] for k in R}); encs = [e for e in ["rk", "pd", "sp0.1", "sp0.25", "sp0.5"] if any(k[1] == e for k in R)]
+insts = sorted({k[0] for k in R}); _order = ["rk", "pd", "sp0.1", "sp0.25", "sp0.5"]
+encs = [e for e in _order if any(k[1] == e for k in R)] + sorted({k[1] for k in R} - set(_order))   # 其他编码（如 sp0.35q0.2）排在后面
 budgets = sorted({k[2] for k in R})
 
 

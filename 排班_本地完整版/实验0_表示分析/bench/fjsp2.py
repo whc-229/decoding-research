@@ -9,7 +9,22 @@ import fjsp as F1
 
 ROOT = F1.ROOT
 DEV_ON = 0.6
-load, meta, nvar, k_slots = F1.load, F1.meta, F1.nvar, F1.k_slots
+load, meta, k_slots = F1.load, F1.meta, F1.k_slots
+
+
+def parse_sp(enc):
+    """"sp{K}" 或 "sp{K}q{q}" → (K, 生效阈值)。q 是随机基因下每个槽生效的概率，阈值 = 1 − q（默认 q = 0.4）"""
+    body = enc[2:]
+    if "q" in body:
+        k, q = body.split("q")
+        return int(k), 1.0 - float(q)
+    return int(body), DEV_ON
+
+
+def nvar(inst, enc):
+    if enc.startswith("sp"):
+        return 2 * parse_sp(enc)[0]
+    return F1.nvar(inst, enc)
 
 
 def refs(name, Mt=None):
@@ -83,11 +98,11 @@ def decode(inst, enc, g=None, insert=True, picks=None):
         return decode_rk(inst, g, insert)
     dev = {}
     if enc.startswith("sp"):
-        K = int(enc[2:])
+        K, on = parse_sp(enc)
         for k in range(K):
             p, a = g[2 * k], g[2 * k + 1]
-            if a >= DEV_ON:
-                dev[min(int(p * N), N - 1)] = (a - DEV_ON) / (1 - DEV_ON)
+            if a >= on:
+                dev[min(int(p * N), N - 1)] = (a - on) / (1 - on)
     for step in range(N):
         C = S.candidates()
         if enc == "pd":
