@@ -10,10 +10,6 @@
 本次提交改动了 bench/fjsp2.py（新增 q 参数）和 bench/moea_fjsp2.py（新增 MOEA/D），默认行为不变：开始前先跑 `cd bench && python check_v2.py`（必须 0 不一致），
 并抽查 `python moea_fjsp2.py rk,sp0.25 1 2 /tmp/x.csv mk01 2000` 的 465 次结果应与 v2_main.csv 中 mk01 第 0 次相同（rk：55:199;66:195;69:190；sp0.25：45:162;46:161;47:160;49:157）。
 
-### T5 [待做] FJSP：MOEA/D 对照（检验结论与搜索算法无关）
-- bench/ 下：`nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_moead.csv big 5000 moead > v3_moead.log 2>&1 &`
-- 完成后：`python analyze_fjsp2.py v3_moead.csv report_v3_moead.md`，汇总写 `报告/T5_MOEAD.md`。
-
 ### T6 [待做] FJSP：主实验最终版（单机、20 次）
 - 目的：论文最终数字全部来自同一台机器、每个实例 20 次。bench/ 下，两条依次跑（共约 10 小时，适合过夜）：
   ```
@@ -38,6 +34,11 @@
 
 ## 已完成
 （移到这里）
+
+### T5 [完成] FJSP：MOEA/D 对照（检验结论与搜索算法无关）
+- bench/ 下：`nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_moead.csv big 5000 moead > v3_moead.log 2>&1 &`
+- 完成后：`python analyze_fjsp2.py v3_moead.csv report_v3_moead.md`，汇总写 `报告/T5_MOEAD.md`。
+- 结果：78 实例 × 4 编码 × 10 次全部完成（6 进程，113 分钟）；5000 次时 sp0.5 对 rk +0.428 HV，75/0。见 `报告/T5_MOEAD.md`。2026-10-21
 
 ### T4 [完成] 排班：测试集验证扩到 20 次（单机重跑）
 - 在 rulegen/ 下：`nohup python ga_rule.py dec5,K0.25:default,K0.25:out/full/best_rule.py,K0.25:out/score_best_rule.py 20 6 out/val20.csv test > out/val20.log 2>&1 &`
