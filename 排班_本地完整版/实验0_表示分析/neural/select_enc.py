@@ -104,7 +104,8 @@ def report():
          "选档：每档 100 个固定随机基因的最好解（先资源数后均衡度），平局按 dec5、K0.25、K0.5。"
          "方法的值 = 选中档臂的 5 次 MOEA 平均 HV，再对同一族的规则（ES16 3 条、GP 5 条）取平均。"
          "p = 实例层面配对 Wilcoxon；Holm 校正在每个分组内对下表的全部比较（每族 4 个对照 × 2 族 = 8 个）一起做。"
-         "\"事后最好档\"按 MOEA 结果挑，只作上限，不参与检验。\n"]
+         "\"事后最好档\"按 MOEA 结果挑，只作上限，不参与检验。"
+         "好/差实例数 = 实例平均 HV 差为正 / 负的实例数（不是逐实例检验）。\n"]
     for gname, grp in [("全部", insts)] + [(g + " 组", [i for i in insts if I.group(i) == g]) for g in ["原", "E", "H", "M"]]:
         if not grp:
             continue
@@ -121,6 +122,17 @@ def report():
         L += ["\n| 选档方法 | 对照 | 平均差 | p | Holm p |", "|---|---|---|---|---|"]
         for (f, ref, dm, p), pa in zip(tests, adj):
             L.append(f"| 选档+{f} | {ref} | {dm:+.3f} | {p:.3g} | {pa:.3g}{'*' if pa < 0.05 else ''} |")
+        tf = []                                          # 固定档对 dec5 / dec5-765（另一个 Holm 检验族：2 档 × 2 族 × 2 对照 = 8 个）
+        for f in fam:
+            for k in ("K0.25", "K0.5"):
+                for ref in ("dec5", "dec5-765"):
+                    d = np.array([V[f"{k}+{f}"][i] - V[ref][i] for i in grp])
+                    p = wilcoxon(d).pvalue if len(grp) > 1 and np.any(d != 0) else 1.0
+                    tf.append((f"{k}+{f}", ref, d.mean(), p, sum(x > 0 for x in d), sum(x < 0 for x in d)))
+        af = AM.holm([t[3] for t in tf])
+        L += ["\n固定档对 dec5（另一族 Holm）：\n", "| 固定档方法 | 对照 | 平均差 | 好/差实例数 | p | Holm p |", "|---|---|---|---|---|---|"]
+        for (m, ref, dm, p, up, dn), pa in zip(tf, af):
+            L.append(f"| {m} | {ref} | {dm:+.3f} | {up}/{dn} | {p:.3g} | {pa:.3g}{'*' if pa < 0.05 else ''} |")
         L += ["\n各档被选中的比例（该组实例 × 该族规则）：\n", "| 族 | dec5 | K0.25 | K0.5 |", "|---|---|---|---|"]
         for f, rs in fam.items():
             c = [pick[(i, r)] for i in grp for r in rs]
