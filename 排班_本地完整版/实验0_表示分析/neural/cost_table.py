@@ -161,14 +161,24 @@ def plot(R, G, E, ER, IL):
             ax.step(xs, ys, where="post", color=col[m], lw=2 if k == 0 else 1.2, alpha=1 if k == 0 else 0.55,
                     label=m if k == 0 else None, solid_capstyle="round")
             rows += [(m, k + 1, x, y) for x, y in zip(xs, ys)]
-        labels.append([m, max(c[0][-1] for c in curves), float(np.mean([c[1][-1] for c in curves]))])
+        ye = float(np.mean([c[1][-1] for c in curves]))
+        if ye < 0.70:                                   # 有的运行一直在坐标范围外（随机初始化种子 0 始终为 0）：标在最好那次的线尾
+            ye = max(c[1][-1] for c in curves)
+        labels.append([m, max(c[0][-1] for c in curves), ye])
+    labels = [l for l in labels if l[0] != "ES16（随机初始化）"] + [l for l in labels if l[0] == "ES16（随机初始化）"]
     labels.sort(key=lambda t: t[2])                     # 线尾位置相近（横向差 < 0.2 个数量级）的标签按 y 排开，至少隔 0.0045
     for k in range(1, len(labels)):
-        near = [l for l in labels[:k] if abs(np.log10(l[1]) - np.log10(labels[k][1])) < 0.2]
+        near = [l for l in labels[:k] if abs(np.log10(l[1]) - np.log10(labels[k][1])) < 0.2 and l[0] != "ES16（随机初始化）"]
         if near:
             labels[k][2] = max(labels[k][2], max(l[2] for l in near) + 0.0045)
     for m, xe, ye in labels:
+        if m == "ES16（随机初始化）":                        # 线尾挤在 GP、IL 预热 ES 中间：标在紫线尾的下方
+            continue
         ax.annotate(m, (xe, ye), xytext=(6, 0), textcoords="offset points", va="center", fontsize=8.5, color=ink)
+    if ER:
+        c = max((e["curve"] for e in ER), key=lambda c: c[1][-1])
+        ax.annotate("ES16（随机初始化）", (c[0][-1], c[1][-1]), xytext=(4, -16), textcoords="offset points",
+                    va="center", ha="center", fontsize=8.5, color=ink)
     ax.scatter([TEACHER] * len(IL), [i["best"] for i in IL], s=36, color=col["IL16"], edgecolor="#fcfcfb", linewidth=1.5,
                zorder=5, label="IL16（老师数据 139 当量）")
     rows += [("IL16", k + 1, TEACHER, i["best"]) for k, i in enumerate(IL)]
@@ -177,7 +187,7 @@ def plot(R, G, E, ER, IL):
     ax.set_xscale("log"); ax.set_xlim(0.9, 3000); ax.set_ylim(0.70, 0.845)
     ax.set_xlabel("累计代理评价当量（1 当量 = 15 实例 × 67 基因的解码；网络计入老师数据）", color=muted, fontsize=9)
     ax.set_ylabel("至今最好的训练集代理分（原 67 个基因）", color=muted, fontsize=9)
-    ax.set_title("设计成本—代理分：每种方法的各次设计运行（粗线为第 1 次）", color=ink, fontsize=11, loc="left")
+    ax.set_title("设计成本—代理分：每种方法的各次设计运行（粗线为第 1 次；随机初始化 ES 种子 0 始终为 0，在图外）", color=ink, fontsize=11, loc="left")
     ax.grid(True, which="major", color=grid, lw=0.8); ax.set_axisbelow(True)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
