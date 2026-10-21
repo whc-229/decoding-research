@@ -24,7 +24,7 @@ import instances as I  # noqa: E402
 
 ALIAS = {"K0.25:LLM(r47)": ("LLM-full", "r47"), "K0.25:LLM(r35)": ("LLM-score", "r35"),
          "K0.25:default": ("默认规则", "—"), "dec5": ("dec5", "—")}
-ORDER = ["dec5", "默认规则", "LLM-full", "LLM-score", "EoH", "GP", "IL16", "ES16", "IL32-16"]
+ORDER = ["dec5", "dec5-765", "默认规则", "LLM-full", "LLM-score", "EoH", "GP", "IL16", "ES16", "IL32-16", "GP@K0.5", "ES16@K0.5"]
 REFS = ["dec5", "默认规则"]
 
 
@@ -32,8 +32,11 @@ def method_of(arm):
     """臂名 → (方法, 设计运行)"""
     if arm in ALIAS:
         return ALIAS[arm]
-    m = re.match(r"^(?:K[\d.]+:)?(.+?)\((.+)\)$", arm)
-    return (m.group(1), m.group(2)) if m else (arm, "—")
+    m = re.match(r"^(?:K([\d.]+):)?(.+?)\((.+)\)$", arm)
+    if not m:
+        return (arm, "—")
+    k, name, run = m.groups()
+    return (name if k in (None, "0.25") else f"{name}@K{k}", run)       # K0.25 是默认档；其他档的方法名带上 @K
 
 
 def hv(P, ref=1.1):
