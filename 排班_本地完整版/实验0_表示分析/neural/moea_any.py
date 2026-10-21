@@ -9,7 +9,7 @@ MOEA/D：照 bench/moea_fjsp2.py 的 run_moead——30 个权向量 (i/29, 1−i
   不可行解的 Tchebycheff 值记为 +∞（比任何可行解都差，不可行子代不会替换可行邻居；两个都不可行时也不替换）。
   记录口径与 NSGA-II 相同：检查点时全部已评价可行解的非支配集。
 
-用法: python moea_any.py 臂[,臂...] 次数 进程数|auto 输出.csv [test|train|实例,...] [--algo nsga2|moead] [--checks 465,2000]
+用法: python moea_any.py 臂[,臂...] 次数 进程数|auto 输出.csv [test|train|实例,...] [--algo nsga2|moead] [--checks 465,2000] [--seed-base 1000]
   最后一个检查点 = 评价次数。输出列与 ga_any.py 相同，evaluations 列 = 检查点；每次运行每个检查点一行。
   可续跑：(实例, 臂, 次号) 在最后一个检查点已有记录的跳过。
 """
@@ -120,10 +120,10 @@ def run_moead(sc, dec, seed, checks, T=6, nr=2):
 
 
 def job(args):
-    inst, name, spec, k, algo, checks = args
+    inst, name, spec, k, algo, checks, seed_base = args
     sc = C.I.load(inst)
     t = time.time()
-    snaps = (run_moead if algo == "moead" else run_nsga2)(sc, A.decoder(spec), 1000 + k, checks)
+    snaps = (run_moead if algo == "moead" else run_nsga2)(sc, A.decoder(spec), seed_base + k, checks)
     secs = f"{time.time() - t:.1f}"
     nv = C.L.nvar(sc, "dec5")
     return [[inst, name, k, secs, c, nv, ";".join(f"{int(a)}:{b:.3f}" for a, b in snaps[c])] for c in checks]
@@ -136,6 +136,7 @@ def main():
     ap.add_argument("sel", nargs="?", default="test")
     ap.add_argument("--algo", default="nsga2", choices=["nsga2", "moead"])
     ap.add_argument("--checks", default="465")
+    ap.add_argument("--seed-base", type=int, default=1000, help="种子 = 此值 + 次号（测试集验证 1000；训练实例上选 K 用 5000）")
     a = ap.parse_args()
     arms = [A.parse(s) for s in a.arms.split(",")]
     checks = sorted(int(c) for c in a.checks.split(","))
@@ -149,7 +150,7 @@ def main():
     for _, spec in arms:
         if spec != "dec5":
             A.rule_of(spec)
-    jobs = [(i, n, s, k, a.algo, checks) for k in range(a.reps) for i in insts for n, s in arms if (i, n, k) not in done]
+    jobs = [(i, n, s, k, a.algo, checks, a.seed_base) for k in range(a.reps) for i in insts for n, s in arms if (i, n, k) not in done]
     jobs.sort(key=lambda j: -C.L.nvar(C.I.load(j[0]), "dec5"))
     procs = C.nprocs(a.procs)
     print(f"{a.algo}，检查点 {checks}：{len(jobs)} 次运行待做（已有 {len(done)}），{procs} 个进程", flush=True)
