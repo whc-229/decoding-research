@@ -1,16 +1,103 @@
-\section{Representation Analysis}
+\section{What Makes a Decoder Work?}
 \label{sec:repr}
 
-% 证据：实验 0 结论
-% 要点：中性率、初始供给与 HV 的相关（+0.91、+0.80）；局部性差但不决定性能；好解被少表示
-% 图 2：中性率 / 初始供给 vs HV
+% 证据：实验 0 结论 / 实验0_报告.md；排班_解码方案汇总.md（精确最优解的结构）
 
-\todo{Neutrality, initial supply and their correlation with HV; locality; under-representation of good solutions.}
+The six decoders of Section~\ref{sec:problem:decoders} differ widely in performance.
+This section asks which property of the genotype--phenotype map explains the difference.
+The answer motivates the design in Section~\ref{sec:method}.
 
-\begin{figure}[t]
+\subsection{Measures}
+\label{sec:repr:measures}
+
+The phenotype is the dispatch sequence together with the types of the new tools; it fixes the roster.
+For each instance and decoder we sample 1000 uniform random genotypes and compute:
+\begin{itemize}
+  \item \textbf{Neutral rate}: the probability that resampling one robot gene leaves the phenotype unchanged.
+  It measures how many genotypes map to the same roster, \ie the redundancy of the decoder.
+  \item \textbf{Initial supply}: the probability that a random genotype decodes to a roster with $\fres \le \LB + 1$.
+  It measures how strongly the redundancy favors good rosters.
+  \item \textbf{Cascade ratio}: after a single-gene change at shift $i$, the fraction of later shifts whose dispatch changes.
+  It measures locality.
+  \item \textbf{Reachability}: whether some genotype decodes to the exact optimal roster, which we obtain by dynamic programming on the four original scenarios.
+\end{itemize}
+Neutral rate and cascade ratio are measured on 100 random feasible genotypes and on the 30 best of the 1000 samples, with five single-gene changes each.
+Performance is the hypervolume (HV) reached by NSGA-II \cite{deb2002nsga2} (population 30, about 465 evaluations).
+For each instance we compute the Spearman correlation between a measure and HV across the decoders, and report the median over 16 instances
+(the four original scenarios and 12 instances of the E, H and M families).
+
+\subsection{Findings}
+\label{sec:repr:findings}
+
+\textbf{Redundancy helps when it favors good rosters.}
+Table~\ref{tab:neutral} shows that each step from \dec{0} to \dec{5} makes the map more redundant.
+On the original single-type scenario the neutral rate rises from 0.30 to 0.69; on the three multi-type scenarios it rises from about 0.1 to about 0.5.
+The redundancy is not uniform: the initial supply rises with it.
+Across instances, the median correlation with HV is $+0.91$ for the neutral rate (same sign on 12 of 12 instances)
+and $+0.80$ for the initial supply (14 of 14).
+This agrees with the theory of redundant representations \cite{rothlauf2006representations}:
+non-uniform redundancy improves search when it over-represents good solutions.
+
+\textbf{Locality is poor in every decoder and does not explain performance.}
+A single-gene change alters 39--61\% of the later shifts, for all six decoders, with no trend from \dec{0} to \dec{5}.
+The correlation of the cascade ratio with HV is only $+0.23$ (7 of 12).
+In a sequential decoder, a changed decision changes the state, and every later gene is read in the new state.
+All improvements so far came from better bias, not from better locality.
+
+\textbf{Bias is useful but not robust.}
+The capacity look-ahead of \dec{3}--\dec{5} replaces some \new actions by \reuse actions.
+On two of the four scenarios this removes the optimal roster from the search space: the roster opens a fifth robot at shift 9, and the look-ahead never allows it.
+Restoring reachability does not pay off.
+When we add a gene band that forces \new, results get significantly worse on two scenarios and do not change on the other two.
+The bias costs reachability, yet it is worth more than what it removes.
+The same bias can still be wrong on other instances; Section~\ref{sec:exp-static} shows such a case.
+
+\textbf{Well-balanced rosters are rarely sampled.}
+Under every decoder, the probability that a random genotype gives $\fres = \LB$ and an imbalance within 1.5 times the optimum is at most 1.7\%,
+and essentially zero on the three multi-type scenarios.
+The remaining gap to the optimal front lies in this layer: at $\fres = \LB$, the best imbalance found is 1.2--2.3 times the optimum.
+
+\begin{table}[t]
   \centering
-  % \includegraphics[width=\columnwidth]{fig2_neutrality_hv}
-  \todo{Figure 2}
-  \caption{Neutral rate and initial supply versus HV.}
-  \label{fig:neutrality}
-\end{figure}
+  \caption{Neutral rate / initial supply $P(\fres \le \LB+1)$ of 1000 random genotypes on the four original scenarios.}
+  \label{tab:neutral}
+  \footnotesize
+  \setlength{\tabcolsep}{1.6pt}
+  \begin{tabular}{@{}lcccccc@{}}
+    \toprule
+    Scenario & \dec{0} & \dec{1} & \dec{2} & \dec{3} & \dec{4} & \dec{5} \\
+    \midrule
+    Single-type & 0.30/.000 & 0.42/.007 & 0.41/.007 & 0.61/.919 & 0.61/.929 & 0.69/.981 \\
+    3 types, 720 h  & 0.10/.000 & 0.21/.000 & 0.22/.000 & 0.44/.020 & 0.46/.024 & 0.50/.032 \\
+    3 types, 1440 h & 0.06/.000 & 0.13/.000 & 0.14/.000 & 0.38/.014 & 0.42/.008 & 0.44/.029 \\
+    3 types, tight   & 0.12/.000 & 0.24/.000 & 0.19/.000 & 0.44/.020 & 0.47/.024 & 0.49/.032 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{What Optimal Rosters Look Like}
+\label{sec:repr:structure}
+
+The exact optimal rosters have a simple structure.
+About 90\% of their shifts follow one rule: send the available robot with the fewest duties.
+The other 10\% deviate from it; in the single-type scenario, 10 of the 65 reuse decisions deviate.
+The deviations sit at a few critical shifts; everywhere else the rule is right.
+
+A per-shift encoding does not express this structure well.
+Under \dec{5}, a uniform random genotype deviates from the ranking at many shifts, and each deviation changes the state seen by all later genes.
+The rule itself also matters a great deal.
+On the single-type scenario, following the fewest-duties rule without deviations needs 11--17 resources,
+because the robots fall into maintenance together and leave gaps.
+A rule that ranks robots by remaining budget reaches the lower bound of 9 without any search.
+
+\subsection{Implications for Design}
+\label{sec:repr:implications}
+
+These findings lead to three requirements.
+\begin{enumerate}
+  \item The encoding should express ``a rule plus a few deviations'' directly. The genes should say where and how to deviate, and the rule should decide everything else.
+  \item The strength of the bias should be a parameter. A fixed bias is useful but not robust, so the representation needs a knob that trades bias against freedom.
+  \item The rule should be chosen for the bias it gives to search, not only for the quality of the single roster it builds.
+\end{enumerate}
+Section~\ref{sec:method} turns these requirements into a decoder.
+Section~\ref{sec:theory} analyzes the knob.

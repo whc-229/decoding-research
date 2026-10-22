@@ -1,19 +1,187 @@
 \section{A Bias--Freedom Model}
 \label{sec:theory}
 
-% 证据：实验 6a；T11 报告
-% 内容：规则距离模型、冗余度精确式、平均场模型；两个区间；多目标扩展（T11-B）
-% 图 4：最优 K 随预算与 d；表 2：两个区间的损失
-% 不能写："理论预言了 K0.5"
+% 证据：实验 6a（theory/model.py、sweep.py、meanfield.py）；T11 报告（bias_multi.py，检验 B、D）
+% 不能写："理论预言了 K0.5"；区间比例 1/q 在 FJSP 上未定量验证（只在第 IX 节写定性结论）
+
+The density $\dens$ trades bias for freedom.
+This section explains the trade-off with a model that is small enough to analyze and to simulate exhaustively.
+The model answers two questions: how many slots are needed, and how the best number changes with the evaluation budget.
 
 \subsection{Rule-Distance Model}
-\todo{Model setup: distance $\dist$, alternatives $\nalt$, deviation budget $\K$.}
+\label{sec:theory:model}
 
-\subsection{Exact Redundancy}
-\todo{Closed-form redundancy.}
+A solution is a string $\mathbf{z} \in \{0, \dots, \nval-1\}^{\npos}$ of $\npos$ decisions.
+Value $0$ is the rule's choice, so the rule's solution is the all-zero string.
+The target $\mathbf{t}$ differs from the rule in $\dist$ positions, where it takes nonzero values.
+The objective is the Hamming distance to the target, $f(\mathbf{z}) = |\{j : z_j \ne t_j\}|$, to be minimized.
+Here $\dist$ is the \emph{rule distance}: the number of decisions in which a good solution departs from the rule.
+The model ignores cascades, \ie a changed decision does not change the meaning of later ones.
+Section~\ref{sec:repr} showed that cascades do not explain performance in our decoders.
 
-\subsection{Mean-Field Dynamics and Two Regimes}
-\todo{$\K<\dist$ stalls above $\dist-\K$; small budget $\K\approx\dist$; large budget $\K\approx\dist/\nalt$.}
+We compare two encodings with genes in $[0,1)$.
+\begin{itemize}
+  \item \textbf{Per-step (PS)}, the abstraction of \dec{0}--\dec{5}: one gene per decision, $z_j = \lfloor g_j \nval \rfloor$.
+  \item \textbf{Sparse deviation (SP$_\K$)}, the abstraction of \SDD: $\K$ slots $(p_k, a_k)$ as in Section~\ref{sec:method:genotype}.
+  Slot $k$ is active if $a_k \ge 0.6$, so it is active with probability $\qon = 0.4$ under a random genotype.
+  It sets position $\lfloor p_k \npos \rfloor$ to the nonzero value $1 + \lfloor u_k (\nval-1) \rfloor$ with $u_k = (a_k-0.6)/0.4$.
+  Later slots overwrite earlier ones.
+\end{itemize}
 
-\subsection{Multi-Objective Extension}
-\todo{Optimum follows the mean distance (T11-B).}
+\subsection{Three Properties of Sparse Deviation}
+\label{sec:theory:props}
+
+The first property describes where random genotypes start.
+
+\begin{proposition}[Initial distance]
+\label{prop:init}
+For a uniform random genotype, let $\pi = 1 - (1 - \qon/\npos)^\K$ be the probability that a given position is deviated. Then
+\begin{equation}
+  \mathbb{E}[f_{\mathrm{SP}}] = (\npos - \dist)\,\pi + \dist \left(1 - \frac{\pi}{\nval-1}\right).
+\end{equation}
+For PS, $\mathbb{E}[f_{\mathrm{PS}}] = \npos (1 - 1/\nval)$.
+\end{proposition}
+
+\begin{IEEEproof}
+Each slot hits a given position with probability $\qon/\npos$, independently of the other slots, so the position is deviated with probability $\pi$.
+The last write at a deviated position is uniform over the $\nval-1$ nonzero values.
+A non-target position is wrong exactly when it is deviated.
+A target position is right exactly when it is deviated and receives the right value, which has probability $\pi/(\nval-1)$.
+\end{IEEEproof}
+
+For small $\K$, $\pi \approx \qon\K/\npos$ and $\mathbb{E}[f_{\mathrm{SP}}] \approx \dist + \qon\K$.
+Random genotypes start near the rule, about $\qon\K$ wrong deviations away from it.
+Under PS they start at distance $\npos(1-1/\nval)$, whatever the rule is; for $\npos = 100$ and $\nval = 4$ this is 75.
+
+The second property limits what a given $\K$ can reach.
+
+\begin{proposition}[Freedom floor]
+\label{prop:floor}
+Every genotype of SP$_\K$ deviates at no more than $\K$ positions, so $\min_{\genome} f_{\mathrm{SP}} \ge \max(0, \dist - \K)$.
+\end{proposition}
+
+If $\K < \dist$, no amount of search reaches the target.
+The search stalls at least $\dist - \K$ decisions away from it.
+
+The third property counts how many genotypes represent the target.
+
+\begin{proposition}[Redundancy of the target]
+\label{prop:red}
+The probability that a uniform random genotype of SP$_\K$ decodes exactly to $\mathbf{t}$ is
+\begin{equation}
+  r(\K) = \frac{\dist!}{(\nval-1)^{\dist}} \sum_{J=\dist}^{\K} \binom{\K}{J} \qon^J (1-\qon)^{\K-J} \npos^{-J}\, \mathcal{S}(J, \dist),
+\end{equation}
+where $\mathcal{S}(J,\dist)$ is the Stirling number of the second kind. In particular, $r(\K) = 0$ for $\K < \dist$.
+\end{proposition}
+
+\begin{IEEEproof}
+Let $J$ be the number of active slots; $J$ is binomial with parameters $\K$ and $\qon$.
+The decoded string equals $\mathbf{t}$ exactly when the $J$ active slots fall only on the $\dist$ target positions,
+cover every one of them, and the last write at each one has the right value.
+Of the $\npos^J$ equally likely placements, $\dist!\,\mathcal{S}(J,\dist)$ map the slots onto the $\dist$ positions surjectively.
+Each of the $\dist$ last writes is right with probability $1/(\nval-1)$.
+\end{IEEEproof}
+
+\begin{corollary}
+\label{cor:kstar}
+Keeping only the leading term $J = \dist$, $r(\K+1)/r(\K) = (\K+1)(1-\qon)/(\K+1-\dist)$, which is at least one exactly when $\K + 1 \le \dist/\qon$.
+The redundancy of the target is therefore largest near $\K^\ast \approx \dist/\qon$.
+\end{corollary}
+
+The exact maximizers agree with the corollary.
+For $\npos = 100$ and $\nval = 4$, they are $\K^\ast = 12$, 26 and 55 for $\dist = 5$, 10 and 20, against $\dist/\qon = 12.5$, 25 and 50.
+For PS the target has redundancy $\nval^{-\npos}$, independent of the rule.
+
+Together, the three properties describe the trade-off.
+With $\K < \dist$ the target is out of reach.
+With $\K$ near $\dist/\qon$ the target is represented by the most genotypes.
+Beyond that, random genotypes deviate at too many wrong positions, and both the start and the redundancy get worse.
+
+\subsection{Behavior Under a Fixed Budget}
+\label{sec:theory:budget}
+
+The properties above describe the search space, not the search.
+To see which $\K$ is best for a given number of evaluations, we run a GA with the operators of our NSGA-II:
+SBX ($\eta = 20$, probability 0.9), polynomial mutation ($\eta = 20$, rate $1/n$), population 30 and truncation selection.
+We use $\npos = 100$, $\nval = 4$, nine values of $\dist$ between 0 and 80, eleven values of $\K$ between 5 and 100, and 20 runs per setting.
+
+Table~\ref{tab:theory-budget} shows two regimes.
+\begin{itemize}
+  \item \textbf{Small budget (465 evaluations).} The best $\K$ is close to $\dist$ or below it.
+  \item \textbf{Large budget (10\,000 evaluations).} The best $\K$ moves up to about $\dist/\qon$, where the target is most redundant.
+\end{itemize}
+A fixed $\K = 25$ is good only in between: with $\dist = 40$ and 10\,000 evaluations it ends at distance 29.7, while $\K = 100$ reaches 12.1.
+PS is far behind in all settings: its final distance is above 40 even after 10\,000 evaluations.
+
+\begin{table}[t]
+  \centering
+  \caption{Best number of slots $\K$ in the rule-distance model ($\npos = 100$, $\nval = 4$, $\qon = 0.4$). Entries: best $\K$ (final distance). Mean of 20 runs.}
+  \label{tab:theory-budget}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}rrccc@{}}
+    \toprule
+    $\dist$ & $\dist/\qon$ & 465 evals & 2000 evals & 10\,000 evals \\
+    \midrule
+    5  & 12.5 & 5 (4.0)       & 15 (3.5)  & 20 (2.4) \\
+    10 & 25   & 5, 10 (8.6)   & 25 (6.8)  & 50 (3.8) \\
+    20 & 50   & 10 (17.2)     & 30 (13.6) & 75 (6.8) \\
+    40 & 100  & 20, 30 (35.1) & 60 (27.1) & 100$^\dagger$ (12.1) \\
+    \bottomrule
+    \multicolumn{5}{@{}l}{\footnotesize $^\dagger$Largest value tested.}
+  \end{tabular}
+\end{table}
+
+\subsection{Why the Best Number of Slots Grows With the Budget}
+\label{sec:theory:meanfield}
+
+A mean-field model makes the mechanism visible.
+We split the $\K$ slots into $w$ wrong active slots, $c$ correct active slots, and $i = \K - w - c$ inactive slots, so that $f = w + (\dist - c)$.
+An offspring changes about one gene, so a given slot is touched with probability about $1/\K$.
+With elitist selection, only changes that lower $f$ survive, and there are three of them:
+\begin{align}
+  \text{clean:}  &\quad w \to w-1        &&\text{rate } \alpha\, \tfrac{w}{2\K}, \\
+  \text{repair:} &\quad c \to c+1        &&\text{rate } \alpha\, \tfrac{i}{2\K} \cdot \tfrac{\dist - c}{\npos(\nval-1)}, \\
+  \text{move:}   &\quad w-1,\ c+1        &&\text{rate } \beta\, \tfrac{w}{2\K} \cdot \tfrac{\dist - c}{\npos(\nval-1)}.
+\end{align}
+The initial values of $w$ and $c$ follow from Proposition~\ref{prop:init}.
+The constants $\alpha$ and $\beta$ depend only on the operators.
+Fitted on the runs with 465 and 2000 evaluations ($\alpha = 0.05$, $\beta = 1.5$),
+the model predicts the final distances after 10\,000 evaluations with a correlation of 0.994.
+
+The two regimes follow from the two kinds of events.
+Every wrong active slot costs one unit of distance and must be cleaned.
+There are about $\qon\K$ of them at the start, so their cost grows with $\K$ and is paid first.
+A repair needs an inactive slot that lands on a missing position with the right value.
+When $\K$ is close to $\dist$, the inactive slots run out as the search approaches the target, and repairs slow down.
+A small budget is spent mostly on cleaning, which favors few slots.
+A large budget is limited by repairs, which favors spare slots.
+
+\subsection{Several Good Solutions}
+\label{sec:theory:multi}
+
+A Pareto front contains many good solutions, and they lie at different distances from the rule.
+We extend the model to $t$ targets at distances $\dist_1, \dots, \dist_t$ and run NSGA-II on the vector of distances to the targets.
+Performance is the mean, over targets, of the smallest distance reached.
+
+The best $\K$ follows the mean distance rather than the smallest one.
+For example, with targets at distances 2 and 40 and 2000 evaluations, the best $\K$ is 30;
+for the near target alone it would be 5.
+Over all target sets, the best $\K$ is up to 7.5 times the smallest distance at 465 evaluations and up to 15 times at 2000 evaluations.
+A density chosen to reach the nearest good solution is therefore too small for a front.
+
+One more factor raises the best $\K$.
+In the base model an unnecessary deviation costs as much as a wrong decision.
+If it costs less, the best $\K$ grows: when the cost falls to 0.1, doubling $\K$ from 25 to 50 no longer hurts at $\dist = 5$.
+A redundant decoder lowers this cost, since many deviations do not change the solution.
+
+\subsection{Consequences for the Method}
+\label{sec:theory:consequences}
+
+The model gives three rules of thumb, which the experiments test.
+\begin{enumerate}
+  \item The density must be at least as large as the typical rule distance; otherwise the search stalls (Proposition~\ref{prop:floor}).
+  \item Larger budgets call for more slots (Table~\ref{tab:theory-budget}).
+  \item In multi-objective search the relevant distance is the mean distance to the front, not the distance to the nearest good solution (Section~\ref{sec:theory:multi}).
+\end{enumerate}
+The model does not give the best density for a real instance, because $\dist$ is unknown before search.
+This is why \SDD chooses $\dens$ on training instances (Section~\ref{sec:method:k}).

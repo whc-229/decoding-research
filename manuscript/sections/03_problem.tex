@@ -1,25 +1,144 @@
 \section{Problem and Baseline Decoders}
 \label{sec:problem}
 
-% 证据：实验 0 报告；exact/mirror.py
-% 内容：值岗排班模型（机器人–工具）、双目标（资源数、均衡度）、实例族（原 4、E/H/M）；基线解码 dec0～dec5
-% 表 1：实例族参数
+% 证据：实验 0 报告；exact/mirror.py；tools/gen_family*.py；rulegen/instances.py
 
-\subsection{Duty Rostering Model}
-\todo{Sets, decision variables, constraints.}
+\subsection{Robot--Tool Duty Rostering}
+\label{sec:problem:model}
+
+A duty post must be staffed by one robot at every moment of the horizon $[0,\horizon]$.
+Robots serve the post in \emph{shifts} that follow each other without gaps:
+shift $i$ starts at the time $E_{i-1}$ at which shift $i-1$ ends, and it ends at $E_i = E_{i-1} + w_\tau$,
+where $w_\tau$ is the duty length of the robot's type $\tau$.
+The roster is complete once $E_i \ge \horizon$.
+
+Each robot type $\tau$ has an outbound travel time $o_\tau$, a return time $b_\tau$, a charging time $c_\tau$ and a maintenance time $\mu_\tau$.
+A robot can perform at most $n_\tau$ duties between two maintenances.
+After a duty, it returns, its tools are removed, and it either charges or, if its duty budget is used up, goes to maintenance, which resets the budget.
+A robot is \emph{available} for a shift that starts at $E$ if it is ready by $E - o_\tau$ and has budget for one more duty.
+At most $L_\tau$ robots of type $\tau$ can be used.
+
+Every duty also needs $\nu_\tau$ tools whose types are compatible with $\tau$.
+A tool is busy for its installation, the robot's travel and duty, its removal and a rest period.
+When a robot is dispatched, ready compatible tools are reused first (earliest ready first).
+Missing tools are created, and the type of a new tool is a decision.
+At most $L_k$ tools of type $k$ can be used.
+A roster is infeasible if a required robot or tool cannot be supplied within these limits.
+
+A roster is therefore fixed by two sequences: the dispatch decision of every shift, and the types of the newly created tools.
+The dispatch decision at shift $i$ is an action
+\begin{equation}
+  \act_i \in \{\reuse(r) : r \in \avail_i\} \cup \{\new(\tau)\},
+\end{equation}
+where $\avail_i$ is the set of available robots.
+$\reuse(r)$ sends an existing robot; $\new(\tau)$ opens a new robot of type $\tau$.
+The state, and hence $\avail_{i+1}$, depends on all earlier actions.
+This dependence is what makes the problem hard to encode.
 
 \subsection{Objectives}
-\todo{Bi-objective formulation: number of resources and balance; HV as the main indicator.}
+\label{sec:problem:objectives}
 
-\subsection{Instance Families}
-\todo{Original 4 instances and families E/H/M; Table~\ref{tab:instances}.}
+Both objectives are minimized.
+The first is the resource count, \ie the number of robots plus the number of tools that are used:
+\begin{equation}
+  \fres = |\mathcal{R}| + |\mathcal{T}|.
+\end{equation}
+The second is the imbalance of the robot fleet:
+\begin{equation}
+  \fbal = 0.3\,\sigma(\mathbf{n}) + 0.4\,\sigma(\mathbf{h}) + 0.3\,\sigma(\Delta\mathbf{t}),
+\end{equation}
+where $\mathbf{n}$ and $\mathbf{h}$ are the duty counts and the total duty hours of the robots,
+$\Delta\mathbf{t}$ are the gaps between consecutive first-maintenance times, and $\sigma(\cdot)$ is the standard deviation.
+A small $\fbal$ means that wear is spread evenly and that maintenances are staggered rather than synchronized.
+The two objectives conflict: a small fleet must work its robots hard and unevenly, and an even fleet needs spare robots.
+
+For each instance we compute a lower bound $\LB$ on $\fres$.
+The robot part comes from an exact feasibility search on a relaxation with unlimited tools;
+the tool part comes from the tools that two consecutive shifts cannot share.
+We use $\LB$ to normalize the resource axis (Section~\ref{sec:exp-static}).
+
+\subsection{Instances}
+\label{sec:problem:instances}
+
+Table~\ref{tab:instances} lists the 62 instances.
+The four original scenarios are hand-built:
+one is the request file of the scheduling software that motivated this work (one robot type, 700\,h),
+and three have three robot types and four tool types, one of them with tight fleet limits.
+The other 58 instances are generated in three families that differ in fleet structure:
+\begin{itemize}
+  \item \textbf{E} (homogeneous): one robot type.
+  \item \textbf{H} (heterogeneous, equal duty length): two or three robot types, all with 10\,h duties.
+  \item \textbf{M} (heterogeneous, mixed duty length): two or three robot types with duties drawn from $\{6,8,10,12\}$\,h.
+        Shifts no longer align to a fixed grid.
+\end{itemize}
+Robot parameters are drawn uniformly: travel 1--2\,h, charging 2--5\,h, maintenance 48--120\,h,
+2--5 duties per maintenance cycle, 2--3 tools per duty, and 6--10 robots per type.
+Tools take 1--2\,h to install or remove and rest for 3--8\,h.
+We generated 64 instances and removed two for which no method found a feasible roster.
+
+The instances are split once into 15 training instances (five per family) and 47 test instances.
+Training instances are used for everything that is learned or tuned: the construction rules and the deviation density.
+Test instances are used only after these choices are fixed.
 
 \begin{table}[t]
   \centering
-  \caption{Instance families.}
+  \caption{Instance groups. $\Nmax$ is the upper bound on the number of shifts.}
   \label{tab:instances}
-  \todo{Table 1}
+  \footnotesize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}lccccccc@{}}
+    \toprule
+    Group & Train & Test & \shortstack{Robot\\types} & \shortstack{Tool\\types} & Horizon (h) & Duty (h) & $\Nmax$ \\
+    \midrule
+    Original & 0 & 4  & 1--3 & 1--4 & 700--1440 & 6, 10 & 70--240 \\
+    E        & 5 & 12 & 1    & 1--3 & 480--1080 & 10    & 48--108 \\
+    H        & 5 & 15 & 2--3 & 2--3 & 480--1080 & 10    & 48--108 \\
+    M        & 5 & 16 & 2--3 & 2--3 & 480--1080 & 6--12 & 60--180 \\
+    \midrule
+    Total    & 15 & 47 & & & & & \\
+    \bottomrule
+  \end{tabular}
 \end{table}
 
-\subsection{Baseline Decoders}
-\todo{dec0--dec5.}
+\subsection{Encoding and Baseline Decoders}
+\label{sec:problem:decoders}
+
+All decoders in this paper read a random-key genotype $\genome \in [0,1)^n$ and build the roster shift by shift.
+At shift $i$, the decoder computes $\avail_i$, chooses an action, and simulates the shift.
+The length of the genotype follows from the shortest duty:
+\begin{equation}
+  \Nmax = \left\lceil \horizon / \min_\tau w_\tau \right\rceil
+\end{equation}
+is an upper bound on the number of shifts.
+The baseline decoders use one robot gene $x_i$ and one tool gene $y_i$ per shift.
+The tool gene picks the type of any tool that must be created at shift $i$; this part is the same in all decoders.
+The decoders differ in how $x_i$ is turned into an action.
+They form a sequence in which each step adds one piece of problem knowledge.
+
+\begin{description}
+  \item[\dec{0} (original).] The action index is $\lfloor (x_i - 10^{-3})(|\avail_i| + n_R) \rfloor$,
+  where $n_R$ is the number of robot types. Indices below $|\avail_i|$ reuse a robot in opening order; the rest open a new type.
+  The same gene value can mean ``reuse'' in one state and ``open'' in another, because $|\avail_i|$ changes.
+
+  \item[\dec{1} (threshold).] A gene below $\theta = 0.85$ always means \reuse, and the robot is $\lfloor x_i |\avail_i| / \theta \rfloor$.
+  A gene above $\theta$ always means \new, and the type is read from $(x_i - \theta)/(1-\theta)$.
+
+  \item[\dec{2} (ranking).] As \dec{1}, but $\avail_i$ is sorted by duty count (ascending) and remaining budget (descending).
+  The gene now selects a rank. Small genes send the least-used robot.
+
+  \item[\dec{3} (capacity look-ahead).] As \dec{2}, but before opening a new robot, the decoder estimates how many duty hours the existing robots can still provide until $\horizon$.
+  If this covers the remaining horizon, the \new action is replaced by a \reuse action.
+
+  \item[\dec{4} (maintenance phase).] As \dec{3}, but robots closest to maintenance are ranked first.
+
+  \item[\dec{5} (backtracking repair).] As \dec{3}, plus a repair step.
+  If no robot is available at shift $i$, the decoder revisits shifts $i-1, \dots, i-W$ ($W = 12$).
+  At each of them it tries the other \reuse choices and re-simulates up to shift $i$.
+  It keeps the first change that leaves a robot available.
+  Only if no change works does it open a new robot.
+\end{description}
+
+\dec{5} is the strongest of the six and is our main baseline.
+The steps add knowledge about which decisions are good, but none of them changes what the genes control:
+in every decoder, each gene still sets one decision of one shift.
+All decoders are implemented in C++ and in an equivalent Python model; the two agree on every tested genotype.
