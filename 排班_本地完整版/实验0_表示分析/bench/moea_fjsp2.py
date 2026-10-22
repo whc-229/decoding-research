@@ -4,7 +4,7 @@
 用法: python moea_fjsp2.py 编码[,编码...] 次数 进程数(auto) 输出.csv 实例名[,..]|实例族|all|main|big [最大预算=5000] [noins] [moead]
   moead：改用 MOEA/D（Tchebycheff 分解，30 个权向量，邻域 6，同样的 SBX/多项式变异），检验结论与搜索算法无关
   main = 除 Behnke 外的 276 个实例；big = Brandimarte、Dauzère、Barnes、Kacem、Fattahi（78 个，用于大预算）
-编码: pd, rk, sp0.1, sp0.25, sp0.5（稀疏槽数 = 比例 × 工序数）
+编码: pd, rk, sp0.1, sp0.25, sp0.5（稀疏槽数 = 比例 × 工序数）；rk+seed, rk+glr, rk+glr+seed（rk 加启发式初始化，见 seed_fjsp.py）
 """
 import csv, multiprocessing as mp, os, sys, time
 for _v in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):   # 每个进程只用 1 个线程，避免几十个进程各开一堆线程把内存吃光
@@ -17,6 +17,7 @@ for _p in (os.path.dirname(HERE), "/home/claude/exp0/scripts"):   # ga.py 所在
         sys.path.insert(0, _p); break
 import fjsp2 as F  # noqa
 import ga as G  # noqa
+import seed_fjsp as SD  # noqa
 
 ALL_CHECK = [465, 2000, 5000, 10000, 20000, 50000]
 CHECK = [465, 2000, 5000]          # 由命令行的最大预算决定
@@ -26,7 +27,10 @@ POP = 30
 
 
 def enc_name(inst, e):
-    """命令行编码名 → 解码用名：sp0.25 → sp{K}；sp0.25q0.2 → sp{K}q0.2（q 为每槽随机生效概率，默认 0.4）"""
+    """命令行编码名 → 解码用名：sp0.25 → sp{K}；sp0.25q0.2 → sp{K}q0.2（q 为每槽随机生效概率，默认 0.4）；
+    rk+seed / rk+glr / rk+glr+seed → rk（只是初始种群不同，见 seed_fjsp.py）"""
+    if e.startswith("rk+"):
+        return "rk"
     if not e.startswith("sp"):
         return e
     frac, q = (e[2:].split("q") + [None])[:2]
@@ -55,7 +59,8 @@ def run(inst, e, seed):
                 pk = []; F.decode(inst, en, best[1], insert=INSERT, picks=pk); d = sum(1 for i in pk if i)
             snaps[ev[0]] = (nd, d)
         return x, o
-    P = [evaluate(rng.uniform(0, G.UB, nv)) for _ in range(POP)]
+    X0 = SD.init_pop(inst, e, rng, POP, nv) if e.startswith("rk+") else [rng.uniform(0, G.UB, nv) for _ in range(POP)]
+    P = [evaluate(x) for x in X0]
     while ev[0] < CHECK[-1]:
         kids = []
         while len(kids) < POP and ev[0] + len(kids) < CHECK[-1]:
@@ -103,7 +108,7 @@ def run_moead(inst, e, seed, T=6, nr=2):
     W = np.array([[i / (POP - 1), 1 - i / (POP - 1)] for i in range(POP)])
     dist = np.linalg.norm(W[:, None, :] - W[None, :, :], axis=2)
     B = np.argsort(dist, axis=1)[:, :T]
-    X = [rng.uniform(0, G.UB, nv) for _ in range(POP)]
+    X = SD.init_pop(inst, e, rng, POP, nv) if e.startswith("rk+") else [rng.uniform(0, G.UB, nv) for _ in range(POP)]
     Fv = np.array([evaluate(x) for x in X], dtype=float)
 
     def tch(f, w, z, zn):

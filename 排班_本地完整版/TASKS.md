@@ -39,6 +39,21 @@
   ```
 - 输出 v3_qk2.csv（新文件，不要写进 v3_qk.csv；分析时我会和 v3_qk.csv 合并统一归一化）。在 `报告/T8_qk补点.md` 写运行情况即可。必须和 v3_qk.csv 在同一台机器上跑。
 
+### T9 [待做] FJSP：规则放进初始种群 vs 放进解码器（启发式初始化对照）
+- 目的：回答"稀疏编码的好处是否只来自好的起点"。三个新臂都用 rk 解码，只是初始种群不同（bench/seed_fjsp.py）：
+  rk+seed（1 个规则解 + 29 个随机）、rk+glr（Zhang 等 2011 的 GS/LS/RS 初始化）、rk+glr+seed（1 个规则解 + 29 个 GLR）。
+- 开始前：`cd bench && python check_seed.py`（必须"规则解不一致 0"，336 个实例），再跑 `python check_v2.py`（moea_fjsp2.py 有改动，默认编码行为不变）。
+- T8 结束后，bench/ 下（与 T6 的 v3_big 同一批实例、同一预算、同一台机器；预计 2～4 小时）：
+  ```
+  nohup python moea_fjsp2.py rk+seed,rk+glr,rk+glr+seed 10 6 v3_big_seed.csv big 20000 > v3_big_seed.log 2>&1 &
+  ```
+- 完成后合并分析（与 v3_big 的 4 个编码统一归一化）：
+  ```
+  { cat v3_big.csv; tail -n +2 v3_big_seed.csv; } > v3_big_all.csv
+  python analyze_fjsp2.py v3_big_all.csv report_v3_big_all.md
+  ```
+  汇总写 `报告/T9_启发式初始化.md`（运行情况 + 主表即可，解读我来做）。
+
 ## 待确认
 （Claude Code 遇到需要决策的问题写在这里）
 
