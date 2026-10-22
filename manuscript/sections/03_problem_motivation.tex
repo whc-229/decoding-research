@@ -1,0 +1,238 @@
+\section{Problem Definition and Motivation}
+\label{sec:problem}
+
+% 证据：exact/mirror.py（模型、目标）；exact/family_bounds.py、robot_lb.py（下界）；tools/gen_family*.py、gen_request.py、rulegen/instances.py（实例与划分）；
+%       实验0_表示分析/exp0lib.py（D0～D5）；实验0_报告.md、out/report_metrics.md、out/report_writeback.md（III-E 的数字）；排班_解码方案汇总.md（最优解结构）
+% 2026-10-22 已两轮独立核对；本版只改写表达，事实未改。
+
+This section defines the rostering problem, the instances, and the six decoders that we use as baselines.
+It ends with an analysis of these decoders, which shows what a better decoder needs.
+
+\subsection{Robot--Tool Duty Rostering}
+\label{sec:problem:model}
+
+A duty post must be staffed by one robot at all times during a horizon $[0,\horizon]$.
+Robots take turns in \emph{shifts}, and each shift starts when the previous one ends.
+If shift $i-1$ ends at time $E_{i-1}$ and shift $i$ is served by a robot of type $\tau$,
+shift $i$ ends at $E_i = E_{i-1} + w_\tau$, where $w_\tau$ is the duty length of type $\tau$.
+The first shift starts once the first robot has installed its tools and travelled to the post.
+The roster is complete when $E_i \ge \horizon$.
+
+\textbf{Robots.}
+Each robot type $\tau$ has a travel time to the post $o_\tau$, a return time $b_\tau$, a charging time $c_\tau$ and a maintenance time $\mu_\tau$.
+A robot can serve at most $n_\tau$ duties between two maintenances; we call this its \emph{duty budget}.
+After each duty the robot returns and its tools are removed.
+It then charges, or, if its budget is used up, goes to maintenance, which refills the budget.
+A robot is \emph{available} for a shift that starts at time $E$ if it is ready by $E - o_\tau$ and still has budget for one duty.
+At most $L_\tau$ robots of type $\tau$ may be used.
+
+\textbf{Tools.}
+Each duty needs $\nu_\tau$ tools of types compatible with the robot.
+A tool in use is busy for its installation, its travel and work time, its removal and a rest period.
+When a robot is dispatched, the decoder first reuses compatible tools that are ready, earliest first.
+If tools are missing, new ones are created, and their type has to be chosen.
+At most $L_k$ tools of type $k$ may be used.
+A roster is infeasible if it needs more robots or tools than these limits allow.
+
+\textbf{Decisions.}
+At every shift $i$ one decision is made: which robot serves it.
+The decision is an action
+\begin{equation}
+  \act_i \in \{\reuse(r) : r \in \avail_i\} \cup \{\new(\tau)\},
+\end{equation}
+where $\avail_i$ is the set of available robots.
+\reuse{}$(r)$ sends a robot that is already in the fleet; \new{}$(\tau)$ adds a new robot of type $\tau$.
+Together with the types of the new tools, these actions fix the roster.
+Each action changes which robots are available later, so a decision at one shift affects all later shifts.
+
+\subsection{Objectives}
+\label{sec:problem:objectives}
+
+We minimize two objectives.
+The first is the \emph{resource count}, the number of robots and tools used:
+\begin{equation}
+  \fres = |\mathcal{R}| + |\mathcal{T}|.
+\end{equation}
+The second is the \emph{imbalance} of the robot fleet:
+\begin{equation}
+  \fbal = 0.3\,\sigma(\mathbf{n}) + 0.4\,\sigma(\mathbf{h}) + 0.3\,\sigma(\Delta\mathbf{t}),
+\end{equation}
+where $\sigma(\cdot)$ is the standard deviation, $\mathbf{n}$ and $\mathbf{h}$ are the robots' duty counts and total duty hours,
+and $\Delta\mathbf{t}$ are the gaps between consecutive first-maintenance times.
+A low imbalance means that all robots wear evenly and do not go to maintenance at the same time.
+The two objectives conflict.
+A small fleet must work some robots hard, while an even workload needs extra robots.
+
+For each instance we also compute a lower bound $\LB$ on the resource count.
+The robot part comes from an exact feasibility search with unlimited tools;
+the tool part counts the tools that two consecutive shifts cannot share.
+
+\subsection{Instances}
+\label{sec:problem:instances}
+
+We use 62 instances (Table~\ref{tab:instances}).
+Four are hand-built scenarios: one is the request file of the scheduling software that motivated this work (one robot type, 700\,h),
+and three have three robot types and four tool types, one of them with tight fleet limits.
+The other 58 are random instances in three families:
+\begin{itemize}
+  \item \textbf{E}: one robot type.
+  \item \textbf{H}: two or three robot types, all with 10\,h duties.
+  \item \textbf{M}: two or three robot types with duty lengths from $\{6,8,10,12\}$\,h, so shifts have different lengths.
+\end{itemize}
+Robot parameters are drawn at random: travel 1--2\,h, charging 2--5\,h, maintenance 48--120\,h,
+2--5 duties per maintenance cycle, 2 or 3 tools per duty, and 6--10 robots per type.
+Tools take 1--2\,h to install or remove and rest for 3--8\,h.
+We generated 60 random instances and removed two for which no method found a feasible roster.
+
+The instances are split once into 15 training instances (five per family) and 47 test instances.
+Construction rules are learned on the training instances only, and the deviation density is selected on them (Section~\ref{sec:method:k}).
+The test instances measure the final performance.
+% 待定（κ 完整结果出来后再写）：是否说明早期探索性运行曾在测试集上评价过 κ = 0.5
+
+\begin{table}[t]
+  \centering
+  \caption{Instance groups. $\Nmax$ is the upper bound on the number of shifts.}
+  \label{tab:instances}
+  \footnotesize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}lccccccc@{}}
+    \toprule
+    Group & Train & Test & \shortstack{Robot\\types} & \shortstack{Tool\\types} & Horizon (h) & Duty (h) & $\Nmax$ \\
+    \midrule
+    Hand-built & 0 & 4  & 1--3 & 1--4 & 700--1440 & 6, 10 & 70--240 \\
+    E        & 5 & 12 & 1    & 1--3 & 480--1080 & 10    & 48--108 \\
+    H        & 5 & 15 & 2--3 & 2--3 & 480--1080 & 10    & 48--108 \\
+    M        & 5 & 16 & 2--3 & 2--3 & 480--1080 & 6--12 & 60--180 \\
+    \midrule
+    Total    & 15 & 47 & & & & & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Encoding and Baseline Decoders}
+\label{sec:problem:decoders}
+
+All decoders in this paper use a random-key genotype $\genome \in [0,1)^n$ and build the roster one shift at a time.
+At each shift the decoder finds the available robots, picks an action, and simulates the shift.
+Since every shift lasts at least $\min_\tau w_\tau$, the number of shifts is at most
+\begin{equation}
+  \Nmax = \left\lceil \horizon / \min_\tau w_\tau \right\rceil .
+\end{equation}
+
+The baseline decoders give each shift two genes: a robot gene $x_i$ that picks the action, and a tool gene $y_i$ that picks the type of any new tool.
+The tool gene points into the list of the $c_\tau$ compatible types at position $\lfloor y_i (c_\tau - 1) \rfloor$;
+if that type has reached its limit, the next type is used.
+All decoders read the tool genes in this way, following the original software.
+They differ in how they read the robot gene.
+We name them \dec{0} to \dec{5}; each one adds a piece of problem knowledge to the one before.
+
+\textbf{\dec{0} (original).}
+The gene is scaled to an index over the available robots followed by the robot types: $\lfloor (x_i - 10^{-3})(|\avail_i| + n_R) \rfloor$, where $n_R$ is the number of types.
+A small index sends an available robot, and a large one opens a new robot.
+Because $|\avail_i|$ changes from shift to shift, the same gene value can mean ``send'' at one shift and ``open'' at another.
+
+\textbf{\dec{1} (threshold).}
+A gene below $\theta = 0.85$ always means \reuse, and a gene above $\theta$ always means \new.
+Below $\theta$, the gene picks robot $\lfloor x_i |\avail_i| / \theta \rfloor$; above $\theta$, it picks a type.
+
+\textbf{\dec{2} (ranking).}
+As \dec{1}, but the available robots are sorted, fewest duties first (ties: most remaining budget first).
+A small gene now sends the least-used robot.
+
+\textbf{\dec{3} (capacity look-ahead).}
+As \dec{2}, but before opening a new robot the decoder estimates how many duty hours the current fleet can still provide.
+If the fleet can cover the rest of the horizon, it sends an existing robot instead.
+
+\textbf{\dec{4} (maintenance phase).}
+As \dec{3}, but robots that are closest to maintenance are ranked first.
+
+\textbf{\dec{5} (backtracking repair).}
+As \dec{3}, with one more step.
+If no robot is available at shift $i$, the decoder goes back over the last $W = 12$ shifts.
+At each of them it tries sending a different robot and re-simulates up to shift $i$.
+It keeps the first change that leaves a robot available at shift $i$, and opens a new robot only if no change works.
+
+\dec{5} performs best of the six and is our main baseline.
+All six decoders, however, share one structure: every shift has its own gene, and that gene decides the shift.
+We implemented all decoders in Python and checked \dec{1}--\dec{5} against the C++ code of the original software, genotype by genotype.
+
+\subsection{Motivation: What the Baseline Decoders Show}
+\label{sec:motivation}
+
+To see why some decoders work better than others, we measured four properties of each decoder on 16 instances
+(the four hand-built scenarios with all six decoders, and 12 E, H and M instances with \dec{2}--\dec{5}):
+\begin{itemize}
+  \item \textbf{Neutral rate}: the chance that redrawing one robot gene leaves the roster unchanged.
+  A high neutral rate means that many genotypes produce the same roster, \ie the encoding is \emph{redundant}.
+  \item \textbf{Good-start rate}: the chance that a uniformly random genotype gives a roster with $\fres \le \LB + 1$.
+  \item \textbf{Change propagation}: after one robot gene is changed, the share of later shifts whose robot also changes.
+  \item \textbf{Reachability}: whether any genotype produces the optimal roster, which we computed by dynamic programming on the hand-built scenarios.
+\end{itemize}
+We then compared these properties with the hypervolume (HV) that NSGA-II \cite{deb2002nsga2} reaches with each decoder
+(population 30, about 465 evaluations).
+For each instance we computed the Spearman correlation across decoders and report the median over instances.
+Table~\ref{tab:neutral} lists the first two properties on the hand-built scenarios.
+
+\begin{table}[t]
+  \centering
+  \caption{Neutral rate / good-start rate of the six decoders on the four hand-built scenarios.}
+  \label{tab:neutral}
+  \footnotesize
+  \setlength{\tabcolsep}{1.6pt}
+  \begin{tabular}{@{}lcccccc@{}}
+    \toprule
+    Scenario & \dec{0} & \dec{1} & \dec{2} & \dec{3} & \dec{4} & \dec{5} \\
+    \midrule
+    1 type, 700 h   & 0.30/.000 & 0.42/.007 & 0.41/.007 & 0.61/.919 & 0.61/.929 & 0.69/.981 \\
+    3 types, 720 h  & 0.10/.000 & 0.21/.000 & 0.22/.000 & 0.44/.020 & 0.46/.024 & 0.50/.032 \\
+    3 types, 1440 h & 0.06/.000 & 0.13/.000 & 0.14/.000 & 0.38/.014 & 0.42/.008 & 0.44/.029 \\
+    3 types, tight  & 0.12/.000 & 0.24/.000 & 0.19/.000 & 0.44/.020 & 0.47/.024 & 0.49/.032 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Finding 1: the better decoders favor good rosters.}
+From \dec{0} to \dec{5}, the neutral rate rises from 0.06--0.30 to 0.44--0.69, and the good-start rate rises with it.
+Both go with better HV: the median correlation is $+0.91$ for the neutral rate and $+0.80$ for the good-start rate,
+with the same sign on every instance (12/12 and 14/14).
+The share of \new actions that the capacity look-ahead turns into \reuse correlates even more strongly ($+0.97$, 16/16).
+These three properties rise together, so the data cannot tell them apart.
+Taken together, they agree with the theory of redundant representations \cite{rothlauf2006representations}:
+an encoding helps when its redundancy favors good solutions.
+
+\textbf{Finding 2: change propagation is high in every decoder.}
+On the hand-built scenarios, changing one gene changes the robot at 39--61\% of the later shifts, for every decoder.
+This share does not track performance (median correlation $+0.23$, same sign on 7/12 instances).
+The reason is structural: a changed decision changes which robots are available, and every later gene is then read in a different situation.
+None of the steps from \dec{0} to \dec{5} reduced this effect.
+
+\textbf{Finding 3: built-in knowledge helps even when it hides good rosters.}
+The capacity look-ahead of \dec{3}--\dec{5} sometimes forbids opening a robot.
+On two hand-built scenarios, this makes the optimal roster unreachable: it opens a fifth robot at shift 9, which the look-ahead does not allow.
+Other optimal rosters can still be reached, and on one of the two scenarios \dec{5} still finds the optimal values.
+Making the optimal roster reachable again did not help.
+When we added a gene range that always opens a robot, the imbalance got significantly worse on the two scenarios that had not lost the optimum,
+and nothing improved on the two that had.
+
+\textbf{Finding 4: well-balanced rosters are rare.}
+With every decoder, at most 1.7\% of random genotypes give a roster with $\fres = \LB$ and an imbalance within 1.5 times the optimum;
+on the three-type scenarios almost none do.
+This is where the search falls short: at $\fres = \LB$, the mean imbalance reached by \dec{5} is 1.1--2.3 times the optimum.
+
+\textbf{Structure of optimal rosters.}
+The optimal rosters follow a simple pattern.
+In 85--90\% of their shifts they send the available robot with the fewest duties.
+In the remaining shifts they send a different robot; in the single-type scenario, this happens in 10 of its 65 reuse decisions.
+A per-shift encoding has no direct way to say ``follow this rule except at a few shifts''.
+The choice of rule also matters.
+On the four hand-built scenarios, always sending the robot with the fewest duties needs 11--17 resources,
+while always sending the robot with the least remaining budget reaches the lower bound of 9 on all four.
+
+\textbf{What a better decoder needs.}
+These results lead to three requirements:
+\begin{enumerate}
+  \item The encoding should express ``a rule plus a few exceptions'' directly: the genes should say only where and how to depart from the rule.
+  \item How strongly the decoder favors the rule should be adjustable, because favoring it helps on most instances but not on all (Finding 3).
+  \item The rule should be chosen for the rosters that the search finds around it, not only for the single roster it builds.
+\end{enumerate}
+Section~\ref{sec:method} presents a decoder that meets these requirements.

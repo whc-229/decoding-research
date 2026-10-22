@@ -1,0 +1,203 @@
+\section{Theoretical Analysis}
+\label{sec:theory}
+
+% 证据：实验 6a（theory/model.py、sweep.py、sweep.json、meanfield.py）；T11 报告（bias_multi.py，检验 B、D；t11_tables.md）
+% 不能写："理论预言了 K0.5"；区间比例 1/q 在 FJSP 上未定量验证（只在实验节写定性结论）
+% 2026-10-22 命题 1～3、推论、K* = 12/26/55、表格数字均已独立核对；本版只改写表达，事实未改。
+% 待补（T12 结果出来后再写）：冗余解码是否降低多余偏离的代价
+
+How many deviation slots should \SDD use?
+Too few, and the search cannot reach rosters that differ from the rule in many shifts.
+Too many, and random genotypes contain many unnecessary deviations, so the search starts far from the rule and wastes evaluations removing them.
+This section makes the trade-off precise with a simple model.
+The model shows that the best number of slots depends on two quantities:
+how many decisions separate a good solution from the rule, and how many evaluations the search can spend.
+
+\subsection{Model}
+\label{sec:theory:model}
+
+A solution is a string $\mathbf{z} \in \{0, \dots, \nval-1\}^{\npos}$ of $\npos$ decisions with $\nval$ options each.
+Option 0 is the rule's choice, so the rule's solution is the all-zero string.
+A target solution $\mathbf{z}^\ast$ differs from the rule in $\dist$ positions.
+We call $\dist$ the \emph{rule distance}.
+The objective is the number of positions in which a solution differs from the target, $f(\mathbf{z}) = |\{j : z_j \ne z^\ast_j\}|$.
+In this model, changing one decision does not change the meaning of other decisions.
+Section~\ref{sec:motivation} found that this kind of propagation did not explain performance differences between decoders.
+
+We compare two encodings with genes in $[0,1)$:
+\begin{itemize}
+  \item \textbf{Per-step (PS)}: one gene per decision, read as $z_j = \lfloor g_j \nval \rfloor$.
+  This is a simplified, unbiased version of \dec{0}--\dec{5}; the real decoders lean toward the rule's choice more than PS does.
+  \item \textbf{Sparse deviation (SP$_\K$)}: the model version of \SDD, with $\K$ slots as in Section~\ref{sec:method:genotype}.
+  A slot is on with probability $\qon \approx 0.4$ in a random genotype.
+  An active slot sets one position, chosen by $p_k$, to a non-zero option chosen by $a_k$.
+  If two slots hit the same position, the later one counts.
+\end{itemize}
+
+\subsection{Where the Search Starts and What It Can Reach}
+\label{sec:theory:props}
+
+We first look at three properties of the encoding itself, before any search.
+The first is how far a random genotype is from the target.
+
+\begin{proposition}[Starting distance]
+\label{prop:init}
+For a uniformly random genotype, let $\pi = 1 - (1 - \qon/\npos)^\K$ be the probability that a given position is changed by some slot. Then
+\begin{equation}
+  \mathbb{E}[f_{\mathrm{SP}}] = (\npos - \dist)\,\pi + \dist \left(1 - \frac{\pi}{\nval-1}\right).
+\end{equation}
+For PS, $\mathbb{E}[f_{\mathrm{PS}}] = \npos (1 - 1/\nval)$.
+\end{proposition}
+
+\begin{IEEEproof}
+Each slot hits a given position with probability $\qon/\npos$, independently of the other slots, so the position is changed with probability $\pi$.
+The last write at a changed position is uniform over the $\nval-1$ non-zero options.
+A position where the target agrees with the rule is wrong exactly when it is changed.
+A position where the target differs from the rule is right exactly when it is changed to the right option, which has probability $\pi/(\nval-1)$.
+\end{IEEEproof}
+
+When $\K$ and $\dist$ are small compared with $\npos$, this is about $\dist + \qon\K$:
+a random genotype is about as far from the target as the rule is, plus roughly one wrong change per active slot.
+Under PS, a random genotype is $\npos(1-1/\nval)$ away, whatever the rule is; for $\npos = 100$ and $\nval = 4$ this is 75.
+
+The second property is a hard limit.
+
+\begin{proposition}[Reach]
+\label{prop:floor}
+A genotype of SP$_\K$ changes at most $\K$ positions, so no genotype gets closer to the target than $\max(0, \dist - \K)$.
+\end{proposition}
+
+With fewer slots than the rule distance, the target cannot be reached, however long the search runs.
+
+The third property counts how many genotypes produce the target.
+The more genotypes that do, the easier the target is to find.
+
+\begin{proposition}[How often the target is represented]
+\label{prop:red}
+The probability that a uniformly random genotype of SP$_\K$ produces exactly $\mathbf{z}^\ast$ is
+\begin{equation}
+  r(\K) = \frac{\dist!}{(\nval-1)^{\dist}} \sum_{J=\dist}^{\K} \binom{\K}{J} \qon^J (1-\qon)^{\K-J} \npos^{-J}\, \mathcal{S}(J, \dist),
+\end{equation}
+where $\mathcal{S}(J,\dist)$ is the Stirling number of the second kind. In particular, $r(\K) = 0$ for $\K < \dist$.
+\end{proposition}
+
+\begin{IEEEproof}
+Let $J$ be the number of active slots; $J$ is binomial with parameters $\K$ and $\qon$.
+The genotype produces $\mathbf{z}^\ast$ exactly when all $J$ active slots fall on the $\dist$ target positions,
+every target position is hit, and the last write at each one is the right option.
+Of the $\npos^J$ equally likely placements, $\dist!\,\mathcal{S}(J,\dist)$ cover all $\dist$ positions.
+Each of the $\dist$ last writes is right with probability $1/(\nval-1)$.
+\end{IEEEproof}
+
+\begin{corollary}
+\label{cor:kstar}
+Keeping only the leading term $J = \dist$, $r(\K+1)/r(\K) = (\K+1)(1-\qon)/(\K+1-\dist)$, which is at least one exactly when $\K + 1 \le \dist/\qon$.
+The target is therefore represented most often when $\K$ is close to $\K^\ast \approx \dist/\qon$.
+\end{corollary}
+
+The exact maximizers agree.
+For $\npos = 100$, $\nval = 4$ and $\qon = 0.4$, they are $\K^\ast = 12$, 26 and 55 for $\dist = 5$, 10 and 20, against $\dist/\qon = 12.5$, 25 and 50.
+Under PS, the target is produced with probability $\nval^{-\npos}$, independent of the rule.
+
+In short: with $\K < \dist$ the target is out of reach;
+near $\K = \dist/\qon$ it is produced most often;
+with more slots, random genotypes make too many wrong changes, and both the starting distance and the chance of producing the target get worse.
+
+\subsection{The Best Number of Slots for a Given Budget}
+\label{sec:theory:budget}
+
+The three properties describe the encoding, not the search.
+To find the best $\K$ for a given number of evaluations, we run a GA with the same operators as our NSGA-II:
+SBX ($\eta = 20$, probability 0.9), polynomial mutation ($\eta = 20$, rate $1/n$), population 30 and truncation selection.
+We use $\npos = 100$ and $\nval = 4$, nine rule distances between 0 and 80, eleven values of $\K$ between 5 and 100, and 20 runs per setting.
+
+Table~\ref{tab:theory-budget} shows that the best $\K$ grows with the budget:
+\begin{itemize}
+  \item With 465 evaluations and $\dist \le 40$, the best $\K$ is at most $\dist$.
+  \item With 2000 evaluations, it is larger than $\dist$, and close to $\dist/\qon$ when $\dist$ is small.
+  \item With 10\,000 evaluations, it is larger than $\dist/\qon$: 20, 50 and 75 for $\dist = 5$, 10 and 20.
+\end{itemize}
+No single value of $\K$ is good for all budgets.
+For example, $\K = 25$ is the best choice in only one of the twelve settings of the table;
+with $\dist = 40$ and 10\,000 evaluations it ends 29.7 positions from the target, while $\K = 100$ ends 12.1 away.
+PS is far behind whenever $\dist \le 60$: it is still more than 40 positions away after 10\,000 evaluations.
+
+\begin{table}[t]
+  \centering
+  \caption{Best number of slots $\K$ in the model ($\npos = 100$, $\nval = 4$, $\qon \approx 0.4$). Entries: best $\K$ (final distance to the target), mean of 20 runs.}
+  \label{tab:theory-budget}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}rrccc@{}}
+    \toprule
+    $\dist$ & $\dist/\qon$ & 465 evals & 2000 evals & 10\,000 evals \\
+    \midrule
+    5  & 12.5 & 5 (4.0)       & 15 (3.5)  & 20 (2.4) \\
+    10 & 25   & 5, 10 (8.6)   & 25 (6.8)  & 50 (3.8) \\
+    20 & 50   & 10 (17.2)     & 30 (13.6) & 75 (6.8) \\
+    40 & 100  & 20, 30 (35.1) & 60 (27.1) & 100$^\dagger$ (12.1) \\
+    \bottomrule
+    \multicolumn{5}{@{}l}{\footnotesize $^\dagger$Largest value tested.}
+  \end{tabular}
+\end{table}
+
+\subsection{Why More Evaluations Call for More Slots}
+\label{sec:theory:meanfield}
+
+A simple model of the search dynamics explains this trend.
+At any time, each slot is in one of three states:
+on and wrong (it changes a position that should not change, or sets a wrong option), on and right, or off.
+Let $w$, $c$ and $v = \K - w - c$ be the numbers of slots in these states, so that $f = w + (\dist - c)$.
+Mutation changes about one gene per offspring, so each slot is touched with probability about $1/\K$.
+Selection keeps only changes that lower $f$.
+There are three such changes: switching off a wrong slot ($w \to w-1$),
+switching on an inactive slot at a missing position with the right option ($c \to c+1$),
+and moving a wrong slot to a missing position with the right option ($w \to w-1$, $c \to c+1$).
+They occur at the rates
+\begin{equation}
+  \alpha\, \frac{w}{2\K}, \qquad
+  \alpha\, \frac{v}{2\K} \cdot \frac{\dist - c}{\npos(\nval-1)}, \qquad
+  \beta\, \frac{w}{2\K} \cdot \frac{\dist - c}{\npos(\nval-1)}.
+\end{equation}
+The starting values of $w$ and $c$ come from Proposition~\ref{prop:init}, corrected for selecting the best of the initial population.
+The constants $\alpha$ and $\beta$ depend only on the operators.
+We fit them on the runs with 465 and 2000 evaluations ($\alpha = 0.05$, $\beta = 1.5$; mean squared error 2.4).
+On the runs with 10\,000 evaluations, which were not used for fitting, predicted and observed final distances have a correlation of 0.994,
+but a larger mean squared error of 22.6, and the model's best $\K$ is 1.3 to 3 times too large.
+The model therefore captures the trend but not the exact values; we use it only to explain the trend.
+
+The explanation is as follows.
+Every wrong slot costs one unit of distance and has to be switched off.
+A random genotype starts with about $\qon\K$ of them, so this cost grows with $\K$, and it is paid early in the search.
+Fixing a missing position needs a slot that is off and can be switched on at the right place.
+When $\K$ is close to $\dist$, such spare slots run out as the search gets close to the target, and progress slows down.
+With few evaluations, most of the effort goes into switching off wrong slots, so fewer slots are better.
+With many evaluations, progress near the target is what limits the search, so spare slots pay off.
+
+\subsection{Several Good Solutions}
+\label{sec:theory:multi}
+
+A multi-objective search looks for a whole front of good solutions, and they can lie at different distances from the rule.
+We extend the model to $n_t$ targets at distances $\dist_1, \dots, \dist_{n_t}$, run NSGA-II on the distances to all targets,
+and measure the mean, over targets, of the smallest distance reached.
+
+The best $\K$ then follows the mean distance, not the smallest one.
+With targets at distances 2 and 40 and 2000 evaluations, for example, the best $\K$ is 30, whereas for the near target alone it is 5.
+Over all target sets we tried, the best $\K$ is up to 7.5 times the smallest distance with 465 evaluations and up to 15 times with 2000 evaluations.
+A density chosen only to reach the nearest good solution is therefore too small for a front.
+
+The best $\K$ also grows when an unnecessary change costs less than a wrong decision.
+In the base model both cost one unit.
+If an unnecessary change costs only 0.1, doubling $\K$ from 25 to 50 no longer hurts at $\dist = 5$.
+
+\subsection{Consequences for SDD}
+\label{sec:theory:consequences}
+
+The analysis gives three guidelines, which the experiments test:
+\begin{enumerate}
+  \item With fewer slots than the rule distance, the best solutions are out of reach (Proposition~\ref{prop:floor}).
+  Once the budget is large enough to get close to good solutions, $\K$ should exceed the typical rule distance.
+  \item Larger budgets call for more slots (Table~\ref{tab:theory-budget}).
+  \item In multi-objective search, the number of slots should match the mean distance to the front, not the distance to the nearest good solution (Section~\ref{sec:theory:multi}).
+\end{enumerate}
+The rule distance of a real instance is unknown before the search.
+This is why \SDD sets the density on training instances (Section~\ref{sec:method:k}).
