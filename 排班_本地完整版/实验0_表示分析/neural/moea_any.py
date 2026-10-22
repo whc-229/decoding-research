@@ -31,11 +31,11 @@ def front_of(archive):
     return nd
 
 
-def run_nsga2(sc, dec, seed, checks):
+def run_nsga2(sc, dec, seed, checks, nv=None):
     """ga_rule.run 的逐行复制，评价次数 = checks[-1]，在每个检查点保存前沿 → {检查点: 前沿}"""
     EVALS = checks[-1]
     rng = np.random.default_rng(seed)
-    nv = C.L.nvar(sc, "dec5")
+    nv = C.L.nvar(sc, "dec5") if nv is None else nv      # 扩展布局（X 开头的臂）基因更长
     archive, ev, snaps = [], [0], {}
 
     def evaluate(x):
@@ -69,12 +69,12 @@ def run_nsga2(sc, dec, seed, checks):
     return snaps
 
 
-def run_moead(sc, dec, seed, checks, T=6, nr=2):
+def run_moead(sc, dec, seed, checks, T=6, nr=2, nv=None):
     """MOEA/D（见文件说明）→ {检查点: 前沿}"""
     EVALS = checks[-1]
     POP = G.POP
     rng = np.random.default_rng(seed)
-    nv = C.L.nvar(sc, "dec5")
+    nv = C.L.nvar(sc, "dec5") if nv is None else nv      # 扩展布局（X 开头的臂）基因更长
     archive, ev, snaps = [], [0], {}
 
     def evaluate(x):
@@ -123,9 +123,9 @@ def job(args):
     inst, name, spec, k, algo, checks, seed_base = args
     sc = C.I.load(inst)
     t = time.time()
-    snaps = (run_moead if algo == "moead" else run_nsga2)(sc, A.decoder(spec), seed_base + k, checks)
+    snaps = (run_moead if algo == "moead" else run_nsga2)(sc, A.decoder(spec), seed_base + k, checks, nv=A.nvar(spec, sc))
     secs = f"{time.time() - t:.1f}"
-    nv = C.L.nvar(sc, "dec5")
+    nv = A.nvar(spec, sc)
     return [[inst, name, k, secs, c, nv, ";".join(f"{int(a)}:{b:.3f}" for a, b in snaps[c])] for c in checks]
 
 

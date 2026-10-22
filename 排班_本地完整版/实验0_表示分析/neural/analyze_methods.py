@@ -32,10 +32,12 @@ def method_of(arm):
     """臂名 → (方法, 设计运行)"""
     if arm in ALIAS:
         return ALIAS[arm]
-    m = re.match(r"^(?:K([\d.]+):)?(.+?)\((.+)\)$", arm)
+    m = re.match(r"^(?:([KX])([\d.]+):)?(.+?)\((.+)\)$", arm)
     if not m:
         return (arm, "—")
-    k, name, run = m.groups()
+    lay, k, name, run = m.groups()
+    if lay == "X":                                                       # 扩展布局（任务 D）：方法名带上 @X
+        return (f"{name}@X{k}", run)
     return (name if k in (None, "0.25") else f"{name}@K{k}", run)       # K0.25 是默认档；其他档的方法名带上 @K
 
 
