@@ -19,16 +19,17 @@ def nvar(sc, kfrac):
     return 2 * K + 1 + nmax + 1
 
 
-def devmap(sc, x, kfrac, i0=0):
-    """偏离槽 (p, a)：a ≥ DEV_ON 生效，班次 = i0 + min(int(p × 剩余班次), 剩余班次 − 1)，强度 (a − DEV_ON)/(1 − DEV_ON)。
-    与 ruledec.devmap 相同，只是去掉了"槽基因超出前半段就停止"的截断（新布局里槽基因总在 x[0:2K]）。"""
+def devmap(sc, x, kfrac, i0=0, dev_on=R.DEV_ON):
+    """偏离槽 (p, a)：a ≥ dev_on 生效，班次 = i0 + min(int(p × 剩余班次), 剩余班次 − 1)，强度 (a − dev_on)/(1 − dev_on)。
+    与 ruledec.devmap 相同，只是去掉了"槽基因超出前半段就停止"的截断（新布局里槽基因总在 x[0:2K]）。
+    dev_on（R0，2026-10-23）：生效阈值，随机基因下每个槽生效的概率 q = 1 − dev_on；默认 0.6（q = 0.4）= 原行为。"""
     K, nmax = R.n_slots(sc, kfrac)
     nrem = max(1, nmax - i0)
     d = {}
     for k in range(K):
         p, a = x[2 * k], x[2 * k + 1]
-        if a >= R.DEV_ON:
-            d[i0 + min(int(p * nrem), nrem - 1)] = (a - R.DEV_ON) / (1.0 - R.DEV_ON)
+        if a >= dev_on:
+            d[i0 + min(int(p * nrem), nrem - 1)] = (a - dev_on) / (1.0 - dev_on)
     return d
 
 
@@ -39,9 +40,10 @@ def from_old(sc, x, kfrac):
     return np.concatenate([np.asarray(x[:2 * K + 1]), np.asarray(x[h:])])
 
 
-def decode_rule(sc, x, rule=R.default_rule, kfrac=0.25, W=12, stats=None, start=None):
+def decode_rule(sc, x, rule=R.default_rule, kfrac=0.25, W=12, stats=None, start=None, dev_on=R.DEV_ON):
     """扩展布局的稀疏偏离解码：x = [2K 个偏离槽基因][1 个默认类型基因][每班 1 个工具基因]，长度 = nvar(sc, kfrac)。
-    除了这三处取基因的位置，逻辑与 rulegen/ruledec.decode_rule 逐行相同（本函数由那里的源码替换生成）。"""
+    除了这三处取基因的位置，逻辑与 rulegen/ruledec.decode_rule 逐行相同（本函数由那里的源码替换生成）。
+    dev_on：偏离槽生效阈值（q = 1 − dev_on），只传给 devmap；默认 0.6 = 原行为。"""
     x = np.asarray(x, np.float32).astype(np.float64)
     n = len(x)
     K, nmax = R.n_slots(sc, kfrac)
@@ -50,7 +52,7 @@ def decode_rule(sc, x, rule=R.default_rule, kfrac=0.25, W=12, stats=None, start=
     assert n == T0 + h, f"基因长度 {n} 与扩展布局 {T0 + h} 不符"
     nty = len(sc["R"])
     i0 = start[1] if start else 0
-    dmap = devmap(sc, x, kfrac, i0)
+    dmap = devmap(sc, x, kfrac, i0, dev_on)
     tdef = min(int(x[2 * K] * nty), nty - 1)
     rc = R.M.rep_ceil_factory(sc)
 

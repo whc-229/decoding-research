@@ -4,6 +4,7 @@
   K0.25:<规则文件.py>          稀疏偏离 + 规则代码（LLM / GP 导出的规则，经 compile_rule 受限执行）；相对路径相对 rulegen/
   K0.25:nn:<参数.npz>          稀疏偏离 + 神经网络规则；相对路径相对 neural/
   X0.75:<规则写法>             扩展布局的稀疏偏离（ruledec_ext，任务 D），规则写法同 K 开头；基因长度随 K 变化，见 nvar()
+  X1.0q0.8:<规则写法>          扩展布局 + 偏离槽生效概率 q（R0：生效阈值 dev_on = 1 − q）；不写 q 即 q = 0.4（原行为）
 CSV 里的臂名可以另起：  显示名=写法，例如  K0.25:LLM(r35)=K0.25:out/score/best_rule.py
 """
 import os
@@ -37,15 +38,28 @@ def rule_of(spec):
     return rule
 
 
+def kq_of(spec):
+    """写法 → (K 比例, q)：'X1.0q0.8:…' → (1.0, 0.8)；没有 q 时 q = None（用解码器默认的 0.4）"""
+    head = spec.split(":", 1)[0][1:]
+    if "q" in head:
+        k, q = head.split("q")
+        return float(k), float(q)
+    return float(head), None
+
+
 def decoder(spec):
     """写法 → 解码函数 (sc, x) → Result"""
     if spec == "dec5":
         return lambda sc, x: C.L.decode(sc, x, "dec5")
-    kf = float(spec.split(":", 1)[0][1:])
+    kf, q = kq_of(spec)
     rule = rule_of(spec)
     if spec[0] == "X":
         import ruledec_ext as X
+        if q is not None:
+            on = round(1.0 - q, 10)
+            return lambda sc, x: X.decode_rule(sc, x, rule, kf, dev_on=on)
         return lambda sc, x: X.decode_rule(sc, x, rule, kf)
+    assert q is None, "q 只支持扩展布局（X 开头）"
     return lambda sc, x: C.R.decode_rule(sc, x, rule, kf)
 
 
@@ -53,5 +67,5 @@ def nvar(spec, sc):
     """写法 → 基因长度：dec5 与 K 开头的原布局都是 nvar(dec5)；X 开头的扩展布局随 K 变化"""
     if spec[0] == "X":
         import ruledec_ext as X
-        return X.nvar(sc, float(spec.split(":", 1)[0][1:]))
+        return X.nvar(sc, kq_of(spec)[0])
     return C.L.nvar(sc, "dec5")
