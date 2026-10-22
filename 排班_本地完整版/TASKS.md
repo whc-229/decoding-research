@@ -47,7 +47,7 @@
 - 目的：回答"稀疏编码的好处是否只来自好的起点"。三个新臂都用 rk 解码，只是初始种群不同（bench/seed_fjsp.py）：
   rk+seed（1 个规则解 + 29 个随机）、rk+glr（Zhang 等 2011 的 GS/LS/RS 初始化）、rk+glr+seed（1 个规则解 + 29 个 GLR）。
 - 开始前：`cd bench && python check_seed.py`（必须"规则解不一致 0"，336 个实例），再跑 `python check_v2.py`（moea_fjsp2.py 有改动，默认编码行为不变）。
-- T8 结束后，bench/ 下（与 T6 的 v3_big 同一批实例、同一预算、同一台机器；预计 2～4 小时）：
+- **顺序调整（2026-10-22）：T6 big 完成后先跑 T9，再跑 T7、T8**（T9 对论文结论更关键）。bench/ 下（与 T6 的 v3_big 同一批实例、同一预算、同一台机器；预计 3～8 小时）：
   ```
   nohup python moea_fjsp2.py rk+seed,rk+glr,rk+glr+seed 10 6 v3_big_seed.csv big 20000 > v3_big_seed.log 2>&1 &
   ```
