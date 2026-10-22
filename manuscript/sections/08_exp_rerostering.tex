@@ -1,8 +1,127 @@
-\section{Experiment B: Mid-Execution Re-rostering}
+\section{Experiment B: Re-rostering During Execution}
 \label{sec:exp-rerostering}
 
-% 证据：实验 4b
-% 原计划作为偏置 vs 旧解播种 vs 两者结合；366 场景、三类扰动；表 5
-% 注意：4b 用的是 K0.25——正文说明"重排班中规则即原计划，离好解近，取较小 K"，不另做实验
+% 证据：实验 4b（实验0_表示分析/reroster/：core.py、moea.py、plans.py、gen_scenarios.py、analyze.py、main_report.md、pilot_report.md）
+% 注意：本实验用 κ = 0.25。与静态排班最终 κ 的关系等 κ 完整结果出来后再补一句说明。
 
-\todo{Original plan as bias vs.\ seeding with the old solution vs.\ both; 366 scenarios, three disturbance types; Table 5.}
+A roster is rarely executed as planned.
+Robots break down, need maintenance earlier than planned, or come back late.
+The roster must then be repaired for the rest of the horizon, and the repair should change as few shifts as possible.
+This is a natural case for \SDD: the original plan is a construction rule that is already known to be good,
+and the task is to find the few deviations from it that the disturbance makes necessary.
+
+\subsection{Setup}
+\label{sec:exp-rerostering:setup}
+
+\textbf{Plans and disturbances.}
+For each of the 62 instances, the original plan is the roster with the fewest resources, and among those the best balance,
+found by one NSGA-II run with \dec{5} (population 30, 465 evaluations).
+The plan is executed up to 30\% or 60\% of its shifts.
+At that point, the robot that the plan sends next is hit by one of three disturbances:
+\begin{itemize}
+  \item \textbf{Breakdown}: the robot is out of service for 48\,h; after the repair its duty budget is full again.
+  \item \textbf{Early maintenance}: the robot must go to maintenance before its next duty, which changes the order of its tasks.
+  \item \textbf{Delay}: the robot becomes ready 8\,h later than planned.
+\end{itemize}
+If the plan opens a new robot at that shift, the disturbance moves to the next shift.
+This gives $62 \times 3 \times 2 = 372$ scenarios.
+On one instance, all six scenarios have no feasible repair, because the fleet is already at its limit; we use the remaining 366.
+The shifts before the disturbance are fixed.
+
+\textbf{Objectives.}
+A repaired roster is judged by two objectives, both minimized:
+the number of changes, \ie the shifts after the disturbance whose robot differs from the planned shift with the nearest start time,
+and the imbalance $\fbal$.
+The resource count is a constraint: it may not exceed a budget $B$.
+$B$ is the smaller resource count of two simple repairs of the plan (the plan rule below without deviations, and the plan encoded for \dec{5}),
+so it is always reachable.
+Rosters over budget are penalized in proportion to the excess.
+In a pilot with resource count and changes as the objectives, the methods rarely differed in resource count, so we moved it to the constraint.
+
+\textbf{Methods.}
+All methods continue decoding from the state at the disturbance, and the repair step of \dec{5} never reaches back into the fixed shifts.
+\begin{itemize}
+  \item \textbf{\dec{5}}: per-shift genes from a random initial population, \ie re-rostering from scratch.
+  \item \textbf{\dec{5}+seed}: as \dec{5}, but 20\% of the initial population is the repaired plan and its mutants.
+  This follows Shen and Yao \cite{shen2015dfjsp}, who fill part of the initial population with the previous schedule, a repaired schedule and their mutants.
+  \item \textbf{Plan as bias}: \SDD with the plan as the rule and $\dens = 0.25$; the slots point only to the remaining shifts.
+  The \emph{plan rule} sends the robot that the plan sends at the nearest start time if it is available,
+  opens a robot of the planned type if the plan opens one there,
+  and otherwise falls back to the default rule $\rul_0$.
+  \item \textbf{Plan as bias + seed}: as above, and 20\% of the initial population is the genotype without deviations and its mutants.
+\end{itemize}
+The plan rule is fixed and not learned, so all 62 instances can be used.
+Each method runs NSGA-II with population 30 and 465 evaluations, five times per scenario.
+
+\textbf{Measures.}
+For each scenario, we normalize (changes, imbalance) over the solutions of all methods and compute the HV with reference point $(1.1, 1.1)$.
+We compare each method with \dec{5}+seed by a paired Wilcoxon test over scenarios,
+and count the scenarios in which a method is significantly better or worse (Mann--Whitney, $p < 0.05$, five runs each).
+We also report the smallest number of changes found and the fraction of runs that find a repair with at most three changes.
+
+\subsection{Results}
+\label{sec:exp-rerostering:results}
+
+\begin{table}[t]
+  \centering
+  \caption{Re-rostering on 366 scenarios. $\Delta$: difference in mean HV to \dec{5}+seed. W/L: scenarios in which a method is significantly better/worse than \dec{5}+seed. Min.\ ch.: smallest number of changes found (mean). $\le 3$: fraction of runs that find a repair with at most three changes.}
+  \label{tab:reroster}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lcccccc@{}}
+    \toprule
+    Method & HV & $\Delta$ & $p$ & W/L & Min.\ ch. & $\le 3$ \\
+    \midrule
+    \dec{5}             & 0.339 & $-0.265$ & $7\!\times\!10^{-45}$ & 2/200  & 25.0 & 0.01 \\
+    \dec{5}+seed        & 0.605 & ---      & ---                    & ---    & 9.9  & 0.36 \\
+    Plan as bias        & 0.788 & $+0.184$ & $5\!\times\!10^{-26}$ & 249/44 & 7.0  & 0.28 \\
+    Plan as bias + seed & \textbf{0.815} & $+0.210$ & $1\!\times\!10^{-40}$ & 238/24 & \textbf{6.4} & \textbf{0.41} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Mean HV by disturbance type and by time of the disturbance (share of the plan already executed). Each group has 122 (type) or 183 (time) scenarios. All differences to \dec{5}+seed are significant ($p < 10^{-5}$).}
+  \label{tab:reroster-groups}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lccccc@{}}
+    \toprule
+    Method & Breakdown & Early maint. & Delay & 30\% & 60\% \\
+    \midrule
+    \dec{5}             & 0.328 & 0.329 & 0.362 & 0.335 & 0.344 \\
+    \dec{5}+seed        & 0.618 & 0.645 & 0.551 & 0.546 & 0.663 \\
+    Plan as bias        & 0.772 & 0.787 & 0.805 & \textbf{0.789} & 0.788 \\
+    Plan as bias + seed & \textbf{0.807} & \textbf{0.832} & \textbf{0.806} & 0.782 & \textbf{0.848} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Table~\ref{tab:reroster} gives the overall results.
+
+\textbf{The plan works better as a bias than as a seed.}
+Using the plan as the rule raises the mean HV from 0.605 to 0.788 ($+0.184$).
+It is significantly better than seeding in 249 scenarios and worse in 44.
+It also needs fewer changes: the smallest repair it finds changes 7.0 shifts on average, against 9.9 with seeding.
+Re-rostering from scratch is far behind (0.339) and almost never finds a repair with few changes.
+
+\textbf{The gain holds for every disturbance and time.}
+Table~\ref{tab:reroster-groups} shows the same order for all three disturbance types and both times.
+The gain over seeding is largest for delays ($+0.254$) and smallest for early maintenance ($+0.142$).
+The direction is also the same in the E, H and M families.
+
+\textbf{Bias and seeding complement each other.}
+Seeding finds repairs with at most three changes in 36\% of the runs, more often than the plan rule alone (28\%).
+Combining the two gives the best results on both counts: an HV of 0.815 and near-zero repairs in 41\% of the runs.
+The combination helps most when the disturbance comes late (60\% executed: 0.848 against 0.788 for the bias alone).
+When it comes early, the bias alone is as good (0.789 against 0.782).
+
+\textbf{Why bias beats seeding.}
+The two methods put the plan into the search in different places.
+Seeding places the plan in a few individuals of the initial population.
+Under per-shift genes, a mutation of the seed changes the state, and the later genes are read in that new state;
+the offspring drift away from the plan at many shifts at once (Section~\ref{sec:repr}).
+With the plan as the rule, every genotype starts from the plan.
+An offspring departs from it only at its active slots, and the rule brings it back to the plan after each departure.
+The whole search therefore stays near the plan, and that is where good repairs are.

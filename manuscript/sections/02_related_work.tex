@@ -1,62 +1,102 @@
 \section{Related Work}
 \label{sec:related}
 
-% 证据：调研笔记 01～03；调研笔记 04（近两年文献，2026-10-22）
-% 原则：每小节"经典奠基 + 近两年进展 + 我们的区别"三段式；近两年（2025–2026）文献占多数。
-% 标"仅读标题"的条目（jiang2025soft, may2026llm, liu2025flexible, duan2025deep）写进正文前要读全文。
+% 证据：调研笔记 01～04（近两年文献已于 2026-10-22 核实出处）
+% 只读过标题/关键词的四篇（jiang2025soft, may2026llm, liu2025flexible, duan2025deep）正文只按题目层面描述；投稿前读全文。
+% 不写"首次"：LDS 式稀疏偏离编码在 GA/MOEA 中目前未检索到，但声称首次前需再查 LDS 的被引。
 
 \subsection{Representations, Redundancy and Decoders}
 \label{sec:related:repr}
-% 经典：Rothlauf 冗余理论（非均匀冗余只在有先验时有利且不稳健）
-% 近两年：间接编码 + 问题专用解码器仍是调度 EA 的主流做法——
-%   随机键 / BRKGA 综述 (londe2025random)；与可行性无关的编码 + 三阶段解码 (park2026genetic)；
-%   软编码 (jiang2025soft)；相对优先级编码 (jiang2025more)。
-% 区别：这些工作设计"一个更好的解码器"，但不分析解码器给搜索带来的偏置与冗余，
-%       也没有把偏置强度作为可调参数。我们对顺序构造型解码做冗余/偏置度量（第 IV 节）并给出理论（第 VI 节）。
-\todo{Classic theory \cite{rothlauf2006representations}; recent decoder-based scheduling EAs
-\cite{londe2025random,park2026genetic,jiang2025soft,jiang2025more}; gap: bias of the decoder is neither measured nor tunable.}
+
+A decoder maps a genotype to a solution, and in scheduling it usually does so by building the schedule step by step.
+Rothlauf's theory of representations \cite{rothlauf2006representations} explains how such a map affects search.
+A representation is redundant when several genotypes encode the same solution.
+Uniform redundancy does not change the expected performance of a GA.
+Non-uniform redundancy helps if it over-represents good solutions and hurts if it over-represents poor ones.
+Such a bias is therefore useful only with prior knowledge, and it is not robust when the knowledge is wrong.
+
+Indirect encodings with problem-specific decoders remain the main way to apply EAs to scheduling.
+Random-key genetic algorithms and their biased variant BRKGA keep the variation operators problem-independent and put all problem knowledge into the decoder \cite{londe2025random}.
+Recent decoders encode more knowledge in this way.
+Park and Huh \cite{park2026genetic} use a feasibility-agnostic chromosome and a three-phase decoder that turns any chromosome into a schedule that respects queue-time limits in semiconductor fabs.
+Jiang \cite{jiang2025soft} proposes a soft encoding for steelmaking scheduling.
+Jiang \emph{et al.} \cite{jiang2025more} split the solution into route selection and operation priorities, decoded with a ready-operation set.
+
+These works design a decoder for a problem and judge it by the final result.
+They do not measure how the decoder biases the search, and the strength of that bias is not a parameter of the design.
+Section~\ref{sec:repr} measures this bias for a sequence of decoders,
+and Section~\ref{sec:theory} makes its strength a parameter and analyzes it.
 
 \subsection{Heuristic Bias in Search}
 \label{sec:related:bias}
-% 经典：问题/启发式空间搜索 (storer1992new)、LDS (harvey1995lds)、HBSS (bresina1996hbss)、
-%       间接 GA 护士排班 (aickelin2004indirect)。
-% 近两年：用学到的策略给进化搜索提供偏置——RL 策略采样 + GA 精修并回灌训练 (gu2025synergizing)；
-%   用神经策略当"老师"指导 LLM 演化启发式 (chen2026teacher)。BRKGA 的精英偏置也属此类 (londe2025random)。
-% 区别：最接近的是 LDS——我们把"至多 K 处偏离启发式"做成 MOEA 的表示，偏离数是显式、有理论指导的参数；
-%       已有的启发式空间编码都是稠密的（每个决策点都由基因决定）。
-%       【待查】声称"首次"前再检索一轮 LDS 的被引（目前未发现 GA/MOEA 中的稀疏偏离编码）。
-\todo{Classic \cite{storer1992new,harvey1995lds,bresina1996hbss,aickelin2004indirect};
-recent learned guidance of evolutionary search \cite{gu2025synergizing,chen2026teacher};
-gap: dense vs.\ sparse deviation, bias strength as a parameter.}
+
+Several classic methods search near a construction heuristic.
+Storer \emph{et al.} \cite{storer1992new} search in problem space, where the genes perturb the problem data before a heuristic builds the schedule,
+and in heuristic space, where the genes select the heuristic used at each decision.
+Aickelin and Dowsland \cite{aickelin2004indirect} evolve the order in which a greedy decoder assigns nurses, and the heuristic knowledge in the decoder is central to the performance of their indirect GA.
+In these encodings every decision is touched by a gene.
+Two non-evolutionary methods are closer to our idea.
+Limited discrepancy search \cite{harvey1995lds} explores, in a search tree, the solutions that depart from a heuristic at no more than $k$ decisions.
+Heuristic-biased stochastic sampling \cite{bresina1996hbss} samples solutions with a probability that favors the heuristic's top choices.
+
+Recent work biases evolutionary search with learned policies.
+Gu \emph{et al.} \cite{gu2025synergizing} sample solutions from a reinforcement-learning policy, refine them with GA operators, and feed the refined solutions back into training.
+Chen \emph{et al.} \cite{chen2026teacher} use trained neural policies as teachers whose action preferences guide the LLM-driven evolution of heuristic programs.
+BRKGA biases recombination toward elite parents \cite{londe2025random}.
+
+\SDD shares the idea of limited discrepancy search: a solution is a heuristic plus a few departures from it.
+It turns this idea into an encoding for a multi-objective EA.
+The departures are genes, their number is an explicit parameter, and Section~\ref{sec:theory} shows how its best value depends on the rule distance and the budget.
+Unlike problem- and heuristic-space encodings, the genes touch only a few decisions, and the rule decides the rest.
 
 \subsection{Learning Construction Rules}
 \label{sec:related:rules}
-% (1) GP 超启发式（近两年仍很活跃，含 TEVC）：
-%     tabu 列表保持行为多样性 (zhang2026genetic)；多形式多目标 GP (pang2025multiform)；
-%     在线 GP (nguyen2026towards)；多任务 GP（TEVC 2025, chen2025optimizing）。
-% (2) LLM 自动启发式设计：FunSearch / EoH / ReEvo 奠基 (romera2024funsearch, liu2024evolution, ye2024reevo)；
-%     2025–2026 进展：HSEvo、MCTS-AHD、多目标 MEoH、启发式集合 EoH-S、LLaMEA（TEVC）、基准 HeuriGym；
-%     综述 (liu2026systematic, zhang2026systematic)。
-% (3) LLM 用于调度：FJSP 中在线设计 EA 算子 (liao2025online)；动态 FJSP 启发式组合 (zhou2026dsevolve)；
-%     actor-critic 生成调度规则 (may2026llm)；人机协作调度 (huang2025leveraging)；多目标启发式 + NSGA-II (fornies2025remoh)。
-% (4) 神经构造：GNN + RL 求解 FJSP (liu2025flexible)。
-% 区别：上述方法学到的规则都是"独立使用的构造启发式"，按最终目标值评价；
-%       我们的规则是解码器的偏置，与偏离槽一起工作，按随机基因解码结果的分布（代理分）评价。
-%       实验 5：在此目标下 GP / 网络 + ES / LLM 可互换——不能写"LLM 优于 GP/网络"。
-%       liao2025online 让 LLM 改 EA 算子、我们让规则改解码偏置，二者互补，可点明。
-\todo{GP hyper-heuristics \cite{zhang2026genetic,pang2025multiform,nguyen2026towards,chen2025optimizing};
-LLM-based heuristic design \cite{romera2024funsearch,liu2024evolution,ye2024reevo,dat2025hsevo,zheng2025monte,yao2025multi,liu2026eohs,vanstein2025llamea,chen2026heurigym}, surveys \cite{liu2026systematic,zhang2026systematic};
-LLMs for scheduling \cite{liao2025online,zhou2026dsevolve,may2026llm,huang2025leveraging,fornies2025remoh};
-neural construction \cite{liu2025flexible};
-gap: rules evaluated as stand-alone heuristics, not as decoder bias.}
+
+\textbf{Genetic programming.}
+GP hyper-heuristics evolve dispatching rules and are an active topic in this journal and beyond.
+Recent work keeps the GP population diverse with a tabu list of rule behaviors \cite{zhang2026genetic},
+trades rule quality against rule complexity in a many-objective setting \cite{pang2025multiform},
+learns rules online in the running system \cite{nguyen2026towards},
+and transfers knowledge between related scheduling tasks by multitask GP \cite{chen2025optimizing}.
+
+\textbf{Large language models.}
+LLMs now design heuristics as code inside an evolutionary loop.
+FunSearch \cite{romera2024funsearch}, EoH \cite{liu2024evolution} and ReEvo \cite{ye2024reevo} established the approach.
+Later methods add diversity measures \cite{dat2025hsevo}, organize the candidates in a search tree \cite{zheng2025monte},
+optimize several objectives such as quality and runtime \cite{yao2025multi},
+evolve a set of complementary heuristics instead of one \cite{liu2026eohs},
+and generate complete metaheuristics \cite{vanstein2025llamea}.
+HeuriGym benchmarks LLM-written heuristics across combinatorial problems \cite{chen2026heurigym},
+and two surveys cover the field \cite{liu2026systematic,zhang2026systematic}.
+In scheduling, LLMs rewrite the operators of an EA for flexible job shops during the run \cite{liao2025online},
+evolve portfolios of dispatching rules with a learned selector for dynamic shops \cite{zhou2026dsevolve},
+generate dispatching rules in an actor--critic arrangement \cite{may2026llm},
+produce dispatching rules for human--robot collaborative manufacturing \cite{huang2025leveraging},
+and supply heuristics to NSGA-II for multi-objective flexible job shops \cite{fornies2025remoh}.
+
+\textbf{Neural construction.}
+Deep reinforcement learning trains policies that build schedules directly, for example with graph neural networks for flexible job shops \cite{liu2025flexible}.
+
+In all of these works, the learned rule is used on its own and judged by the objective value of the schedule it builds.
+In \SDD, the rule is the bias of a decoder and works together with the deviation slots.
+We therefore judge it by the distribution of rosters that random deviations produce around it (Section~\ref{sec:method:proxy}).
+Section~\ref{sec:exp-static} compares GP, neural networks and LLMs as learners for this target.
+The work closest in spirit is \cite{liao2025online}, which also uses an LLM to change how a GA explores;
+it rewrites the variation operators, whereas we change the decoder's bias.
 
 \subsection{Rescheduling and Multi-Objective Rostering}
 \label{sec:related:resched}
-% 经典：动态 FJSP 的多目标 EA (shen2015dfjsp)。
-% 近两年：事件驱动的预测–反应式 DRL 多目标重调度 (duan2025deep)；
-%   扰动下的鲁棒 FJSP（DQL 辅助竞争 EA, zhao2024dql）；
-%   人员排班的多目标方法综述——多数工作把冲突准则加权成单目标 (bodvarsdottir2026review)，
-%   可用来支撑"保留双目标、报告 HV"的选择。
-% 区别：重调度一般用旧解播种或在旧解附近修复；我们把原计划直接当解码偏置（实验 4b）。
-\todo{Classic \cite{shen2015dfjsp}; recent \cite{duan2025deep,zhao2024dql}; multi-objective rostering review \cite{bodvarsdottir2026review};
-gap: the original plan used as decoder bias rather than as a seed.}
+
+When a schedule is disrupted, predictive--reactive methods revise it for the rest of the horizon.
+Shen and Yao \cite{shen2015dfjsp} solve dynamic flexible job shops with MOEAs that include a stability objective,
+and they seed the initial population with the previous schedule, a repaired schedule and their mutants.
+Recent work applies deep reinforcement learning to event-driven predictive--reactive multi-objective rescheduling \cite{duan2025deep}
+and combines a competitive EA with double Q-learning for robust scheduling under disruptions \cite{zhao2024dql}.
+In personnel rostering, rerostering after absences has been solved with GAs on permutations decoded into rosters \cite{moz2007genetic}
+and with evolutionary metaheuristics \cite{maenhout2011evolutionary}.
+A recent review finds that most multi-objective rostering studies combine the criteria into a weighted sum,
+and that methods which keep the trade-off are rarer \cite{bodvarsdottir2026review}.
+
+The methods above use the old schedule as a reference in the objective or as a starting point of the search.
+In Section~\ref{sec:exp-rerostering}, we put the old schedule into the decoder instead: it becomes the rule, and every genotype departs from it at only a few shifts.
+We keep both rostering objectives and report the hypervolume.
