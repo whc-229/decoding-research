@@ -1,21 +1,62 @@
 \section{Related Work}
 \label{sec:related}
 
-% 证据：调研笔记 01～03
+% 证据：调研笔记 01～03；调研笔记 04（近两年文献，2026-10-22）
+% 原则：每小节"经典奠基 + 近两年进展 + 我们的区别"三段式；近两年（2025–2026）文献占多数。
+% 标"仅读标题"的条目（jiang2025soft, may2026llm, liu2025flexible, duan2025deep）写进正文前要读全文。
 
-\subsection{Redundancy and Representation Theory}
-% Rothlauf 的冗余表示理论（同义冗余、偏置）；Gottlieb & Raidl 关于解码器局部性
-\todo{Redundant representations and decoders \cite{rothlauf2006representations}.}
+\subsection{Representations, Redundancy and Decoders}
+\label{sec:related:repr}
+% 经典：Rothlauf 冗余理论（非均匀冗余只在有先验时有利且不稳健）
+% 近两年：间接编码 + 问题专用解码器仍是调度 EA 的主流做法——
+%   随机键 / BRKGA 综述 (londe2025random)；与可行性无关的编码 + 三阶段解码 (park2026genetic)；
+%   软编码 (jiang2025soft)；相对优先级编码 (jiang2025more)。
+% 区别：这些工作设计"一个更好的解码器"，但不分析解码器给搜索带来的偏置与冗余，
+%       也没有把偏置强度作为可调参数。我们对顺序构造型解码做冗余/偏置度量（第 IV 节）并给出理论（第 VI 节）。
+\todo{Classic theory \cite{rothlauf2006representations}; recent decoder-based scheduling EAs
+\cite{londe2025random,park2026genetic,jiang2025soft,jiang2025more}; gap: bias of the decoder is neither measured nor tunable.}
 
-\subsection{Heuristics Combined with Genetic Perturbation}
-% 问题空间/启发式空间搜索（Storer 等 1992、1995）；Hart & Ross 1998；
-% LDS 1995；HBSS 1996；Aickelin & Dowsland 2004（间接 GA 护士排班）
-\todo{Problem/heuristic-space search \cite{storer1992new}, LDS \cite{harvey1995lds}, HBSS \cite{bresina1996hbss}, indirect GA for nurse scheduling \cite{aickelin2004indirect}.}
+\subsection{Heuristic Bias in Search}
+\label{sec:related:bias}
+% 经典：问题/启发式空间搜索 (storer1992new)、LDS (harvey1995lds)、HBSS (bresina1996hbss)、
+%       间接 GA 护士排班 (aickelin2004indirect)。
+% 近两年：用学到的策略给进化搜索提供偏置——RL 策略采样 + GA 精修并回灌训练 (gu2025synergizing)；
+%   用神经策略当"老师"指导 LLM 演化启发式 (chen2026teacher)。BRKGA 的精英偏置也属此类 (londe2025random)。
+% 区别：最接近的是 LDS——我们把"至多 K 处偏离启发式"做成 MOEA 的表示，偏离数是显式、有理论指导的参数；
+%       已有的启发式空间编码都是稠密的（每个决策点都由基因决定）。
+%       【待查】声称"首次"前再检索一轮 LDS 的被引（目前未发现 GA/MOEA 中的稀疏偏离编码）。
+\todo{Classic \cite{storer1992new,harvey1995lds,bresina1996hbss,aickelin2004indirect};
+recent learned guidance of evolutionary search \cite{gu2025synergizing,chen2026teacher};
+gap: dense vs.\ sparse deviation, bias strength as a parameter.}
 
 \subsection{Learning Construction Rules}
-% GP 超启发式综述；EoH / ReEvo / FunSearch；L2D
-\todo{GP hyper-heuristics, LLM-based heuristic design \cite{romera2024funsearch}, learning to dispatch.}
+\label{sec:related:rules}
+% (1) GP 超启发式（近两年仍很活跃，含 TEVC）：
+%     tabu 列表保持行为多样性 (zhang2026genetic)；多形式多目标 GP (pang2025multiform)；
+%     在线 GP (nguyen2026towards)；多任务 GP（TEVC 2025, chen2025optimizing）。
+% (2) LLM 自动启发式设计：FunSearch / EoH / ReEvo 奠基 (romera2024funsearch, liu2024evolution, ye2024reevo)；
+%     2025–2026 进展：HSEvo、MCTS-AHD、多目标 MEoH、启发式集合 EoH-S、LLaMEA（TEVC）、基准 HeuriGym；
+%     综述 (liu2026systematic, zhang2026systematic)。
+% (3) LLM 用于调度：FJSP 中在线设计 EA 算子 (liao2025online)；动态 FJSP 启发式组合 (zhou2026dsevolve)；
+%     actor-critic 生成调度规则 (may2026llm)；人机协作调度 (huang2025leveraging)；多目标启发式 + NSGA-II (fornies2025remoh)。
+% (4) 神经构造：GNN + RL 求解 FJSP (liu2025flexible)。
+% 区别：上述方法学到的规则都是"独立使用的构造启发式"，按最终目标值评价；
+%       我们的规则是解码器的偏置，与偏离槽一起工作，按随机基因解码结果的分布（代理分）评价。
+%       实验 5：在此目标下 GP / 网络 + ES / LLM 可互换——不能写"LLM 优于 GP/网络"。
+%       liao2025online 让 LLM 改 EA 算子、我们让规则改解码偏置，二者互补，可点明。
+\todo{GP hyper-heuristics \cite{zhang2026genetic,pang2025multiform,nguyen2026towards,chen2025optimizing};
+LLM-based heuristic design \cite{romera2024funsearch,liu2024evolution,ye2024reevo,dat2025hsevo,zheng2025monte,yao2025multi,liu2026eohs,vanstein2025llamea,chen2026heurigym}, surveys \cite{liu2026systematic,zhang2026systematic};
+LLMs for scheduling \cite{liao2025online,zhou2026dsevolve,may2026llm,huang2025leveraging,fornies2025remoh};
+neural construction \cite{liu2025flexible};
+gap: rules evaluated as stand-alone heuristics, not as decoder bias.}
 
-\subsection{Rescheduling and Re-rostering}
-% Shen & Yao 2015；护士重排班
-\todo{Dynamic scheduling and re-rostering \cite{shen2015dfjsp}.}
+\subsection{Rescheduling and Multi-Objective Rostering}
+\label{sec:related:resched}
+% 经典：动态 FJSP 的多目标 EA (shen2015dfjsp)。
+% 近两年：事件驱动的预测–反应式 DRL 多目标重调度 (duan2025deep)；
+%   扰动下的鲁棒 FJSP（DQL 辅助竞争 EA, zhao2024dql）；
+%   人员排班的多目标方法综述——多数工作把冲突准则加权成单目标 (bodvarsdottir2026review)，
+%   可用来支撑"保留双目标、报告 HV"的选择。
+% 区别：重调度一般用旧解播种或在旧解附近修复；我们把原计划直接当解码偏置（实验 4b）。
+\todo{Classic \cite{shen2015dfjsp}; recent \cite{duan2025deep,zhao2024dql}; multi-objective rostering review \cite{bodvarsdottir2026review};
+gap: the original plan used as decoder bias rather than as a seed.}

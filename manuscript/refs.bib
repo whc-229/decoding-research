@@ -1,9 +1,19 @@
 % =====================================================================
-%  References. Every entry must be checked against the original paper
-%  (volume / pages / year) before submission; none has been checked yet.
+%  References.
+%  - "Classic" entries: not yet checked against the original PDFs.
+%  - "Recent (2024-2026)" entries: checked 2026-10-22 against publisher
+%    pages / Crossref / OpenAlex / DBLP / GP-bib / arXiv. Fields that could
+%    not be confirmed are left out and flagged with note = {VERIFY: ...}.
+%  - Preprints / early access (re-check before camera-ready):
+%    gu2025synergizing, chen2026teacher, zhang2026systematic,
+%    liao2025online, zhou2026dsevolve, fornies2025remoh, jiang2025more.
 % =====================================================================
 
-% ---------- representation theory ----------
+% =====================================================================
+%  (a) Representation, redundancy and decoders
+% =====================================================================
+
+% ---- classic ----
 @book{rothlauf2006representations,
   author    = {Franz Rothlauf},
   title     = {Representations for Genetic and Evolutionary Algorithms},
@@ -13,7 +23,54 @@
   year      = {2006}
 }
 
-% ---------- heuristics + perturbation ----------
+% ---- recent ----
+@incollection{londe2025random,
+  author    = {Londe, Mariana A. and Pessoa, Luciana S. and Andrade, Carlos E. and Gon{\c{c}}alves, Jos{\'e} F. and Resende, Mauricio G. C.},
+  title     = {Random-Key Genetic Algorithms: Principles and Applications},
+  booktitle = {Handbook of Heuristics},
+  edition   = {2nd},
+  editor    = {Mart{\'i}, Rafael and Pardalos, Panos M. and Resende, Mauricio G. C.},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2025},
+  pages     = {921--939},
+  doi       = {10.1007/978-3-032-00385-0_30}
+}
+
+@article{park2026genetic,
+  author  = {Park, In-Beom and Huh, Jaeseok},
+  title   = {A genetic algorithm with feasibility-agnostic encoding and three-phase decoding for scheduling semiconductor manufacturing facilities under queue time limits},
+  journal = {Expert Systems with Applications},
+  volume  = {301},
+  pages   = {130310},
+  year    = {2026},
+  doi     = {10.1016/j.eswa.2025.130310}
+}
+
+@article{jiang2025soft,
+  author  = {Jiang, Sheng-Long},
+  title   = {A soft encoding-based evolutionary algorithm for the steelmaking scheduling problem and its extension under energy thresholds},
+  journal = {Computers \& Operations Research},
+  volume  = {174},
+  pages   = {106885},
+  year    = {2025},
+  doi     = {10.1016/j.cor.2024.106885}
+}
+
+@article{jiang2025more,
+  author  = {Jiang, Junqiang and Duan, Jinxue and Sun, Zhifang and Jin, Shengjie and Pan, Li and Peng, Xin and Zhou, Mengzhen and Peng, Zebo},
+  title   = {More efficient meta-heuristic algorithms for integrated process planning and scheduling based on relative-priority encoding},
+  journal = {Annals of Operations Research},
+  year    = {2025},
+  doi     = {10.1007/s10479-025-06966-1},
+  note    = {VERIFY: volume, number and pages (online first, Nov. 2025)}
+}
+
+% =====================================================================
+%  (b) Heuristics combined with search / learned guidance of EAs
+% =====================================================================
+
+% ---- classic ----
 @article{storer1992new,
   author  = {Robert H. Storer and S. David Wu and Renzo Vaccari},
   title   = {New search spaces for sequencing problems with application to job shop scheduling},
@@ -50,7 +107,75 @@
   year    = {2004}
 }
 
-% ---------- rule learning ----------
+% ---- recent ----
+@misc{gu2025synergizing,
+  author        = {Gu, Shengda and Li, Kai and Xing, Junliang and Zhang, Yifan and Cheng, Jian},
+  title         = {Synergizing Reinforcement Learning and Genetic Algorithms for Neural Combinatorial Optimization},
+  year          = {2025},
+  eprint        = {2506.09404},
+  archivePrefix = {arXiv},
+  howpublished  = {arXiv:2506.09404}
+}
+
+@misc{chen2026teacher,
+  author        = {Chen, Minyu and Qin, Song and Wu, Ling-I and Xue, Jianxin and Li, Guoqiang},
+  title         = {Teacher-Aware Evolution of Heuristic Programs from Learned Optimization Policies},
+  year          = {2026},
+  eprint        = {2605.10634},
+  archivePrefix = {arXiv},
+  howpublished  = {arXiv:2605.10634},
+  note          = {To appear at NeurIPS 2026; VERIFY: proceedings details}
+}
+
+% =====================================================================
+%  (c) Learning construction rules: GP, LLM, neural
+% =====================================================================
+
+% ---- GP hyper-heuristics (recent) ----
+@article{zhang2026genetic,
+  author  = {Zhang, Fangfang and Ardeh, Mazhar Ansari and Mei, Yi and Zhang, Mengjie},
+  title   = {Genetic Programming with Tabu List for Dynamic Flexible Job Shop Scheduling},
+  journal = {Evolutionary Computation},
+  volume  = {34},
+  number  = {1},
+  pages   = {137--165},
+  year    = {2026},
+  doi     = {10.1162/evco.a.26}
+}
+
+@inproceedings{pang2025multiform,
+  author    = {Pang, Junwei and Mei, Yi and Zhang, Mengjie},
+  title     = {A Multiform Many-Objective Genetic Programming Method for Dynamic Flexible Job Shop Scheduling},
+  booktitle = {Proc. Genetic and Evolutionary Computation Conf. (GECCO)},
+  pages     = {267--276},
+  publisher = {ACM},
+  year      = {2025},
+  doi       = {10.1145/3712256.3726371}
+}
+
+@article{nguyen2026towards,
+  author  = {Nguyen, Su and Tran, Binh and Ngo, Xuan Nam and Tran, Duy Thinh},
+  title   = {Towards online genetic programming approach to dynamic flexible job shop scheduling},
+  journal = {Genetic Programming and Evolvable Machines},
+  volume  = {27},
+  number  = {1},
+  pages   = {8},
+  year    = {2026},
+  doi     = {10.1007/s10710-025-09529-2}
+}
+
+@article{chen2025optimizing,
+  author  = {Chen, Xiaolong and Li, Junqing and Wang, Zunxun and Chen, Qingda and Gao, Kaizhou and Pan, Quanke},
+  title   = {Optimizing Dynamic Flexible Job Shop Scheduling Using an Evolutionary Multitask Optimization Framework and Genetic Programming},
+  journal = {IEEE Trans. Evol. Comput.},
+  volume  = {29},
+  number  = {5},
+  pages   = {1502--1516},
+  year    = {2025},
+  doi     = {10.1109/TEVC.2025.3543770}
+}
+
+% ---- LLM-based automatic heuristic design ----
 @article{romera2024funsearch,
   author  = {Bernardino Romera-Paredes and others},
   title   = {Mathematical discoveries from program search with large language models},
@@ -60,7 +185,173 @@
   year    = {2024}
 }
 
-% ---------- rescheduling ----------
+@inproceedings{liu2024evolution,
+  author    = {Liu, Fei and Tong, Xialiang and Yuan, Mingxuan and Lin, Xi and Luo, Fu and Wang, Zhenkun and Lu, Zhichao and Zhang, Qingfu},
+  title     = {Evolution of Heuristics: Towards Efficient Automatic Algorithm Design Using Large Language Model},
+  booktitle = {Proc. 41st Int. Conf. Mach. Learn. (ICML)},
+  series    = {PMLR},
+  volume    = {235},
+  pages     = {32201--32223},
+  year      = {2024}
+}
+
+@inproceedings{ye2024reevo,
+  author    = {Ye, Haoran and Wang, Jiarui and Cao, Zhiguang and Berto, Federico and Hua, Chuanbo and Kim, Haeyeon and Park, Jinkyoo and Song, Guojie},
+  title     = {{ReEvo}: Large Language Models as Hyper-Heuristics with Reflective Evolution},
+  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+  volume    = {37},
+  pages     = {43571--43608},
+  year      = {2024},
+  doi       = {10.52202/079017-1381}
+}
+
+@inproceedings{dat2025hsevo,
+  author    = {Dat, Pham Vu Tuan and Doan, Long and Binh, Huynh Thi Thanh},
+  title     = {{HSEvo}: Elevating Automatic Heuristic Design with Diversity-Driven Harmony Search and Genetic Algorithm Using {LLMs}},
+  booktitle = {Proc. AAAI Conf. Artif. Intell.},
+  volume    = {39},
+  number    = {25},
+  pages     = {26931--26938},
+  year      = {2025},
+  doi       = {10.1609/aaai.v39i25.34898}
+}
+
+@inproceedings{zheng2025monte,
+  author    = {Zheng, Zhi and Xie, Zhuoliang and Wang, Zhenkun and Hooi, Bryan},
+  title     = {{Monte Carlo} Tree Search for Comprehensive Exploration in {LLM}-Based Automatic Heuristic Design},
+  booktitle = {Proc. 42nd Int. Conf. Mach. Learn. (ICML)},
+  series    = {PMLR},
+  volume    = {267},
+  pages     = {78338--78373},
+  year      = {2025}
+}
+
+@inproceedings{yao2025multi,
+  author    = {Yao, Shunyu and Liu, Fei and Lin, Xi and Lu, Zhichao and Wang, Zhenkun and Zhang, Qingfu},
+  title     = {Multi-Objective Evolution of Heuristic Using Large Language Model},
+  booktitle = {Proc. AAAI Conf. Artif. Intell.},
+  volume    = {39},
+  number    = {25},
+  pages     = {27144--27152},
+  year      = {2025},
+  doi       = {10.1609/aaai.v39i25.34922}
+}
+
+@inproceedings{liu2026eohs,
+  author    = {Liu, Fei and Liu, Yilu and Zhang, Qingfu and Tong, Xialiang and Yuan, Mingxuan},
+  title     = {{EoH-S}: Evolution of Heuristic Set Using {LLMs} for Automated Heuristic Design},
+  booktitle = {Proc. AAAI Conf. Artif. Intell.},
+  volume    = {40},
+  number    = {43},
+  pages     = {37090--37098},
+  year      = {2026},
+  doi       = {10.1609/aaai.v40i43.41038}
+}
+
+@article{vanstein2025llamea,
+  author  = {van Stein, Niki and B{\"a}ck, Thomas},
+  title   = {{LLaMEA}: A Large Language Model Evolutionary Algorithm for Automatically Generating Metaheuristics},
+  journal = {IEEE Trans. Evol. Comput.},
+  volume  = {29},
+  number  = {2},
+  pages   = {331--345},
+  year    = {2025},
+  doi     = {10.1109/TEVC.2024.3497793}
+}
+
+@inproceedings{chen2026heurigym,
+  author    = {Chen, Hongzheng and Wang, Yingheng and Cai, Yaohui and Hu, Hins and Li, Jiajie and Huang, Shirley and Deng, Chenhui and Liang, Rongjian and Kong, Shufeng and Ren, Haoxing and Samaranayake, Samitha and Gomes, Carla P. and Zhang, Zhiru},
+  title     = {{HeuriGym}: An Agentic Benchmark for {LLM}-Crafted Heuristics in Combinatorial Optimization},
+  booktitle = {Proc. Int. Conf. Learn. Represent. (ICLR)},
+  year      = {2026}
+}
+
+@article{liu2026systematic,
+  author  = {Liu, Fei and Yao, Yiming and Guo, Ping and Yang, Zhiyuan and Lin, Xi and Zhao, Zhe and Tong, Xialiang and Mao, Kun and Lu, Zhichao and Wang, Zhenkun and Yuan, Mingxuan and Zhang, Qingfu},
+  title   = {A Systematic Survey on Large Language Models for Algorithm Design},
+  journal = {ACM Comput. Surv.},
+  volume  = {58},
+  number  = {8},
+  year    = {2026},
+  doi     = {10.1145/3787585},
+  note    = {VERIFY: article number}
+}
+
+@article{zhang2026systematic,
+  author  = {Zhang, Yisong and Cheng, Ran and Yi, Guoxing and Tan, Kay Chen},
+  title   = {A Systematic Survey on Large Language Models for Evolutionary Optimization: From Modeling to Solving},
+  journal = {IEEE Comput. Intell. Mag.},
+  year    = {2026},
+  doi     = {10.1109/MCI.2026.3727078},
+  note    = {Early access; VERIFY: volume, number and pages}
+}
+
+% ---- LLMs for scheduling (recent) ----
+@misc{liao2025online,
+  author        = {Liao, Rongjie and Qiu, Junhao and Chen, Xin and Li, Xiaoping},
+  title         = {Online Operator Design in Evolutionary Optimization for Flexible Job Shop Scheduling via Large Language Models},
+  year          = {2025},
+  eprint        = {2511.16485},
+  archivePrefix = {arXiv},
+  howpublished  = {arXiv:2511.16485}
+}
+
+@misc{zhou2026dsevolve,
+  author        = {Zhou, XinLei and Huang, Jin and Yang, Jie and Li, Xinyu and Gao, Liang},
+  title         = {{DSevolve}: Enabling Real-Time Adaptive Scheduling on Dynamic Flexible Job Shop with {LLM}-Evolved Heuristic Portfolios},
+  year          = {2026},
+  eprint        = {2603.27628},
+  archivePrefix = {arXiv},
+  howpublished  = {arXiv:2603.27628}
+}
+
+@article{may2026llm,
+  author  = {May, Marvin Carl and Salama, Shady and Pfl{\"u}ger, Johannes and Kaihara, Toshiya},
+  title   = {{LLM} actor-critic based dispatching rule generation for dynamic job shop scheduling},
+  journal = {CIRP Annals},
+  volume  = {75},
+  number  = {1},
+  pages   = {601--605},
+  year    = {2026},
+  doi     = {10.1016/j.cirp.2026.04.007}
+}
+
+@article{huang2025leveraging,
+  author  = {Huang, Jin and Teng, Yue and Liu, Qihao and Gao, Liang and Li, Xinyu and Zhang, Chunjiang and Xu, Guoqing},
+  title   = {Leveraging large language models for efficient scheduling in Human--Robot collaborative flexible manufacturing systems},
+  journal = {npj Adv. Manuf.},
+  volume  = {2},
+  number  = {1},
+  pages   = {47},
+  year    = {2025},
+  doi     = {10.1038/s44334-025-00061-w}
+}
+
+@misc{fornies2025remoh,
+  author        = {Forni{\'e}s-Tabuenca, Diego and Uribe, Alejandro and Otamendi, Urtzi and Artetxe, Arkaitz and Rivera, Juan Carlos and Lopez de Lacalle, Oier},
+  title         = {{REMoH}: A Reflective Evolution of Multi-objective Heuristics approach via Large Language Models},
+  year          = {2025},
+  eprint        = {2506.07759},
+  archivePrefix = {arXiv},
+  howpublished  = {arXiv:2506.07759}
+}
+
+% ---- neural construction (recent) ----
+@article{liu2025flexible,
+  author  = {Liu, Xi and Chen, Xin and Chau, Vincent and Musia{\l}, J{\k{e}}drzej and B{\l}a{\.z}ewicz, Jacek},
+  title   = {Flexible Job Shop Scheduling Problem using graph neural networks and reinforcement learning},
+  journal = {Computers \& Operations Research},
+  volume  = {182},
+  pages   = {107139},
+  year    = {2025},
+  doi     = {10.1016/j.cor.2025.107139}
+}
+
+% =====================================================================
+%  (d) Rescheduling, re-rostering and rostering
+% =====================================================================
+
+% ---- classic ----
 @article{shen2015dfjsp,
   author  = {Xiao-Ning Shen and Xin Yao},
   title   = {Mathematical modeling and multi-objective evolutionary algorithms applied to dynamic flexible job shop scheduling problems},
@@ -70,7 +361,41 @@
   year    = {2015}
 }
 
-% ---------- algorithms & statistics (not yet cited) ----------
+% ---- recent ----
+@article{duan2025deep,
+  author  = {Duan, Chunyan and Mo, Yuxin and Zhang, Zehao},
+  title   = {Deep reinforcement learning for event-driven predictive--reactive multi-objective scheduling in dynamic flexible job shop},
+  journal = {J. Manuf. Syst.},
+  volume  = {83},
+  pages   = {992--1008},
+  year    = {2025},
+  doi     = {10.1016/j.jmsy.2025.11.014}
+}
+
+@article{zhao2024dql,
+  author  = {Zhao, Shicun and Zhou, Hong and Zhao, Yujie and Wang, Da},
+  title   = {{DQL}-assisted competitive evolutionary algorithm for energy-aware robust flexible job shop scheduling under unexpected disruptions},
+  journal = {Swarm Evol. Comput.},
+  volume  = {91},
+  pages   = {101750},
+  year    = {2024},
+  doi     = {10.1016/j.swevo.2024.101750}
+}
+
+@article{bodvarsdottir2026review,
+  author  = {B{\"o}{\dh}varsd{\'o}ttir, El{\'i}n Bj{\"o}rk and Stidsen, Thomas},
+  title   = {A review of multi-objective optimization methods for personnel rostering problems},
+  journal = {J. Scheduling},
+  volume  = {29},
+  number  = {1},
+  pages   = {1--19},
+  year    = {2026},
+  doi     = {10.1007/s10951-025-00845-0}
+}
+
+% =====================================================================
+%  Algorithms and statistics
+% =====================================================================
 @article{deb2002nsga2,
   author  = {Kalyanmoy Deb and Amrit Pratap and Sameer Agarwal and T. Meyarivan},
   title   = {A fast and elitist multiobjective genetic algorithm: {NSGA-II}},
