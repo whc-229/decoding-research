@@ -251,5 +251,15 @@ Section~\ref{sec:theory} shows that its best value depends on how far good roste
 Neither is known for a new instance, so we set $\dens$ once on the training instances.
 For each candidate value and each of the eight learned rules from the GP and ES runs (five GP runs and three ES runs), we run NSGA-II five times on all 15 training instances,
 normalize the HV per instance over all runs, and choose the value with the highest mean HV.
+If the best value is the largest candidate, we only report whether HV still rises toward it.
 This selection procedure was written, and tested on dummy data, before the runs.
-% 待补（κ 完整结果出来后再写）：候选集合与选出的 κ。T10 训练集选出 1.0（0.75 与 1.0 不显著），D4 测试集仍在跑。
+
+We compared the candidates in two steps.
+First, $\dens = 0.5$ was clearly better than $0.25$.
+Second, with a genotype layout long enough to hold more slots, we compared $0.5$, $0.75$ and $1.0$.
+The procedure selected $\dens = 1.0$.
+On the training instances, HV rises from $0.5$ to $0.75$ and changes little from $0.75$ to $1.0$ (Section~\ref{sec:exp-static}, Table~\ref{tab:kcurve}).
+We therefore use $\dens = 1.0$ in the final method.
+With $\dens = 1.0$ there are as many slots as shifts, but each slot is active with probability about 0.4 and some slots hit the same shift,
+so a random genotype still follows the rule in about two thirds of the shifts.
+% 待定（T12 验证后再决定）：是否说明早期探索性运行曾在测试集上评价过 κ ≤ 0.5；κ 与 q 的关系（T12）。
