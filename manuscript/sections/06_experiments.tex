@@ -57,12 +57,14 @@ We compare the following methods on the 47 test instances:
   \item the final method: \SDD with $\dens = 1.0$ and the GP or ES16 rules.
 \end{itemize}
 A \emph{design run} is one independent run of a rule learner, \ie one learned rule.
-All 54 arms (each rule at each density, and the baselines) are run five times with NSGA-II and 465 evaluations,
+The eight GP and ES16 rules are run at $\dens = 0.25$, 0.5, 0.75 and 1.0; the other learned rules at $\dens = 0.25$ only.
+All 54 arms are run five times with NSGA-II and 465 evaluations (765 for the larger \dec{5} budget),
 and HV is normalized per instance over all of them.
+Holm's correction is applied to one family for the comparisons with \dec{5} and the default rule (29 tests), and to another family for all pairwise comparisons between methods (91 tests).
 
 \begin{table*}[t]
   \centering
-  \caption{Static rostering on the 47 test instances (NSGA-II, 465 evaluations; mean HV over design runs and five runs; HV normalized per instance over all 54 arms).
+  \caption{Static rostering on the 47 test instances (NSGA-II, 465 evaluations unless stated; mean HV over design runs and five runs; HV normalized per instance over all 54 arms).
   $\Delta$: difference from \dec{5} over all instances, with Holm-corrected $p$. W/L: instances where the method is significantly better/worse than \dec{5}.}
   \label{tab:static-main}
   \footnotesize
@@ -94,40 +96,42 @@ Table~\ref{tab:static-main} shows the results.
 The final method raises the mean HV from 0.570 with \dec{5} to 0.785 with the GP rules and 0.788 with the ES16 rules.
 Both are significantly better than \dec{5} (Holm-corrected $p = 3 \times 10^{-7}$) and are never significantly worse on any instance.
 Giving \dec{5} 65\% more evaluations raises its HV by only 0.022.
-The gain is large in the H and M groups ($+0.19$ and $+0.34$, Holm-corrected $p \le 0.008$)
+The gain is large in the H and M groups ($+0.19$ and $+0.34$, Holm-corrected $p < 0.01$)
 and in the four hand-built scenarios ($+0.28$ to $+0.30$, too few instances for a significant test).
-In the E group, where all robots are of one type, the final method has a higher mean HV than \dec{5} ($+0.05$), but the difference is not significant (Holm-corrected $p \ge 0.23$).
+In the E group, where all robots are of one type, the final method has a higher mean HV than \dec{5} ($+0.05$), but the difference is not significant (Holm-corrected $p \ge 0.22$).
 
 \textbf{The rule is what makes \SDD work.}
-With the default rule, \SDD is not better than \dec{5} overall ($+0.020$, $p = 0.81$):
+With the default rule, \SDD is not better than \dec{5} overall ($+0.020$, Holm-corrected $p = 0.81$):
 it is much better in the M group and much worse in the E group.
 With learned rules at the same density, \SDD is better than \dec{5} by $+0.07$ to $+0.16$, significantly so for all rule learners except IL32-16.
 The sparse encoding alone is therefore not enough; it needs a good rule.
 
 \textbf{Optimizing the proxy score matters more than the rule's form.}
-At $\dens = 0.25$, the three learners that optimize the proxy score directly, ES16 (0.724), GP (0.716) and LLM-score (0.699), do not differ significantly from each other
-(Holm-corrected $p \ge 0.9$ over all 91 pairwise comparisons).
+At $\dens = 0.25$, the three best learners, ES16 (0.724), GP (0.716) and LLM-score (0.699), do not differ significantly from each other
+(Holm-corrected $p \ge 0.9$).
+All three are guided by the proxy score alone.
 Imitation alone is clearly worse: IL16 is below ES16 by 0.061 and below GP by 0.052 (Holm-corrected $p \le 2 \times 10^{-4}$),
 although it uses the same network as ES16 before the ES stage.
 Good rosters often make different decisions in the same state, so there is no single correct action to imitate.
-EoH (0.676) and LLM-full (0.677) lie between these groups.
+EoH (0.676) and LLM-full (0.677) lie between these groups in mean HV; of their differences to the other learners, only EoH against ES16 is significant.
 The diagnostic feedback of LLM-full did not improve on score-only feedback.
 
 \textbf{The proxy score predicts test performance.}
 We rescored all 28 rules (the default rule and 27 learned rules) on new sets of random genotypes.
-Their proxy scores have a Spearman correlation of 0.91 with their test HV ($p = 10^{-11}$),
-and the scores used during learning overestimate the rescored ones by at most 0.012.
+Their proxy scores have a Spearman correlation of 0.91 with their test HV ($p < 10^{-10}$).
+Averaged over the design runs of each learner, the score seen during learning exceeds the rescored one by at most 0.003 (0.013 for a single rule).
 
 \textbf{Effect of the density.}
 Table~\ref{tab:kcurve} shows HV against $\dens$ for the eight GP and ES16 rules.
 On the test instances we report it only as a sensitivity analysis; it was not used to choose $\dens$.
 Training and test instances show the same shape: HV rises from $0.25$ to $0.75$ and is flat between $0.75$ and $1.0$.
-The difference between $0.75$ and $1.0$ is small and not significant on either set ($+0.005$, $p = 0.52$ on training; $+0.003$, $p = 0.54$ on test).
-In the E group, the density matters most: at $\dens = 0.25$, the learned rules are significantly worse than \dec{5}, and from $\dens = 0.5$ on they are not.
+The difference between $0.75$ and $1.0$ is small and not significant on either set ($+0.005$, $p = 0.52$ on training; $+0.003$, $p = 0.54$ on test; uncorrected).
+The E group depends most on the density.
+On the test instances (eight rules pooled, Holm's correction over the four densities), the learned rules are significantly worse than \dec{5} at $\dens = 0.25$ ($-0.077$, $p = 0.004$), and from $\dens = 0.5$ on they are not.
 
 \begin{table}[t]
   \centering
-  \caption{Mean HV against the density $\dens$ (eight GP and ES16 rules, NSGA-II, 465 evaluations). Training and test values are normalized separately and cannot be compared with each other.}
+  \caption{Mean HV against the density $\dens$ (eight GP and ES16 rules, NSGA-II, 465 evaluations). Training and test values are normalized separately and cannot be compared with each other. The test row ``All'' also includes the four hand-built scenarios.}
   \label{tab:kcurve}
   \footnotesize
   \setlength{\tabcolsep}{3.5pt}
@@ -152,39 +156,42 @@ In the E group, the density matters most: at $\dens = 0.25$, the learned rules a
 We ran the robustness checks with $\dens = 0.5$, the density chosen in the first selection step; each setting is normalized separately.
 With MOEA/D (465 evaluations), \SDD with the ES16 and GP rules reaches 0.758 and 0.751 against 0.564 for \dec{5}
 ($+0.19$, Holm-corrected $p = 3 \times 10^{-6}$).
-With NSGA-II and 2000 evaluations, \SDD with the ES16 rules reaches 0.782 against 0.563 for \dec{5} ($+0.218$, $p = 10^{-7}$).
+With NSGA-II and 2000 evaluations, \SDD with the ES16 rules reaches 0.782 against 0.563 for \dec{5} ($+0.218$, Holm-corrected $p = 10^{-7}$).
 In both settings the E group again shows no significant difference from \dec{5}.
-The comparison of rule learners at $\dens = 0.25$ changes slightly:
-under MOEA/D, LLM-score falls significantly below GP (Holm-corrected $p = 0.007$) and ES16 ($p = 0.048$),
-and with 2000 evaluations ES16 is slightly but significantly better than GP ($p = 0.049$).
-ES16 is in the top group in every setting, and GP in two of the three.
+The comparison of rule learners at $\dens = 0.25$ changes slightly.
+Under MOEA/D, LLM-score falls significantly below GP (Holm-corrected $p \le 0.01$);
+whether it is also below ES16 depends on which arms are normalized together ($p = 0.048$ or $0.068$).
+With 2000 evaluations, ES16 is slightly but significantly better than GP ($p = 0.049$).
+ES16 is never significantly below another learner.
 
 \textbf{Stability across design runs.}
 The learners differ in how much their rules vary between independent runs.
 At $\dens = 0.25$, the three ES16 rules span a test HV range of only 0.723--0.725,
-whereas the GP rules span 0.689--0.725 and the LLM-score rules 0.658--0.724.
+whereas the GP rules span 0.689--0.725, the LLM-score rules 0.658--0.724 and the LLM-full rules 0.637--0.725.
 At $\dens = 1.0$, the ranges are 0.772--0.797 for ES16 and 0.766--0.796 for GP.
 
 \textbf{A failure case.}
 Five of the nine LLM-generated rules (from LLM-full, LLM-score and EoH) are infeasible in almost every run on one test instance, H13.
-They choose the type of a new robot by its own efficiency and ignore the gene type,
+They choose the type of a new robot by its own efficiency and ignore, or nearly ignore, the gene type,
 so every genotype opens a type whose tools cannot be cycled fast enough on this instance.
 No training instance has such a tight tool supply, so the proxy score did not penalize this choice.
 The GP and network rules keep the gene type as an input of their score and do not fail.
 LLM rules can thus remove freedom that the encoding was meant to provide.
 
 \textbf{What the rules learn.}
-In four of the five GP runs, the tree for \reuse candidates uses the feature that indicates whether a robot's maintenance, if started after this duty, can still finish before the end of the horizon;
+In four of the five GP runs, the tree for \reuse candidates uses the feature that indicates whether a robot is due for maintenance after this duty and the maintenance can still finish before the end of the horizon;
 in one run, this tree uses only this feature, and the whole rule has four nodes.
 These rules send robots that are close to maintenance first, which spreads the maintenances over time.
-The ES16 networks rely most on the capacity ratio and on whether a robot is close to maintenance.
-Different learned rules agree on only 57--97\% of their first choices, although they reach similar HV:
-several different rules can be equally good starting points for the search.
+The ES16 networks rely most on the capacity ratio, on whether a robot is close to maintenance, and on its working hours relative to the fleet.
+The ES16, GP and LLM rules reach similar test HV, yet they often choose differently:
+on the states that the default rule visits on the test instances, their first choices agree with those of a reference GP or LLM rule in only 57--97\% of the cases.
+Several different rules can thus be equally good starting points for the search.
 
 \textbf{Design cost.}
 One LLM design run uses about 55 proxy evaluations and 55 LLM calls; EoH uses 54 evaluations and about 91 calls.
 A GP run uses 174--539 proxy evaluations, and an ES16 run 693 plus the imitation data, which cost 139 evaluations to generate.
-The LLM learners are the cheapest in evaluations but the least stable; GP and ES16 cost more and reach good rules in every run.
+The LLM learners need the fewest evaluations, but LLM-full and LLM-score vary most between runs.
+GP and ES16 cost more, and every one of their runs reaches a proxy score of 0.82 (LLM-full and LLM-score: 3 of 6 runs; EoH: 0 of 3).
 
 \subsection{Re-rostering During Execution}
 \label{sec:exp-rerostering}

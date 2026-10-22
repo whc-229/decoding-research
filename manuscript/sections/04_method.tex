@@ -249,8 +249,8 @@ One run needs about 55 LLM calls and 55 evaluations of $\proxy$.
 The density $\dens$ decides how far the search may move away from the rule.
 Section~\ref{sec:theory} shows that its best value depends on how far good rosters are from the rule's roster and on the number of evaluations.
 Neither is known for a new instance, so we set $\dens$ once on the training instances.
-For each candidate value and each of the eight learned rules from the GP and ES runs (five GP runs and three ES runs), we run NSGA-II five times on all 15 training instances,
-normalize the HV per instance over all runs, and choose the value with the highest mean HV.
+For each candidate value and each of the eight learned rules from the GP and ES16 runs (five GP runs and three ES16 runs), we run NSGA-II five times on all 15 training instances,
+normalize the HV per instance over all runs, and choose the value with the highest mean HV over all eight rules, also when the GP and ES16 rules alone would prefer different values.
 If the best value is the largest candidate, we only report whether HV still rises toward it.
 This selection procedure was written, and tested on dummy data, before the runs.
 
@@ -260,6 +260,6 @@ Second, with a genotype layout long enough to hold more slots, we compared $0.5$
 The procedure selected $\dens = 1.0$.
 On the training instances, HV rises from $0.5$ to $0.75$ and changes little from $0.75$ to $1.0$ (Section~\ref{sec:exp-static}, Table~\ref{tab:kcurve}).
 We therefore use $\dens = 1.0$ in the final method.
-With $\dens = 1.0$ there are as many slots as shifts, but each slot is active with probability about 0.4 and some slots hit the same shift,
-so a random genotype still follows the rule in about two thirds of the shifts.
+With $\dens = 1.0$ there are as many slots as the upper bound $\Nmax$ on the number of shifts, but each slot is active with probability about 0.4 and some slots hit the same shift,
+so a random genotype still follows the rule in at least about two thirds of the shifts.
 % 待定（T12 验证后再决定）：是否说明早期探索性运行曾在测试集上评价过 κ ≤ 0.5；κ 与 q 的关系（T12）。
