@@ -18,10 +18,10 @@ Evolutionary algorithms (EAs) for scheduling often use an indirect encoding:
 the genotype is a vector of numbers, and a \emph{decoder} turns it into a schedule, usually by building the schedule step by step.
 Rothlauf's theory of representations \cite{rothlauf2006representations} explains how this mapping affects a genetic algorithm (GA).
 An encoding is \emph{redundant} when several genotypes give the same solution.
+For synonymous redundancy, where the genotypes of one solution are similar to each other, the theory shows the following.
 If every solution is represented equally often, redundancy does not change GA performance.
 If good solutions are represented more often than others, the GA performs better; if they are represented less often, it performs worse.
 Such a bias therefore helps only when it points in the right direction, and it can hurt when it does not.
-(The theory covers synonymous redundancy, where the genotypes of one solution are similar to each other.)
 
 Decoders remain a common way to bring problem knowledge into EAs.
 Random-key GAs keep the variation operators independent of the problem and put all problem knowledge into the decoder;
@@ -46,17 +46,17 @@ Aickelin and Dowsland \cite{aickelin2004indirect} evolve the order in which a he
 and compare decoders that contain different amounts of heuristic knowledge.
 In these encodings, genes affect every decision.
 Two methods outside evolutionary computation are closer to our idea.
-Limited discrepancy search \cite{harvey1995lds} explores a search tree for solutions that depart from a heuristic in at most $k$ decisions.
+Limited discrepancy search \cite{harvey1995lds} explores a search tree for solutions that deviate from a heuristic in at most $k$ decisions.
 Heuristic-biased stochastic sampling \cite{bresina1996hbss} samples solutions with probabilities that favor the heuristic's top choices.
 
 Recent work guides evolutionary search with learned policies.
 Gu \emph{et al.} \cite{gu2025synergizing} sample solutions from a reinforcement-learning policy, improve them with GA operators, and use the improved solutions to train the policy further.
 Chen \emph{et al.} \cite{chen2026teacher} use trained neural policies as teachers: their preferred actions guide an evolution of heuristic programs written by a large language model (LLM).
 
-\SDD takes the idea of limited discrepancy search, ``a heuristic plus a few departures'', and turns it into an encoding for a multi-objective EA (MOEA).
-The departures are stored in the genotype, and their number is an explicit parameter.
+\SDD takes the idea of limited discrepancy search, ``a heuristic plus a few deviations'', and turns it into an encoding for a multi-objective EA (MOEA).
+The deviations are stored in the genotype, and their number is an explicit parameter.
 Unlike the encodings above, the genes affect only a few decisions, and the rule decides all others.
-Section~\ref{sec:theory} shows how the best number of departures depends on the distance between the rule and good solutions and on the evaluation budget.
+Section~\ref{sec:theory} shows how the best number of deviations depends on the distance between the rule and good solutions and on the evaluation budget.
 
 \subsection{Learning Construction Rules}
 \label{sec:related:rules}
@@ -81,14 +81,14 @@ In scheduling, LLMs rewrite the operators of an EA for flexible job shops during
 build portfolios of dispatching rules with a learned selector for dynamic shops \cite{zhou2026dsevolve},
 generate dispatching rules in an actor--critic setup \cite{may2026llm},
 produce dispatching rules for human--robot collaborative manufacturing \cite{huang2025leveraging},
-and supply heuristics to NSGA-II for multi-objective flexible job shops \cite{fornies2025remoh}.
+and supply heuristics to NSGA-II \cite{deb2002nsga2} for multi-objective flexible job shops \cite{fornies2025remoh}.
 
 \textbf{Neural construction.}
 Deep reinforcement learning trains policies that build schedules directly, for example with graph neural networks for flexible job shops \cite{liu2025flexible}.
 
 In most of these works, a learned rule or program is judged by the quality of the schedules it produces.
-In \SDD, the rule is part of a decoder: the search starts from it and departs from it through the deviation slots.
-We therefore judge a rule by the rosters that random departures from it produce (Section~\ref{sec:method:proxy}),
+In \SDD, the rule is part of a decoder: the search starts from it and departs from it through a few genes that mark deviations (Section~\ref{sec:method}).
+We therefore judge a rule by the rosters that random deviations from it produce (Section~\ref{sec:method:proxy}),
 and Section~\ref{sec:exp-static} compares GP, neural networks and LLMs as learners for this score.
 The closest work in spirit is \cite{liao2025online}, which also uses an LLM to change how a GA explores;
 it rewrites the variation operators, whereas we change the rule inside the decoder.

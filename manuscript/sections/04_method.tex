@@ -10,7 +10,7 @@
 Sparse-deviation decoding (\SDD) splits the work between a rule and the genotype.
 A \emph{construction rule} decides every shift by default, for example ``send the available robot with the fewest duties''.
 The genotype does not encode every shift.
-It only encodes a few \emph{deviations}: the shifts at which the decoder should not follow the rule, and what it should do there instead.
+Instead, it encodes a few \emph{deviations}: the shifts at which the decoder should not follow the rule, and what it should do there instead.
 
 Fig.~\ref{fig:encoding} compares the two encodings on ten shifts.
 In a per-shift encoding such as \dec{5}, each shift has its own gene, and changing one decision changes how all later genes are read.
@@ -55,7 +55,7 @@ Finally, because the rule shapes every roster the search produces, the rule can 
     \draw[ar] (s2.north) -- (b7.south);
     \node[font=\scriptsize, anchor=west] at (6.7,-2.3) {rule $\rul$};
   \end{tikzpicture}
-  \caption{Two encodings of a ten-shift roster. (a) Each shift has its own gene. (b) Gray shifts follow the rule $\rul$; the genotype only holds deviation slots, here two active ones that change shifts 3 and 7.}
+  \caption{Two encodings of a ten-shift roster. (a) Each shift has its own gene. (b) Gray shifts follow the rule $\rul$; apart from the type and tool genes, the genotype holds only deviation slots, here two active ones that change shifts 3 and 7.}
   \label{fig:encoding}
 \end{figure}
 
@@ -74,7 +74,7 @@ A rule $\rul$ looks at the current state $s_i$ and returns a list of actions, be
 \begin{equation}
   \rul(s_i) = \bigl(\act_i^{(1)}, \act_i^{(2)}, \dots\bigr).
 \end{equation}
-The first action is the \emph{default action}; it is taken at every shift without a deviation.
+The first action is the rule's \emph{first choice}; it is taken at every shift without a deviation.
 The other \reuse actions are the alternatives a deviation can choose from, in the rule's order.
 
 The rule can read the state but not change it.
@@ -82,7 +82,7 @@ It sees the current time and the remaining horizon, which robots are available,
 and for every robot in the fleet its duty count, duty hours, remaining budget, duties left before maintenance, ready time, the end of its last duty and its first maintenance time.
 It also sees the parameters of each robot type, how many robots of each type may still be added,
 the capacity estimate of \dec{3},
-and a \emph{default type} $\tau_g$ that is read from one gene and can be used when the rule opens a robot.
+and a \emph{gene type} $\tau_g$, a robot type read from one gene that the rule can use when it opens a robot.
 If the rule leaves out some available robots, the decoder appends them in fewest-duties order, and it always appends $\tau_g$ as an option to open.
 In this way every available robot can be reached by a deviation, whatever the rule returns.
 
@@ -95,7 +95,7 @@ It is the ranking of \dec{2} without genes.
 
 The genotype has three parts:
 \begin{equation}
-  \genome = \bigl(\underbrace{p_1, a_1, \dots, p_\K, a_\K}_{\text{deviation slots}},\ \underbrace{g}_{\text{default type}},\ \underbrace{y_0, \dots, y_{\Nmax}}_{\text{tool genes}}\bigr).
+  \genome = \bigl(\underbrace{p_1, a_1, \dots, p_\K, a_\K}_{\text{deviation slots}},\ \underbrace{g}_{\text{gene type}},\ \underbrace{y_0, \dots, y_{\Nmax}}_{\text{tool genes}}\bigr).
 \end{equation}
 Its length is $2\K + \Nmax + 2$.
 The tool genes work as in the baselines.
@@ -115,7 +115,7 @@ Each slot $k$ has two genes, $p_k$ and $a_k$ in $[0,1)$.
 \end{itemize}
 A slot has no effect if it cannot be carried out:
 a reassignment needs at least one alternative robot, and, as in \dec{3}, a robot is not opened if the current fleet can cover the rest of the horizon.
-If two active slots point to the same shift, the later one counts.
+If two active slots point to the same shift, the slot with the larger index counts.
 
 Two properties follow from these choices.
 First, a small $u_k$ picks the rule's second choice, so even deviations lean toward actions that the rule rates highly.
@@ -130,7 +130,8 @@ every genotype with all slots off decodes to it, and these make up a share $(1-\
 Algorithm~\ref{alg:decode} lists the decoder.
 It first collects the active slots into a map $\Delta$ from shifts to deviations.
 It then builds the roster shift by shift.
-At a shift in $\Delta$ it carries out the deviation if possible; at all other shifts it takes the rule's default action.
+At a shift in $\Delta$ it carries out the deviation if possible; at all other shifts it takes the rule's first choice.
+Here $E(s)$ denotes the end time of the last shift in state $s$.
 If no robot is available at a shift without a deviation, it first tries the backtracking repair of \dec{5} and opens a new robot only if the repair fails.
 
 \begin{algorithm}[t]
@@ -177,9 +178,10 @@ Section~\ref{sec:motivation} showed that the rosters produced by random genotype
 We use them to score rules.
 
 For each training instance $I$ we fix a set $G_I$ of 67 genotypes:
-three with all slots off (default-type gene 0.1, 0.5 and 0.9) and 64 uniformly random ones.
+three with all slots off (with $g = 0.1$, 0.5 and 0.9) and 64 uniformly random ones.
 Every candidate rule is scored on the same set, so that differences between rules are not due to sampling.
-We decode all genotypes with the rule and compute the HV of the non-dominated feasible rosters.
+Let $\mathcal{D}_\rul(\genome)$ be the roster that \SDD decodes from $\genome$ with rule $\rul$.
+We decode all genotypes in $G_I$ and compute the HV of the non-dominated feasible rosters.
 The \emph{proxy score} is the mean over the training instances:
 \begin{equation}
   \proxy(\rul) = \frac{1}{|\mathcal{I}_{\text{train}}|} \sum_{I \in \mathcal{I}_{\text{train}}} \HV_I\bigl(\{\mathcal{D}_\rul(\genome) : \genome \in G_I\}\bigr).
@@ -190,7 +192,7 @@ where $\fres^{\max}$ and $\fbal^{\max}$ are the largest values among the rosters
 The reference point is $(1.1, 1.1)$, and the HV is divided by $1.1^2$.
 During rule learning we use $\dens = 0.25$.
 
-One evaluation of $\proxy$ takes $15 \times 67 = 1005$ decodings, fewer than a single NSGA-II run on the 15 training instances.
+One evaluation of $\proxy$ takes $15 \times 67 = 1005$ decodings, about one seventh of a single 465-evaluation NSGA-II run on each of the 15 training instances.
 Section~\ref{sec:exp-static} shows that the score is strongly rank-correlated with the HV of full MOEA runs on the test instances (Spearman $\rho = 0.91$ over 28 rules).
 
 \subsection{Learning the Rule}
@@ -205,9 +207,9 @@ The score is computed from features that do not depend on the instance size:
 6 global features (\eg the remaining share of the horizon, the capacity ratio, the number of available robots),
 7 features of the robot type (\eg duty length, overhead per duty, duties per maintenance cycle),
 9 features of a \reuse candidate (\eg its duty count and hours relative to the fleet mean, the duties it has left before maintenance, and whether its maintenance can still finish before $\horizon$),
-and 5 features of a \new candidate (\eg how many robots of this type may still be added, and whether it is the default type).
+and 5 features of a \new candidate (\eg how many robots of this type may still be added, whether it is the gene type, and a flag that marks new candidates).
 The network uses all 27 features.
-The GP trees use the 22 that apply to \reuse candidates or the 17 that apply to \new candidates.
+The GP tree for \reuse candidates uses the 22 features that apply to them; the tree for \new candidates uses 17, since it does not need the flag.
 
 \textbf{Genetic programming (GP).}
 A GP rule consists of two trees: one scores \reuse candidates and one scores \new candidates.
@@ -223,9 +225,9 @@ the final rule is chosen with all 67.
 One small network scores every candidate from its 27 features.
 It has one hidden layer of 16 $\tanh$ units, 465 weights in total.
 Training has two stages.
-First, the network learns by imitation to repeat the decisions of good \dec{5} rosters (87\,451 state--action pairs).
-Then OpenAI-ES optimizes the proxy score directly
-(population 32, noise $\sigma = 0.02$, Adam with learning rate 0.01, 60 generations, 23 genotypes per instance and generation).
+First, the network learns by imitation to repeat the decisions in good rosters found by \dec{5} on the training instances (87\,451 state--action pairs).
+Then OpenAI-ES \cite{salimans2017evolution} optimizes the proxy score directly
+(population 32, noise $\sigma = 0.02$, Adam \cite{kingma2015adam} with learning rate 0.01, 60 generations, 23 genotypes per instance and generation).
 Imitation alone is not enough: good rosters often make different choices in the same state, so there is no single right answer to imitate.
 Its purpose is to give ES a useful starting point.
 A network with random weights can open so many robots that every decoded roster lies outside the normalization range;
@@ -246,7 +248,7 @@ One run needs about 55 LLM calls and 55 evaluations of $\proxy$.
 The density $\dens$ decides how far the search may move away from the rule.
 Section~\ref{sec:theory} shows that its best value depends on how far good rosters are from the rule's roster and on the number of evaluations.
 Neither is known for a new instance, so we set $\dens$ once on the training instances.
-For each candidate value and each of the eight GP and ES rules, we run NSGA-II five times on all 15 training instances,
+For each candidate value and each of the eight learned rules from the GP and ES runs (five GP runs and three ES runs), we run NSGA-II five times on all 15 training instances,
 normalize the HV per instance over all runs, and choose the value with the highest mean HV.
-This decision rule was written, and tested on dummy data, before the runs.
+This selection procedure was written, and tested on dummy data, before the runs.
 % 待补（κ 完整结果出来后再写）：候选集合与选出的 κ。T10 训练集选出 1.0（0.75 与 1.0 不显著），D4 测试集仍在跑。

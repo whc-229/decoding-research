@@ -19,7 +19,7 @@ The first shift starts once the first robot has installed its tools and travelle
 The roster is complete when $E_i \ge \horizon$.
 
 \textbf{Robots.}
-Each robot type $\tau$ has a travel time to the post $o_\tau$, a return time $b_\tau$, a charging time $c_\tau$ and a maintenance time $\mu_\tau$.
+Each robot type $\tau$ has a travel time to the post $o_\tau$, a return time $b_\tau$, a charging time $\gamma_\tau$ and a maintenance time $\mu_\tau$.
 A robot can serve at most $n_\tau$ duties between two maintenances; we call this its \emph{duty budget}.
 After each duty the robot returns and its tools are removed.
 It then charges, or, if its budget is used up, goes to maintenance, which refills the budget.
@@ -29,7 +29,7 @@ At most $L_\tau$ robots of type $\tau$ may be used.
 \textbf{Tools.}
 Each duty needs $\nu_\tau$ tools of types compatible with the robot.
 A tool in use is busy for its installation, its travel and work time, its removal and a rest period.
-When a robot is dispatched, the decoder first reuses compatible tools that are ready, earliest first.
+When a robot is dispatched, the simulator first reuses compatible tools that are ready, earliest first.
 If tools are missing, new ones are created, and their type has to be chosen.
 At most $L_k$ tools of type $k$ may be used.
 A roster is infeasible if it needs more robots or tools than these limits allow.
@@ -58,14 +58,14 @@ The second is the \emph{imbalance} of the robot fleet:
   \fbal = 0.3\,\sigma(\mathbf{n}) + 0.4\,\sigma(\mathbf{h}) + 0.3\,\sigma(\Delta\mathbf{t}),
 \end{equation}
 where $\sigma(\cdot)$ is the standard deviation, $\mathbf{n}$ and $\mathbf{h}$ are the robots' duty counts and total duty hours,
-and $\Delta\mathbf{t}$ are the gaps between consecutive first-maintenance times.
+and $\Delta\mathbf{t}$ are the gaps between the times at which successive robots first go to maintenance.
 A low imbalance means that all robots wear evenly and do not go to maintenance at the same time.
 The two objectives conflict.
 A small fleet must work some robots hard, while an even workload needs extra robots.
 
 For each instance we also compute a lower bound $\LB$ on the resource count.
 The robot part comes from an exact feasibility search with unlimited tools;
-the tool part counts the tools that two consecutive shifts cannot share.
+the tool part checks whether a tool used in one shift can be ready again for the next shift, and if not, counts the extra tools needed.
 
 \subsection{Instances}
 \label{sec:problem:instances}
@@ -75,9 +75,9 @@ Four are hand-built scenarios: one is the request file of the scheduling softwar
 and three have three robot types and four tool types, one of them with tight fleet limits.
 The other 58 are random instances in three families:
 \begin{itemize}
-  \item \textbf{E}: one robot type.
-  \item \textbf{H}: two or three robot types, all with 10\,h duties.
-  \item \textbf{M}: two or three robot types with duty lengths from $\{6,8,10,12\}$\,h, so shifts have different lengths.
+  \item \textbf{E} (homogeneous): one robot type.
+  \item \textbf{H} (heterogeneous): two or three robot types, all with 10\,h duties.
+  \item \textbf{M} (mixed duty lengths): two or three robot types with duty lengths from $\{6,8,10,12\}$\,h, so shifts have different lengths.
 \end{itemize}
 Robot parameters are drawn at random: travel 1--2\,h, charging 2--5\,h, maintenance 48--120\,h,
 2--5 duties per maintenance cycle, 2 or 3 tools per duty, and 6--10 robots per type.
@@ -85,7 +85,7 @@ Tools take 1--2\,h to install or remove and rest for 3--8\,h.
 We generated 60 random instances and removed two for which no method found a feasible roster.
 
 The instances are split once into 15 training instances (five per family) and 47 test instances.
-Construction rules are learned on the training instances only, and the deviation density is selected on them (Section~\ref{sec:method:k}).
+The construction rules of our method are learned on the training instances only, and its deviation density is selected on them (Section~\ref{sec:method}).
 The test instances measure the final performance.
 % 待定（κ 完整结果出来后再写）：是否说明早期探索性运行曾在测试集上评价过 κ = 0.5
 
@@ -112,7 +112,7 @@ The test instances measure the final performance.
 \subsection{Encoding and Baseline Decoders}
 \label{sec:problem:decoders}
 
-All decoders in this paper use a random-key genotype $\genome \in [0,1)^n$ and build the roster one shift at a time.
+All decoders in this paper use a random-key genotype $\genome \in [0,1)^n$, a vector of $n$ numbers, and build the roster one shift at a time.
 At each shift the decoder finds the available robots, picks an action, and simulates the shift.
 Since every shift lasts at least $\min_\tau w_\tau$, the number of shifts is at most
 \begin{equation}
@@ -166,11 +166,14 @@ To see why some decoders work better than others, we measured four properties of
   A high neutral rate means that many genotypes produce the same roster, \ie the encoding is \emph{redundant}.
   \item \textbf{Good-start rate}: the chance that a uniformly random genotype gives a roster with $\fres \le \LB + 1$.
   \item \textbf{Change propagation}: after one robot gene is changed, the share of later shifts whose robot also changes.
-  \item \textbf{Reachability}: whether any genotype produces the optimal roster, which we computed by dynamic programming on the hand-built scenarios.
+  \item \textbf{Reachability}: whether some genotype produces the optimal roster. We computed the optimal rosters of the hand-built scenarios by dynamic programming.
 \end{itemize}
+We also recorded the \emph{override share}: how often the capacity look-ahead of \dec{3}--\dec{5} (below) turns a \new action into a \reuse action.
+The good-start rate is estimated from 1000 random genotypes.
+The neutral rate and change propagation are measured on 100 random feasible genotypes and on the 30 best of the 1000, with five single-gene changes each.
 We then compared these properties with the hypervolume (HV) that NSGA-II \cite{deb2002nsga2} reaches with each decoder
 (population 30, about 465 evaluations).
-For each instance we computed the Spearman correlation across decoders and report the median over instances.
+For each instance we computed the Spearman correlation between each property and HV across the decoders, and we report the median over instances.
 Table~\ref{tab:neutral} lists the first two properties on the hand-built scenarios.
 
 \begin{table}[t]
@@ -194,9 +197,9 @@ Table~\ref{tab:neutral} lists the first two properties on the hand-built scenari
 \textbf{Finding 1: the better decoders favor good rosters.}
 From \dec{0} to \dec{5}, the neutral rate rises from 0.06--0.30 to 0.44--0.69, and the good-start rate rises with it.
 Both go with better HV: the median correlation is $+0.91$ for the neutral rate and $+0.80$ for the good-start rate,
-with the same sign on every instance (12/12 and 14/14).
-The share of \new actions that the capacity look-ahead turns into \reuse correlates even more strongly ($+0.97$, 16/16).
-These three properties rise together, so the data cannot tell them apart.
+with the same sign on every instance where the correlation is defined (12/12 and 14/14).
+The override share correlates even more strongly ($+0.97$, 16/16).
+These three properties rise together, so the data cannot tell their effects apart.
 Taken together, they agree with the theory of redundant representations \cite{rothlauf2006representations}:
 an encoding helps when its redundancy favors good solutions.
 
@@ -208,10 +211,10 @@ None of the steps from \dec{0} to \dec{5} reduced this effect.
 
 \textbf{Finding 3: built-in knowledge helps even when it hides good rosters.}
 The capacity look-ahead of \dec{3}--\dec{5} sometimes forbids opening a robot.
-On two hand-built scenarios, this makes the optimal roster unreachable: it opens a fifth robot at shift 9, which the look-ahead does not allow.
+On two hand-built scenarios, this makes the optimal roster unreachable: that roster opens a fifth robot at shift 9, which the look-ahead does not allow.
 Other optimal rosters can still be reached, and on one of the two scenarios \dec{5} still finds the optimal values.
 Making the optimal roster reachable again did not help.
-When we added a gene range that always opens a robot, the imbalance got significantly worse on the two scenarios that had not lost the optimum,
+When we added a range of gene values that always opens a robot, the imbalance got significantly worse on the two scenarios that had not lost the optimum,
 and nothing improved on the two that had.
 
 \textbf{Finding 4: well-balanced rosters are rare.}
@@ -232,7 +235,7 @@ while always sending the robot with the least remaining budget reaches the lower
 These results lead to three requirements:
 \begin{enumerate}
   \item The encoding should express ``a rule plus a few exceptions'' directly: the genes should say only where and how to depart from the rule.
-  \item How strongly the decoder favors the rule should be adjustable, because favoring it helps on most instances but not on all (Finding 3).
+  \item How strongly the decoder favors the rule should be adjustable, because the distance between the rule and good rosters differs between rules and instances.
   \item The rule should be chosen for the rosters that the search finds around it, not only for the single roster it builds.
 \end{enumerate}
 Section~\ref{sec:method} presents a decoder that meets these requirements.

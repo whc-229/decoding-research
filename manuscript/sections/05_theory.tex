@@ -26,7 +26,7 @@ Section~\ref{sec:motivation} found that this kind of propagation did not explain
 
 We compare two encodings with genes in $[0,1)$:
 \begin{itemize}
-  \item \textbf{Per-step (PS)}: one gene per decision, read as $z_j = \lfloor g_j \nval \rfloor$.
+  \item \textbf{Per-shift (PS)}: one gene per decision, read as $z_j = \lfloor g_j \nval \rfloor$.
   This is a simplified, unbiased version of \dec{0}--\dec{5}; the real decoders lean toward the rule's choice more than PS does.
   \item \textbf{Sparse deviation (SP$_\K$)}: the model version of \SDD, with $\K$ slots as in Section~\ref{sec:method:genotype}.
   A slot is on with probability $\qon \approx 0.4$ in a random genotype.
@@ -107,8 +107,8 @@ with more slots, random genotypes make too many wrong changes, and both the star
 \label{sec:theory:budget}
 
 The three properties describe the encoding, not the search.
-To find the best $\K$ for a given number of evaluations, we run a GA with the same operators as our NSGA-II:
-SBX ($\eta = 20$, probability 0.9), polynomial mutation ($\eta = 20$, rate $1/n$), population 30 and truncation selection.
+To find the best $\K$ for a given number of evaluations, we run a GA with the same operators as our NSGA-II (Section~\ref{sec:exp-setup}):
+simulated binary crossover (SBX, $\eta = 20$, probability 0.9), polynomial mutation ($\eta = 20$, rate $1/n$ for a genotype of length $n$), population 30 and truncation selection.
 We use $\npos = 100$ and $\nval = 4$, nine rule distances between 0 and 80, eleven values of $\K$ between 5 and 100, and 20 runs per setting.
 
 Table~\ref{tab:theory-budget} shows that the best $\K$ grows with the budget:
@@ -185,9 +185,9 @@ With targets at distances 2 and 40 and 2000 evaluations, for example, the best $
 Over all target sets we tried, the best $\K$ is up to 7.5 times the smallest distance with 465 evaluations and up to 15 times with 2000 evaluations.
 A density chosen only to reach the nearest good solution is therefore too small for a front.
 
-The best $\K$ also grows when an unnecessary change costs less than a wrong decision.
-In the base model both cost one unit.
-If an unnecessary change costs only 0.1, doubling $\K$ from 25 to 50 no longer hurts at $\dist = 5$.
+The best $\K$ also grows when unnecessary deviations are cheap.
+In the base model, a deviation at a position where the target agrees with the rule costs one unit, like any other error.
+If such a deviation cost only 0.1 instead, doubling $\K$ from 25 to 50 would no longer hurt at $\dist = 5$.
 
 \subsection{Consequences for SDD}
 \label{sec:theory:consequences}
@@ -197,7 +197,7 @@ The analysis gives three guidelines, which the experiments test:
   \item With fewer slots than the rule distance, the best solutions are out of reach (Proposition~\ref{prop:floor}).
   Once the budget is large enough to get close to good solutions, $\K$ should exceed the typical rule distance.
   \item Larger budgets call for more slots (Table~\ref{tab:theory-budget}).
-  \item In multi-objective search, the number of slots should match the mean distance to the front, not the distance to the nearest good solution (Section~\ref{sec:theory:multi}).
+  \item In multi-objective search, the number of slots should be chosen for the mean distance to the front, not for the distance to the nearest good solution (Section~\ref{sec:theory:multi}).
 \end{enumerate}
 The rule distance of a real instance is unknown before the search.
 This is why \SDD sets the density on training instances (Section~\ref{sec:method:k}).
