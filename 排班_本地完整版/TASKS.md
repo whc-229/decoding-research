@@ -94,9 +94,10 @@
 
 - [2026-10-22，给负责 FJSP 的会话] **T9 没有排进任何调度脚本**：run_T8.sh 只跑 T8，T8 结束后 T9 不会自动开始。
   需要在 T8 结束后手动启动 T9（命令见上面 T9 一节，先跑 check_seed.py 和 check_v2.py），或另加一个调度脚本。
-  → **已处理（2026-10-22 15:37）**：加了 `报告/run_T9.sh` 并已在后台启动。它等 `T3_T7_标记/T8.done` 出现后，先跑 check_seed.py 和 check_v2.py
-  （任一不为 0 就停；现在试跑：336 个实例规则解不一致 0、360 条不一致 0），再按 T9 一节的命令跑（进程数规则同 run_T8.sh）、合并成 v3_big_all.csv 并分析，
-  完成后写 `T3_T7_标记/T9.done`。已有进程在写 v3_big_seed.csv 时不启动，**不要再手动启动 T9**。`报告/T9_启发式初始化.md` 仍由负责 FJSP 的会话写。
+  → **已处理，2026-10-23 01:28 按新顺序重排**：TASKS 改为"T6 big → T9 → T7 → T8"后，停掉了 run_T3_T7.sh 与 run_T9.sh 两个调度外壳
+  （T6b 的计算进程未中断，继续跑完），换成 `报告/run_T6b_T9_T7.sh`：等 T6b 进程结束 → 续跑同一命令补齐并分析、写 T6b.done →
+  T9（先跑 check_seed.py、check_v2.py，任一不为 0 就停；运行后合并成 v3_big_all.csv 并分析）→ T7。run_T8.sh 未动，仍在 T7.done 后接 T8。
+  已有进程在写 v3_big_seed.csv 时 T9 不启动，**不要再手动启动 T9**。各任务报告仍由负责 FJSP 的会话写。run_T9.sh 已停用（保留文件）。
 - [2026-10-22] T12 已撤销；停之前的中间文件未提交、留在原处（theory/analyze_t12.py、neural/lambda_cost.py、neural/out/lambda/、
   theory/T12_撤销_中间文件/）。不要删，也不要提交；以后若审稿需要再用。
 

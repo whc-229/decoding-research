@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# 【已停用 2026-10-23】顺序改为 T6b → T9 → T7 → T8，由 run_T6b_T9_T7.sh 接替；本文件仅保留备查。
 # T9：等 T8 完成标记出现后，跑启发式初始化对照（rk+seed / rk+glr / rk+glr+seed，big 实例，10 次，20000 次评价），
 # 然后与 v3_big 合并分析。命令照 TASKS.md 的 T9 一节；进程数规则与 run_T8.sh 相同；可续跑（moea_fjsp2.py 跳过 CSV 中已有的行）。
 # 开跑前必须：check_seed.py "规则解不一致 0"、check_v2.py "不一致 0"，否则停下等排查。日志追加到 报告/T3_T7_调度.log。
