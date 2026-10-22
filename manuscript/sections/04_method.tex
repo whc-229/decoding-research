@@ -118,7 +118,8 @@ a reassignment needs at least one alternative robot, and, as in \dec{3}, a robot
 If two active slots point to the same shift, the slot with the larger index counts.
 
 Two properties follow from these choices.
-First, a small $u_k$ picks the rule's second choice, so even deviations lean toward actions that the rule rates highly.
+First, the alternatives are ordered as the rule ranks them, so close values of $u_k$ pick robots that the rule ranks similarly, and a small mutation of $u_k$ gives a similar deviation.
+In a random genotype, every alternative is equally likely; the order adds structure, not preference.
 Second, in a uniformly random genotype each slot is on with probability $\qon \approx 0.4$, so about $\qon\K$ slots are active.
 The density $\dens$ therefore sets how far from the rule's roster a random genotype lands.
 It also sets how often the rule's roster itself is produced:
