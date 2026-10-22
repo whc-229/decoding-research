@@ -21,11 +21,11 @@ At that point, the robot that the plan sends next is hit by one of three disturb
 \begin{itemize}
   \item \textbf{Breakdown}: the robot is out of service for 48\,h; after the repair its duty budget is full again.
   \item \textbf{Early maintenance}: the robot must go to maintenance before its next duty, which changes the order of its tasks.
-  \item \textbf{Delay}: the robot becomes ready 8\,h later than planned.
+  \item \textbf{Delay}: the robot becomes ready 8\,h later than it otherwise would.
 \end{itemize}
 If the plan opens a new robot at that shift, the disturbance moves to the next shift.
 This gives $62 \times 3 \times 2 = 372$ scenarios.
-On one instance, all six scenarios have no feasible repair, because the fleet is already at its limit; we use the remaining 366.
+On one instance, neither simple repair of the plan (see below) is feasible in any of its six scenarios, so no budget can be set; we use the remaining 366.
 The shifts before the disturbance are fixed.
 
 \textbf{Objectives.}
@@ -36,15 +36,15 @@ The resource count is a constraint: it may not exceed a budget $B$.
 $B$ is the smaller resource count of two simple repairs of the plan (the plan rule below without deviations, and the plan encoded for \dec{5}),
 so it is always reachable.
 Rosters over budget are penalized in proportion to the excess.
-In a pilot with resource count and changes as the objectives, the methods rarely differed in resource count, so we moved it to the constraint.
+In a pilot with resource count and changes as the objectives, the methods never differed in the smallest resource count (36 scenarios), so we moved it to the constraint.
 
 \textbf{Methods.}
 All methods continue decoding from the state at the disturbance, and the repair step of \dec{5} never reaches back into the fixed shifts.
 \begin{itemize}
   \item \textbf{\dec{5}}: per-shift genes from a random initial population, \ie re-rostering from scratch.
   \item \textbf{\dec{5}+seed}: as \dec{5}, but 20\% of the initial population is the repaired plan and its mutants.
-  This follows Shen and Yao \cite{shen2015dfjsp}, who fill part of the initial population with the previous schedule, a repaired schedule and their mutants.
-  \item \textbf{Plan as bias}: \SDD with the plan as the rule and $\dens = 0.25$; the slots point only to the remaining shifts.
+  This is a simplified form of the seeding of Shen and Yao \cite{shen2015dfjsp}, who fill 20\% of the population with the previous schedule and its mutants and 30\% with a repaired schedule and its mutants.
+  \item \textbf{Plan as bias}: \SDD with the plan as the rule. The number of slots is set from the full horizon with $\dens = 0.25$, and the slots point only to the remaining shifts.
   The \emph{plan rule} sends the robot that the plan sends at the nearest start time if it is available,
   opens a robot of the planned type if the plan opens one there,
   and otherwise falls back to the default rule $\rul_0$.
@@ -54,7 +54,8 @@ The plan rule is fixed and not learned, so all 62 instances can be used.
 Each method runs NSGA-II with population 30 and 465 evaluations, five times per scenario.
 
 \textbf{Measures.}
-For each scenario, we normalize (changes, imbalance) over the solutions of all methods and compute the HV with reference point $(1.1, 1.1)$.
+The front of a run is the non-dominated set of all evaluated rosters within budget.
+For each scenario, we normalize (changes, imbalance) over the solutions of all methods and compute the HV with reference point $(1.1, 1.1)$, divided by $1.1^2$.
 We compare each method with \dec{5}+seed by a paired Wilcoxon test over scenarios,
 and count the scenarios in which a method is significantly better or worse (Mann--Whitney, $p < 0.05$, five runs each).
 We also report the smallest number of changes found and the fraction of runs that find a repair with at most three changes.
@@ -75,7 +76,7 @@ We also report the smallest number of changes found and the fraction of runs tha
     \dec{5}             & 0.339 & $-0.265$ & $7\!\times\!10^{-45}$ & 2/200  & 25.0 & 0.01 \\
     \dec{5}+seed        & 0.605 & ---      & ---                    & ---    & 9.9  & 0.36 \\
     Plan as bias        & 0.788 & $+0.184$ & $5\!\times\!10^{-26}$ & 249/44 & 7.0  & 0.28 \\
-    Plan as bias + seed & \textbf{0.815} & $+0.210$ & $1\!\times\!10^{-40}$ & 238/24 & \textbf{6.4} & \textbf{0.41} \\
+    Plan as bias + seed & 0.815 & $+0.210$ & $1\!\times\!10^{-40}$ & 238/24 & \textbf{6.4} & \textbf{0.41} \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -107,21 +108,22 @@ It also needs fewer changes: the smallest repair it finds changes 7.0 shifts on 
 Re-rostering from scratch is far behind (0.339) and almost never finds a repair with few changes.
 
 \textbf{The gain holds for every disturbance and time.}
-Table~\ref{tab:reroster-groups} shows the same order for all three disturbance types and both times.
+In every group of Table~\ref{tab:reroster-groups}, both bias variants beat seeding, and seeding beats re-rostering from scratch.
 The gain over seeding is largest for delays ($+0.254$) and smallest for early maintenance ($+0.142$).
-The direction is also the same in the E, H and M families.
+The bias also beats seeding within each of the E, H and M families ($p \le 2 \times 10^{-4}$).
 
 \textbf{Bias and seeding complement each other.}
 Seeding finds repairs with at most three changes in 36\% of the runs, more often than the plan rule alone (28\%).
-Combining the two gives the best results on both counts: an HV of 0.815 and near-zero repairs in 41\% of the runs.
-The combination helps most when the disturbance comes late (60\% executed: 0.848 against 0.788 for the bias alone).
-When it comes early, the bias alone is as good (0.789 against 0.782).
+Combining the two finds repairs with at most three changes in 41\% of the runs and gives the highest mean HV (0.815),
+although its HV gain over the bias alone is not significant ($p = 0.59$).
+The combination helps when the disturbance comes late (60\% executed: 0.848 against 0.788, $p = 0.05$).
+When it comes early, the bias alone is slightly better (0.789 against 0.782, $p = 0.003$).
 
 \textbf{Why bias beats seeding.}
-The two methods put the plan into the search in different places.
+The two methods put the plan into the search in different places, and this explains the gap in changes (7.0 against 9.9).
 Seeding places the plan in a few individuals of the initial population.
 Under per-shift genes, a mutation of the seed changes the state, and the later genes are read in that new state;
 the offspring drift away from the plan at many shifts at once (Section~\ref{sec:repr}).
 With the plan as the rule, every genotype starts from the plan.
-An offspring departs from it only at its active slots, and the rule brings it back to the plan after each departure.
+An offspring departs from it only at its active slots, and after each departure the rule returns to the plan's robot whenever that robot is available.
 The whole search therefore stays near the plan, and that is where good repairs are.
