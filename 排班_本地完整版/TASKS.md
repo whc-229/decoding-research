@@ -36,22 +36,6 @@
 - R0-4 报告 `报告/R0_偏离率扫描.md`：以 q·κ 为横轴的训练 HV 曲线（全部与 E/H/M），标出是否出现下降段；κ = 0.5、q = 0.8 与 κ = 1.0、q = 0.4 的差（配对 Wilcoxon）；
   最好解实际用到的偏离数 / 班次数（对照 FJSP 的 P1）。结论补一句到 `报告/待检验_偏离偏置与最优K.md` 的"现象"一节。
 
-### T6 [待做] FJSP：主实验最终版（单机、20 次）
-- 目的：论文最终数字全部来自同一台机器、每个实例 20 次。bench/ 下，两条依次跑（共约 10 小时，适合过夜）：
-  ```
-  nohup python moea_fjsp2.py pd,rk,sp0.1,sp0.25,sp0.5 20 6 v3_main.csv main 5000 > v3_main.log 2>&1 &
-  # 上一条结束后：
-  nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_big.csv big 20000 > v3_big.log 2>&1 &
-  ```
-- 完成后分别 `python analyze_fjsp2.py v3_main.csv report_v3_main.md`、`... v3_big.csv report_v3_big.md`，汇总写 `报告/T6_FJSP最终版.md`。
-- **中期快照（2026-10-21 新增，不要停主进程）**：v3_main.csv 中第 0～9 次全部齐了以后（每个 (实例, 编码, 次) 都有 465/2000/5000 三行），
-  把这部分抽出来另存为 `bench/v3_main_r10.csv`（只读 v3_main.csv、另写新文件，不影响正在写入的进程），commit + push，在 `报告/T6_FJSP最终版.md` 记一句快照时间。
-  判断"齐了"可以用：
-  ```
-  python -c "import csv,collections as C;c=C.Counter((r[0],r[1]) for r in csv.reader(open('v3_main.csv')) if r and r[0]!='instance' and r[3]=='5000' and int(r[2])<10);print(len(c),sum(v==10 for v in c.values()))"
-  ```
-  两个数都等于 276×5=1380 即可（实例数以 main 的实际数为准）。抽取：表头 + `int(run)<10` 的行。主进程照常跑到 20 次。
-
 ### T7 [待做] FJSP：Behnke（60 个大实例，原 T2）
 - bench/ 下：`nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_behnke.csv behnke 5000 > v3_behnke.log 2>&1 &`
 - 完成后 `python analyze_fjsp2.py v3_behnke.csv report_v3_behnke.md`，汇总写 `报告/T7_Behnke.md`。
@@ -131,6 +115,23 @@
 
 ## 已完成
 （移到这里）
+
+### T6 [完成] FJSP：主实验最终版（单机、20 次）
+- 目的：论文最终数字全部来自同一台机器、每个实例 20 次。bench/ 下，两条依次跑（共约 10 小时，适合过夜）：
+  ```
+  nohup python moea_fjsp2.py pd,rk,sp0.1,sp0.25,sp0.5 20 6 v3_main.csv main 5000 > v3_main.log 2>&1 &
+  # 上一条结束后：
+  nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_big.csv big 20000 > v3_big.log 2>&1 &
+  ```
+- 完成后分别 `python analyze_fjsp2.py v3_main.csv report_v3_main.md`、`... v3_big.csv report_v3_big.md`，汇总写 `报告/T6_FJSP最终版.md`。
+- **中期快照（2026-10-21 新增，不要停主进程）**：v3_main.csv 中第 0～9 次全部齐了以后（每个 (实例, 编码, 次) 都有 465/2000/5000 三行），
+  把这部分抽出来另存为 `bench/v3_main_r10.csv`（只读 v3_main.csv、另写新文件，不影响正在写入的进程），commit + push，在 `报告/T6_FJSP最终版.md` 记一句快照时间。
+  判断"齐了"可以用：
+  ```
+  python -c "import csv,collections as C;c=C.Counter((r[0],r[1]) for r in csv.reader(open('v3_main.csv')) if r and r[0]!='instance' and r[3]=='5000' and int(r[2])<10);print(len(c),sum(v==10 for v in c.values()))"
+  ```
+  两个数都等于 276×5=1380 即可（实例数以 main 的实际数为准）。抽取：表头 + `int(run)<10` 的行。主进程照常跑到 20 次。
+- 结果：v3_main 27600 组齐全（6 进程，29.6 小时）；v3_big 3120 组齐全（4 进程，12.3 小时）；中期快照 v3_main_r10.csv 已提交。见 `报告/T6_FJSP最终版.md`。2026-10-23
 
 ### T11 [完成] 理论：偏离偏置与最优 K（交给负责实验 6 理论的一方，2026-10-22）
 - 读 `报告/待检验_偏离偏置与最优K.md`，在 `实验0_表示分析/theory/` 的抽象模型（model.py / meanfield.py）里做文中的检验 A（偏离值有偏）和 B（多个目标解）。
