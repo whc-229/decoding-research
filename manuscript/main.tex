@@ -1,0 +1,61 @@
+% =====================================================================
+%  Manuscript for IEEE Transactions on Evolutionary Computation (TEVC)
+%  Build:  latexmk -pdf main.tex      (or upload this folder to Overleaf)
+%  Outline: project doc 「论文提纲_v1」 (2026-10-22)
+% =====================================================================
+\documentclass[journal]{IEEEtran}
+
+% ---------- packages ----------
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{figures/}}
+
+\input{macros}
+
+% ---------- title ----------
+% Working title (outline v1); revisit after the abstract is fixed.
+\title{Rules as Bias, Deviations as Freedom:\\
+Sparse-Deviation Decoding for Evolutionary Rostering}
+
+\author{%
+  Author~One,~\IEEEmembership{Student Member,~IEEE,}
+  and~Author~Two% TODO: real names, affiliations, funding
+  \thanks{Manuscript received XXX; revised XXX.}%
+  \thanks{The authors are with XXX (e-mail: XXX).}%
+}
+
+\markboth{IEEE Transactions on Evolutionary Computation,~Vol.~XX, No.~X, Month~2026}%
+{Sparse-Deviation Decoding for Evolutionary Rostering}
+
+\begin{document}
+
+\maketitle
+
+\input{sections/00_abstract}
+
+\input{sections/01_introduction}
+\input{sections/02_related_work}
+\input{sections/03_problem}
+\input{sections/04_representation_analysis}
+\input{sections/05_method}
+\input{sections/06_theory}
+\input{sections/07_exp_static}
+\input{sections/08_exp_rerostering}
+\input{sections/09_exp_fjsp}
+\input{sections/10_discussion}
+\input{sections/11_conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}

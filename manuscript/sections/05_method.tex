@@ -1,0 +1,35 @@
+\section{Sparse-Deviation Decoding}
+\label{sec:method}
+
+% 证据：实验 1、4a、5；交接说明
+% 算法 1：解码；图 3：代理分示意
+
+\subsection{Rules Plus Sparse Deviations}
+\label{sec:method:encoding}
+% 偏离槽、改派/新开、回溯修复
+\todo{Encoding: rule $\rul$ + deviation slots; reassign/open-new; backtracking repair.}
+
+\begin{algorithm}[t]
+  \caption{Sparse-deviation decoding}
+  \label{alg:decode}
+  \begin{algorithmic}[1]
+    \Require genotype $\genome$, rule $\rul$, deviation density $\K$
+    \Ensure roster
+    \State \todo{fill in}
+  \end{algorithmic}
+\end{algorithm}
+
+\subsection{Proxy Score for Rule Quality}
+\label{sec:method:proxy}
+% 代理分 = 随机基因解码集的 HV
+\todo{Proxy score $\proxy(\rul)$: HV of solutions decoded from random genotypes.}
+
+\subsection{Rule Acquisition}
+\label{sec:method:acquisition}
+% GP、IL→ES、LLM（rulegen）
+\todo{GP, imitation learning followed by ES, and LLM-based rule generation.}
+
+\subsection{Choosing the Deviation Density}
+\label{sec:method:k}
+% K 在训练实例上选定
+\todo{$\K$ selected on training instances.}

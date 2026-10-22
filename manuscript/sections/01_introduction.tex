@@ -1,0 +1,25 @@
+\section{Introduction}
+\label{sec:intro}
+
+% 证据：调研笔记 01、03
+% 段落计划：
+%  1. 间接编码 + 解码器在调度/排班中很常见；解码器带来多对一（冗余）。
+%  2. 规则（启发式）偏置有用但不稳健——好解离规则远时偏置有害（Rothlauf 的冗余/偏置理论）。
+%  3. 本文问题：如何同时给出偏置与自由度，以及如何获得"好的"规则。
+%  4. 本文做法概述。
+%  5. 贡献列表（见下）。
+%  6. 文章结构。
+% 图 1：编码示意（dec5 逐班基因 vs 规则 + 稀疏偏离）
+
+\todo{Introduction.}
+
+The main contributions of this paper are as follows.
+\begin{enumerate}
+  \item \textbf{Representation.} \todo{Rules plus sparse deviation slots, with the deviation density as an explicit parameter (LDS idea turned into an MOEA encoding).}
+  \item \textbf{Theory.} \todo{Bias--freedom model: for $\K<\dist$ search stalls above $\dist-\K$; small-budget optimum $\K\approx\dist$, large-budget $\approx\dist/\nalt$; multi-objective case follows the mean distance.}
+  \item \textbf{Rule acquisition.} \todo{Rules should be optimized for bias quality (the proxy score); under this objective GP, neural network + ES and LLM are interchangeable; imitating good solutions is not enough.}
+  \item \textbf{Applications.} \todo{Static rostering (47 test instances), mid-execution re-rostering, and public FJSP benchmarks.}
+\end{enumerate}
+
+% Organization paragraph
+\todo{Organization of the paper.}
