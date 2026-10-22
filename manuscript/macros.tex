@@ -1,12 +1,32 @@
 % ---------- notation (keep all symbols here so they stay consistent) ----------
-\newcommand{\K}{K}                       % deviation density / number of deviation slots
-\newcommand{\dist}{d}                    % distance between rule-decoded solution and good solutions
-\newcommand{\nalt}{q}                    % number of alternatives per decision
-\newcommand{\HV}{\mathrm{HV}}            % hypervolume
-\newcommand{\proxy}{S}                   % surrogate (proxy) score of a rule
-\newcommand{\genome}{\mathbf{g}}         % genotype
-\newcommand{\decoder}{\mathcal{D}}       % decoder
-\newcommand{\rul}{r}                     % construction rule (\rule is a LaTeX built-in)
+% problem
+\newcommand{\horizon}{T}                 % task horizon (h)
+\newcommand{\Nmax}{N_{\max}}             % upper bound on the number of shifts
+\newcommand{\avail}{\mathcal{A}}         % set of available robots
+\newcommand{\LB}{\mathrm{LB}}            % lower bound on the resource count
+\newcommand{\fres}{f_{1}}                % resource count
+\newcommand{\fbal}{f_{2}}                % imbalance
+\newcommand{\act}{a}                     % an action
+\newcommand{\reuse}{\textsc{reuse}\xspace}
+\newcommand{\new}{\textsc{new}\xspace}
+
+% encodings and decoders
+\newcommand{\dec}[1]{\textsf{D#1}}       % baseline decoders D0--D5
+\newcommand{\SDD}{\textsf{SDD}\xspace}          % sparse-deviation decoding (proposed)
+\newcommand{\genome}{\mathbf{x}}         % genotype
+\newcommand{\rul}{\phi}                  % construction rule
+\newcommand{\K}{K}                       % number of deviation slots
+\newcommand{\dens}{\kappa}               % deviation density, K = ceil(kappa * Nmax)
+\newcommand{\qon}{q}                     % probability that a random slot is active
+\newcommand{\proxy}{S}                   % proxy score of a rule
+
+% theory
+\newcommand{\dist}{d}                    % distance between rule string and target
+\newcommand{\nval}{m}                    % number of values per decision
+\newcommand{\npos}{N}                    % number of decisions (positions)
+
+% misc
+\newcommand{\HV}{\mathrm{HV}}
 \newcommand{\eg}{e.g.,\ }
 \newcommand{\ie}{i.e.,\ }
 

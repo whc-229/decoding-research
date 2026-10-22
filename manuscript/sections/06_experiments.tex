@@ -1,0 +1,168 @@
+\section{Experimental Studies}
+\label{sec:experiments}
+
+% 证据：ga.py、neural/moea_any.py（算法设置）；neural/analyze_methods.py、reroster/analyze.py（HV 归一化与检验）
+% 本节按"统一设置 → 静态排班 → 重排班 → FJSP"组织。静态排班与 FJSP 的结果等实验全部完成后再写（见各小节注释）。
+
+We evaluate \SDD in three settings:
+static rostering on the 47 test instances (Section~\ref{sec:exp-static}),
+re-rostering after a disturbance during execution (Section~\ref{sec:exp-rerostering}),
+and public flexible job shop benchmarks (Section~\ref{sec:exp-fjsp}).
+Section~\ref{sec:exp-setup} describes the settings that all experiments share.
+
+\subsection{Common Setup}
+\label{sec:exp-setup}
+
+\textbf{Optimizers.}
+The main optimizer is NSGA-II \cite{deb2002nsga2} with population 30.
+Parents are drawn uniformly at random; offspring are created by SBX (distribution index 20, probability 0.9, each gene recombined with probability 0.5)
+and polynomial mutation (distribution index 20, rate $1/n$ per gene); survivors are chosen by non-dominated sorting and crowding distance.
+Genes take values in $[0, 0.99]$.
+Unless stated otherwise, each run has 465 evaluations.
+To check that the results do not depend on NSGA-II, we also use MOEA/D \cite{zhang2007moead} with the Tchebycheff approach, 30 weight vectors and a neighborhood of 6.
+All methods in a comparison use the same optimizer, budget and random seeds; only the decoder differs.
+
+\textbf{Performance measure.}
+The result of a run is the non-dominated set of all feasible solutions it evaluated (in re-rostering, of those within the resource budget).
+We measure it by the hypervolume (HV).
+For each instance, both objectives are normalized by the smallest and largest values found by all compared methods,
+the reference point is $(1.1, 1.1)$, and the HV is divided by $1.1^2$, so that it lies between 0 and 1.
+
+\textbf{Statistics.}
+Unless stated otherwise, each method is run five times per instance.
+For methods with a learned rule, the method's result on an instance is the mean over all its design runs (independent runs of the rule learner) and their MOEA runs.
+We compare two methods by a paired Wilcoxon signed-rank test over instances and correct the $p$-values by Holm's method \cite{holm1979simple} within each family of comparisons, \eg all comparisons with one baseline in one table.
+We also count on how many instances a method is significantly better or worse than the other (Mann--Whitney U test, $p < 0.05$).
+
+\subsection{Static Rostering}
+\label{sec:exp-static}
+
+\todo{To be written after the deviation-density experiments are complete.}
+% 计划内容（实验 5、实验 5 续；报告 实验5_A/B/C/D）：
+%  - 规则来源对比（GP / ES16 / LLM-score / LLM-full / EoH / IL16 / IL32-16，三档，Holm）；代理分与测试集 HV 的秩相关 ρ = 0.91（28 条规则）
+%  - 最终方法（κ 待定）+ ES16/GP：NSGA-II 465、NSGA-II 2000、MOEA/D 465；E/H/M 分组
+%  - 稳定性（设计运行的离散度）、H13 稳健性诊断、可解释性（GP 收敛到"维修错开"）、设计成本
+%  - 守住：不写"LLM 优于 GP/网络"；不写"所有实例优于 dec5"（E 组无显著差别）；不写"κ 是最优密度"；方法成绩用各设计运行平均
+
+\subsection{Re-rostering During Execution}
+\label{sec:exp-rerostering}
+
+% 证据：实验 4b（reroster/：core.py、moea.py、plans.py、gen_scenarios.py、analyze.py、main_report.md、pilot_report.md）
+% Holm 校正：对 dec5+seed 的三个比较为一族（由 main_report.md 的原始 p 按 Holm 计算：6.89e-45×3、9.98e-41×2、5.39e-26×1）。
+% plan+seed 对 plan（全部 / 30% / 60%）为一族：原始 p = 0.59 / 0.003 / 0.048 → Holm 0.59 / 0.009 / 0.096。
+% E/H/M 分组（2 个方法 × 3 组为一族）：最大原始 p = 2.02e-4（plan，E 组），排最后，Holm 后仍为 2.0e-4。以上两族来自 2026-10-22 核对时的重算，需补进服务器报告。
+% 待补（κ 完整结果出来后）：本实验 κ = 0.25 与静态排班最终 κ 的关系
+
+Rosters are rarely executed exactly as planned.
+A robot may break down, need maintenance early, or come back late.
+The rest of the roster must then be repaired, and the repair should change as few shifts as possible.
+\SDD fits this task naturally: the original plan is a good rule, and the search only has to find the few changes that the disturbance requires.
+
+\textbf{Scenarios.}
+For each of the 62 instances, the original plan is the roster with the fewest resources (and, among those, the best balance) found by one NSGA-II run with \dec{5}.
+We execute the plan up to 30\% or 60\% of its shifts.
+Then the robot that the plan sends next is hit by one of three disturbances:
+\begin{itemize}
+  \item \textbf{Breakdown}: the robot is out of service for 48\,h; after the repair its duty budget is full again.
+  \item \textbf{Early maintenance}: the robot must go to maintenance before its next duty.
+  \item \textbf{Delay}: the robot becomes ready 8\,h later than it otherwise would.
+\end{itemize}
+If the plan opens a new robot at that shift, the disturbance moves to the next shift.
+This gives $62 \times 3 \times 2 = 372$ scenarios.
+For one instance, neither of the two simple repairs described below is feasible in any of its six scenarios, so no resource budget can be set; we use the remaining 366 scenarios.
+The shifts before the disturbance cannot be changed.
+
+\textbf{Objectives.}
+A repaired roster has two objectives, both minimized:
+the number of \emph{changes}, \ie shifts after the disturbance whose robot differs from that of the planned shift with the nearest start time,
+and the imbalance $\fbal$.
+The resource count must not exceed a budget $B$, the smaller resource count of two simple repairs:
+following the plan rule below without deviations, and encoding the plan for \dec{5}.
+Rosters over budget are penalized in proportion to the excess.
+In a pilot study with resource count and changes as the objectives, the smallest resource count was the same for all methods in all 36 scenarios,
+so we turned it into a constraint.
+
+\textbf{Methods.}
+All methods start decoding from the state at the disturbance.
+\begin{itemize}
+  \item \textbf{\dec{5}}: per-shift genes and a random initial population, \ie re-rostering from scratch.
+  \item \textbf{\dec{5}+seed}: as \dec{5}, but 20\% of the initial population is the plan encoded for \dec{5} (the second simple repair) and its mutants.
+  This is a simplified form of the seeding of Shen and Yao \cite{shen2015dfjsp},
+  who fill 20\% of the population with the previous schedule and its mutants and 30\% with a repaired schedule and its mutants.
+  \item \textbf{Plan as rule}: \SDD with the plan as the rule.
+  The \emph{plan rule} sends the robot that the plan sends at the nearest start time if that robot is available;
+  if the plan opens a robot there, it opens one of the same type; otherwise it falls back to the default rule $\rul_0$.
+  The number of slots is set from the full horizon with $\dens = 0.25$, and the slots point only to the remaining shifts.
+  \item \textbf{Plan as rule + seed}: as above, and 20\% of the initial population is the genotype without deviations and its mutants.
+\end{itemize}
+The plan rule is not learned, so all 62 instances can be used.
+We report the HV, the smallest number of changes found, and how often a run finds a repair with at most three changes.
+The $p$-values compare each method with \dec{5}+seed and are Holm-corrected over these three comparisons.
+
+\begin{table}[t]
+  \centering
+  \caption{Re-rostering results on 366 scenarios. $\Delta$: difference in mean HV from \dec{5}+seed. W/L: scenarios in which a method is significantly better/worse than \dec{5}+seed. Min.\ ch.: smallest number of changes found (mean). $\le 3$: share of runs that find a repair with at most three changes.}
+  \label{tab:reroster}
+  \footnotesize
+  \setlength{\tabcolsep}{2.8pt}
+  \begin{tabular}{@{}lcccccc@{}}
+    \toprule
+    Method & HV & $\Delta$ & $p$ & W/L & Min.\ ch. & $\le 3$ \\
+    \midrule
+    \dec{5}             & 0.339 & $-0.265$ & $2\!\times\!10^{-44}$ & 2/200  & 25.0 & 0.01 \\
+    \dec{5}+seed        & 0.605 & ---      & ---                    & ---    & 9.9  & 0.36 \\
+    Plan as rule        & 0.788 & $+0.184$ & $5\!\times\!10^{-26}$ & 249/44 & 7.0  & 0.28 \\
+    Plan as rule + seed & 0.815 & $+0.210$ & $2\!\times\!10^{-40}$ & 238/24 & 6.4  & 0.41 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Mean HV by disturbance type and by how much of the plan was executed. Each group has 122 (type) or 183 (time) scenarios. Every method differs significantly from \dec{5}+seed in every group (Holm-corrected $p < 10^{-5}$).}
+  \label{tab:reroster-groups}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lccccc@{}}
+    \toprule
+    Method & Breakdown & Early maint. & Delay & 30\% & 60\% \\
+    \midrule
+    \dec{5}             & 0.328 & 0.329 & 0.362 & 0.335 & 0.344 \\
+    \dec{5}+seed        & 0.618 & 0.645 & 0.551 & 0.546 & 0.663 \\
+    Plan as rule        & 0.772 & 0.787 & 0.805 & 0.789 & 0.788 \\
+    Plan as rule + seed & 0.807 & 0.832 & 0.806 & 0.782 & 0.848 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{The plan works better as a rule than as a seed.}
+Table~\ref{tab:reroster} shows that using the plan as the rule raises the mean HV from 0.605 to 0.788.
+It is significantly better than seeding in 249 scenarios and worse in 44.
+Its repairs also change fewer shifts: the smallest repair it finds changes 7.0 shifts on average, against 9.9 with seeding.
+Re-rostering from scratch is far behind and almost never finds a repair with few changes.
+
+\textbf{The result holds across disturbances.}
+In every group of Table~\ref{tab:reroster-groups}, both rule-based methods beat seeding, and seeding beats re-rostering from scratch.
+The plan rule's gain over seeding is largest for delays ($+0.254$) and smallest for early maintenance ($+0.142$).
+Both rule-based methods also beat seeding within each of the E, H and M families (Holm-corrected $p \le 3 \times 10^{-4}$).
+
+\textbf{Rule and seeding complement each other.}
+Seeding finds repairs with at most three changes in 36\% of the runs, more often than the plan rule alone (28\%).
+Combining the two raises this share to 41\% and gives the highest mean HV (0.815).
+Its HV is not significantly higher than that of the plan rule alone, however (Holm-corrected $p = 0.59$).
+When the disturbance comes late (60\% executed), the combination has a higher mean HV than the plan rule alone (0.848 against 0.788), but the difference is not significant ($p = 0.10$).
+When it comes early, the plan rule alone is slightly better (0.789 against 0.782, $p = 0.009$).
+
+\textbf{Why the rule beats seeding.}
+The two methods bring the plan into the search in different ways, and this explains why the rule-based repairs need fewer changes.
+Seeding puts the plan into a few individuals of the initial population.
+With per-shift genes, a mutation of such an individual changes which robots are available later, so the offspring differ from the plan at many shifts (Section~\ref{sec:motivation}).
+With the plan as the rule, every genotype starts from the plan.
+An offspring departs from the plan only at its active slots, and after each departure the rule returns to the planned robot whenever that robot is available.
+The whole search therefore stays close to the plan, which is where good repairs lie.
+
+\subsection{Flexible Job Shop Benchmarks}
+\label{sec:exp-fjsp}
+
+\todo{To be written after the FJSP experiments (T6 large-budget runs, T7--T9) are complete.}
+% 计划内容（实验 6c；T3、T5、T6、T9 报告）：稀疏编码对随机键 / 逐步编码；多预算；MOEA/D；槽数 × q 扫描对理论的检验（q·f 为有效参数；最优 q·f 随预算增大，只写定性）；启发式初始化对照（T9）。
