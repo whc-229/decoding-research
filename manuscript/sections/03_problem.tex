@@ -10,6 +10,7 @@ A duty post must be staffed by one robot at every moment of the horizon $[0,\hor
 Robots serve the post in \emph{shifts} that follow each other without gaps:
 shift $i$ starts at the time $E_{i-1}$ at which shift $i-1$ ends, and it ends at $E_i = E_{i-1} + w_\tau$,
 where $w_\tau$ is the duty length of the robot's type $\tau$.
+The first shift starts once the first robot has installed its tools and travelled to the post.
 The roster is complete once $E_i \ge \horizon$.
 
 Each robot type $\tau$ has an outbound travel time $o_\tau$, a return time $b_\tau$, a charging time $c_\tau$ and a maintenance time $\mu_\tau$.
@@ -19,7 +20,7 @@ A robot is \emph{available} for a shift that starts at $E$ if it is ready by $E 
 At most $L_\tau$ robots of type $\tau$ can be used.
 
 Every duty also needs $\nu_\tau$ tools whose types are compatible with $\tau$.
-A tool is busy for its installation, the robot's travel and duty, its removal and a rest period.
+A tool in use is busy for its installation, its own travel and work times, its removal and a rest period.
 When a robot is dispatched, ready compatible tools are reused first (earliest ready first).
 Missing tools are created, and the type of a new tool is a decision.
 At most $L_k$ tools of type $k$ can be used.
@@ -71,14 +72,15 @@ The other 58 instances are generated in three families that differ in fleet stru
   \item \textbf{M} (heterogeneous, mixed duty length): two or three robot types with duties drawn from $\{6,8,10,12\}$\,h.
         Shifts no longer align to a fixed grid.
 \end{itemize}
-Robot parameters are drawn uniformly: travel 1--2\,h, charging 2--5\,h, maintenance 48--120\,h,
-2--5 duties per maintenance cycle, 2--3 tools per duty, and 6--10 robots per type.
+Robot parameters are drawn at random: travel 1--2\,h, charging 2--5\,h, maintenance 48--120\,h,
+2--5 duties per maintenance cycle, 2 or 3 tools per duty, and 6--10 robots per type.
 Tools take 1--2\,h to install or remove and rest for 3--8\,h.
-We generated 64 instances and removed two for which no method found a feasible roster.
+We generated 60 instances and removed two for which no method found a feasible roster; with the four original scenarios this gives 62.
 
 The instances are split once into 15 training instances (five per family) and 47 test instances.
-Training instances are used for everything that is learned or tuned: the construction rules and the deviation density.
-Test instances are used only after these choices are fixed.
+Construction rules are learned on the training instances only, and the deviation density is selected on them (Section~\ref{sec:method:k}).
+The test instances measure the final performance.
+\todo{Disclose that an earlier exploratory run evaluated $\dens = 0.5$ on the test set before the training-based selection? (research decision)}
 
 \begin{table}[t]
   \centering
@@ -111,7 +113,10 @@ The length of the genotype follows from the shortest duty:
 \end{equation}
 is an upper bound on the number of shifts.
 The baseline decoders use one robot gene $x_i$ and one tool gene $y_i$ per shift.
-The tool gene picks the type of any tool that must be created at shift $i$; this part is the same in all decoders.
+The tool gene sets the type of any tool that must be created at shift $i$:
+it selects the starting position $\lfloor y_i (c_\tau - 1) \rfloor$ in the list of the $c_\tau$ compatible types,
+and the decoder moves to the next type when a type's limit is reached.
+This part is the same in all decoders and follows the original software.
 The decoders differ in how $x_i$ is turned into an action.
 They form a sequence in which each step adds one piece of problem knowledge.
 
@@ -141,4 +146,4 @@ They form a sequence in which each step adds one piece of problem knowledge.
 \dec{5} is the strongest of the six and is our main baseline.
 The steps add knowledge about which decisions are good, but none of them changes what the genes control:
 in every decoder, each gene still sets one decision of one shift.
-All decoders are implemented in C++ and in an equivalent Python model; the two agree on every tested genotype.
+All decoders are implemented in Python; \dec{1}--\dec{5} were cross-checked against the C++ implementation of the original software genotype by genotype.
