@@ -1,0 +1,301 @@
+2340 次运行待做（已有 0），4 个进程，算法 nsga2，插空，检查点 [465, 2000, 5000, 10000, 20000]
+10/2340 mk04 rk+glr 13.7s
+20/2340 mk07 rk+glr+seed 16.7s
+30/2340 mk11 rk+glr 32.4s
+40/2340 mk14 rk+glr 44.2s
+50/2340 dpp01 rk+glr+seed 61.8s
+60/2340 dpp06 rk+glr 32.9s
+70/2340 dpp09 rk+glr 47.7s
+80/2340 dpp11 rk+glr+seed 99.2s
+90/2340 dpp15 rk+glr+seed 71.2s
+100/2340 mt10x rk+glr 13.5s
+110/2340 mt10xy rk+glr 13.2s
+120/2340 mt10cc rk+glr+seed 13.2s
+130/2340 setb4xy rk+seed 19.9s
+140/2340 setb4cc rk+glr 19.9s
+150/2340 seti5xxx rk+glr+seed 27.7s
+160/2340 seti5cc rk+seed 29.4s
+170/2340 k3 rk+glr+seed 6.6s
+180/2340 sfjs02 rk+glr+seed 2.9s
+190/2340 sfjs06 rk+seed 3.5s
+200/2340 sfjs09 rk+glr 3.5s
+210/2340 mfjs02 rk+glr+seed 4.2s
+220/2340 mfjs06 rk+seed 5.3s
+230/2340 mfjs09 rk+glr 7.6s
+240/2340 mk02 rk+glr+seed 9.6s
+250/2340 mk06 rk+seed 22.9s
+260/2340 mk09 rk+glr 36.4s
+270/2340 mk12 rk+glr+seed 30.6s
+280/2340 dpp01 rk+seed 30.0s
+290/2340 dpp04 rk+glr 29.8s
+300/2340 dpp07 rk+glr+seed 44.5s
+310/2340 dpp11 rk+seed 47.9s
+320/2340 dpp14 rk+glr 63.1s
+330/2340 dpp17 rk+glr+seed 65.7s
+340/2340 mt10xxx rk+seed 13.1s
+350/2340 mt10c1 rk+glr 13.4s
+360/2340 setb4xx rk+glr+seed 20.0s
+370/2340 setb4c9 rk+seed 20.4s
+380/2340 seti5xx rk+glr 28.4s
+390/2340 seti5xyz rk+glr+seed 28.7s
+400/2340 k2 rk+glr 6.3s
+410/2340 sfjs01 rk+glr+seed 2.9s
+420/2340 sfjs04 rk+glr+seed 3.2s
+430/2340 sfjs08 rk+seed 3.6s
+440/2340 mfjs01 rk+glr 4.2s
+450/2340 mfjs04 rk+glr+seed 4.9s
+460/2340 mfjs08 rk+seed 6.6s
+470/2340 mk01 rk+glr 8.8s
+480/2340 mk04 rk+glr+seed 13.4s
+490/2340 mk08 rk+seed 34.7s
+500/2340 mk11 rk+glr 31.9s
+510/2340 mk14 rk+glr+seed 43.6s
+520/2340 dpp03 rk+seed 32.0s
+530/2340 dpp06 rk+glr 32.2s
+540/2340 dpp09 rk+glr+seed 48.6s
+550/2340 dpp13 rk+seed 61.0s
+560/2340 dpp16 rk+glr 61.3s
+570/2340 dpp18 rk+glr 68.8s
+580/2340 mt10xyz rk+seed 13.4s
+590/2340 setb4x rk+glr 19.8s
+600/2340 setb4xy rk+glr+seed 19.8s
+610/2340 seti5x rk+seed 28.1s
+620/2340 seti5xy rk+glr 28.6s
+630/2340 k1 rk+glr 3.8s
+640/2340 sfjs01 rk+seed 2.9s
+650/2340 sfjs03 rk+glr 3.2s
+660/2340 sfjs06 rk+glr+seed 3.5s
+670/2340 sfjs10 rk+seed 3.7s
+680/2340 mfjs03 rk+glr 4.6s
+690/2340 mfjs06 rk+glr+seed 5.3s
+700/2340 mfjs10 rk+seed 8.2s
+710/2340 mk03 rk+seed 22.6s
+720/2340 mk06 rk+glr+seed 22.8s
+730/2340 mk10 rk+seed 37.7s
+740/2340 mk13 rk+glr 38.6s
+750/2340 dpp01 rk+glr+seed 30.3s
+760/2340 dpp05 rk+seed 31.7s
+770/2340 dpp08 rk+glr 46.0s
+780/2340 dpp11 rk+glr+seed 47.4s
+790/2340 dpp15 rk+seed 66.6s
+800/2340 mt10x rk+seed 13.4s
+810/2340 mt10xxx rk+glr+seed 13.5s
+820/2340 mt10cc rk+seed 13.4s
+830/2340 setb4xxx rk+glr 19.8s
+840/2340 setb4c9 rk+glr+seed 20.1s
+850/2340 seti5xxx rk+seed 29.7s
+860/2340 seti5c12 rk+glr 28.8s
+870/2340 k3 rk+seed 6.6s
+880/2340 sfjs02 rk+seed 3.0s
+890/2340 sfjs05 rk+glr 3.2s
+900/2340 sfjs08 rk+glr+seed 3.5s
+910/2340 mfjs02 rk+seed 4.2s
+920/2340 mfjs05 rk+glr 4.9s
+930/2340 mfjs08 rk+glr+seed 6.7s
+940/2340 mk02 rk+seed 9.6s
+950/2340 mk05 rk+glr 15.4s
+960/2340 mk08 rk+glr+seed 30.7s
+970/2340 mk12 rk+seed 28.2s
+980/2340 mk15 rk+glr 40.2s
+990/2340 dpp03 rk+glr+seed 29.0s
+1000/2340 dpp07 rk+seed 39.2s
+1010/2340 dpp10 rk+glr 40.5s
+1020/2340 dpp13 rk+glr+seed 54.6s
+1030/2340 dpp17 rk+glr 57.2s
+1040/2340 dpp18 rk+glr+seed 62.7s
+1050/2340 mt10xyz rk+glr+seed 11.8s
+1060/2340 setb4xx rk+seed 18.3s
+1070/2340 setb4xyz rk+glr 17.9s
+1080/2340 seti5x rk+glr+seed 25.9s
+1090/2340 seti5xyz rk+seed 26.2s
+1100/2340 seti5cc rk+glr 25.6s
+1110/2340 k4 rk+glr 9.5s
+1120/2340 sfjs04 rk+seed 2.9s
+1130/2340 sfjs07 rk+glr 3.2s
+1140/2340 sfjs10 rk+glr+seed 3.4s
+1150/2340 mfjs04 rk+seed 4.4s
+1160/2340 mfjs07 rk+glr 5.5s
+1170/2340 mfjs10 rk+glr+seed 7.4s
+1180/2340 mk03 rk+glr+seed 20.0s
+1190/2340 mk07 rk+glr 14.7s
+1200/2340 mk11 rk+seed 28.1s
+1210/2340 mk14 rk+seed 39.8s
+1220/2340 dpp02 rk+glr 27.1s
+1230/2340 dpp05 rk+glr+seed 28.2s
+1240/2340 dpp09 rk+seed 43.7s
+1250/2340 dpp12 rk+glr 44.4s
+1260/2340 dpp16 rk+seed 56.3s
+1270/2340 mt10x rk+glr+seed 12.0s
+1280/2340 mt10xy rk+glr 12.0s
+1290/2340 mt10cc rk+glr+seed 11.8s
+1300/2340 setb4xy rk+seed 17.8s
+1310/2340 setb4cc rk+glr 18.0s
+1320/2340 seti5xxx rk+glr+seed 26.1s
+1330/2340 seti5c12 rk+glr+seed 26.1s
+1340/2340 k3 rk+glr+seed 5.9s
+1350/2340 sfjs02 rk+glr+seed 2.7s
+1360/2340 sfjs06 rk+seed 3.2s
+1370/2340 sfjs09 rk+glr 3.2s
+1380/2340 mfjs02 rk+glr+seed 3.8s
+1390/2340 mfjs06 rk+seed 4.8s
+1400/2340 mfjs09 rk+glr 6.9s
+1410/2340 mk02 rk+glr+seed 8.6s
+1420/2340 mk06 rk+seed 20.8s
+1430/2340 mk09 rk+glr 32.8s
+1440/2340 mk12 rk+glr+seed 27.7s
+1450/2340 mk15 rk+glr+seed 40.4s
+1460/2340 dpp04 rk+glr 27.3s
+1470/2340 dpp07 rk+glr+seed 39.7s
+1480/2340 dpp11 rk+seed 43.1s
+1490/2340 dpp14 rk+glr 56.5s
+1500/2340 dpp17 rk+glr+seed 59.5s
+1510/2340 mt10xxx rk+seed 12.1s
+1520/2340 mt10c1 rk+glr 11.9s
+1530/2340 setb4xx rk+glr+seed 18.0s
+1540/2340 setb4c9 rk+seed 18.6s
+1550/2340 seti5xx rk+glr 25.7s
+1560/2340 seti5xyz rk+glr+seed 25.6s
+1570/2340 k2 rk+glr 5.6s
+1580/2340 k4 rk+glr+seed 9.4s
+1590/2340 sfjs04 rk+glr+seed 2.9s
+1600/2340 sfjs08 rk+seed 3.1s
+1610/2340 mfjs01 rk+glr 3.8s
+1620/2340 mfjs04 rk+glr+seed 4.4s
+1630/2340 mfjs08 rk+seed 5.9s
+1640/2340 mk01 rk+glr 7.9s
+1650/2340 mk04 rk+glr+seed 12.1s
+1660/2340 mk08 rk+glr 31.2s
+1670/2340 mk11 rk+glr 28.6s
+1680/2340 mk14 rk+glr+seed 38.8s
+1690/2340 dpp03 rk+seed 28.8s
+1700/2340 dpp06 rk+glr 28.6s
+1710/2340 dpp09 rk+glr+seed 42.0s
+1720/2340 dpp13 rk+seed 54.5s
+1730/2340 dpp16 rk+glr 55.6s
+1740/2340 mt10xx rk+seed 11.9s
+1750/2340 mt10xy rk+glr+seed 11.9s
+1760/2340 setb4x rk+glr 17.9s
+1770/2340 setb4xy rk+glr+seed 17.8s
+1780/2340 seti5x rk+glr 25.5s
+1790/2340 seti5xy rk+glr 25.8s
+1800/2340 k1 rk+glr 3.5s
+1810/2340 sfjs01 rk+seed 2.7s
+1820/2340 sfjs03 rk+glr 2.9s
+1830/2340 sfjs06 rk+glr+seed 3.1s
+1840/2340 sfjs10 rk+seed 3.5s
+1850/2340 mfjs03 rk+glr 4.1s
+1860/2340 mfjs06 rk+glr+seed 4.8s
+1870/2340 mfjs10 rk+seed 7.3s
+1880/2340 mk03 rk+seed 20.1s
+1890/2340 mk07 rk+seed 14.9s
+1900/2340 mk10 rk+seed 33.4s
+1910/2340 mk13 rk+glr 34.6s
+1920/2340 dpp01 rk+glr+seed 27.0s
+1930/2340 dpp05 rk+seed 28.7s
+1940/2340 dpp08 rk+glr 40.7s
+1950/2340 dpp11 rk+glr+seed 43.1s
+1960/2340 dpp15 rk+seed 61.1s
+1970/2340 dpp18 rk+seed 62.1s
+1980/2340 mt10xxx rk+glr+seed 11.7s
+1990/2340 mt10cc rk+seed 12.0s
+2000/2340 setb4xxx rk+glr 18.2s
+2010/2340 setb4c9 rk+glr+seed 17.9s
+2020/2340 seti5xxx rk+seed 26.4s
+2030/2340 seti5c12 rk+glr 25.2s
+2040/2340 k3 rk+seed 5.9s
+2050/2340 sfjs02 rk+glr+seed 2.6s
+2060/2340 sfjs05 rk+glr 2.8s
+2070/2340 sfjs08 rk+glr+seed 3.2s
+2080/2340 mfjs02 rk+seed 3.8s
+2090/2340 mfjs05 rk+glr 4.4s
+2100/2340 mfjs08 rk+glr+seed 6.0s
+2110/2340 mk02 rk+seed 8.6s
+2120/2340 mk05 rk+glr 14.9s
+2130/2340 mk08 rk+glr+seed 30.9s
+2140/2340 mk12 rk+seed 27.6s
+2150/2340 mk15 rk+glr 40.5s
+2160/2340 dpp03 rk+glr+seed 28.4s
+2170/2340 dpp07 rk+seed 40.5s
+2180/2340 dpp10 rk+glr 40.3s
+2190/2340 dpp13 rk+glr+seed 54.1s
+2200/2340 dpp17 rk+seed 59.1s
+2210/2340 mt10xx rk+glr 11.9s
+2220/2340 mt10xyz rk+glr+seed 11.7s
+2230/2340 setb4xx rk+seed 18.0s
+2240/2340 setb4xyz rk+glr 18.1s
+2250/2340 seti5x rk+glr+seed 26.0s
+2260/2340 seti5xyz rk+seed 26.1s
+2270/2340 k2 rk+seed 5.7s
+2280/2340 sfjs01 rk+glr 2.7s
+2290/2340 sfjs04 rk+seed 2.9s
+2300/2340 sfjs07 rk+glr 3.1s
+2310/2340 sfjs10 rk+glr+seed 3.4s
+2320/2340 mfjs04 rk+seed 4.4s
+2330/2340 mfjs07 rk+glr 5.5s
+2340/2340 mfjs10 rk+glr+seed 7.2s
+# FJSP：78 个实例，编码 rk, sp0.1, sp0.25, sp0.5, rk+glr, rk+glr+seed, rk+seed（v3_big_all.csv）
+
+HV：每个 (实例, 预算) 内统一归一化 (makespan, total workload)。间隙 = 最好 makespan / 已知最好解（BKS，有最优值时即最优值）− 1。p：实例层面配对 Wilcoxon，对照 rk。
+
+纯规则（ECT+MWKR）相对 BKS 的平均间隙：0.370
+
+
+## 预算 465 次评价（78 个实例）
+
+| 编码 | 平均 HV | 对 rk | p | 赢/输实例数 | 平均间隙 | 最好编码的实例数 |
+|---|---|---|---|---|---|---|
+| rk | 0.386 | +0.000 | — | 0/0 | 0.364 | 2 |
+| sp0.1 | 0.767 | +0.381 | 3.9e-13 | 69/7 | 0.163 | 20 |
+| sp0.25 | 0.805 | +0.419 | 4.2e-14 | 75/1 | 0.148 | 26 |
+| sp0.5 | 0.803 | +0.417 | 3.6e-14 | 76/0 | 0.146 | 24 |
+| rk+glr | 0.578 | +0.191 | 6.8e-08 | 57/21 | 0.205 | 3 |
+| rk+glr+seed | 0.625 | +0.239 | 2.8e-09 | 59/19 | 0.195 | 3 |
+| rk+seed | 0.552 | +0.166 | 3.2e-07 | 54/21 | 0.248 | 0 |
+
+## 预算 2000 次评价（78 个实例）
+
+| 编码 | 平均 HV | 对 rk | p | 赢/输实例数 | 平均间隙 | 最好编码的实例数 |
+|---|---|---|---|---|---|---|
+| rk | 0.402 | +0.000 | — | 0/0 | 0.307 | 2 |
+| sp0.1 | 0.766 | +0.364 | 2.9e-13 | 71/5 | 0.143 | 15 |
+| sp0.25 | 0.816 | +0.414 | 3.6e-14 | 76/0 | 0.128 | 26 |
+| sp0.5 | 0.818 | +0.416 | 3.8e-14 | 75/1 | 0.125 | 31 |
+| rk+glr | 0.572 | +0.170 | 8.5e-08 | 59/19 | 0.188 | 3 |
+| rk+glr+seed | 0.615 | +0.213 | 1.6e-08 | 60/18 | 0.179 | 1 |
+| rk+seed | 0.549 | +0.147 | 9.3e-05 | 52/23 | 0.223 | 0 |
+
+## 预算 5000 次评价（78 个实例）
+
+| 编码 | 平均 HV | 对 rk | p | 赢/输实例数 | 平均间隙 | 最好编码的实例数 |
+|---|---|---|---|---|---|---|
+| rk | 0.420 | +0.000 | — | 0/0 | 0.268 | 2 |
+| sp0.1 | 0.761 | +0.341 | 3.9e-13 | 71/5 | 0.134 | 14 |
+| sp0.25 | 0.813 | +0.393 | 3.6e-14 | 76/0 | 0.119 | 23 |
+| sp0.5 | 0.819 | +0.399 | 3.8e-14 | 75/1 | 0.115 | 35 |
+| rk+glr | 0.571 | +0.150 | 1.9e-06 | 55/23 | 0.176 | 2 |
+| rk+glr+seed | 0.613 | +0.192 | 5.9e-08 | 56/22 | 0.169 | 1 |
+| rk+seed | 0.551 | +0.130 | 0.0012 | 45/31 | 0.207 | 1 |
+
+## 预算 10000 次评价（78 个实例）
+
+| 编码 | 平均 HV | 对 rk | p | 赢/输实例数 | 平均间隙 | 最好编码的实例数 |
+|---|---|---|---|---|---|---|
+| rk | 0.427 | +0.000 | — | 0/0 | 0.244 | 2 |
+| sp0.1 | 0.753 | +0.326 | 4.9e-13 | 71/5 | 0.128 | 13 |
+| sp0.25 | 0.805 | +0.378 | 3.6e-14 | 76/0 | 0.114 | 20 |
+| sp0.5 | 0.818 | +0.391 | 3.8e-14 | 75/1 | 0.108 | 37 |
+| rk+glr | 0.568 | +0.141 | 3.7e-06 | 52/26 | 0.167 | 2 |
+| rk+glr+seed | 0.607 | +0.180 | 3.6e-07 | 55/23 | 0.161 | 3 |
+| rk+seed | 0.551 | +0.124 | 0.0019 | 42/34 | 0.197 | 1 |
+
+## 预算 20000 次评价（78 个实例）
+
+| 编码 | 平均 HV | 对 rk | p | 赢/输实例数 | 平均间隙 | 最好编码的实例数 |
+|---|---|---|---|---|---|---|
+| rk | 0.437 | +0.000 | — | 0/0 | 0.224 | 2 |
+| sp0.1 | 0.744 | +0.307 | 5.7e-13 | 71/5 | 0.122 | 12 |
+| sp0.25 | 0.793 | +0.357 | 3.8e-14 | 75/1 | 0.108 | 21 |
+| sp0.5 | 0.807 | +0.370 | 3.8e-14 | 75/1 | 0.102 | 36 |
+| rk+glr | 0.569 | +0.132 | 3.2e-06 | 53/25 | 0.157 | 2 |
+| rk+glr+seed | 0.602 | +0.165 | 4.2e-07 | 51/25 | 0.154 | 4 |
+| rk+seed | 0.555 | +0.118 | 0.00047 | 47/29 | 0.186 | 1 |

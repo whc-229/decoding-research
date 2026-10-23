@@ -28,21 +28,6 @@
   ```
 - 输出 v3_qk2.csv（新文件，不要写进 v3_qk.csv；分析时我会和 v3_qk.csv 合并统一归一化）。在 `报告/T8_qk补点.md` 写运行情况即可。必须和 v3_qk.csv 在同一台机器上跑。
 
-### T9 [待做] FJSP：规则放进初始种群 vs 放进解码器（启发式初始化对照）
-- 目的：回答"稀疏编码的好处是否只来自好的起点"。三个新臂都用 rk 解码，只是初始种群不同（bench/seed_fjsp.py）：
-  rk+seed（1 个规则解 + 29 个随机）、rk+glr（Zhang 等 2011 的 GS/LS/RS 初始化）、rk+glr+seed（1 个规则解 + 29 个 GLR）。
-- 开始前：`cd bench && python check_seed.py`（必须"规则解不一致 0"，336 个实例），再跑 `python check_v2.py`（moea_fjsp2.py 有改动，默认编码行为不变）。
-- **顺序调整（2026-10-22）：T6 big 完成后先跑 T9，再跑 T7、T8**（T9 对论文结论更关键）。bench/ 下（与 T6 的 v3_big 同一批实例、同一预算、同一台机器；预计 3～8 小时）：
-  ```
-  nohup python moea_fjsp2.py rk+seed,rk+glr,rk+glr+seed 10 6 v3_big_seed.csv big 20000 > v3_big_seed.log 2>&1 &
-  ```
-- 完成后合并分析（与 v3_big 的 4 个编码统一归一化）：
-  ```
-  { cat v3_big.csv; tail -n +2 v3_big_seed.csv; } > v3_big_all.csv
-  python analyze_fjsp2.py v3_big_all.csv report_v3_big_all.md
-  ```
-  汇总写 `报告/T9_启发式初始化.md`（运行情况 + 主表即可，解读我来做）。
-
 ### T10 [完成] 排班：扩展编码，比较更高的偏离密度（实验 5 任务 D，2026-10-22）
 - 目的：现有基因布局最多只放得下 K0.5 的偏离槽，任务 C 只能在 {0.25, 0.5} 里选，"选出 K0.5"等于"越多越好直到上限"。
   扩展编码后比较 K ∈ {0.5, 0.75, 1.0}，看是否存在中间的最优点。只用训练实例选 K，判定规则事先写死。不改 rulegen/。
@@ -94,6 +79,22 @@
 
 ## 已完成
 （移到这里）
+
+### T9 [完成] FJSP：规则放进初始种群 vs 放进解码器（启发式初始化对照）
+- 目的：回答"稀疏编码的好处是否只来自好的起点"。三个新臂都用 rk 解码，只是初始种群不同（bench/seed_fjsp.py）：
+  rk+seed（1 个规则解 + 29 个随机）、rk+glr（Zhang 等 2011 的 GS/LS/RS 初始化）、rk+glr+seed（1 个规则解 + 29 个 GLR）。
+- 开始前：`cd bench && python check_seed.py`（必须"规则解不一致 0"，336 个实例），再跑 `python check_v2.py`（moea_fjsp2.py 有改动，默认编码行为不变）。
+- **顺序调整（2026-10-22）：T6 big 完成后先跑 T9，再跑 T7、T8**（T9 对论文结论更关键）。bench/ 下（与 T6 的 v3_big 同一批实例、同一预算、同一台机器；预计 3～8 小时）：
+  ```
+  nohup python moea_fjsp2.py rk+seed,rk+glr,rk+glr+seed 10 6 v3_big_seed.csv big 20000 > v3_big_seed.log 2>&1 &
+  ```
+- 完成后合并分析（与 v3_big 的 4 个编码统一归一化）：
+  ```
+  { cat v3_big.csv; tail -n +2 v3_big_seed.csv; } > v3_big_all.csv
+  python analyze_fjsp2.py v3_big_all.csv report_v3_big_all.md
+  ```
+  汇总写 `报告/T9_启发式初始化.md`（运行情况 + 主表即可，解读我来做）。
+- 结果：78 实例 × 3 臂 × 10 次全部完成（4 进程，217 分钟），核对 0 不一致；合并分析 report_v3_big_all.md。见 `报告/T9_启发式初始化.md`。2026-10-23
 
 ### R0 [完成] 排班：偏离率扫描——在 κ = 1.0 下提高生效概率 q（冻结后补，2026-10-23）
 - 目的：排班上只改过 κ（q 固定 0.4），最大偏离率 q·κ 只到 0.4，只看到"先升后饱和"，没看到"自由度太多变差"的一段。
