@@ -24,7 +24,7 @@ All methods in a comparison use the same optimizer, budget and random seeds; onl
 
 \textbf{Performance measure.}
 The result of a run is the non-dominated set of all feasible solutions it evaluated (in re-rostering, of those within the resource budget).
-We measure it by the hypervolume (HV).
+We measure it by its HV.
 For each instance, both objectives are normalized by the smallest and largest values found by all compared methods,
 the reference point is $(1.1, 1.1)$, and the HV is divided by $1.1^2$, so that it lies between 0 and 1.
 
@@ -342,5 +342,208 @@ The whole search therefore stays close to the plan, which is where good repairs 
 \subsection{Flexible Job Shop Benchmarks}
 \label{sec:exp-fjsp}
 
-\todo{To be written after the FJSP experiments (T6 large-budget runs, T7--T9) are complete.}
-% 计划内容（实验 6c；T3、T5、T6、T9 报告）：稀疏编码对随机键 / 逐步编码；多预算；MOEA/D；槽数 × q 扫描对理论的检验（q·f 为有效参数；最优 q·f 随预算增大，只写定性）；启发式初始化对照（T9）。
+% 证据：bench/fjsp.py、fjsp2.py（解码）、moea_fjsp2.py、seed_fjsp.py、analyze_fjsp2.py；v3_main.csv（20 次）、v3_big_all.csv、v3_moead.csv、v3_behnke.csv、v3_qk.csv + v3_qk2.csv；
+%       报告/T3_分析.md、T5_MOEAD.md、T6_FJSP最终版.md、T7_Behnke.md、T8_qk补点.md、T9_启发式初始化.md；项目文档 实验6续_FJSP最终结果.md。
+% Holm p 与逐实例 Mann--Whitney 计数由 2026-10-23 重算（scratchpad/fjsp/ana.py），均值与服务器报告一致。
+% 约定：Behnke 只报 HV 与 W/L，不报间隙；不写"超过已知最好解"；不写理论的定量部分（1/q 比例）在 FJSP 上成立。
+% 注意：rk 显著更好的 12 个实例中 edata 是 8 个（项目文档写的 7 个有误）。
+
+The rostering problem is our own.
+To see whether the representation results carry over to a well-studied problem, we apply \RDD to the FJSP \cite{dauzere2024flexible}.
+We do not learn a rule here.
+\RDD uses a standard dispatching rule, so the comparison isolates the effect of the encoding.
+
+\textbf{Problem and instances.}
+A job is a sequence of operations, and each operation can be processed on one of several eligible machines, with a processing time that depends on the machine.
+We minimize two objectives, the makespan and the total workload (the sum of the processing times of all operations), a common bi-objective form of the FJSP \cite{kacem2002approach}.
+The instances come from a public collection \cite{schedulinglab2024fjsp}.
+The \emph{main set} has 276 instances:
+Brandimarte (15) \cite{brandimarte1993routing},
+the edata, rdata and vdata sets of Hurink \etal (66 each) \cite{hurink1994tabu},
+Dauz\`ere-P\'er\`es and Paulli (18) \cite{dauzere1997integrated},
+Barnes and Chambers (21) \cite{barnes1996flexible},
+Kacem \etal (4) \cite{kacem2002approach}
+and Fattahi \etal (20) \cite{fattahi2007mathematical}.
+The 78 instances outside the Hurink sets form the \emph{large-budget set}.
+We also use the 60 instances of Behnke and Geiger \cite{behnke2012test}, which have up to 500 operations.
+
+\textbf{Schedule builder.}
+All encodings use the same builder.
+It schedules one operation per step.
+At each step, the candidates are all pairs of a job's next operation and one of its eligible machines.
+The chosen operation is placed into the earliest idle interval of its machine that can hold it after the job's previous operation.
+An instance with $N$ operations thus needs $N$ decisions.
+
+\textbf{Encodings.}
+\begin{itemize}
+  \item \textbf{\RDD.} The rule ranks the candidates by the earliest completion time (ECT); ties are broken by the most work remaining in the job (MWKR) and then by the shorter processing time.
+  The slots work as in Section~\ref{sec:method:genotype}, with $N$ steps in place of $\Nmax$ shifts:
+  there are $\K = \max(4, \lceil \dens N \rceil)$ slots, a slot is active if $a_k \ge 1 - \qon$, it acts at step $\lfloor p_k N \rfloor$,
+  and $u_k$ picks one of the candidates other than the first choice, uniformly in the rule's order.
+  There is no ``open'' action and there are no other genes, so the genotype has $2\K$ genes.
+  We use $\qon = 0.4$ and $\dens = 0.1$, 0.25 and 0.5, \ie $\drate = 0.04$, 0.1 and 0.2.
+  \item \textbf{RK.} The two-vector random key, the standard encoding of EAs for the FJSP \cite{zhang2011effective, londe2025random}.
+  The first $N$ keys give the operation sequence (sorting them gives the order in which the jobs' next operations are scheduled), and the other $N$ keys select the machine of each operation.
+  \item \textbf{PS.} A per-step encoding, the counterpart of \dec{5}: one gene per step selects the candidate at rank $\lfloor g\,|C| \rfloor$ in the rule's order, where $|C|$ is the number of candidates.
+  It uses the rule's order, but a random gene does not favor the rule's first choice.
+\end{itemize}
+As a reference, the rule alone (\RDD without active slots) has a mean gap of 37.9\% on the main set.
+
+\textbf{Setup.}
+The optimizers are those of Section~\ref{sec:exp-setup}.
+On the main set, each encoding is run 20 times per instance, and the front is recorded after 465, 2000 and 5000 evaluations.
+On the large-budget set and the Behnke set, each encoding is run 10 times, up to 20\,000 and 5000 evaluations.
+HV is normalized per instance and budget over all encodings of the same experiment, so HV values of different budgets or different tables cannot be compared.
+The \emph{gap} is the best makespan of a run divided by the best-known makespan (the optimum if known, otherwise the best upper bound in the collection), minus one, averaged over runs.
+Holm's correction is applied over all comparisons with one baseline in one experiment.
+
+\begin{table}[t]
+  \centering
+  \caption{FJSP main set (276 instances, NSGA-II, 20 runs). HV is normalized per budget. W/L: instances where an encoding is significantly better/worse than RK at 5000 evaluations. Every encoding differs significantly from RK at every budget (Holm-corrected $p \le 0.005$).}
+  \label{tab:fjsp-main}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lcccccccc@{}}
+    \toprule
+    & & \multicolumn{3}{c}{HV} & & \multicolumn{2}{c}{Gap (\%)} \\
+    \cmidrule(lr){3-5} \cmidrule(lr){7-8}
+    Encoding & $\drate$ & 465 & 2000 & 5000 & W/L & 465 & 5000 \\
+    \midrule
+    Rule alone & --- & --- & --- & --- & --- & 37.9 & 37.9 \\
+    RK   & --- & 0.445 & 0.447 & 0.463 & ---    & 30.4 & 24.5 \\
+    PS   & --- & 0.362 & 0.421 & 0.437 & 48/81  & 32.5 & 26.0 \\
+    \RDD & 0.04 & 0.719 & 0.699 & 0.695 & 190/34 & 17.5 & 14.9 \\
+    \RDD & 0.1  & 0.775 & 0.765 & 0.763 & 215/23 & 16.1 & 13.4 \\
+    \RDD & 0.2  & \textbf{0.795} & \textbf{0.801} & \textbf{0.803} & 237/12 & \textbf{15.7} & \textbf{12.5} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{\RDD is better than random keys on most instances.}
+Table~\ref{tab:fjsp-main} shows the main set.
+All three \RDD settings are significantly better than RK at every budget (Holm-corrected $p < 10^{-24}$).
+With $\drate = 0.2$ and 5000 evaluations, \RDD reaches an HV of 0.803 against 0.463 for RK.
+It is significantly better on 237 instances and worse on 12.
+Its mean gap is 12.5\%, half that of RK (24.5\%).
+More evaluations do not close this difference:
+from 465 to 5000 evaluations, the gap of RK falls from 30.4\% to 24.5\%, while that of \RDD falls from 15.7\% to 12.5\%.
+Among the three settings, $\drate = 0.2$ is best, and its lead over $\drate = 0.1$ grows with the budget
+($+0.019$ at 465 and $+0.040$ at 5000 evaluations; significantly better on 55 and 93 instances, worse on 42 and 16).
+
+\textbf{The bias toward the first choice is what helps.}
+PS uses the same rule order as \RDD, yet it is worse than RK at every budget
+($-0.083$ at 465 evaluations, Holm-corrected $p = 10^{-16}$; $-0.026$ at 5000, $p = 0.005$).
+A random PS gene picks any rank with equal probability, so random genotypes are not pulled toward the rule's schedule.
+Ranking the candidates by a rule is therefore not enough; the encoding must also pull the search toward the rule's first choices.
+
+\textbf{The gain grows with flexibility.}
+The three Hurink sets have the same jobs but differ in the mean number of eligible machines per operation: 1.15 (edata), 1.97 (rdata) and 4.13 (vdata).
+At 5000 evaluations, the HV gain of \RDD ($\drate = 0.2$) over RK is $+0.225$, $+0.353$ and $+0.420$ on these sets.
+All 12 instances on which RK is significantly better belong to the Hurink sets, and 8 of them to edata, which is closest to the classical job shop.
+
+\begin{table}[t]
+  \centering
+  \caption{FJSP large-budget set (78 instances, NSGA-II, 10 runs). The first four rows use RK with different initial populations. HV is normalized per budget over all seven rows.}
+  \label{tab:fjsp-big}
+  \footnotesize
+  \setlength{\tabcolsep}{2.6pt}
+  \begin{tabular}{@{}lccccccc@{}}
+    \toprule
+    & & \multicolumn{4}{c}{HV} & \multicolumn{2}{c}{Gap (\%)} \\
+    \cmidrule(lr){3-6} \cmidrule(lr){7-8}
+    Encoding & $\drate$ & 465 & 2000 & 5000 & 20\,000 & 465 & 20\,000 \\
+    \midrule
+    RK            & --- & 0.386 & 0.402 & 0.420 & 0.437 & 36.4 & 22.4 \\
+    RK+seed       & --- & 0.552 & 0.549 & 0.551 & 0.555 & 24.8 & 18.6 \\
+    RK+GLR        & --- & 0.578 & 0.572 & 0.571 & 0.569 & 20.5 & 15.7 \\
+    RK+GLR+seed   & --- & 0.625 & 0.615 & 0.613 & 0.602 & 19.5 & 15.4 \\
+    \RDD          & 0.04 & 0.767 & 0.766 & 0.761 & 0.744 & 16.3 & 12.2 \\
+    \RDD          & 0.1  & \textbf{0.805} & 0.816 & 0.813 & 0.793 & 14.8 & 10.8 \\
+    \RDD          & 0.2  & 0.803 & \textbf{0.818} & \textbf{0.819} & \textbf{0.807} & \textbf{14.6} & \textbf{10.2} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Larger budgets and another optimizer.}
+On the large-budget set (Table~\ref{tab:fjsp-big}), \RDD stays well ahead of RK up to 20\,000 evaluations.
+With $\drate = 0.2$, its HV lead shrinks only slowly, from 0.417 at 465 evaluations to 0.370 at 20\,000;
+at 20\,000 evaluations it is significantly better on 68 instances and worse on none (Holm-corrected $p < 10^{-12}$),
+and its gap is 10.2\% against 22.4\% for RK.
+With MOEA/D and 5000 evaluations, \RDD with $\drate = 0.2$ reaches an HV of 0.787 against 0.359 for RK
+($+0.428$, Holm-corrected $p = 4 \times 10^{-13}$; better on 69 instances, worse on none).
+All three \RDD settings are significantly better than RK with MOEA/D at all three budgets.
+
+\textbf{The rule works better in the decoder than in the initial population.}
+A rule can also help an EA through its initial population.
+We give RK three initial populations, keeping everything else fixed:
+one rule schedule and 29 random genotypes (RK+seed);
+the global, local and random selection (GLR) initialization of Zhang \etal \cite{zhang2011effective} (RK+GLR);
+and one rule schedule with 29 GLR genotypes (RK+GLR+seed).
+All three improve RK (Holm-corrected $p \le 0.003$ at every budget), and RK+GLR+seed is the best of them (Table~\ref{tab:fjsp-big}).
+\RDD with $\drate = 0.2$ is still better than RK+GLR+seed by 0.178 at 465 evaluations and by 0.205 at 20\,000
+(Holm-corrected $p \le 2 \times 10^{-10}$; better on 51 and 59 instances, worse on 6 and 2).
+The best initialization recovers 57\% of the HV gain of \RDD over RK at 465 evaluations, and only 45\% at 20\,000.
+A good initial population helps at the start, but the search can move away from it.
+\RDD keeps the bias for the whole run, because every genotype is decoded relative to the rule.
+The re-rostering experiment (Section~\ref{sec:exp-rerostering}) showed the same pattern: the plan helped more as a rule than as a seed.
+
+\textbf{Large instances.}
+On the 60 Behnke instances, all three \RDD settings are significantly better than RK on every instance at 465, 2000 and 5000 evaluations (Holm-corrected $p = 2 \times 10^{-10}$).
+Here the smallest rate is best.
+At 5000 evaluations, $\drate = 0.04$ reaches an HV of 0.971, against 0.950 for $\drate = 0.1$, 0.890 for $\drate = 0.2$ and 0.128 for RK;
+it is significantly better than both other settings (Holm-corrected $p < 10^{-8}$).
+We do not report gaps for this set.
+The collection gives only bounds for its instances, and they are loose: the rule alone is on average within 0.7\% of the upper bound.
+
+\begin{table}[t]
+  \centering
+  \caption{Mean HV against the slot ratio $\dens$ and the activation probability $\qon$ on 30 FJSP instances (NSGA-II, 5 runs; the deviation rate is $\drate = \qon\dens$). HV is normalized per budget over all 24 settings and RK (RK: 0.232 at 465 and 0.263 at 20\,000 evaluations). Bold: best per column.}
+  \label{tab:fjsp-rate}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{@{}ccccccc@{}}
+    \toprule
+    & \multicolumn{2}{c}{$\qon = 0.2$} & \multicolumn{2}{c}{$\qon = 0.4$} & \multicolumn{2}{c}{$\qon = 0.6$} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+    $\dens$ & 465 & 20\,000 & 465 & 20\,000 & 465 & 20\,000 \\
+    \midrule
+    0.05 & 0.665 & 0.629 & 0.715 & 0.685 & 0.748 & 0.721 \\
+    0.1  & 0.712 & 0.677 & 0.748 & 0.730 & 0.776 & 0.760 \\
+    0.2  & 0.752 & 0.714 & \textbf{0.793} & 0.768 & \textbf{0.789} & 0.787 \\
+    0.35 & 0.768 & 0.752 & 0.789 & 0.780 & 0.776 & \textbf{0.798} \\
+    0.5  & 0.778 & 0.757 & 0.777 & \textbf{0.792} & 0.770 & 0.792 \\
+    0.75 & \textbf{0.788} & 0.777 & 0.758 & 0.791 & 0.702 & 0.747 \\
+    1.0  & \textbf{0.788} & \textbf{0.792} & 0.725 & 0.769 & 0.635 & 0.704 \\
+    1.5  & 0.756 & 0.775 & --- & --- & --- & --- \\
+    2.0  & 0.727 & 0.755 & --- & --- & --- & --- \\
+    3.0  & 0.664 & 0.691 & --- & --- & --- & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{The deviation rate on FJSP.}
+To relate the FJSP results to Section~\ref{sec:theory}, we varied $\dens$ and $\qon$ on 30 instances
+(Brandimarte and the rdata instances la16--la30), with budgets of up to 20\,000 evaluations (Table~\ref{tab:fjsp-rate}).
+Four findings stand out.
+\begin{itemize}
+  \item \emph{The rate $\drate$ is the parameter that matters}, as in rostering.
+  For each instance and budget, a quadratic function of $\log\drate$ explains the HV of the 24 settings with a mean $R^2$ of 0.68--0.78; a quadratic function of $\log\dens$ explains only 0.46--0.48.
+  Four pairs of settings with the same $\drate$ but different $\dens$ and $\qon$ differ by at most 0.017 in mean HV, and none of the 20 comparisons (four pairs, five budgets) is significant after Holm's correction.
+  \item \emph{The search keeps the share of active slots near $\qon$.}
+  In the best schedule of a run, the share of slots that change a decision is 0.21, 0.36 and 0.52 for $\qon = 0.2$, 0.4 and 0.6 (465 evaluations), and it hardly changes with the budget.
+  \item \emph{Too many deviations hurt.}
+  For every $\qon$, HV first rises and then falls with $\dens$.
+  At 465 evaluations, the best setting is better than the setting with the largest $\dens$ by 0.125 ($\qon = 0.2$: $\drate = 0.2$ against 0.6), 0.068 ($\qon = 0.4$: 0.08 against 0.4) and 0.154 ($\qon = 0.6$: 0.12 against 0.6), with Holm-corrected $p \le 0.002$ over the three tests.
+  At 20\,000 evaluations, the decline is still significant for $\qon = 0.2$ and 0.6 (Holm-corrected $p \le 2 \times 10^{-4}$), but not for $\qon = 0.4$ ($+0.023$, $p = 0.10$).
+  \item \emph{The best rate grows with the budget.}
+  The setting with the highest mean HV has $\drate = 0.08$ at 465 evaluations, 0.12 at 2000, and 0.21 from 5000 on.
+  The median over instances of the best $\drate$ rises from 0.10 at 465 evaluations to 0.175 at 2000 and to 0.20--0.21 from 5000 on.
+  This agrees with the second guideline of Section~\ref{sec:theory:consequences}.
+  The Behnke results point the same way: with up to 500 decisions and at most 5000 evaluations, the smallest rate was best.
+\end{itemize}
+On FJSP the best rate is thus 0.1--0.2 for moderate and large budgets, lower than the rate of 0.4 chosen for rostering (Section~\ref{sec:method:k}).
+
+\textbf{Distance to specialized algorithms.}
+At 20\,000 evaluations, the best makespans of \RDD are still 10.2\% above the best-known values on average.
+These values were found by specialized FJSP algorithms that use problem-specific neighborhoods and much larger budgets \cite{dauzere2024flexible}.
+Our experiment compares encodings under the same generic MOEA; it does not compete with these algorithms.

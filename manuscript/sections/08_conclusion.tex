@@ -1,4 +1,17 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-\todo{Conclusion.}
+This paper proposed rule-deviation decoding for evolutionary scheduling.
+A construction rule makes every decision by default, and the genotype encodes only where and how to depart from it.
+The rule provides the bias, the deviation slots provide the freedom, and the deviation rate sets the balance between them.
+Rules are learned offline by scoring the solutions that random deviations from them produce.
+
+The experiments support three conclusions.
+First, a good rule used in this way helps the search a lot: on robot--tool duty rostering, the mean HV on the test instances rises from 0.570 to 0.788, and on FJSP benchmarks a standard dispatching rule raises it from 0.463 with random keys to 0.803.
+Second, a rule helps more inside the decoder than in the initial population, both when a roster is repaired during execution and on FJSP.
+Third, the deviation rate is the parameter that matters, and its best value depends on the problem and on the budget; a few settings tested on training instances are enough to set it.
+
+Several questions remain open.
+The deviation rate is fixed during a run; adapting it to the budget used so far, or to the instance, is a natural next step.
+\RDD could be combined with problem-specific local search, which would make it competitive with specialized FJSP algorithms.
+Finally, measuring how much an unnecessary deviation costs in a given decoder would show whether the theory can predict the best deviation rate before any runs.

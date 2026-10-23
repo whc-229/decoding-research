@@ -9,13 +9,12 @@
 This section reviews four lines of work:
 how decoders shape evolutionary search, how heuristics have been used to guide search,
 how construction rules are learned, and how schedules are repaired after a disturbance.
-For each line we state how our method, rule-deviation decoding (\RDD), differs.
+For each line we state how \RDD differs.
 
 \subsection{Representations, Redundancy and Decoders}
 \label{sec:related:repr}
 
-Evolutionary algorithms (EAs) for scheduling often use an indirect encoding:
-the genotype is a vector of numbers, and a \emph{decoder} turns it into a schedule, usually by building the schedule step by step.
+Indirect encodings with a decoder are common in EAs for scheduling (Section~\ref{sec:intro}).
 Rothlauf's theory of representations \cite{rothlauf2006representations} explains how this mapping affects a genetic algorithm (GA).
 An encoding is \emph{redundant} when several genotypes give the same solution.
 For synonymous redundancy, where the genotypes of one solution are similar to each other, the theory shows the following.
@@ -51,9 +50,9 @@ Heuristic-biased stochastic sampling \cite{bresina1996hbss} samples solutions wi
 
 Recent work guides evolutionary search with learned policies.
 Gu \emph{et al.} \cite{gu2025synergizing} sample solutions from a reinforcement-learning policy, improve them with GA operators, and use the improved solutions to train the policy further.
-Chen \emph{et al.} \cite{chen2026teacher} use trained neural policies as teachers: their preferred actions guide an evolution of heuristic programs written by a large language model (LLM).
+Chen \emph{et al.} \cite{chen2026teacher} use trained neural policies as teachers: their preferred actions guide an evolution of heuristic programs written by an LLM.
 
-\RDD takes the idea of limited discrepancy search, ``a heuristic plus a few deviations'', and turns it into an encoding for a multi-objective EA (MOEA).
+\RDD takes the idea of limited discrepancy search, ``a heuristic plus a few deviations'', and turns it into an encoding for an MOEA.
 The deviations are stored in the genotype, and the rate of deviations is an explicit parameter.
 Unlike the encodings above, the genes affect only a few decisions, and the rule decides all others.
 Section~\ref{sec:theory} shows how the best number of deviations depends on the distance between the rule and good solutions and on the evaluation budget.
@@ -62,7 +61,7 @@ Section~\ref{sec:theory} shows how the best number of deviations depends on the 
 \label{sec:related:rules}
 
 \textbf{Genetic programming.}
-Genetic programming (GP) hyper-heuristics evolve dispatching rules, and they remain an active topic in this journal and elsewhere.
+GP hyper-heuristics evolve dispatching rules, and they remain an active topic in this journal and elsewhere.
 Recent work keeps the GP population diverse with a tabu list of rule behaviors \cite{zhang2026genetic},
 trades rule quality against rule size in a many-objective setting \cite{pang2025multiform},
 learns rules online while the system runs \cite{nguyen2026towards},

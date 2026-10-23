@@ -171,7 +171,7 @@ To see why some decoders work better than others, we measured four properties of
 We also recorded the \emph{override share}: how often the capacity look-ahead of \dec{3}--\dec{5} (below) turns a \new action into a \reuse action.
 The good-start rate is estimated from 1000 random genotypes.
 The neutral rate and change propagation are measured on 100 random feasible genotypes and on the 30 best of the 1000, with five single-gene changes each.
-We then compared these properties with the hypervolume (HV) that NSGA-II \cite{deb2002nsga2} reaches with each decoder
+We then compared these properties with the HV that NSGA-II \cite{deb2002nsga2} reaches with each decoder
 (population 30, about 465 evaluations).
 For each instance we computed the Spearman correlation between each property and HV across the decoders, and we report the median over instances.
 Table~\ref{tab:neutral} lists the first two properties on the hand-built scenarios.

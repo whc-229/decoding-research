@@ -1,25 +1,63 @@
 \section{Introduction}
 \label{sec:intro}
 
-% 证据：调研笔记 01、03
-% 段落计划：
-%  1. 间接编码 + 解码器在调度/排班中很常见；解码器带来多对一（冗余）。
-%  2. 规则（启发式）偏置有用但不稳健——好解离规则远时偏置有害（Rothlauf 的冗余/偏置理论）。
-%  3. 本文问题：如何同时给出偏置与自由度，以及如何获得"好的"规则。
-%  4. 本文做法概述。
-%  5. 贡献列表（见下）。
-%  6. 文章结构。
-% 图 1：编码示意（dec5 逐班基因 vs 规则 + 稀疏偏离）
+% 证据：调研笔记 01、03；第 III 节（动机数字）、第 VI 节（结果数字）
+% 缩写在本节首次出现处定义：EA、MOEA、HV、RDD、LLM、GP、ES、FJSP。第 II 节不再重复定义这些缩写。
+% 不写"首次"（见第 II 节注释）。
 
-\todo{Introduction.}
+Evolutionary algorithms (EAs) for scheduling and rostering often use an indirect encoding.
+The genotype is a vector of numbers, and a \emph{decoder} turns it into a solution, usually by building the solution one decision at a time.
+The decoder is where most of the problem knowledge goes: it can skip infeasible choices, rank the options, or repair a partial schedule.
+It also makes the encoding redundant, because many genotypes decode to the same solution.
+The theory of representations \cite{rothlauf2006representations} shows that such redundancy helps only if it favors good solutions; otherwise it hurts.
+
+This paper started from a practical problem, robot--tool duty rostering, in which robots take turns at a duty post and each duty needs tools.
+A roster is judged by two objectives, the number of robots and tools used and how evenly the robots are loaded, so the problem is solved with a multi-objective EA (MOEA).
+The scheduling software we started from contains a series of decoders, each adding a piece of problem knowledge to the one before.
+The better decoders map more random genotypes to good rosters, and they reach a higher hypervolume (HV) (Section~\ref{sec:motivation}).
+All of them, however, give each shift its own gene.
+Changing one gene changes which robots are available later, so the robot changes at 39--61\% of the later shifts.
+The optimal rosters, by contrast, follow a simple rule at 85--90\% of their shifts and depart from it at a few.
+A per-shift encoding cannot express ``follow this rule except at a few shifts''.
+
+This observation suggests a different division of labor between the rule and the genes.
+The rule should provide the bias, so that every genotype starts from the rule's solution.
+The genes should provide the freedom, by saying only where and how to depart from the rule.
+Limited discrepancy search \cite{harvey1995lds} uses this idea in tree search: it explores solutions that deviate from a heuristic in only a few decisions.
+Turning the idea into an encoding for an MOEA raises three questions.
+How should the deviations be encoded?
+How much freedom should the encoding give?
+And which rule should it use?
+
+We answer these questions with \emph{rule-deviation decoding} (\RDD).
+A construction rule makes every decision by default.
+The genotype holds a fixed number of \emph{deviation slots}; each slot names a decision and an alternative action, and it can be switched off.
+The \emph{deviation rate} $\drate$, the expected share of decisions at which a random genotype departs from the rule, sets the balance between bias and freedom.
+Because the rule shapes every solution the search produces, we learn it offline on training instances.
+A rule is scored by the HV of the solutions decoded from random genotypes around it, and this score is optimized by genetic programming (GP), by a neural network trained with an evolution strategy (ES), or by a large language model (LLM) that writes the rule as code.
+
+On 47 test instances of the rostering problem, \RDD raises the mean HV of NSGA-II \cite{deb2002nsga2} from 0.570 with the best existing decoder to 0.788,
+and it is not significantly worse on any instance.
+When a roster must be repaired during execution, using the old roster as the rule gives a higher HV than seeding the population with it (0.788 against 0.605).
+On 276 public benchmark instances of the flexible job shop scheduling problem (FJSP), \RDD with a standard dispatching rule raises the HV from 0.463 with random keys to 0.803.
+This advantage holds with MOEA/D \cite{zhang2007moead}, for budgets of up to 20\,000 evaluations, and against random keys with heuristic initial populations.
 
 The main contributions of this paper are as follows.
 \begin{enumerate}
-  \item \textbf{Representation.} \todo{Rules plus deviation slots; the deviation rate $\drate = \qon\dens$ (expected share of decisions that deviate) is the parameter that matters, shown on both problems (LDS idea turned into an MOEA encoding).}
-  \item \textbf{Theory.} \todo{Bias--freedom model: for $\K<\dist$ search stalls above $\dist-\K$; the best $\K$ grows with the budget, from at most $\dist$ (small budget) to beyond $\dist/\qon$ (large budget); with several good solutions it follows their mean distance.}
-  \item \textbf{Rule acquisition.} \todo{Rules should be optimized for bias quality (the proxy score); under this objective GP, neural network + ES and LLM are interchangeable; imitating good solutions is not enough.}
-  \item \textbf{Applications.} \todo{Static rostering (47 test instances), mid-execution re-rostering, and public FJSP benchmarks.}
+  \item \textbf{Representation.} We propose \RDD, which encodes a construction rule plus a few deviations.
+  On both problems, the deviation rate, not the number of slots, determines performance.
+  In both re-rostering and FJSP, a rule placed in the decoder helps the search more than the same rule placed in the initial population.
+  \item \textbf{Theory.} A simple model of the distance between the rule and good solutions explains the role of the number of slots $\K$.
+  With $\K$ smaller than this distance, the search cannot reach good solutions.
+  The best $\K$ grows with the budget, and with several good solutions it follows their mean distance to the rule.
+  We test these predictions on both problems and report where they fail.
+  \item \textbf{Rule learning.} We score a rule by the solutions that random deviations from it produce.
+  Under this score, GP, an ES-trained network and an LLM learn rules of similar quality, while imitating good rosters is clearly worse.
+  \item \textbf{Applications.} We evaluate \RDD on static rostering, on re-rostering during execution, and on public FJSP benchmarks.
 \end{enumerate}
 
-% Organization paragraph
-\todo{Organization of the paper.}
+The rest of the paper is organized as follows.
+Section~\ref{sec:related} reviews related work.
+Section~\ref{sec:problem} defines the rostering problem and analyzes the existing decoders.
+Section~\ref{sec:method} presents \RDD and the rule learners, and Section~\ref{sec:theory} analyzes the bias--freedom trade-off.
+Section~\ref{sec:experiments} reports the experiments, Section~\ref{sec:discussion} discusses the results and their limitations, and Section~\ref{sec:conclusion} concludes the paper.
