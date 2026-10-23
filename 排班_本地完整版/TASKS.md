@@ -6,7 +6,7 @@
 
 > **实验冻结（2026-10-22）**：除了正在跑的 T10 和已排好的 FJSP T6～T9，不再新增实验，转入论文写作。
 > 之后只有导师要求修改或审稿意见到来时，才会在这里加新任务（编号 R1、R2…，并注明来源）。
-> 例外：R0（2026-10-23，claude.ai 对话与用户商定后补的一项，见下）。
+> 例外：R0（2026-10-23，claude.ai 对话与用户商定后补的一项，见下）；T13（2026-10-23，用户同意的已有方法对照，见下）。
 > 跑完 T10、T6～T9 后照常写报告、commit + push；不要自行扩展任务范围，有疑问写进"待确认"。
 
 **通用约定（T3～T7）**：在 `实验0_表示分析/` 下运行；先 `export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 PAIBAN_SRC=/home/hk/解码研究/排班_本地完整版`。
@@ -14,6 +14,36 @@
 按 T3 → T4 → T5 → T6 → T7 的顺序一个一个跑（同一时间只跑一个任务）。每个任务跑完：运行分析命令、在 `报告/` 写汇总、commit + push，再开始下一个。
 本次提交改动了 bench/fjsp2.py（新增 q 参数）和 bench/moea_fjsp2.py（新增 MOEA/D），默认行为不变：开始前先跑 `cd bench && python check_v2.py`（必须 0 不一致），
 并抽查 `python moea_fjsp2.py rk,sp0.25 1 2 /tmp/x.csv mk01 2000` 的 465 次结果应与 v2_main.csv 中 mk01 第 0 次相同（rk：55:199;66:195;69:190；sp0.25：45:162;46:161;47:160;49:157）。
+
+### T13 [待做] 最接近的已有方法作为对照（用户 2026-10-23 同意的新实验，来源：新颖性检查）
+- **目的**：审稿人最可能问"这不就是 LDS / 迭代贪心 / 启发式空间搜索吗"。用同一规则、同一预算比较四种最接近的做法：
+  1. **db / D（稠密有偏逐步编码，HBSS / LDS 的逐步版本）**：每步一个基因，以概率 ρ 偏离规则首选，偏离语义与 RDD 相同。
+     等价于"每步一个固定位置的偏离槽"——与 RDD 的唯一区别是偏离位置不可进化。**这是对"稀疏偏离槽"这一形式本身的消融，最重要。**
+  2. **hs（启发式空间，Storer 等 1992；Dorndorf & Pesch 1995）**：每步一个基因选 6 条派工规则之一（只在 FJSP 上做）。
+  3. **ps（问题空间，Storer 等 1992）**：基因扰动加工时间，规则在扰动数据上构造、真实数据上重放（只在 FJSP 上做）。
+  4. **pls / P（偏离空间上的 Pareto 局部搜索，LNS / 迭代贪心思想）**：编码与 RDD 相同，不用种群和交叉，从规则解出发每次重抽 j 个偏离槽。
+- **新代码（只新增文件，不改已有文件）**：`bench/fjsp_base3.py`、`bench/moea_fjsp3.py`、`bench/check_base3.py`、`bench/choose_t13.py`；
+  `neural/base3.py`、`neural/check_base3.py`、`neural/choose_t13.py`。各文件开头有说明。
+- **开跑前自检**（必须全部通过）：
+  - `cd bench && python check_base3.py`：0 不一致（db 与固定位置 sp 逐解相同；ps 在 ε = 0、hs 全选 ECT 时等于规则解）。
+  - `python moea_fjsp3.py rk,sp0.5 1 2 /tmp/t13chk.csv mk01 20000`，再与 `v3_big.csv` 中 mk01 第 0 次的五个检查点逐行比较前沿，必须相同（说明外包一层没有改变原有臂）。
+  - `cd neural && python check_base3.py`：0 不一致。
+- **第 1 步 FJSP 调参**（pilot 集 = Hurink rdata la16～la30，15 个实例，**不在 big 集里**）：
+  `python moea_fjsp3.py rk,sp0.5,hs,db0.04,db0.1,db0.2,db0.4,ps0.05,ps0.1,ps0.2,ps0.4,pls1:sp0.5,pls2:sp0.5,pls4:sp0.5 5 6 pilot_t13.csv pilot 5000`
+  然后 `python choose_t13.py pilot_t13.csv 5000`（判定规则已写死：每族取 5000 次时平均 HV 最高的参数）→ choose_t13.json。约 1050 次运行。
+- **第 2 步 FJSP 主比较**（big 集 78 个实例 × 10 次 × 20000 次评价，与 v3_big_all.csv 同设置、同种子）：
+  `python moea_fjsp3.py hs,<选中的 db>,<选中的 ps>,<选中的 pls> 10 6 v3_big_t13.csv big 20000`
+  合并：`{ cat v3_big_all.csv; tail -n +2 v3_big_t13.csv; } > v3_big_all13.csv`，`python analyze_fjsp2.py v3_big_all13.csv report_v3_big_all13.md`。
+  另算（报告里给出）：四个新臂各自对 sp0.5 的配对 Wilcoxon（Holm 校正，族 = 4 个臂 × 5 个检查点 = 20 个检验）与逐实例 Mann-Whitney 好/差计数。约 3120 次运行。
+- **第 3 步 排班调参**（15 个训练实例，8 条规则 × 5 次，NSGA-II 465，种子 5000 + 次号）：臂 = D0.2、D0.4、D0.6、P1、P2、P4，每个 × 8 条规则，
+  臂名写成 `D0.4:ES16(s0)=D0.4:nn:out/es/il_h16/best.npz`、`P2:GP(run1)=P2:X1.0:../neural/out/gp/run1/best_rule.py`（规则路径同 run_R0.sh 的 rules()）。
+  `python base3.py "<48 个臂>" 5 6 out/train_t13.csv train --seed-base 5000`，然后 `python choose_t13.py out/train_t13.csv` → out/choose_t13.json。约 3600 次运行。
+- **第 4 步 排班测试集**（47 个测试实例，8 条规则 × 5 次，种子 1000 + 次号，与 val_Kext.csv 相同）：只跑第 3 步选中的 D 与 P → `out/val_t13.csv`。约 3760 次运行。
+  分析：与 val_Kext.csv 的 X1.0 臂（最终方法 ρ = 0.4）和 val_server.csv 的 dec5 合并，每个实例内统一归一化；方法层面对 8 条规则 × 5 次取平均；
+  报告 D、P 各自对 X1.0 与对 dec5 的差（Holm 校正，族 = 4 个检验）、逐实例 Mann-Whitney 好/差，并按 E/H/M 分组。
+- **顺序与进程**：第 1 步 → 第 3 步 → 第 2 步 → 第 4 步，一次一个，进程数 6（看 uptime）。所有臂必须在服务器上跑（与已有结果同一台机器）。
+- **报告**：`报告/T13_已有方法对照.md`（设定、命令、判定结果、主表、异常）。只写运行情况和数字，解读由 claude.ai 对话负责。
+- **注意**：claude.ai 对话在云端容器里只做了小样试跑（3 个实例 × 1 次），数字不作数；第 1 步的 pilot 在容器里也开了一份，只用来提前看方向，正式判定以服务器的 pilot_t13.csv 为准。
 
 ### T10 [完成] 排班：扩展编码，比较更高的偏离密度（实验 5 任务 D，2026-10-22）
 - 目的：现有基因布局最多只放得下 K0.5 的偏离槽，任务 C 只能在 {0.25, 0.5} 里选，"选出 K0.5"等于"越多越好直到上限"。
