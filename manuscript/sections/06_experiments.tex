@@ -350,12 +350,11 @@ The whole search therefore stays close to the plan, which is where good repairs 
 
 The rostering problem is our own.
 To see whether the representation results carry over to a well-studied problem, we apply \RDD to the FJSP \cite{dauzere2024flexible}.
-We do not learn a rule here.
-\RDD uses a standard dispatching rule, so the comparison isolates the effect of the encoding.
+We do not learn a rule here: \RDD uses a standard dispatching rule.
 
 \textbf{Problem and instances.}
 A job is a sequence of operations, and each operation can be processed on one of several eligible machines, with a processing time that depends on the machine.
-We minimize two objectives, the makespan and the total workload (the sum of the processing times of all operations), a common bi-objective form of the FJSP \cite{kacem2002approach}.
+We minimize two objectives, the makespan and the total workload (the sum of the processing times of all operations), two of the three objectives of Kacem \etal \cite{kacem2002approach}.
 The instances come from a public collection \cite{schedulinglab2024fjsp}.
 The \emph{main set} has 276 instances:
 Brandimarte (15) \cite{brandimarte1993routing},
@@ -377,14 +376,15 @@ An instance with $N$ operations thus needs $N$ decisions.
 \textbf{Encodings.}
 \begin{itemize}
   \item \textbf{\RDD.} The rule ranks the candidates by the earliest completion time (ECT); ties are broken by the most work remaining in the job (MWKR) and then by the shorter processing time.
-  The slots work as in Section~\ref{sec:method:genotype}, with $N$ steps in place of $\Nmax$ shifts:
-  there are $\K = \max(4, \lceil \dens N \rceil)$ slots, a slot is active if $a_k \ge 1 - \qon$, it acts at step $\lfloor p_k N \rfloor$,
-  and $u_k$ picks one of the candidates other than the first choice, uniformly in the rule's order.
+  The slots work as in Section~\ref{sec:method:genotype}, with $N$ steps in place of $\Nmax$ shifts.
+  There are $\K = \max(4, \lceil \dens N \rceil)$ slots.
+  A slot is active if $a_k \ge 1 - \qon$, and it acts at step $\lfloor p_k N \rfloor$.
+  There, $u_k$ picks one of the candidates other than the first choice, uniformly in the rule's order.
   There is no ``open'' action and there are no other genes, so the genotype has $2\K$ genes.
-  We use $\qon = 0.4$ and $\dens = 0.1$, 0.25 and 0.5, \ie $\drate = 0.04$, 0.1 and 0.2.
+  We use $\qon = 0.4$ and $\dens = 0.1$, 0.25 and 0.5, \ie $\drate = 0.04$, 0.1 and 0.2.\footnote{On the smallest instances, the minimum of four slots makes the actual rate higher than this nominal value.}
   \item \textbf{RK.} The two-vector random key, the standard encoding of EAs for the FJSP \cite{zhang2011effective, londe2025random}.
   The first $N$ keys give the operation sequence (sorting them gives the order in which the jobs' next operations are scheduled), and the other $N$ keys select the machine of each operation.
-  \item \textbf{PS.} A per-step encoding, the counterpart of \dec{5}: one gene per step selects the candidate at rank $\lfloor g\,|C| \rfloor$ in the rule's order, where $|C|$ is the number of candidates.
+  \item \textbf{PD.} A per-decision encoding, which gives every step its own gene like the rostering baselines: the gene selects the candidate at rank $\lfloor g\,|C| \rfloor$ in the rule's order, where $|C|$ is the number of candidates.
   It uses the rule's order, but a random gene does not favor the rule's first choice.
 \end{itemize}
 As a reference, the rule alone (\RDD without active slots) has a mean gap of 37.9\% on the main set.
@@ -392,8 +392,10 @@ As a reference, the rule alone (\RDD without active slots) has a mean gap of 37.
 \textbf{Setup.}
 The optimizers are those of Section~\ref{sec:exp-setup}.
 On the main set, each encoding is run 20 times per instance, and the front is recorded after 465, 2000 and 5000 evaluations.
-On the large-budget set and the Behnke set, each encoding is run 10 times, up to 20\,000 and 5000 evaluations.
-HV is normalized per instance and budget over all encodings of the same experiment, so HV values of different budgets or different tables cannot be compared.
+On the large-budget set, each encoding is run 10 times with NSGA-II up to 20\,000 evaluations, and 10 times with MOEA/D up to 5000 evaluations.
+On the Behnke set, each encoding is run 10 times up to 5000 evaluations.
+HV is normalized per instance and budget over all encodings of the same experiment.
+Absolute HV values of different budgets or different tables therefore cannot be compared; we compare encodings only within each budget.
 The \emph{gap} is the best makespan of a run divided by the best-known makespan (the optimum if known, otherwise the best upper bound in the collection), minus one, averaged over runs.
 Holm's correction is applied over all comparisons with one baseline in one experiment.
 
@@ -411,7 +413,7 @@ Holm's correction is applied over all comparisons with one baseline in one exper
     \midrule
     Rule alone & --- & --- & --- & --- & --- & 37.9 & 37.9 \\
     RK   & --- & 0.445 & 0.447 & 0.463 & ---    & 30.4 & 24.5 \\
-    PS   & --- & 0.362 & 0.421 & 0.437 & 48/81  & 32.5 & 26.0 \\
+    PD   & --- & 0.362 & 0.421 & 0.437 & 48/81  & 32.5 & 26.0 \\
     \RDD & 0.04 & 0.719 & 0.699 & 0.695 & 190/34 & 17.5 & 14.9 \\
     \RDD & 0.1  & 0.775 & 0.765 & 0.763 & 215/23 & 16.1 & 13.4 \\
     \RDD & 0.2  & \textbf{0.795} & \textbf{0.801} & \textbf{0.803} & 237/12 & \textbf{15.7} & \textbf{12.5} \\
@@ -431,9 +433,9 @@ Among the three settings, $\drate = 0.2$ is best, and its lead over $\drate = 0.
 ($+0.019$ at 465 and $+0.040$ at 5000 evaluations; significantly better on 55 and 93 instances, worse on 42 and 16).
 
 \textbf{The bias toward the first choice is what helps.}
-PS uses the same rule order as \RDD, yet it is worse than RK at every budget
+PD uses the same rule order as \RDD, yet it is worse than RK at every budget
 ($-0.083$ at 465 evaluations, Holm-corrected $p = 10^{-16}$; $-0.026$ at 5000, $p = 0.005$).
-A random PS gene picks any rank with equal probability, so random genotypes are not pulled toward the rule's schedule.
+A random PD gene picks any rank with equal probability, so random genotypes are not pulled toward the rule's schedule.
 Ranking the candidates by a rule is therefore not enough; the encoding must also pull the search toward the rule's first choices.
 
 \textbf{The gain grows with flexibility.}
@@ -467,9 +469,9 @@ All 12 instances on which RK is significantly better belong to the Hurink sets, 
 \textbf{Larger budgets and another optimizer.}
 On the large-budget set (Table~\ref{tab:fjsp-big}), \RDD stays well ahead of RK up to 20\,000 evaluations.
 With $\drate = 0.2$, its HV lead shrinks only slowly, from 0.417 at 465 evaluations to 0.370 at 20\,000;
-at 20\,000 evaluations it is significantly better on 68 instances and worse on none (Holm-corrected $p < 10^{-12}$),
+at 20\,000 evaluations it is significantly better on 68 instances and worse on none (Holm-corrected $p = 10^{-12}$),
 and its gap is 10.2\% against 22.4\% for RK.
-With MOEA/D and 5000 evaluations, \RDD with $\drate = 0.2$ reaches an HV of 0.787 against 0.359 for RK
+With MOEA/D (large-budget set, 5000 evaluations), \RDD with $\drate = 0.2$ reaches an HV of 0.787 against 0.359 for RK
 ($+0.428$, Holm-corrected $p = 4 \times 10^{-13}$; better on 69 instances, worse on none).
 All three \RDD settings are significantly better than RK with MOEA/D at all three budgets.
 
@@ -483,12 +485,11 @@ All three improve RK (Holm-corrected $p \le 0.003$ at every budget), and RK+GLR+
 \RDD with $\drate = 0.2$ is still better than RK+GLR+seed by 0.178 at 465 evaluations and by 0.205 at 20\,000
 (Holm-corrected $p \le 2 \times 10^{-10}$; better on 51 and 59 instances, worse on 6 and 2).
 The best initialization recovers 57\% of the HV gain of \RDD over RK at 465 evaluations, and only 45\% at 20\,000.
-A good initial population helps at the start, but the search can move away from it.
-\RDD keeps the bias for the whole run, because every genotype is decoded relative to the rule.
+One explanation is that an initial population biases only the start of the search, whereas \RDD keeps the bias for the whole run, because every genotype is decoded relative to the rule.
 The re-rostering experiment (Section~\ref{sec:exp-rerostering}) showed the same pattern: the plan helped more as a rule than as a seed.
 
 \textbf{Large instances.}
-On the 60 Behnke instances, all three \RDD settings are significantly better than RK on every instance at 465, 2000 and 5000 evaluations (Holm-corrected $p = 2 \times 10^{-10}$).
+On the 60 Behnke instances, all three \RDD settings are significantly better than RK on every instance at 465, 2000 and 5000 evaluations (Holm-corrected $p = 1.5 \times 10^{-10}$).
 Here the smallest rate is best.
 At 5000 evaluations, $\drate = 0.04$ reaches an HV of 0.971, against 0.950 for $\drate = 0.1$, 0.890 for $\drate = 0.2$ and 0.128 for RK;
 it is significantly better than both other settings (Holm-corrected $p < 10^{-8}$).
@@ -528,22 +529,27 @@ Four findings stand out.
 \begin{itemize}
   \item \emph{The rate $\drate$ is the parameter that matters}, as in rostering.
   For each instance and budget, a quadratic function of $\log\drate$ explains the HV of the 24 settings with a mean $R^2$ of 0.68--0.78; a quadratic function of $\log\dens$ explains only 0.46--0.48.
-  Four pairs of settings with the same $\drate$ but different $\dens$ and $\qon$ differ by at most 0.017 in mean HV, and none of the 20 comparisons (four pairs, five budgets) is significant after Holm's correction.
+  Eight pairs of settings with the same $\drate$ but different $\dens$ and $\qon$ differ by at most 0.029 in mean HV.
+  None of the 40 comparisons (eight pairs, five budgets) is significant after Holm's correction.
   \item \emph{The search keeps the share of active slots near $\qon$.}
-  In the best schedule of a run, the share of slots that change a decision is 0.21, 0.36 and 0.52 for $\qon = 0.2$, 0.4 and 0.6 (465 evaluations), and it hardly changes with the budget.
+  In the schedule with the best makespan of a run, the share of slots that change a decision is 0.21, 0.36 and 0.52 for $\qon = 0.2$, 0.4 and 0.6 (465 evaluations, settings with $\dens \le 1$), and it hardly changes with the budget.
   \item \emph{Too many deviations hurt.}
   For every $\qon$, HV first rises and then falls with $\dens$.
-  At 465 evaluations, the best setting is better than the setting with the largest $\dens$ by 0.125 ($\qon = 0.2$: $\drate = 0.2$ against 0.6), 0.068 ($\qon = 0.4$: 0.08 against 0.4) and 0.154 ($\qon = 0.6$: 0.12 against 0.6), with Holm-corrected $p \le 0.002$ over the three tests.
+  At 465 evaluations, we compare the best setting of each $\qon$ with its setting of largest $\dens$ (Holm's correction over the three tests).
+  For $\qon = 0.2$, $\drate = 0.2$ beats $\drate = 0.6$ by 0.125.
+  For $\qon = 0.4$, $\drate = 0.08$ beats $\drate = 0.4$ by 0.068.
+  For $\qon = 0.6$, $\drate = 0.12$ beats $\drate = 0.6$ by 0.154.
+  All three differences are significant (Holm-corrected $p \le 0.002$).
   At 20\,000 evaluations, the decline is still significant for $\qon = 0.2$ and 0.6 (Holm-corrected $p \le 2 \times 10^{-4}$), but not for $\qon = 0.4$ ($+0.023$, $p = 0.10$).
   \item \emph{The best rate grows with the budget.}
   The setting with the highest mean HV has $\drate = 0.08$ at 465 evaluations, 0.12 at 2000, and 0.21 from 5000 on.
   The median over instances of the best $\drate$ rises from 0.10 at 465 evaluations to 0.175 at 2000 and to 0.20--0.21 from 5000 on.
   This agrees with the second guideline of Section~\ref{sec:theory:consequences}.
-  The Behnke results point the same way: with up to 500 decisions and at most 5000 evaluations, the smallest rate was best.
+  The Behnke results are consistent with this: with up to 500 decisions and at most 5000 evaluations, the smallest rate was best.
 \end{itemize}
 On FJSP the best rate is thus 0.1--0.2 for moderate and large budgets, lower than the rate of 0.4 chosen for rostering (Section~\ref{sec:method:k}).
 
 \textbf{Distance to specialized algorithms.}
-At 20\,000 evaluations, the best makespans of \RDD are still 10.2\% above the best-known values on average.
+The best makespans of \RDD are still above the best-known values: by 12.5\% on average on the main set at 5000 evaluations, and by 10.2\% on the large-budget set at 20\,000 evaluations.
 These values were found by specialized FJSP algorithms that use problem-specific neighborhoods and much larger budgets \cite{dauzere2024flexible}.
 Our experiment compares encodings under the same generic MOEA; it does not compete with these algorithms.

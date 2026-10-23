@@ -1,14 +1,14 @@
 \begin{abstract}
 % 证据：第 VI 节各表。≤ 250 词（TEVC）。
 Decoders for evolutionary scheduling build a solution one decision at a time and usually give every decision its own gene.
-Changing one gene then changes how all later genes are read, and the decoder's bias toward good solutions cannot be tuned.
+Such an encoding cannot express ``a rule plus a few exceptions'', and the decoder's bias toward good solutions cannot be tuned.
 We propose rule-deviation decoding (RDD), which separates bias from freedom.
 A construction rule makes every decision by default; the genotype encodes only a few deviation slots, each naming a decision and an alternative action.
-The deviation rate, the expected share of decisions at which a random genotype departs from the rule, sets how far the search may move from the rule.
+The deviation rate, the expected number of active slots per decision, sets how far the search may move from the rule.
 Rules are learned offline by scoring the solutions that random deviations produce;
-genetic programming, a neural network trained by an evolution strategy, and a large language model reach similar quality under this score.
+with NSGA-II, genetic programming, a neural network trained by an evolution strategy, and a large language model reach similar quality under this score.
 A rule-distance model shows that too few slots keep good solutions out of reach and that the best number of slots grows with the budget.
-On a bi-objective robot--tool duty rostering problem, RDD raises the mean hypervolume of NSGA-II on 47 test instances from 0.570 to 0.788.
+On a bi-objective robot--tool duty rostering problem, RDD raises the mean hypervolume of NSGA-II on 47 test instances from 0.570 with the best existing decoder to 0.788.
 For repairs during execution, using the old roster as the rule works better than seeding the population with it.
 On 276 flexible job shop benchmarks, RDD with a standard dispatching rule outperforms random keys on most instances, also with MOEA/D, larger budgets and heuristic initialization.
 On both problems, the deviation rate, not the number of slots, is the parameter that matters.

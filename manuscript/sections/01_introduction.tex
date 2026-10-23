@@ -16,9 +16,8 @@ A roster is judged by two objectives, the number of robots and tools used and ho
 The scheduling software we started from contains a series of decoders, each adding a piece of problem knowledge to the one before.
 The better decoders map more random genotypes to good rosters, and they reach a higher hypervolume (HV) (Section~\ref{sec:motivation}).
 All of them, however, give each shift its own gene.
-Changing one gene changes which robots are available later, so the robot changes at 39--61\% of the later shifts.
 The optimal rosters, by contrast, follow a simple rule at 85--90\% of their shifts and depart from it at a few.
-A per-shift encoding cannot express ``follow this rule except at a few shifts''.
+A per-shift encoding cannot express ``follow this rule except at a few shifts'', and how strongly it favors the rule is fixed by the decoder's design.
 
 This observation suggests a different division of labor between the rule and the genes.
 The rule should provide the bias, so that every genotype starts from the rule's solution.
@@ -32,7 +31,7 @@ And which rule should it use?
 We answer these questions with \emph{rule-deviation decoding} (\RDD).
 A construction rule makes every decision by default.
 The genotype holds a fixed number of \emph{deviation slots}; each slot names a decision and an alternative action, and it can be switched off.
-The \emph{deviation rate} $\drate$, the expected share of decisions at which a random genotype departs from the rule, sets the balance between bias and freedom.
+The \emph{deviation rate} $\drate$, the expected number of active slots per decision in a random genotype, sets the balance between bias and freedom.
 Because the rule shapes every solution the search produces, we learn it offline on training instances.
 A rule is scored by the HV of the solutions decoded from random genotypes around it, and this score is optimized by genetic programming (GP), by a neural network trained with an evolution strategy (ES), or by a large language model (LLM) that writes the rule as code.
 
@@ -47,12 +46,12 @@ The main contributions of this paper are as follows.
   \item \textbf{Representation.} We propose \RDD, which encodes a construction rule plus a few deviations.
   On both problems, the deviation rate, not the number of slots, determines performance.
   In both re-rostering and FJSP, a rule placed in the decoder helps the search more than the same rule placed in the initial population.
-  \item \textbf{Theory.} A simple model of the distance between the rule and good solutions explains the role of the number of slots $\K$.
+  \item \textbf{Theory.} A simple model of the distance between the rule and good solutions explains the role of the number of slots $\K$ at a fixed activation probability, \ie of the number of active slots.
   With $\K$ smaller than this distance, the search cannot reach good solutions.
   The best $\K$ grows with the budget, and with several good solutions it follows their mean distance to the rule.
   We test these predictions on both problems and report where they fail.
   \item \textbf{Rule learning.} We score a rule by the solutions that random deviations from it produce.
-  Under this score, GP, an ES-trained network and an LLM learn rules of similar quality, while imitating good rosters is clearly worse.
+  Under this score, GP, an ES-trained network and an LLM with score feedback learn rules of similar quality with NSGA-II, while imitating good rosters is clearly worse.
   \item \textbf{Applications.} We evaluate \RDD on static rostering, on re-rostering during execution, and on public FJSP benchmarks.
 \end{enumerate}
 
