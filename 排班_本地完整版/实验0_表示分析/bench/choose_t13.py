@@ -17,13 +17,15 @@ def hv(P, ref=1.1):
     return v / ref ** 2
 
 
-FAM = {"db": ["db0.04", "db0.1", "db0.2", "db0.4"], "ps": ["ps0.05", "ps0.1", "ps0.2", "ps0.4"],
-       "pls": ["pls1:sp0.5", "pls2:sp0.5", "pls4:sp0.5"]}
+FAM = {"db": ["db0.04", "db0.1", "db0.2", "db0.4", "db0.6"], "ps": ["ps0.05", "ps0.1", "ps0.2", "ps0.4"],
+       "pls": ["pls1:sp0.5", "pls2:sp0.5", "pls4:sp0.5", "pls8:sp0.5", "pls16:sp0.5"]}
+# 第 1b 步（2026-10-23）：db 与 pls 的选中值落在网格上端，网格往上扩（db0.6；pls8、pls16）。缺的臂自动跳过。
+# 多个 CSV 时合并后统一归一化：python choose_t13.py pilot_t13.csv,pilot_t13b.csv 5000
 
 if __name__ == "__main__":
     inp = sys.argv[1]; bud = int(sys.argv[2]) if len(sys.argv) > 2 else 5000
     R = collections.defaultdict(list)
-    for r in csv.DictReader(open(inp)):
+    for r in (r for f in inp.split(",") for r in csv.DictReader(open(f))):
         if int(r["evals"]) == bud:
             s = r["front(makespan:workload;...)"]
             R[(r["instance"], r["encoding"])].append([tuple(map(float, p.split(":"))) for p in s.split(";")] if s else [])

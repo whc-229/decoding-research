@@ -35,6 +35,14 @@
   `python moea_fjsp3.py hs,<选中的 db>,<选中的 ps>,<选中的 pls> 10 6 v3_big_t13.csv big 20000`
   合并：`{ cat v3_big_all.csv; tail -n +2 v3_big_t13.csv; } > v3_big_all13.csv`，`python analyze_fjsp2.py v3_big_all13.csv report_v3_big_all13.md`。
   另算（报告里给出）：四个新臂各自对 sp0.5 的配对 Wilcoxon（Holm 校正，族 = 4 个臂 × 5 个检查点 = 20 个检验）与逐实例 Mann-Whitney 好/差计数。约 3120 次运行。
+- **第 1b 步 FJSP 网格上扩（2026-10-23 22:40 加，必须在第 2 步开始前完成）**：第 1 步选中的 db0.4、pls4 都在网格上端，按"选中值在边界就往外扩一次"补点。
+  - **不要修改正在运行的 run_T13.sh**（bash 边读边执行，改文件会出错）。现在就另开一个 tmux 窗口，与第 3 步并行跑，进程数 2：
+    `cd bench && python moea_fjsp3.py db0.6,pls8:sp0.5,pls16:sp0.5 5 2 pilot_t13b.csv pilot 5000`（225 次运行，新文件，同种子）
+  - 跑完后：`cp choose_t13.json choose_t13_v1.json && python choose_t13.py pilot_t13.csv,pilot_t13b.csv 5000`（choose_t13.py 已加入新候选，17 个臂合并归一化）。
+    新的 choose_t13.json 会被第 2 步读取。若再次选中新的边界值（db0.6 或 pls16），**不再继续扩**，就用它，并在报告里写明"仍在网格上端"。
+  - 若第 3 步结束时第 1b 步还没跑完：在第 2 步开始前停下调度（kill 调度进程，标记机制可续跑），等 1b 完成后重新启动 run_T13.sh。
+- **附带记录（2026-10-23）**：Hurink 全部 198 个、Barnes 全部 21 个、Dauzère 18 个中的 9 个实例，每道工序在所有可选机器上的加工时间相同，
+  所以总负荷是常数，这些实例上的双目标问题实际只有 makespan（前沿只有 1 个点）。分析不用改，报告里注明即可。
 - **第 3 步 排班调参**（15 个训练实例，8 条规则 × 5 次，NSGA-II 465，种子 5000 + 次号）：臂 = D0.2、D0.4、D0.6、P1、P2、P4，每个 × 8 条规则，
   臂名写成 `D0.4:ES16(s0)=D0.4:nn:out/es/il_h16/best.npz`、`P2:GP(run1)=P2:X1.0:../neural/out/gp/run1/best_rule.py`（规则路径同 run_R0.sh 的 rules()）。
   `python base3.py "<48 个臂>" 5 6 out/train_t13.csv train --seed-base 5000`，然后 `python choose_t13.py out/train_t13.csv` → out/choose_t13.json。约 3600 次运行。
