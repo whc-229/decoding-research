@@ -41,6 +41,15 @@
   - 跑完后：`cp choose_t13.json choose_t13_v1.json && python choose_t13.py pilot_t13.csv,pilot_t13b.csv 5000`（choose_t13.py 已加入新候选，17 个臂合并归一化）。
     新的 choose_t13.json 会被第 2 步读取。若再次选中新的边界值（db0.6 或 pls16），**不再继续扩**，就用它，并在报告里写明"仍在网格上端"。
   - 若第 3 步结束时第 1b 步还没跑完：在第 2 步开始前停下调度（kill 调度进程，标记机制可续跑），等 1b 完成后重新启动 run_T13.sh。
+- **第 1c 步 + 第 2b 步：规则组合偏离 spr（用户 2026-10-23 22:31 同意加；看到 pilot 上 hs 最好之后设计的变体，论文中须注明）**
+  - 编码见 `bench/fjsp_base3.py` 开头：偏离槽与 sp 完全相同，只把"偏离时在其余候选里均匀选"换成"在 ECT 以外 5 条规则的首选里选"。`check_base3.py` 已加 spr 的核对（756 项 0 不一致）。
+  - 第 1c 步（pilot，与 1b 一样与第 3 步并行、2 个进程，新文件）：
+    `cd bench && python moea_fjsp3.py spr0.1,spr0.25,spr0.5,spr1.0,spr2.0 5 2 pilot_t13c.csv pilot 5000`（375 次运行）
+  - 1b、1c 都跑完后再判定一次：`python choose_t13.py pilot_t13.csv,pilot_t13b.csv,pilot_t13c.csv 5000`（覆盖 choose_t13.json；旧的已存为 choose_t13_v1.json）。
+    若 spr 选中 spr2.0（网格上端），不再扩，照用并在报告注明。
+  - 第 2b 步（big 集，78 个实例 × 10 次 × 20000 次评价，同种子）：`python moea_fjsp3.py <选中的 spr> 10 6 v3_big_t13b.csv big 20000`。
+    如果第 2 步已经按旧 json 开跑，不要停它，2b 单独跑即可；分析时把 v3_big_all.csv、v3_big_t13.csv、v3_big_t13b.csv 合并统一归一化，
+    并补算 spr 对 hs、对 sp0.5 的配对 Wilcoxon（与第 2 步的 20 个检验合为一族做 Holm）。约 780 次运行。
 - **附带记录（2026-10-23）**：Hurink 全部 198 个、Barnes 全部 21 个、Dauzère 18 个中的 9 个实例，每道工序在所有可选机器上的加工时间相同，
   所以总负荷是常数，这些实例上的双目标问题实际只有 makespan（前沿只有 1 个点）。分析不用改，报告里注明即可。
 - **第 3 步 排班调参**（15 个训练实例，8 条规则 × 5 次，NSGA-II 465，种子 5000 + 次号）：臂 = D0.2、D0.4、D0.6、P1、P2、P4，每个 × 8 条规则，

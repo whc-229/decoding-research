@@ -11,11 +11,17 @@
            在扰动后的数据上按 ECT+MWKR 规则逐步构造，记下每步选的 (工件, 机器)，再用真实加工时间按同样顺序、同样机器插空重放得到目标值。
            ε → 0 时就是规则解。
 
+  spr{f}[q{q}]  规则组合偏离（2026-10-23 看到 pilot 上 hs 最好之后加的变体，论文中须注明）：偏离槽与 sp{f} 完全相同
+           （K = max(4, ⌈f·N⌉)，a ≥ 1 − q 生效，位置 ⌊p·N⌋，后面的槽覆盖前面的），只改"偏离时选什么"：
+           u 在 ECT 以外的 5 条规则（SPT、MWKR、LWKR、EST、MOR）中选一条，取该规则的首选；与 ECT 首选相同时等于不偏离。
+           即 hs 的备选项放进稀疏槽：默认按 ECT，只在少数步换成另一条规则。
+
 新算法（在 moea_fjsp3.py）：pls —— 偏离空间上的 Pareto 局部搜索（LNS / 迭代贪心思想）：从规则解出发，每次从存档里随机取一个解，
   重抽 j 个偏离槽（"拆掉并重建" j 处偏离），非支配则进存档。编码用 sp（同 ρ），只换搜索算法。
 
 decode3(inst, enc, g, picks) 返回 (makespan, total_workload)；picks 给出时记每步所选候选在"真实数据上的规则排序"中的名次（0 = 规则首选），
 口径与 fjsp2.decode 相同，用来数相对规则的偏离步数。"""
+import math
 import numpy as np
 import fjsp2 as F
 
@@ -24,7 +30,14 @@ RULES = ("ECT", "SPT", "MWKR", "LWKR", "EST", "MOR")
 
 
 def is_new(enc):
-    return enc == "hs" or enc.startswith("db") or enc.startswith("ps")
+    return enc == "hs" or enc.startswith("db") or enc.startswith("ps") or enc.startswith("spr")
+
+
+def parse_spr(inst, enc):
+    """spr0.5 / spr0.5q0.2 → (K, 生效阈值 1 − q)"""
+    body = enc[3:]
+    f, q = (body.split("q") + ["0.4"])[:2]
+    return max(4, math.ceil(float(f) * inst["nops"] - 1e-9)), 1.0 - float(q)
 
 
 def n_options(inst):
@@ -34,6 +47,8 @@ def n_options(inst):
 def nvar3(inst, enc):
     if enc.startswith("ps"):
         return n_options(inst)
+    if enc.startswith("spr"):
+        return 2 * parse_spr(inst, enc)[0]
     return inst["nops"]                         # db、hs：每步一个基因
 
 
@@ -63,6 +78,8 @@ def decode3(inst, enc, g, insert=True, picks=None):
     N = inst["nops"]
     if enc.startswith("ps"):
         return _decode_ps(inst, float(enc[2:]), g, insert, picks)
+    if enc.startswith("spr"):
+        return _decode_spr(inst, enc, g, insert, picks)
     S = F.Sched(inst, insert)
     if enc.startswith("db"):
         rho = float(enc[2:]); on = 1.0 - rho
@@ -78,6 +95,30 @@ def decode3(inst, enc, g, insert=True, picks=None):
                 Cs = sorted(C); c = Cs[1 + min(int(u * (len(C) - 1)), len(C) - 2)]
             else:
                 c = min(C)
+        if picks is not None:
+            picks.append(_rank_true(C, c))
+        S.apply(c)
+    return S.objs()
+
+
+def _decode_spr(inst, enc, g, insert, picks):
+    N = inst["nops"]
+    K, on = parse_spr(inst, enc)
+    dev = {}
+    for k in range(K):                          # 与 fjsp2.decode 的 sp 取数相同
+        p, a = g[2 * k], g[2 * k + 1]
+        if a >= on:
+            dev[min(int(p * N), N - 1)] = (a - on) / (1 - on)
+    S = F.Sched(inst, insert)
+    alt = RULES[1:]
+    for step in range(N):
+        C = S.candidates()
+        u = dev.get(step)
+        if u is None or len(C) < 2:
+            c = min(C)
+        else:
+            r = alt[min(int(u * len(alt)), len(alt) - 1)]
+            c = min(C, key=lambda cc: _key(r, cc, S))
         if picks is not None:
             picks.append(_rank_true(C, c))
         S.apply(c)
