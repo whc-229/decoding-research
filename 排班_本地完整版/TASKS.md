@@ -15,10 +15,6 @@
 本次提交改动了 bench/fjsp2.py（新增 q 参数）和 bench/moea_fjsp2.py（新增 MOEA/D），默认行为不变：开始前先跑 `cd bench && python check_v2.py`（必须 0 不一致），
 并抽查 `python moea_fjsp2.py rk,sp0.25 1 2 /tmp/x.csv mk01 2000` 的 465 次结果应与 v2_main.csv 中 mk01 第 0 次相同（rk：55:199;66:195;69:190；sp0.25：45:162;46:161;47:160;49:157）。
 
-### T7 [待做] FJSP：Behnke（60 个大实例，原 T2）
-- bench/ 下：`nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_behnke.csv behnke 5000 > v3_behnke.log 2>&1 &`
-- 完成后 `python analyze_fjsp2.py v3_behnke.csv report_v3_behnke.md`，汇总写 `报告/T7_Behnke.md`。
-
 ### T8 [待做] FJSP：T3 扫描补点（q = 0.2 的槽数扩到 1.0 以上）
 - 目的：T3 中 q = 0.2 的最优槽数顶在网格上限 f = 1.0，"最优期望偏离数随预算变化"一条在 q = 0.2 上被网格截断；补点后还多出一组 q·f = 0.30 的配对（1.5q0.2 / 0.75q0.4 / 0.5q0.6）。
 - T7 结束后，bench/ 下（同 T3 的 30 个实例，约 2 小时）：
@@ -62,6 +58,8 @@
 ## 待确认
 （Claude Code 遇到需要决策的问题写在这里）
 
+- **[2026-10-23 T7] Behnke 间隙的参考值**：instances.json 中 Behnke 没有最优值，`fjsp2.refs` 用数据集上界当 BKS；这些上界很弱（纯规则间隙只有 0.007；60 个实例中有 40 个找到了低于上界的解；多个实例共用同一上界，如 87 出现 6 次）。没有任何解低于下界。论文里 Behnke 的间隙是改用下界计算，还是只报告 HV，需要决定。代码未改动。
+
 - [2026-10-22，给负责 FJSP 的会话] **T9 没有排进任何调度脚本**：run_T8.sh 只跑 T8，T8 结束后 T9 不会自动开始。
   需要在 T8 结束后手动启动 T9（命令见上面 T9 一节，先跑 check_seed.py 和 check_v2.py），或另加一个调度脚本。
   → **已处理，2026-10-23 01:28 按新顺序重排**：TASKS 改为"T6 big → T9 → T7 → T8"后，停掉了 run_T3_T7.sh 与 run_T9.sh 两个调度外壳
@@ -79,6 +77,11 @@
 
 ## 已完成
 （移到这里）
+
+### T7 [完成] FJSP：Behnke（60 个大实例，原 T2）
+- bench/ 下：`nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_behnke.csv behnke 5000 > v3_behnke.log 2>&1 &`
+- 完成后 `python analyze_fjsp2.py v3_behnke.csv report_v3_behnke.md`，汇总写 `报告/T7_Behnke.md`。
+- 结果：60 实例 × 4 编码 × 10 次全部完成（6 进程，518 分钟）；sp 三档对 rk 全部 60/0。Behnke 的参考上界偏弱，间隙列不可比（见待确认）。见 `报告/T7_Behnke.md`。2026-10-23
 
 ### T9 [完成] FJSP：规则放进初始种群 vs 放进解码器（启发式初始化对照）
 - 目的：回答"稀疏编码的好处是否只来自好的起点"。三个新臂都用 rk 解码，只是初始种群不同（bench/seed_fjsp.py）：
