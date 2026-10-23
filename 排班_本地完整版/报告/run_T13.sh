@@ -73,6 +73,36 @@ s3() {
   $ANA choose_t13.py out/train_t13.csv >> out/train_t13.log 2>&1
 }
 
+# 第 1b 步（2026-10-23 TASKS.md 新增）：FJSP pilot 网格上扩（db0.6、pls8、pls16），新文件 pilot_t13b.csv
+s1b() {
+  cd $B || return 1
+  $ANA moea_fjsp3.py db0.6,pls8:sp0.5,pls16:sp0.5 5 $P pilot_t13b.csv pilot 5000 >> pilot_t13b.log 2>&1
+}
+
+# 第 1c 步（2026-10-23 TASKS.md 新增）：规则组合偏离 spr 的 pilot，新文件 pilot_t13c.csv
+s1c() {
+  cd $B || return 1
+  $ANA moea_fjsp3.py spr0.1,spr0.25,spr0.5,spr1.0,spr2.0 5 $P pilot_t13c.csv pilot 5000 >> pilot_t13c.log 2>&1
+}
+
+# 1b、1c 之后重新判定：旧判定另存为 choose_t13_v1.json（已存在则不覆盖），三个 pilot 文件合并统一归一化 → 新 choose_t13.json
+s1choose() {
+  cd $B || return 1
+  [ -f choose_t13_v1.json ] || cp choose_t13.json choose_t13_v1.json
+  $ANA choose_t13.py pilot_t13.csv,pilot_t13b.csv,pilot_t13c.csv 5000 >> pilot_t13c.log 2>&1
+}
+
+# 第 2b 步（2026-10-23 TASKS.md 新增）：选中的 spr 在 big 集上（78 个实例 × 10 次 × 20000 次评价），然后三个文件合并分析
+s2b() {
+  cd $B || return 1
+  local A
+  A=$($ANA -c "import json;print(json.load(open('choose_t13.json'))['pick']['spr'])") || return 1
+  log "T13 s2b 臂：$A"
+  $ANA moea_fjsp3.py $A 10 $P v3_big_t13b.csv big 20000 >> v3_big_t13b.log 2>&1 || return 1
+  { cat v3_big_all.csv; tail -n +2 v3_big_t13.csv; tail -n +2 v3_big_t13b.csv; } > v3_big_all13b.csv
+  $ANA analyze_fjsp2.py v3_big_all13b.csv report_v3_big_all13b.md >> v3_big_t13b.log 2>&1
+}
+
 # 第 2 步：FJSP big 主比较（78 个实例 × 4 臂 × 10 次，20000 次评价），臂 = hs + 第 1 步选中的 db / ps / pls；合并 v3_big_all.csv 后分析
 s2() {
   cd $B || return 1
@@ -94,9 +124,13 @@ s4() {
   $LCP base3.py "$(rules $D $D),$(rules $Pj $Pj:X1.0)" 5 $P out/val_t13.csv test >> out/val_t13.log 2>&1
 }
 
-log "===== T13 调度启动（顺序 s1 → s3 → s2 → s4）====="
+log "===== T13 调度启动（顺序 s1 → s3 → s1b → s1c → 重新判定 → s2 → s2b → s4）====="
 run_step s1 s1
 run_step s3 s3
+run_step s1b s1b
+run_step s1c s1c
+run_step s1choose s1choose
 run_step s2 s2
+run_step s2b s2b
 run_step s4 s4
 log "===== T13 四步运行全部完成（第 2、4 步的另算统计由 Claude Code 补做）====="
