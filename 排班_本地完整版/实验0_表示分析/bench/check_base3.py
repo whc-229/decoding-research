@@ -22,5 +22,17 @@ for nm in names:
     if B.decode3(inst, "hs", np.full(N, 0.05), picks=pk) != rule or any(pk): bad += 1; print("hs", nm)
     pk = []
     if B.decode3(inst, "db0.2", np.zeros(N), picks=pk) != rule or any(pk): bad += 1; print("db", nm)
-    n += 3
+    K = B.parse_spr(inst, "spr0.5")[0]
+    pk = []
+    if B.decode3(inst, "spr0.5", np.zeros(2 * K), picks=pk) != rule or any(pk): bad += 1; print("spr0", nm)
+    # spr 的偏离位置与 sp 相同：同一基因下两者偏离的步集合相同（规则组合偏离可能与 ECT 相同，所以 spr 的偏离步 ⊆ sp 的偏离步）
+    for _ in range(10):
+        g = rng.uniform(0, 0.99, 2 * K)
+        p1, p2 = [], []
+        F.decode(inst, f"sp{K}", g, picks=p1); B.decode3(inst, "spr0.5", g, picks=p2)
+        a_on = {min(int(g[2 * k] * N), N - 1) for k in range(K) if g[2 * k + 1] >= 0.6}
+        bad += p1[0] != 0 and 0 not in a_on      # 第一步：没有槽时都应为规则首选
+        bad += any(p2[t] != 0 for t in range(N) if t not in a_on and all(p2[s] == 0 for s in range(t)))
+        n += 2
+    n += 4
 print(f"{n} 项核对，不一致 {bad}")

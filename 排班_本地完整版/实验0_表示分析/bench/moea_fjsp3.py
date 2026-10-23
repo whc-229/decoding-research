@@ -3,7 +3,7 @@
   python moea_fjsp3.py 臂[,臂...] 次数 进程数 输出.csv 实例名[,..]|实例族|main|big [最大预算=5000] [moead]
 臂：
   moea_fjsp2.py 的全部编码（rk、pd、sp0.5、sp0.5q0.2 ……），NSGA-II（或 moead）
-  db{ρ}、hs、ps{ε}                      新编码（见 fjsp_base3.py），NSGA-II（或 moead）
+  db{ρ}、hs、ps{ε}、spr{f}[q{q}]       新编码（见 fjsp_base3.py），NSGA-II（或 moead）
   pls{j}:{sp 编码}  例如 pls2:sp0.5     偏离空间上的 Pareto 局部搜索：从规则解（全部槽关闭）出发，每次从存档随机取一个解，
                                         重抽 j 个随机槽的两个基因（拆掉并重建 j 处偏离），不被存档支配就进存档
                                         （与存档中目标值相同的解被替换，允许中性移动）。不用种群、不用交叉。
@@ -34,6 +34,8 @@ def _nvar(inst, enc):
 
 
 F.decode, F.nvar = _decode, _nvar            # moea_fjsp2.run / run_moead 在调用时按模块属性取，替换后即生效
+_enc0 = M2.enc_name
+M2.enc_name = lambda inst, e: e if e.startswith("spr") else _enc0(inst, e)   # spr 的槽数在解码时算，不走 sp 的改名
 
 
 def run_pls(inst, e, seed):
