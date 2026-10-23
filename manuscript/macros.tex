@@ -12,11 +12,12 @@
 
 % encodings and decoders
 \newcommand{\dec}[1]{\textsf{D#1}}       % baseline decoders D0--D5
-\newcommand{\SDD}{\textsf{SDD}\xspace}          % sparse-deviation decoding (proposed)
+\newcommand{\RDD}{\textsf{RDD}\xspace}          % rule-deviation decoding (proposed)
 \newcommand{\genome}{\mathbf{x}}         % genotype
 \newcommand{\rul}{\phi}                  % construction rule
 \newcommand{\K}{K}                       % number of deviation slots
-\newcommand{\dens}{\kappa}               % deviation density, K = ceil(kappa * Nmax)
+\newcommand{\dens}{\kappa}               % slot ratio, K = ceil(kappa * Nmax)
+\newcommand{\drate}{\rho}               % deviation rate, rho = q * kappa
 \newcommand{\qon}{q}                     % probability that a random slot is active
 \newcommand{\proxy}{S}                   % proxy score of a rule
 

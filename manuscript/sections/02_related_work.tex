@@ -9,7 +9,7 @@
 This section reviews four lines of work:
 how decoders shape evolutionary search, how heuristics have been used to guide search,
 how construction rules are learned, and how schedules are repaired after a disturbance.
-For each line we state how our method, sparse-deviation decoding (\SDD), differs.
+For each line we state how our method, rule-deviation decoding (\RDD), differs.
 
 \subsection{Representations, Redundancy and Decoders}
 \label{sec:related:repr}
@@ -34,7 +34,7 @@ Jiang \emph{et al.} \cite{jiang2025more} split a solution into route choices and
 These works design a decoder for one problem and judge it by the final result.
 They do not report how the decoder biases the search, and how strongly it does so is not a design parameter.
 In this paper, Section~\ref{sec:motivation} measures this bias for a series of decoders,
-and \SDD turns its strength into a parameter that Section~\ref{sec:theory} analyzes.
+and \RDD turns its strength into a parameter that Section~\ref{sec:theory} analyzes.
 
 \subsection{Searching Near a Heuristic}
 \label{sec:related:bias}
@@ -53,8 +53,8 @@ Recent work guides evolutionary search with learned policies.
 Gu \emph{et al.} \cite{gu2025synergizing} sample solutions from a reinforcement-learning policy, improve them with GA operators, and use the improved solutions to train the policy further.
 Chen \emph{et al.} \cite{chen2026teacher} use trained neural policies as teachers: their preferred actions guide an evolution of heuristic programs written by a large language model (LLM).
 
-\SDD takes the idea of limited discrepancy search, ``a heuristic plus a few deviations'', and turns it into an encoding for a multi-objective EA (MOEA).
-The deviations are stored in the genotype, and their number is an explicit parameter.
+\RDD takes the idea of limited discrepancy search, ``a heuristic plus a few deviations'', and turns it into an encoding for a multi-objective EA (MOEA).
+The deviations are stored in the genotype, and the rate of deviations is an explicit parameter.
 Unlike the encodings above, the genes affect only a few decisions, and the rule decides all others.
 Section~\ref{sec:theory} shows how the best number of deviations depends on the distance between the rule and good solutions and on the evaluation budget.
 
@@ -87,7 +87,7 @@ and supply heuristics to NSGA-II \cite{deb2002nsga2} for multi-objective flexibl
 Deep reinforcement learning trains policies that build schedules directly, for example with graph neural networks for flexible job shops \cite{liu2025flexible}.
 
 In most of these works, a learned rule or program is judged by the quality of the schedules it produces.
-In \SDD, the rule is part of a decoder: the search starts from it and departs from it through a few genes that mark deviations (Section~\ref{sec:method}).
+In \RDD, the rule is part of a decoder: the search starts from it and departs from it through a few genes that mark deviations (Section~\ref{sec:method}).
 We therefore judge a rule by the rosters that random deviations from it produce (Section~\ref{sec:method:proxy}),
 and Section~\ref{sec:exp-static} compares GP, neural networks and LLMs as learners for this score.
 The closest work in spirit is \cite{liao2025online}, which also uses an LLM to change how a GA explores;
@@ -107,6 +107,6 @@ A recent review notes that most rostering studies combine their criteria into a 
 and surveys the smaller set of methods that keep the trade-off between criteria \cite{bodvarsdottir2026review}.
 
 The evolutionary methods above use the old schedule as a reference in the objective or as a starting point of the search.
-\SDD instead puts the old schedule into the decoder (Section~\ref{sec:exp-rerostering}):
+\RDD instead puts the old schedule into the decoder (Section~\ref{sec:exp-rerostering}):
 the old schedule becomes the rule, and every genotype departs from it in only a few shifts.
 We keep two objectives, the number of changes and the imbalance, under a resource budget, and report the hypervolume.

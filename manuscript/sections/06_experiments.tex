@@ -4,7 +4,7 @@
 % 证据：ga.py、neural/moea_any.py（算法设置）；neural/analyze_methods.py、reroster/analyze.py（HV 归一化与检验）
 % 本节按"统一设置 → 静态排班 → 重排班 → FJSP"组织。静态排班与 FJSP 的结果等实验全部完成后再写（见各小节注释）。
 
-We evaluate \SDD in three settings:
+We evaluate \RDD in three settings:
 static rostering on the 47 test instances (Section~\ref{sec:exp-static}),
 re-rostering after a disturbance during execution (Section~\ref{sec:exp-rerostering}),
 and public flexible job shop benchmarks (Section~\ref{sec:exp-fjsp}).
@@ -47,17 +47,17 @@ We also count on how many instances a method is significantly better or worse th
 We compare the following methods on the 47 test instances:
 \begin{itemize}
   \item \dec{5}, and \dec{5} with a larger budget of 765 evaluations;
-  \item \SDD with the default rule $\rul_0$;
-  \item \SDD with learned rules at the density used during rule learning, $\dens = 0.25$:
+  \item \RDD with the default rule $\rul_0$;
+  \item \RDD with learned rules at the deviation rate used during rule learning, $\drate = 0.1$ ($\dens = 0.25$, $\qon = 0.4$):
   GP (5 design runs), ES16, the network trained by imitation and then ES (3 runs),
   LLM-score, the LLM rule evolved with score feedback (3 runs),
   LLM-full, the same with extra diagnostic feedback (3 runs),
   EoH, the original EoH procedure with its own prompts (3 runs),
   and IL16 and IL32-16, networks with one hidden layer of 16 units or two layers of 32 and 16 units, trained by imitation only (5 runs each);
-  \item the final method: \SDD with $\dens = 1.0$ and the GP or ES16 rules.
+  \item the final method: \RDD with $\drate = 0.4$ ($\dens = 1.0$, $\qon = 0.4$) and the GP or ES16 rules.
 \end{itemize}
 A \emph{design run} is one independent run of a rule learner, \ie one learned rule.
-The eight GP and ES16 rules are run at $\dens = 0.25$, 0.5, 0.75 and 1.0; the other learned rules at $\dens = 0.25$ only.
+The eight GP and ES16 rules are run at $\drate = 0.1$, 0.2, 0.3 and 0.4 ($\dens = 0.25$ to 1.0 with $\qon = 0.4$); the other learned rules at $\drate = 0.1$ only.
 All 54 arms are run five times with NSGA-II and 465 evaluations (765 for the larger \dec{5} budget),
 and HV is normalized per instance over all of them.
 Holm's correction is applied to one family for the comparisons with \dec{5} and the default rule (29 tests), and to another family for all pairwise comparisons between methods (91 tests).
@@ -71,22 +71,22 @@ Holm's correction is applied to one family for the comparisons with \dec{5} and 
   \setlength{\tabcolsep}{4pt}
   \begin{tabular}{@{}llccccccccc@{}}
     \toprule
-    & Method & $\dens$ & All & $\Delta$ (Holm $p$) & W/L & Hand-built (4) & E (12) & H (15) & M (16) \\
+    & Method & $\drate$ & All & $\Delta$ (Holm $p$) & W/L & Hand-built (4) & E (12) & H (15) & M (16) \\
     \midrule
     Baselines & \dec{5}                 & --   & 0.570 & --- & --- & 0.581 & 0.733 & 0.550 & 0.463 \\
               & \dec{5}, 765 evaluations & --  & 0.592 & $+0.022$ ($8\!\times\!10^{-7}$) & 0/0 & 0.602 & 0.746 & 0.578 & 0.487 \\
-              & \SDD, default rule $\rul_0$ & 0.25 & 0.589 & $+0.020$ (0.81) & 14/8 & 0.686 & 0.403 & 0.585 & 0.709 \\
+              & \RDD, default rule $\rul_0$ & 0.1 & 0.589 & $+0.020$ (0.81) & 14/8 & 0.686 & 0.403 & 0.585 & 0.709 \\
     \midrule
-    Rule learners & IL32-16   & 0.25 & 0.641 & $+0.071$ (0.055) & 19/6 & 0.750 & 0.569 & 0.624 & 0.683 \\
-                  & IL16      & 0.25 & 0.663 & $+0.094$ (0.015) & 20/6 & 0.727 & 0.598 & 0.633 & 0.725 \\
-                  & EoH       & 0.25 & 0.676 & $+0.107$ (0.008) & 20/3 & 0.757 & 0.599 & 0.644 & 0.744 \\
-                  & LLM-full  & 0.25 & 0.677 & $+0.107$ (0.002) & 24/1 & 0.730 & 0.661 & 0.631 & 0.719 \\
-                  & LLM-score & 0.25 & 0.699 & $+0.129$ ($4\!\times\!10^{-4}$) & 22/1 & 0.735 & 0.679 & 0.636 & 0.763 \\
-                  & GP        & 0.25 & 0.716 & $+0.146$ ($2\!\times\!10^{-4}$) & 24/3 & 0.812 & 0.656 & 0.679 & 0.770 \\
-                  & ES16      & 0.25 & 0.724 & $+0.155$ ($2\!\times\!10^{-4}$) & 25/1 & 0.821 & 0.655 & 0.684 & 0.789 \\
+    Rule learners & IL32-16   & 0.1 & 0.641 & $+0.071$ (0.055) & 19/6 & 0.750 & 0.569 & 0.624 & 0.683 \\
+                  & IL16      & 0.1 & 0.663 & $+0.094$ (0.015) & 20/6 & 0.727 & 0.598 & 0.633 & 0.725 \\
+                  & EoH       & 0.1 & 0.676 & $+0.107$ (0.008) & 20/3 & 0.757 & 0.599 & 0.644 & 0.744 \\
+                  & LLM-full  & 0.1 & 0.677 & $+0.107$ (0.002) & 24/1 & 0.730 & 0.661 & 0.631 & 0.719 \\
+                  & LLM-score & 0.1 & 0.699 & $+0.129$ ($4\!\times\!10^{-4}$) & 22/1 & 0.735 & 0.679 & 0.636 & 0.763 \\
+                  & GP        & 0.1 & 0.716 & $+0.146$ ($2\!\times\!10^{-4}$) & 24/3 & 0.812 & 0.656 & 0.679 & 0.770 \\
+                  & ES16      & 0.1 & 0.724 & $+0.155$ ($2\!\times\!10^{-4}$) & 25/1 & 0.821 & 0.655 & 0.684 & 0.789 \\
     \midrule
-    Final method & \SDD + GP   & 1.0 & 0.785 & $+0.215$ ($3\!\times\!10^{-7}$) & 35/0 & 0.859 & 0.778 & 0.743 & \textbf{0.811} \\
-                 & \SDD + ES16 & 1.0 & \textbf{0.788} & $+0.218$ ($3\!\times\!10^{-7}$) & 36/0 & \textbf{0.880} & \textbf{0.786} & \textbf{0.745} & 0.807 \\
+    Final method & \RDD + GP   & 0.4 & 0.785 & $+0.215$ ($3\!\times\!10^{-7}$) & 35/0 & 0.859 & 0.778 & 0.743 & \textbf{0.811} \\
+                 & \RDD + ES16 & 0.4 & \textbf{0.788} & $+0.218$ ($3\!\times\!10^{-7}$) & 36/0 & \textbf{0.880} & \textbf{0.786} & \textbf{0.745} & 0.807 \\
     \bottomrule
   \end{tabular}
 \end{table*}
@@ -100,14 +100,14 @@ The gain is large in the H and M groups ($+0.19$ and $+0.34$, Holm-corrected $p 
 and in the four hand-built scenarios ($+0.28$ to $+0.30$, too few instances for a significant test).
 In the E group, where all robots are of one type, the final method has a higher mean HV than \dec{5} ($+0.05$), but the difference is not significant (Holm-corrected $p \ge 0.22$).
 
-\textbf{The rule is what makes \SDD work.}
-With the default rule, \SDD is not better than \dec{5} overall ($+0.020$, Holm-corrected $p = 0.81$):
+\textbf{The rule is what makes \RDD work.}
+With the default rule, \RDD is not better than \dec{5} overall ($+0.020$, Holm-corrected $p = 0.81$):
 it is much better in the M group and much worse in the E group.
-With learned rules at the same density, \SDD is better than \dec{5} by $+0.07$ to $+0.16$, significantly so for all rule learners except IL32-16.
-The sparse encoding alone is therefore not enough; it needs a good rule.
+With learned rules at the same deviation rate, \RDD is better than \dec{5} by $+0.07$ to $+0.16$, significantly so for all rule learners except IL32-16.
+The rule-and-deviation encoding alone is therefore not enough; it needs a good rule.
 
 \textbf{Optimizing the proxy score matters more than the rule's form.}
-At $\dens = 0.25$, the three best learners, ES16 (0.724), GP (0.716) and LLM-score (0.699), do not differ significantly from each other
+At $\drate = 0.1$, the three best learners, ES16 (0.724), GP (0.716) and LLM-score (0.699), do not differ significantly from each other
 (Holm-corrected $p \ge 0.9$).
 All three are guided by the proxy score alone.
 Imitation alone is clearly worse: IL16 is below ES16 by 0.061 and below GP by 0.052 (Holm-corrected $p \le 2 \times 10^{-4}$),
@@ -121,23 +121,31 @@ We rescored all 28 rules (the default rule and 27 learned rules) on new sets of 
 Their proxy scores have a Spearman correlation of 0.91 with their test HV ($p < 10^{-10}$).
 Averaged over the design runs of each learner, the score seen during learning exceeds the rescored one by at most 0.003 (0.013 for a single rule).
 
-\textbf{Effect of the density.}
-Table~\ref{tab:kcurve} shows HV against $\dens$ for the eight GP and ES16 rules.
-On the test instances we report it only as a sensitivity analysis; it was not used to choose $\dens$.
-Training and test instances show the same shape: HV rises from $0.25$ to $0.75$ and is flat between $0.75$ and $1.0$.
-The difference between $0.75$ and $1.0$ is small and not significant on either set ($+0.005$, $p = 0.52$ on training; $+0.003$, $p = 0.54$ on test; uncorrected).
-The E group depends most on the density.
-On the test instances (eight rules pooled, Holm's correction over the four densities), the learned rules are significantly worse than \dec{5} at $\dens = 0.25$ ($-0.077$, $p = 0.004$), and from $\dens = 0.5$ on they are not.
+\textbf{Effect of the deviation rate.}
+Table~\ref{tab:kcurve} shows HV against $\drate$ for the eight GP and ES16 rules, with $\qon = 0.4$.
+On the test instances we report it only as a sensitivity analysis; it was not used to choose $\drate$.
+Training and test instances show the same shape: HV rises from $\drate = 0.1$ to 0.3 and is flat between 0.3 and 0.4.
+The difference between 0.3 and 0.4 is small and not significant on either set ($+0.005$, $p = 0.52$ on training; $+0.003$, $p = 0.54$ on test; uncorrected).
+The E group depends most on the deviation rate.
+On the test instances (eight rules pooled, Holm's correction over the four rates), the learned rules are significantly worse than \dec{5} at $\drate = 0.1$ ($-0.077$, $p = 0.004$), and from $\drate = 0.2$ on they are not.
+
+\textbf{The deviation rate, not the number of slots, is what matters.}
+In the third selection step we also varied the activation probability $\qon$ (Table~\ref{tab:rate}, training instances).
+Two settings with the same rate $\drate = 0.4$, $\dens = 0.5$ with $\qon = 0.8$ and $\dens = 1.0$ with $\qon = 0.4$, differ by only $-0.007$ ($p = 0.47$).
+With the same slot ratio $\dens = 0.5$, raising $\qon$ from 0.4 to 0.8 raises HV by $+0.047$ (13/2 instances, $p = 0.008$).
+Above $\drate = 0.4$, HV declines slightly, but not significantly ($\drate = 0.8$ against 0.4: $-0.028$, 5/10 instances, $p = 0.15$; all $p$ uncorrected).
+The search also keeps the share of active slots set by $\qon$:
+in the rosters on the final fronts, 0.39, 0.59 and 0.79 of the slots are active for $\qon = 0.4$, 0.6 and 0.8.
 
 \begin{table}[t]
   \centering
-  \caption{Mean HV against the density $\dens$ (eight GP and ES16 rules, NSGA-II, 465 evaluations). Training and test values are normalized separately and cannot be compared with each other. The test row ``All'' also includes the four hand-built scenarios.}
+  \caption{Mean HV against the deviation rate $\drate$ (eight GP and ES16 rules, $\qon = 0.4$, $\dens = 0.25$ to 1.0; NSGA-II, 465 evaluations). Training and test values are normalized separately and cannot be compared with each other. The test row ``All'' also includes the four hand-built scenarios.}
   \label{tab:kcurve}
   \footnotesize
   \setlength{\tabcolsep}{3.5pt}
   \begin{tabular}{@{}llccccc@{}}
     \toprule
-    Set & Group & \dec{5} & $\dens = 0.25$ & 0.5 & 0.75 & 1.0 \\
+    Set & Group & \dec{5} & $\drate = 0.1$ & 0.2 & 0.3 & 0.4 \\
     \midrule
     Training (15) & All & 0.491 & 0.622 & 0.698 & 0.732 & 0.737 \\
                   & E   & 0.608 & 0.431 & 0.579 & 0.637 & 0.656 \\
@@ -152,13 +160,34 @@ On the test instances (eight rules pooled, Holm's correction over the four densi
   \end{tabular}
 \end{table}
 
+\begin{table}[t]
+  \centering
+  \caption{Mean HV of the eight GP and ES16 rules on the training instances for different slot ratios $\dens$ and activation probabilities $\qon$ (NSGA-II, 465 evaluations; HV normalized over the six settings).}
+  \label{tab:rate}
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{@{}cccc@{}}
+    \toprule
+    $\drate = \qon\dens$ & $\dens$ & $\qon$ & HV \\
+    \midrule
+    0.2 & 0.5  & 0.4 & 0.551 \\
+    0.3 & 0.75 & 0.4 & 0.593 \\
+    0.4 & 0.5  & 0.8 & 0.598 \\
+    0.4 & 1.0  & 0.4 & \textbf{0.606} \\
+    0.6 & 1.0  & 0.6 & 0.590 \\
+    0.8 & 1.0  & 0.8 & 0.578 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
 \textbf{Other optimizers and budgets.}
-We ran the robustness checks with $\dens = 0.5$, the density chosen in the first selection step; each setting is normalized separately.
-With MOEA/D (465 evaluations), \SDD with the ES16 and GP rules reaches 0.758 and 0.751 against 0.564 for \dec{5}
+We ran the robustness checks with $\drate = 0.2$ ($\dens = 0.5$, $\qon = 0.4$), the setting chosen in the first selection step; each setting is normalized separately.
+On the test instances with NSGA-II, $\drate = 0.2$ is about 0.017 below the final $\drate = 0.4$ (Table~\ref{tab:kcurve}).
+With MOEA/D (465 evaluations), \RDD with the ES16 and GP rules reaches 0.758 and 0.751 against 0.564 for \dec{5}
 ($+0.19$, Holm-corrected $p = 3 \times 10^{-6}$).
-With NSGA-II and 2000 evaluations, \SDD with the ES16 rules reaches 0.782 against 0.563 for \dec{5} ($+0.218$, Holm-corrected $p = 10^{-7}$).
+With NSGA-II and 2000 evaluations, \RDD with the ES16 rules reaches 0.782 against 0.563 for \dec{5} ($+0.218$, Holm-corrected $p = 10^{-7}$).
 In both settings the E group again shows no significant difference from \dec{5}.
-The comparison of rule learners at $\dens = 0.25$ changes slightly.
+The comparison of rule learners at $\drate = 0.1$ changes slightly.
 Under MOEA/D, LLM-score falls significantly below GP (Holm-corrected $p \le 0.01$);
 whether it is also below ES16 depends on which arms are normalized together ($p = 0.048$ or $0.068$).
 With 2000 evaluations, ES16 is slightly but significantly better than GP ($p = 0.049$).
@@ -166,9 +195,9 @@ ES16 is never significantly below another learner.
 
 \textbf{Stability across design runs.}
 The learners differ in how much their rules vary between independent runs.
-At $\dens = 0.25$, the three ES16 rules span a test HV range of only 0.723--0.725,
+At $\drate = 0.1$, the three ES16 rules span a test HV range of only 0.723--0.725,
 whereas the GP rules span 0.689--0.725, the LLM-score rules 0.658--0.724 and the LLM-full rules 0.637--0.725.
-At $\dens = 1.0$, the ranges are 0.772--0.797 for ES16 and 0.766--0.796 for GP.
+At $\drate = 0.4$, the ranges are 0.772--0.797 for ES16 and 0.766--0.796 for GP.
 
 \textbf{A failure case.}
 Five of the nine LLM-generated rules (from LLM-full, LLM-score and EoH) are infeasible in almost every run on one test instance, H13.
@@ -205,7 +234,7 @@ GP and ES16 cost more, and every one of their runs reaches a proxy score of 0.82
 Rosters are rarely executed exactly as planned.
 A robot may break down, need maintenance early, or come back late.
 The rest of the roster must then be repaired, and the repair should change as few shifts as possible.
-\SDD fits this task naturally: the original plan is a good rule, and the search only has to find the few changes that the disturbance requires.
+\RDD fits this task naturally: the original plan is a good rule, and the search only has to find the few changes that the disturbance requires.
 
 \textbf{Scenarios.}
 For each of the 62 instances, the original plan is the roster with the fewest resources (and, among those, the best balance) found by one NSGA-II run with \dec{5}.
@@ -238,10 +267,10 @@ All methods start decoding from the state at the disturbance.
   \item \textbf{\dec{5}+seed}: as \dec{5}, but 20\% of the initial population is the plan encoded for \dec{5} (the second simple repair) and its mutants.
   This is a simplified form of the seeding of Shen and Yao \cite{shen2015dfjsp},
   who fill 20\% of the population with the previous schedule and its mutants and 30\% with a repaired schedule and its mutants.
-  \item \textbf{Plan as rule}: \SDD with the plan as the rule.
+  \item \textbf{Plan as rule}: \RDD with the plan as the rule.
   The \emph{plan rule} sends the robot that the plan sends at the nearest start time if that robot is available;
   if the plan opens a robot there, it opens one of the same type; otherwise it falls back to the default rule $\rul_0$.
-  The number of slots is set from the full horizon with $\dens = 0.25$, and the slots point only to the remaining shifts.
+  The number of slots is set from the full horizon with $\dens = 0.25$ and $\qon = 0.4$ ($\drate = 0.1$), and the slots point only to the remaining shifts, so the rate on the remaining shifts is higher.
   \item \textbf{Plan as rule + seed}: as above, and 20\% of the initial population is the genotype without deviations and its mutants.
 \end{itemize}
 The plan rule is not learned, so all 62 instances can be used.
