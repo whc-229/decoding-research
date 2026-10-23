@@ -15,15 +15,6 @@
 本次提交改动了 bench/fjsp2.py（新增 q 参数）和 bench/moea_fjsp2.py（新增 MOEA/D），默认行为不变：开始前先跑 `cd bench && python check_v2.py`（必须 0 不一致），
 并抽查 `python moea_fjsp2.py rk,sp0.25 1 2 /tmp/x.csv mk01 2000` 的 465 次结果应与 v2_main.csv 中 mk01 第 0 次相同（rk：55:199;66:195;69:190；sp0.25：45:162;46:161;47:160;49:157）。
 
-### T8 [待做] FJSP：T3 扫描补点（q = 0.2 的槽数扩到 1.0 以上）
-- 目的：T3 中 q = 0.2 的最优槽数顶在网格上限 f = 1.0，"最优期望偏离数随预算变化"一条在 q = 0.2 上被网格截断；补点后还多出一组 q·f = 0.30 的配对（1.5q0.2 / 0.75q0.4 / 0.5q0.6）。
-- T7 结束后，bench/ 下（同 T3 的 30 个实例，约 2 小时）：
-  ```
-  I=$(python -c "import fjsp2 as F;M=F.meta();print(','.join([n for n,d in M.items() if d['path'].startswith('brandimarte')]+['r-la%02d'%i for i in range(16,31)]))")
-  nohup python moea_fjsp2.py sp1.5q0.2,sp2.0q0.2,sp3.0q0.2 5 6 v3_qk2.csv $I 20000 > v3_qk2.log 2>&1 &
-  ```
-- 输出 v3_qk2.csv（新文件，不要写进 v3_qk.csv；分析时我会和 v3_qk.csv 合并统一归一化）。在 `报告/T8_qk补点.md` 写运行情况即可。必须和 v3_qk.csv 在同一台机器上跑。
-
 ### T10 [完成] 排班：扩展编码，比较更高的偏离密度（实验 5 任务 D，2026-10-22）
 - 目的：现有基因布局最多只放得下 K0.5 的偏离槽，任务 C 只能在 {0.25, 0.5} 里选，"选出 K0.5"等于"越多越好直到上限"。
   扩展编码后比较 K ∈ {0.5, 0.75, 1.0}，看是否存在中间的最优点。只用训练实例选 K，判定规则事先写死。不改 rulegen/。
@@ -77,6 +68,16 @@
 
 ## 已完成
 （移到这里）
+
+### T8 [完成] FJSP：T3 扫描补点（q = 0.2 的槽数扩到 1.0 以上）
+- 目的：T3 中 q = 0.2 的最优槽数顶在网格上限 f = 1.0，"最优期望偏离数随预算变化"一条在 q = 0.2 上被网格截断；补点后还多出一组 q·f = 0.30 的配对（1.5q0.2 / 0.75q0.4 / 0.5q0.6）。
+- T7 结束后，bench/ 下（同 T3 的 30 个实例，约 2 小时）：
+  ```
+  I=$(python -c "import fjsp2 as F;M=F.meta();print(','.join([n for n,d in M.items() if d['path'].startswith('brandimarte')]+['r-la%02d'%i for i in range(16,31)]))")
+  nohup python moea_fjsp2.py sp1.5q0.2,sp2.0q0.2,sp3.0q0.2 5 6 v3_qk2.csv $I 20000 > v3_qk2.log 2>&1 &
+  ```
+- 输出 v3_qk2.csv（新文件，不要写进 v3_qk.csv；分析时我会和 v3_qk.csv 合并统一归一化）。在 `报告/T8_qk补点.md` 写运行情况即可。必须和 v3_qk.csv 在同一台机器上跑。
+- 结果：30 实例 × 3 编码 × 5 次全部完成（6 进程，91 分钟），可与 v3_qk.csv 直接拼接。见 `报告/T8_qk补点.md`。2026-10-23
 
 ### T7 [完成] FJSP：Behnke（60 个大实例，原 T2）
 - bench/ 下：`nohup python moea_fjsp2.py rk,sp0.1,sp0.25,sp0.5 10 6 v3_behnke.csv behnke 5000 > v3_behnke.log 2>&1 &`
