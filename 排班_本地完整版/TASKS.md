@@ -75,6 +75,23 @@
 ## 已完成
 （移到这里）
 
+### T13b [待做] T13 第 5 步：补全落在网格边界的参数（用户 2026-10-26 同意，为审稿时对照方法的公平性）
+- **目的**：T13 中排班的 D 选中网格下端 D0.2、P 选中上端 P4，FJSP 的 spr 选中上端 spr2.0。各往外扩一次，确认不是网格太窄造成的。
+  **只扩这一次**：若再次选中新的边界值（D0.1、P16、spr4.0），照用并在报告注明，不再继续扩。
+- 判定脚本已更新（只加候选、支持多个 CSV 合并统一归一化，判定口径不变）：`neural/choose_t13.py`、`bench/choose_t13.py`。开跑前先把现有判定结果另存：
+  `cp neural/out/choose_t13.json neural/out/choose_t13_v1.json`，`cp bench/choose_t13.json bench/choose_t13_v2.json`。
+- **5a 排班训练集**（15 个训练实例，8 条规则 × 5 次，NSGA-II 465，种子 5000 + 次号，同第 3 步）：
+  臂 = D0.1、P8、P16 各配 8 条规则（写法同 run_T13.sh 的 rules()：`$(rules D0.1 D0.1),$(rules P8 P8:X1.0),$(rules P16 P16:X1.0)`）
+  `python base3.py "<24 个臂>" 5 6 out/train_t13b.csv train --seed-base 5000`，然后 `python choose_t13.py out/train_t13.csv,out/train_t13b.csv`。约 1800 次运行。
+  - 若选中的 D 或 P 变了：只对变了的那个补跑测试集（8 条规则 × 5 次，种子 1000 + 次号）→ `out/val_t13b.csv`，
+    再用 stats_t13_roster.py 的口径重算第 4 步的表（新选中的臂替换旧的，Holm 族仍为 4 个检验），报告里新旧两版都给出。没变就不跑测试集。
+- **5b FJSP pilot**（Hurink rdata la16～la30，5 次，5000 次评价，同第 1 步）：
+  `cd bench && python moea_fjsp3.py spr3.0,spr4.0 5 6 pilot_t13d.csv pilot 5000`（150 次运行），然后
+  `python choose_t13.py pilot_t13.csv,pilot_t13b.csv,pilot_t13c.csv,pilot_t13d.csv 5000`。
+  - 若 spr 的选中值变了：在 big 集上补跑新选中的 spr（78 个实例 × 10 次 × 20000 次评价，同种子）→ `v3_big_t13c.csv`，
+    合并 v3_big_all13b.csv 后用 stats_t13_fjsp.py 重算（新 spr 替换 spr2.0，Holm 族仍为 30 个检验），报告里新旧两版都给出。没变就不跑。
+- 顺序：5b → 5a（5b 很短）。进程数 6（看 uptime）。报告追加到 `报告/T13_已有方法对照.md` 的新一节"第 5 步"。
+
 ### T13 [完成] 最接近的已有方法作为对照（用户 2026-10-23 同意的新实验，来源：新颖性检查）
 - **目的**：审稿人最可能问"这不就是 LDS / 迭代贪心 / 启发式空间搜索吗"。用同一规则、同一预算比较四种最接近的做法：
   1. **db / D（稠密有偏逐步编码，HBSS / LDS 的逐步版本）**：每步一个基因，以概率 ρ 偏离规则首选，偏离语义与 RDD 相同。

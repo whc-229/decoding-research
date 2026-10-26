@@ -18,11 +18,13 @@ def hv(P, ref=1.1):
     return v / ref ** 2
 
 
-FAM = {"D": ["D0.2", "D0.4", "D0.6"], "P": ["P1", "P2", "P4"]}
+FAM = {"D": ["D0.1", "D0.2", "D0.4", "D0.6"], "P": ["P1", "P2", "P4", "P8", "P16"]}
+# 第 5 步（2026-10-26）：D 选中下端 D0.2、P 选中上端 P4，网格各扩一次（D0.1；P8、P16）。缺的臂自动跳过。
+# 多个 CSV 时合并后统一归一化：python choose_t13.py out/train_t13.csv,out/train_t13b.csv
 
 if __name__ == "__main__":
     R = collections.defaultdict(list)
-    for r in csv.DictReader(open(sys.argv[1], encoding="utf-8")):
+    for r in (r for f in sys.argv[1].split(",") for r in csv.DictReader(open(f, encoding="utf-8"))):
         s = r["front(资源数:均衡度;...)"]
         R[(r["scenario"], r["variant"])].append([tuple(map(float, p.split(":"))) for p in s.split(";")] if s else [])
     insts = sorted({k[0] for k in R}); arms = sorted({k[1] for k in R})
