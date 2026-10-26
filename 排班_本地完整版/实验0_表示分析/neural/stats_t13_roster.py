@@ -5,7 +5,8 @@ HV：每个实例内用四种方法的全部解统一归一化（资源数, 均�
 方法层面：每个实例先对 8 条规则 × 5 次取平均（dec5 对 5 次取平均），再做实例层面配对 Wilcoxon；
 Holm 族 = 全部 47 个实例上的 4 个检验（D、P 各对 X1.0、对 dec5）；分组（原/E/H/M）只报未校正 p。
 逐实例 Mann-Whitney：用各次运行的 HV（规则臂 40 个值、dec5 5 个值），双侧 p < 0.05，按均值方向计"好/差"。
-用法（neural/ 下）: python stats_t13_roster.py [输出.md=out/stats_t13_val.md]"""
+用法（neural/ 下）: python stats_t13_roster.py [输出.md=out/stats_t13_val.md] [D/P 臂所在 CSV=out/val_t13.csv] [D 方法=D0.2] [P 方法=P4]
+  第 5 步（T13b）重算：python stats_t13_roster.py out/stats_t13_val_v2.md out/val_t13b.csv D0.4 P16"""
 import csv, collections, os, sys
 import numpy as np
 from scipy.stats import mannwhitneyu, wilcoxon
@@ -29,10 +30,10 @@ def hv(P, ref=1.1):
     return v / ref ** 2
 
 
-def load():
-    """读三个 CSV，返回 {(实例, 方法): [每次运行的前沿]}；方法 = 臂名冒号前的部分（D0.2 / P4 / X1.0）或 dec5。"""
+def load(t13="out/val_t13.csv"):
+    """读三个 CSV（t13 = D/P 臂所在的 CSV），返回 {(实例, 方法): [每次运行的前沿]}；方法 = 臂名冒号前的部分（D0.2 / P4 / X1.0）或 dec5。"""
     R = collections.defaultdict(list)
-    src = [("out/val_t13.csv", lambda v: True), ("out/val_Kext.csv", lambda v: v.startswith("X1.0:")), ("out/val_server.csv", lambda v: v == "dec5")]
+    src = [(t13, lambda v: True), ("out/val_Kext.csv", lambda v: v.startswith("X1.0:")), ("out/val_server.csv", lambda v: v == "dec5")]
     for f, keep in src:
         for r in csv.DictReader(open(os.path.join(HERE, f), encoding="utf-8")):
             if keep(r["variant"]):
@@ -75,11 +76,13 @@ def compare(H, ok, a, c):
 
 def main():
     """计算全部实例（含 Holm）与各组的对比表，并写出 Markdown。"""
-    outp = sys.argv[1] if len(sys.argv) > 1 else os.path.join(HERE, "out/stats_t13_val.md")
-    H, insts, meths = run_hv(load())
+    a = sys.argv[1:] + [None] * 4
+    outp = a[0] or os.path.join(HERE, "out/stats_t13_val.md")
+    dm, pm = a[2] or "D0.2", a[3] or "P4"
+    H, insts, meths = run_hv(load(a[1] or "out/val_t13.csv"))
     cnt = collections.Counter(k[1] for k in H)
     runs = {m: len(H[(insts[0], m)]) for m in meths}
-    pairs = [(a, c) for a in ("D0.2", "P4") for c in ("X1.0", "dec5")]
+    pairs = [(a, c) for a in (dm, pm) for c in ("X1.0", "dec5")]
     out = [f"# T13 第 4 步：排班测试集（{len(insts)} 个实例），方法 {', '.join(meths)}\n",
            f"每个实例的运行数：{runs}（规则臂为 8 条规则 × 5 次）。HV 每个实例内四种方法统一归一化，不可行 HV = 0。"
            "p：实例层面配对 Wilcoxon（方法层面先对规则 × 次取平均）；Holm 族 = 全部实例上的 4 个检验；分组只报未校正 p。"
