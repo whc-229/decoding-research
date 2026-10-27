@@ -6,10 +6,10 @@ A construction rule makes every decision by default, and the genotype encodes on
 The rule provides the bias, the deviation slots provide the freedom, and the deviation rate sets the balance between them.
 Rules are learned offline by scoring the solutions that random deviations from them produce.
 
-On robot--tool duty rostering, \RDD raises the mean HV on the test instances from 0.570 to 0.788, and an old roster used as the rule repairs disturbances with fewer changes than seeding.
+On robot--tool duty rostering, \RDD raises the mean HV on the test instances from 0.570 to 0.788, and an old roster used as the rule repairs disturbances with a higher HV and fewer changes in its smallest repair than seeding.
 On FJSP benchmarks, \RDD with standard dispatching rules is significantly better than random keys, seeding, heuristic-space and problem-space search.
 Ablations on both problems show that the rule helps far more in the decoder than in the initial population,
-that deviation slots beat one gene per decision, that the alternatives must be good candidates, and that the encoding matters more than the optimizer.
+that deviation slots beat one gene per decision, that the alternatives must be good candidates, and that the encoding works with different optimizers.
 
 Several directions remain open.
 The deviation rate could be adapted during a run or per instance instead of being fixed on training instances.

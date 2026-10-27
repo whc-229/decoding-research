@@ -15,13 +15,13 @@ The comparisons place \RDD between two extremes.
 Heuristic-space search has full freedom and no default; seeding has a default only at the start.
 On FJSP, both are clearly worse than \RDD, which keeps a default rule and lets the search leave it at a tuned rate.
 How often the best solutions leave the rule depends on the alternatives.
-With a rule portfolio on FJSP, the best schedules leave the default rule in about half of the steps; on rostering, a random genotype at the selected rate still follows the rule in about two thirds of the shifts.
+With a rule portfolio on FJSP ($\drate = 1.2$), the best schedules leave the default rule in about half of the steps; on rostering ($\drate = 0.4$), a random genotype still follows the rule in at least about two thirds of the shifts.
 The best rate is therefore a property of the problem and the alternatives, and \RDD sets it on training instances.
 
 \textbf{Theory and observations.}
-Several predictions of Section~\ref{sec:theory} hold on both problems:
-the deviation rate, not the number of slots, determines performance; the search keeps the share of active slots near $\qon$;
-too few slots keep good solutions out of reach; and on FJSP the best rate grows with the budget.
+Several predictions of Section~\ref{sec:theory} hold.
+On both problems, the deviation rate, not the number of slots, determines performance, and the share of active slots in the best solutions stays near $\qon$, as the model assumes (Sections~S-V and S-VI of the supplementary material).
+On rostering, too few slots keep good solutions out of reach in the E group, and on FJSP the best rate grows with the budget.
 One observation does not fit the model directly.
 On rostering, HV keeps rising up to $\drate \approx 0.3$--0.4 already at 465 evaluations, whereas the model predicts that small budgets call for no more slots than the rule distance.
 Part of this can be explained by the spread of the front: the nearest good roster differs from the rule in fewer than five shifts on four training instances,
@@ -32,6 +32,6 @@ The model also predicts the direction of the budget effect but not its size.
 \textbf{Limitations.}
 The learned rules and the main tests use one rostering problem, with instances from one generator and 15 training instances.
 The rostering comparison covers the decoders of the software that motivated this work and dense deviations, but not other metaheuristics for this problem.
-Pareto local search improved with its step size up to the largest value tested, so the optimizer side of \RDD is not fully tuned.
+On rostering, Pareto local search improved with its step size up to the largest value tested, so the optimizer side of \RDD is not fully tuned.
 The checks with MOEA/D and 2000 evaluations used $\drate = 0.2$ rather than the final rate.
 On FJSP we used fixed rules and a generic search; specialized algorithms with problem-specific neighborhoods reach better makespans.

@@ -25,17 +25,17 @@ The two objectives conflict: a small fleet must work some robots hard, while an 
 \textbf{Instances.}
 We use 62 instances: four hand-built scenarios (one of them taken from the scheduling software that motivated this work) and 58 random instances in three families.
 In the E family all robots are of one type; in the H family there are two or three types with equal duty lengths; in the M family there are two or three types with duty lengths between 6 and 12\,h.
-Horizons range from 480 to 1440\,h, so a roster has 48 to 240 shifts.
+Horizons range from 480 to 1440\,h, so a roster has at most 48 to 240 shifts.
 The instances are split once into 15 training instances (five per family) and 47 test instances.
 Rules and parameters of our method are chosen on the training instances only.
 Section~S-I of the supplementary material gives the details.
 
 \textbf{Baseline decoders.}
 The scheduling software uses a random-key genotype with one robot gene and one tool gene per shift.
-We study six decoders, \dec{0} to \dec{5}, each adding a piece of problem knowledge to the one before:
+We study six decoders, \dec{0} to \dec{5}, which add problem knowledge step by step:
 a fixed threshold between ``send'' and ``open'' (\dec{1}), a ranking of the available robots by duty count (\dec{2}),
-a capacity look-ahead that forbids opening a robot when the fleet can still cover the horizon (\dec{3}), a maintenance-aware ranking (\dec{4}),
-and a backtracking repair over the last 12 shifts (\dec{5}).
+a capacity look-ahead that forbids opening a robot when the fleet can still cover the horizon (\dec{3}), and, on top of \dec{3}, either a maintenance-aware ranking (\dec{4})
+or a backtracking repair over the last 12 shifts (\dec{5}).
 \dec{5} performs best and is our main baseline.
 All six share one structure: every shift has its own gene, and that gene decides the shift.
 
@@ -45,7 +45,7 @@ All six share one structure: every shift has its own gene, and that gene decides
 To see why some decoders work better than others, we measured on 16 instances how often redrawing one gene leaves the roster unchanged (\emph{neutral rate}),
 how often a random genotype gives a roster within one resource of the lower bound (\emph{good-start rate}),
 and how many later shifts change when one gene changes (\emph{change propagation}).
-We related these properties to the hypervolume (HV) that NSGA-II reaches with each decoder.
+We related these properties to the HV that NSGA-II \cite{deb2002nsga2} reaches with each decoder.
 Table~\ref{tab:neutral} lists the first two on the hand-built scenarios.
 Three observations stand out.
 
@@ -75,8 +75,8 @@ This agrees with the theory of redundant representations \cite{rothlauf2006repre
 \textbf{The bias is fixed by the design.}
 How strongly a decoder favors certain rosters is a side effect of its rules, not a parameter.
 On two hand-built scenarios, the look-ahead of \dec{3}--\dec{5} even makes the optimal roster unreachable,
-yet adding gene values that always open a robot, which makes it reachable again, did not improve any scenario and worsened the imbalance on two of them.
-Changing one gene still changes the robot at 39--61\% of the later shifts in every decoder.
+yet adding gene values that always open a robot, which makes it reachable again, did not improve these two scenarios and worsened the imbalance on the other two.
+On the hand-built scenarios, changing one gene still changes the robot at 39--61\% of the later shifts in every decoder.
 
 \textbf{Optimal rosters are a rule plus a few exceptions.}
 In 85--90\% of their shifts, the optimal rosters of the hand-built scenarios send the available robot with the fewest duties; in the remaining shifts they send another one.

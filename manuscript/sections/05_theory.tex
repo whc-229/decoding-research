@@ -82,7 +82,7 @@ To find the best $\K$ for a given budget, we run a GA with the operators of our 
 with $\npos = 100$, $\nval = 4$, rule distances from 0 to 80, $\K$ from 5 to 100, and 20 runs per setting.
 Table~\ref{tab:theory-budget} shows that the best $\K$ grows with the budget.
 With 465 evaluations and $\dist \le 40$, it is at most $\dist$.
-With 2000 evaluations it is larger than $\dist$, and with 10\,000 evaluations it is larger than $\dist/\qon$.
+With 2000 evaluations it is larger than $\dist$, and with 10\,000 evaluations it is larger than $\dist/\qon$ for $\dist \le 20$.
 No single $\K$ is good for all budgets, and PD remains more than 40 positions away after 10\,000 evaluations whenever $\dist \le 60$.
 
 The reason is a simple trade-off, which a mean-field model of the search reproduces (Section~S-III of the supplementary material).

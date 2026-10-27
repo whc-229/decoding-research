@@ -30,7 +30,7 @@
 \section{Rostering Model, Instances and Baseline Decoders}
 \label{sec:s-model}
 
-\subsubsection{Robot--Tool Duty Rostering}
+\subsection{Robot--Tool Duty Rostering}
 \label{sec:problem:model}
 
 A duty post must be staffed by one robot at all times during a horizon $[0,\horizon]$.
@@ -67,7 +67,7 @@ where $\avail_i$ is the set of available robots.
 Together with the types of the new tools, these actions fix the roster.
 Each action changes which robots are available later, so a decision at one shift affects all later shifts.
 
-\subsubsection{Objectives}
+\subsection{Objectives}
 \label{sec:problem:objectives}
 
 We minimize two objectives.
@@ -89,7 +89,7 @@ For each instance we also compute a lower bound $\LB$ on the resource count.
 The robot part comes from an exact feasibility search with unlimited tools;
 the tool part checks whether a tool used in one shift can be ready again for the next shift, and if not, counts the extra tools needed.
 
-\subsubsection{Instances}
+\subsection{Instances}
 \label{sec:problem:instances}
 
 We use 62 instances (Table~\ref{tab:instances}).
@@ -131,7 +131,7 @@ The test instances measure the final performance.
   \end{tabular}
 \end{table}
 
-\subsubsection{Encoding and Baseline Decoders}
+\subsection{Encoding and Baseline Decoders}
 \label{sec:problem:decoders}
 
 All decoders in this paper use a random-key genotype $\genome \in [0,1)^n$, a vector of $n$ numbers, and build the roster one shift at a time.
@@ -193,7 +193,7 @@ To see why some decoders work better than others, we measured four properties of
   \item \textbf{Change propagation}: after one robot gene is changed, the share of later shifts whose robot also changes.
   \item \textbf{Reachability}: whether some genotype produces the optimal roster. We computed the optimal rosters of the hand-built scenarios by dynamic programming.
 \end{itemize}
-We also recorded the \emph{override share}: how often the capacity look-ahead of \dec{3}--\dec{5} (below) turns a \new action into a \reuse action.
+We also recorded the \emph{override share}: how often the capacity look-ahead of \dec{3}--\dec{5} (Section~\ref{sec:problem:decoders}) turns a \new action into a \reuse action.
 The good-start rate is estimated from 1000 random genotypes.
 The neutral rate and change propagation are measured on 100 random feasible genotypes and on the 30 best of the 1000, with five single-gene changes each.
 We then compared these properties with the HV that NSGA-II \cite{deb2002nsga2} reaches with each decoder
@@ -261,7 +261,7 @@ while always sending the robot with the least remaining budget reaches the lower
 \section{Mean-Field Model of the Search}
 \label{sec:s-meanfield}
 
-A simple model of the search dynamics explains this trend.
+A simple model of the search dynamics explains why the best number of slots grows with the budget (Table~\ref{M-tab:theory-budget}).
 At any time, each slot is in one of three states:
 on and wrong (it changes a position that should not change, or sets a wrong option), on and right, or off.
 Let $w$, $c$ and $v = \K - w - c$ be the numbers of slots in these states, so that $f = w + (\dist - c)$.
@@ -384,7 +384,7 @@ A network with random weights can open so many robots that every decoded roster 
 then the proxy score is zero for every perturbation, and ES gets no signal.
 
 \textbf{Large language model (LLM).}
-Here the rule is a Python function that follows the interface of Section~\ref{M-sec:method:rule}.
+Here the rule is a Python function that follows the interface of Section~S-IV-A.
 We evolve it in the style of EoH \cite{liu2024evolution}.
 Five initial rules are written from five prompts that each suggest a different idea.
 In each of 12 generations, the LLM writes four new rules (two refinements, one new idea, one combination of two parents), and the six best rules are kept.
@@ -407,7 +407,7 @@ The E group depends most on the deviation rate.
 On the test instances (eight rules pooled, Holm's correction over the four rates), the learned rules are significantly worse than \dec{5} at $\drate = 0.1$ ($-0.077$, $p = 0.004$), and from $\drate = 0.2$ on they are not.
 
 \textbf{The deviation rate, not the number of slots, is what matters.}
-In the third selection step we also varied the activation probability $\qon$ (Table~\ref{tab:rate}, training instances).
+In the second selection step we also varied the activation probability $\qon$ (Table~\ref{tab:rate}, training instances).
 Two settings with the same rate $\drate = 0.4$, $\dens = 0.5$ with $\qon = 0.8$ and $\dens = 1.0$ with $\qon = 0.4$, differ by only $-0.007$ ($p = 0.47$).
 With the same slot ratio $\dens = 0.5$, raising $\qon$ from 0.4 to 0.8 raises HV by $+0.047$ (13/2 instances, $p = 0.008$).
 Above $\drate = 0.4$, HV declines slightly, but not significantly ($\drate = 0.8$ against 0.4: $-0.028$, 5/10 instances, $p = 0.15$; all $p$ uncorrected).
@@ -597,6 +597,11 @@ At 5000 evaluations, the HV gain of \RDD-U ($\drate = 0.2$) over RK is $+0.225$,
 All 12 instances on which RK is significantly better belong to the Hurink sets, and 8 of them to edata, which is closest to the classical job shop.
 
 
+\textbf{Another optimizer.}
+With MOEA/D on the 78 instances of the main paper (10 runs, 5000 evaluations), \RDD-U with $\drate = 0.2$ reaches an HV of 0.787 against 0.359 for RK
+($+0.428$, Holm-corrected $p = 4 \times 10^{-13}$; better on 69 instances, worse on none).
+All three \RDD-U settings are significantly better than RK with MOEA/D at 465, 2000 and 5000 evaluations.
+
 \textbf{Large instances.}
 On the 60 Behnke instances, all three \RDD-U settings are significantly better than RK on every instance at 465, 2000 and 5000 evaluations (Holm-corrected $p = 1.5 \times 10^{-10}$).
 Here the smallest rate is best.
@@ -656,7 +661,7 @@ Four findings stand out.
   This agrees with the second guideline of Section~\ref{M-sec:theory:consequences}.
   The Behnke results are consistent with this: with up to 500 decisions and at most 5000 evaluations, the smallest rate was best.
 \end{itemize}
-On FJSP the best rate is thus 0.1--0.2 for moderate and large budgets, lower than the rate of 0.4 chosen for rostering (Section~\ref{M-sec:method:k}).
+For \RDD-U on FJSP, the best rate is thus 0.1--0.2 for moderate and large budgets.
 
 
 

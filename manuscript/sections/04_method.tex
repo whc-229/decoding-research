@@ -40,7 +40,7 @@ We use two kinds:
   This suits problems with many feasible actions, most of them poor.
   We use it in the flexible job shop, where a decision chooses among dozens of operation--machine pairs and many standard dispatching rules exist.
 \end{itemize}
-In both cases a deviation picks one entry of the list, and under random genes every entry is equally likely.
+A deviation picks one entry of the list by its position.
 What matters is that the entries are reasonable candidates.
 On the flexible job shop, a rule portfolio is clearly better than ranked alternatives over all operation--machine pairs (Section~\ref{sec:exp-ablation}).
 
@@ -56,7 +56,8 @@ The genotype holds $\K$ \emph{deviation slots}, two genes per slot, in $[0,1)$:
   \genome = (p_1, a_1, \dots, p_\K, a_\K, \text{other genes}).
 \end{equation}
 In rostering, the other genes are the gene type $g$ and one tool gene per shift, read as in the baselines; FJSP needs no other genes.
-The number of slots grows with the number $N$ of decisions, $\K = \max(4, \lceil \dens N \rceil)$, where $\dens$ is the \emph{slot ratio}.
+Let $N$ be the number of decisions; in rostering, where the number of shifts depends on the roster, $N$ is its upper bound $\Nmax$.
+The number of slots grows with $N$, $\K = \max(4, \lceil \dens N \rceil)$, where $\dens$ is the \emph{slot ratio}.
 Each slot works as follows:
 \begin{itemize}
   \item \textbf{On or off.} The slot is active if $a_k \ge 1 - \qon$, where $\qon$ is the \emph{activation probability}.
@@ -66,8 +67,9 @@ Each slot works as follows:
 Algorithm~\ref{alg:decode} lists the decoder.
 It collects the active slots, then builds the schedule decision by decision.
 At a decision with an active slot it takes the chosen alternative, if that action is feasible; otherwise it takes the rule's first choice.
-In rostering the alternatives are split as in the baselines: values $u_k < 0.85$ send another robot and larger values open a new robot of a type chosen by $u_k$;
-the decoder also keeps the capacity check and the backtracking repair of \dec{5} on decisions without a deviation.
+In FJSP every entry of the list is equally likely under random genes.
+In rostering, values $u_k < 0.85$ send another robot and larger values open a new robot of a type chosen by $u_k$, as in the baselines;
+an opening deviation is ignored, as in \dec{3}, when the current fleet can still cover the horizon, and the backtracking repair of \dec{5} is kept on decisions without a deviation.
 
 \begin{algorithm}[t]
   \caption{Rule-deviation decoding}
@@ -143,9 +145,9 @@ A small $\drate$ keeps random genotypes close to the rule's schedule; a large $\
 On both problems, settings with the same $\drate$ but different $\dens$ and $\qon$ perform alike (Section~\ref{sec:experiments}), so $\drate$ is the parameter to set.
 The realized share of decisions that differ from the rule is smaller than $\drate$, because several slots may hit the same decision and an alternative may coincide with the rule's choice.
 
-Two existing encodings are limiting cases of \RDD.
-A per-decision encoding that ranks the options by a rule corresponds to one gene for every decision and no default: every decision is free.
-Heuristic-space search \cite{storer1992new,dorndorf1995evolution}, which picks a rule for every decision, corresponds to a rule portfolio with no default rule.
+Two existing encodings can be viewed as extremes of this design.
+A per-decision encoding that ranks the options by a rule has a gene at every decision and no default: every decision is free.
+Heuristic-space search \cite{storer1992new,dorndorf1995evolution}, which picks a rule for every decision, is a rule portfolio with no default rule.
 \RDD adds what both lack: a default, and a parameter that sets how often the search may leave it.
 
 \textbf{Optimizer.}
@@ -189,4 +191,4 @@ For rostering, each candidate setting was run with the eight GP and ES16 rules o
 and the setting with the highest mean HV was kept.
 We first compared $\drate = 0.1$ to $0.4$ with $\qon = 0.4$, and then $\qon = 0.4$, 0.6 and 0.8 at the largest slot ratio.
 The procedure selected $\drate = 0.4$ ($\dens = 1.0$, $\qon = 0.4$).\footnote{Before this selection, an exploratory run had evaluated $\drate = 0.2$ on the test instances. The final rate was chosen on the training instances only; test results at other rates are reported only as a sensitivity analysis.}
-For FJSP, the settings of \RDD and of all compared methods were chosen in the same way on 15 instances that are not used in the comparison (Section~\ref{sec:exp-fjsp}).
+For FJSP, the settings of \RDD and of the compared methods were chosen in the same way on 15 instances that are not used in the comparison (Section~\ref{sec:exp-fjsp}).

@@ -39,13 +39,14 @@ Every parameter of a compared method was selected on training or tuning instance
     \midrule
     \dec{5} & one gene per shift; rule-based ranking, look-ahead and repair & R \\
     RK & two-vector random key \cite{zhang2011effective}; no rule & F \\
-    RK+seed, RK+GLR+seed & RK with the rule's schedule (and GLR initialization \cite{zhang2011effective}) in the initial population & F \\
+    RK+seed, RK+GLR+seed & RK with the rule's schedule (and the global, local and random selection (GLR) initialization of \cite{zhang2011effective}) in the initial population & F \\
     Heuristic space & one gene per decision picks one of six dispatching rules \cite{storer1992new,dorndorf1995evolution} & F \\
     Problem space & genes perturb processing times; the rule builds the schedule \cite{storer1992new} & F \\
-    Dense deviations (DD) & one gene per decision, which deviates from the rule with probability $\drate$, as in biased sampling \cite{bresina1996hbss} & R, F \\
+    Dense deviations (DD) & one gene per decision, which deviates from the rule with probability $\drate$, as in biased sampling \cite{bresina1996hbss}; same alternatives as \RDD (R) or \RDD-U (F) & R, F \\
     \midrule
-    \RDD & rule + deviation slots (this paper) & R, F \\
-    \RDD-PLS & \RDD searched by Pareto local search & R, F \\
+    \RDD & rule + deviation slots (this paper); rule portfolio on F & R, F \\
+    \RDD-U & \RDD with ranked alternatives over all options & F \\
+    \RDD-PLS, \RDD-U-PLS & \RDD (R) or \RDD-U (F) searched by Pareto local search & R, F \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -53,7 +54,7 @@ Every parameter of a compared method was selected on training or tuning instance
 \textbf{Performance measure and statistics.}
 The result of a run is the non-dominated set of all feasible solutions it evaluated, measured by the HV.
 Per instance, both objectives are normalized by the smallest and largest values found by all methods in the comparison; the reference point is $(1.1, 1.1)$, and the HV is divided by $1.1^2$.
-Each method is run five times per instance on rostering and ten times on FJSP.
+Each method is run five times per instance on rostering and ten times in the main FJSP comparison.
 For a method with a learned rule, the result on an instance is the mean over all design runs (independent runs of the rule learner) and their MOEA runs.
 We compare methods by a paired Wilcoxon signed-rank test over instances and correct the $p$-values by Holm's method \cite{holm1979simple} within the family of comparisons stated in each table.
 W/L counts the instances on which a method is significantly better/worse than its reference (Mann--Whitney U test over runs, $p < 0.05$).
@@ -100,7 +101,9 @@ In the E group, where all robots are of one type, \RDD has a higher mean HV than
 
 \textbf{A good rule is essential.}
 With the default rule, \RDD is not better than \dec{5} overall ($+0.020$, Holm-corrected $p = 0.81$).
-With learned rules at the same deviation rate, it is better by $+0.07$ to $+0.16$, significantly so for all learners except IL32-16.
+The learners are GP, ES16 and two LLM variants (LLM-score, whose prompts show only the score, and LLM-full, which also shows diagnostic feedback),
+the original EoH procedure \cite{liu2024evolution}, and networks trained only by imitation (IL16 with 16 hidden units, IL32-16 with two layers of 32 and 16).
+With learned rules at the same deviation rate, \RDD is better than \dec{5} by $+0.07$ to $+0.16$, significantly so for all learners except IL32-16.
 The three learners guided by the proxy score, ES16 (0.724), GP (0.716) and LLM-score (0.699), do not differ significantly from each other (Holm-corrected $p \ge 0.9$ over 91 pairwise tests),
 whereas imitation alone (IL16) is significantly worse than ES16 and GP.
 The proxy score predicts test performance: over 28 rules, its Spearman correlation with the test HV is 0.91 ($p < 10^{-10}$).
@@ -195,7 +198,7 @@ Using the old roster as the rule raises the mean HV from 0.605 with seeding to 0
 The gain holds for every disturbance type, at both execution points and in every instance family (Section~S-VI of the supplementary material).
 Seeding finds repairs with at most three changes more often than the rule alone.
 Combining the two gives the highest HV (0.815) and the most such repairs, although its HV is not significantly higher than that of the rule alone (Holm-corrected $p = 0.59$).
-The difference between rule and seed comes from what a mutation does.
+A likely reason lies in what a mutation does.
 With per-shift genes, a mutation of a seeded roster changes which robots are available later, so the offspring differ from the plan at many shifts.
 With the plan as the rule, an offspring departs from the plan only at its active slots, and the rule returns to the plan wherever it can.
 
@@ -217,14 +220,15 @@ All encodings use the same schedule builder.
 At each step it picks one pair of a job's next operation and an eligible machine, and places the operation in the earliest idle interval of that machine.
 The rule is earliest completion time (ECT), with ties broken by the most work remaining.
 \RDD uses a rule portfolio: a deviation takes the first choice of one of five other rules (shortest processing time, most and least work remaining, earliest start, most operations remaining).
-The selected setting is $\dens = 3.0$ with $\qon = 0.4$.
-Because several slots hit the same step and the proposals often agree with ECT, the schedules with the best makespan depart from ECT in about half of the steps.
-\RDD-U is the variant with ranked alternatives over all operation--machine pairs ($\drate = 0.2$).
+The selected setting is $\dens = 3.0$ with $\qon = 0.4$, \ie $\drate = 1.2$.
+Since several slots can hit the same step and a proposal can coincide with the ECT choice, the realized share is lower: the schedules with the best makespan depart from ECT in about half of the steps.
+\RDD-U is the variant with ranked alternatives over all operation--machine pairs; it uses $\drate = 0.2$, the best of three rates in earlier runs on all benchmark families (Section~S-VI of the supplementary material).
+DD uses the same alternatives as \RDD-U.
 Heuristic-space search uses the same six rules without a default.
 
 \begin{table}[t]
   \centering
-  \caption{FJSP: 78 instances, 10 runs; HV normalized per budget over all methods. Gap: best makespan over the best-known value, minus one. W/L: instances where \RDD is significantly better/worse than the method at 20\,000 evaluations. All differences from \RDD are significant at every budget (Holm-corrected $p \le 3 \times 10^{-6}$, 40 tests), except for \RDD-U-PLS from 5000 evaluations on.}
+  \caption{FJSP: 78 instances, 10 runs; HV normalized per budget over these methods and three further variants. Gap: best makespan over the best-known value, minus one. W/L: instances where the method is significantly better/worse than \RDD at 20\,000 evaluations. Holm's correction covers 40 tests (eight methods, five budgets): the first seven methods differ significantly from \RDD at every budget ($p \le 3 \times 10^{-6}$); \RDD-U-PLS differs at 465 and 2000 evaluations ($p \le 0.007$) but not from 5000 on.}
   \label{tab:fjsp-main}
   \footnotesize
   \setlength{\tabcolsep}{2.4pt}
@@ -234,15 +238,15 @@ Heuristic-space search uses the same six rules without a default.
     \cmidrule(lr){2-3} \cmidrule(lr){4-5}
     Method & 465 & 20\,000 & 465 & 20\,000 & W/L \\
     \midrule
-    RK            & 0.389 & 0.452 & 36.4 & 22.4 & 70/0 \\
-    RK+seed       & 0.546 & 0.567 & 24.8 & 18.6 & 68/1 \\
-    RK+GLR+seed   & 0.613 & 0.610 & 19.5 & 15.4 & 65/1 \\
-    Problem space & 0.614 & 0.558 & 22.6 & 20.5 & 72/0 \\
-    DD            & 0.684 & 0.717 & 17.5 & 11.5 & 54/0 \\
-    Heuristic space & 0.818 & 0.791 & 10.8 & 8.7 & 33/0 \\
+    RK            & 0.389 & 0.452 & 36.4 & 22.4 & 0/70 \\
+    RK+seed       & 0.546 & 0.567 & 24.8 & 18.6 & 1/68 \\
+    RK+GLR+seed   & 0.613 & 0.610 & 19.5 & 15.4 & 1/65 \\
+    Problem space & 0.614 & 0.558 & 22.6 & 20.5 & 0/72 \\
+    DD            & 0.684 & 0.717 & 17.5 & 11.5 & 0/54 \\
+    Heuristic space & 0.818 & 0.791 & 10.8 & 8.7 & 0/33 \\
     \midrule
-    \RDD-U        & 0.758 & 0.779 & 14.6 & 10.2 & 44/6 \\
-    \RDD-U-PLS    & 0.794 & 0.829 & 13.8 & 8.8 & 29/19 \\
+    \RDD-U        & 0.758 & 0.779 & 14.6 & 10.2 & 6/44 \\
+    \RDD-U-PLS    & 0.794 & 0.829 & 13.8 & 8.8 & 19/29 \\
     \RDD          & \textbf{0.850} & \textbf{0.837} & \textbf{9.8} & \textbf{7.4} & --- \\
     \bottomrule
   \end{tabular}
@@ -251,7 +255,7 @@ Heuristic-space search uses the same six rules without a default.
 \textbf{Results.}
 Table~\ref{tab:fjsp-main} shows the comparison.
 \RDD has the highest HV and the smallest gap at both budgets.
-It is significantly better than every existing method at every budget, including heuristic-space search, the strongest of them ($+0.046$ at 20\,000 evaluations; better on 33 instances, worse on none).
+It is significantly better than every existing method at every budget, including heuristic-space search, the strongest of them ($+0.046$ at 20\,000 evaluations; \RDD is better on 33 instances and worse on none).
 Seeding helps random keys, but much less than placing the rule in the decoder.
 With ranked alternatives, Pareto local search is better than NSGA-II, and \RDD-U-PLS comes close to \RDD at large budgets (the difference is not significant from 5000 evaluations on).
 The makespans of \RDD remain about 7\% above the best-known values.
@@ -264,7 +268,7 @@ Per instance and budget, a quadratic function of $\log\drate$ explains the HV wi
 and none of 40 comparisons between settings with equal $\drate$ is significant after Holm's correction.
 For every $\qon$, HV first rises and then falls with the rate: at 465 evaluations, the best setting beats the one with the largest $\dens$ by 0.07 to 0.15 (Holm-corrected $p \le 0.002$).
 The best rate grows with the budget, from $\drate = 0.08$ at 465 evaluations to 0.21 from 5000 evaluations on, as Section~\ref{sec:theory} predicts.
-Section~S-VI of the supplementary material reports \RDD-U against random keys on all 276 instances of the six benchmark families, with MOEA/D, and on 60 large instances; \RDD-U is significantly better in all three.
+Section~S-VI of the supplementary material reports \RDD-U against random keys on all 276 instances of the six benchmark families, with MOEA/D, and on 60 large instances; \RDD-U is significantly better in all three settings.
 
 \begin{figure*}[t]
   \centering
@@ -280,7 +284,7 @@ Table~\ref{tab:ablation} isolates the design choices of \RDD by comparing pairs 
 
 \begin{table}[t]
   \centering
-  \caption{Effect of single design choices: difference in mean HV (Holm-corrected $p$). Rostering: 47 test instances, $\drate = 0.4$ unless stated; FJSP: 78 instances, 20\,000 evaluations.}
+  \caption{Effect of single design choices: difference in mean HV (Holm-corrected $p$, within the family of the table or test cited). Rostering: 47 test instances, $\drate = 0.4$, Table~\ref{tab:roster-closest}, unless stated; FJSP: 78 instances, 20\,000 evaluations, 30 tests of the T13 comparison unless stated.}
   \label{tab:ablation}
   \footnotesize
   \setlength{\tabcolsep}{2.5pt}
@@ -294,17 +298,17 @@ Table~\ref{tab:ablation} isolates the design choices of \RDD by comparing pairs 
     Learned vs.\ default rule & $+0.135$ ($8\!\times\!10^{-7}$)$^d$ & --- \\
     NSGA-II vs.\ Pareto local search & $-0.007$ (0.98) & $-0.050$ ($3\!\times\!10^{-10}$)$^c$ \\
     \bottomrule
-    \multicolumn{3}{@{}p{8.3cm}@{}}{\footnotesize $^a$Re-rostering: plan as rule vs.\ plan as seed. $^b$\RDD-U vs.\ RK+seed (same rule). $^c$With ranked alternatives (\RDD-U). $^d$ES16 vs.\ $\rul_0$ at $\drate = 0.1$.}
+    \multicolumn{3}{@{}p{8.3cm}@{}}{\footnotesize $^a$Re-rostering, 366 scenarios: plan as rule vs.\ plan as seed (Table~\ref{tab:reroster}). $^b$\RDD-U vs.\ RK+seed (same rule; four tests). $^c$With ranked alternatives (\RDD-U). $^d$ES16 vs.\ $\rul_0$ at $\drate = 0.1$ (Table~\ref{tab:static-main}).}
   \end{tabular}
 \end{table}
 
 Four conclusions follow.
 \emph{Where the rule goes matters most.}
 The same rule helps far more in the decoder than in the initial population.
-A seeded solution can only bias the start of the search, whereas the decoder biases every genotype that the search creates.
+A plausible reason is that a seeded solution biases only the start of the search, whereas the decoder biases every genotype that the search creates.
 \emph{Slots beat one gene per decision} at a tuned deviation rate on both problems.
-With slots, a mutation typically adds, removes or moves one deviation, and the rule handles the other decisions.
+One explanation is that with slots a mutation adds, removes or moves one deviation and the rule handles the other decisions.
 \emph{The alternatives must be good candidates.}
 On FJSP, where a step has dozens of options, deviating to the proposals of other rules is much better than deviating to any option.
-\emph{The optimizer matters less than the encoding.}
-Pareto local search is as good as NSGA-II on rostering and better on FJSP, and both are far ahead of the methods that do not use the encoding.
+\emph{The encoding works with different optimizers.}
+Pareto local search is as good as NSGA-II on rostering and better on FJSP, and with either optimizer \RDD is far ahead of the methods that do not use the encoding.

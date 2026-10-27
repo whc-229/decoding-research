@@ -15,7 +15,7 @@ A construction rule is the most common form of this knowledge, and EAs use it in
 A changed decision changes the state, so every later gene is read in a new context, and how strongly the rule is favored is fixed by the decoder's design.
 \emph{Seeding} puts the rule's solution into the initial population \cite{shen2015dfjsp,zhang2011effective}, but the bias acts only at the start of the search.
 \emph{Heuristic-space search} lets every gene choose which rule makes a decision \cite{storer1992new,dorndorf1995evolution}; it has freedom at every decision but no default.
-Finally, rules learned by genetic programming (GP) or written by large language models (LLMs) are often used on their own \cite{zhang2026genetic,liu2024evolution}, which yields a single schedule rather than a set of trade-offs.
+Finally, rules learned by genetic programming (GP) or written by large language models (LLMs) \cite{zhang2026genetic,liu2024evolution} are usually applied without a search around them, so each rule yields one schedule.
 
 \begin{figure*}[t]
   \centering
@@ -42,11 +42,11 @@ a rule is scored by the hypervolume (HV) of the solutions decoded from random ge
 The main contributions of this paper are as follows.
 \begin{enumerate}
   \item \textbf{Encoding.} We propose \RDD, which encodes a rule plus deviations and is independent of the optimizer.
-  Per-decision encodings and heuristic-space search are limiting cases of it, and its deviation rate turns the strength of the rule's bias into one parameter.
+  Per-decision encodings and heuristic-space search can be viewed as its two extremes, and its deviation rate turns the strength of the rule's bias into one parameter.
   \item \textbf{Analysis.} A model of the distance between the rule and good solutions shows that the deviation rate determines where the search starts,
   that too few slots keep good solutions out of reach, and that the best number of slots grows with the budget.
   \item \textbf{Rule learning.} We score a rule by the solutions that random deviations from it produce.
-  Under this score, GP, an ES-trained network and an LLM learn rules of similar quality, while imitating good rosters is clearly worse.
+  Under this score, GP, an ES-trained network and an LLM learn rules of similar quality with NSGA-II, while imitating good rosters is clearly worse.
   \item \textbf{Evidence on two problems.} On static rostering, \RDD raises the mean HV of NSGA-II \cite{deb2002nsga2} on 47 test instances from 0.570 to 0.788;
   on re-rostering, the old roster works better as the rule than as a seed (0.788 against 0.605);
   and on 78 benchmark instances of the flexible job shop scheduling problem (FJSP), \RDD is significantly better than random keys, seeding, heuristic-space search, problem-space search and dense deviations.

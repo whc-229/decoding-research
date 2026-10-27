@@ -1,14 +1,14 @@
 \begin{abstract}
 % 证据：第 VI 节各表。≤ 250 词（TEVC）。
-Decoders for evolutionary scheduling usually give every decision its own gene, and the bias of the decoder toward good solutions is fixed by its design.
+Decoders for evolutionary scheduling usually give every decision its own gene, and their bias toward good solutions is fixed by design.
 We propose rule-deviation decoding (RDD).
 A construction rule makes every decision by default; the genotype encodes deviation slots, each naming a decision and an alternative action from a structured list, such as the rule's own ranking or the proposals of other rules.
 The deviation rate, the expected number of active slots per decision, sets the balance between the rule's bias and the freedom of the search.
 RDD is an encoding and works with any optimizer.
-We learn the rule offline by scoring the solutions that random deviations from it produce; under this score, genetic programming, a neural network trained by an evolution strategy, and a large language model learn rules of similar quality.
+We learn the rule offline by scoring the solutions that random deviations from it produce; with NSGA-II, genetic programming, an evolution-strategy-trained network and a large language model learn rules of similar quality.
 A rule-distance model shows that the deviation rate determines where the search starts, that too few slots keep good solutions out of reach, and that the best number of slots grows with the budget.
 On a bi-objective robot--tool duty rostering problem, RDD raises the mean hypervolume of NSGA-II on 47 test instances from 0.570 with the best existing decoder to 0.788, and an old roster used as the rule repairs disturbances better than seeding.
-On 78 flexible job shop benchmark instances, RDD outperforms random keys, seeded initialization, heuristic-space and problem-space search, and dense per-decision deviations.
+On 78 flexible job shop instances, RDD outperforms random keys, seeding, heuristic-space and problem-space search, and dense per-decision deviations.
 Ablations on both problems show that placing the rule in the decoder, encoding deviations in slots, and choosing good alternatives each contribute.
 \end{abstract}
 
