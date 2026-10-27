@@ -1,111 +1,64 @@
 \section{Related Work}
 \label{sec:related}
 
-% 证据：调研笔记 01～04（近两年文献已于 2026-10-22 核实出处；第 II 节各文献的描述已对照摘要核对）
-% 只读过标题/关键词的四篇（jiang2025soft, may2026llm, liu2025flexible, duan2025deep）正文只按题目层面描述；投稿前读全文。
-% 不写"首次"：LDS 式稀疏偏离编码在 GA/MOEA 中目前未检索到，但声称首次前需再查 LDS 的被引。
-% 缩写首次出现处给全称：EA、GA、MOEA、SDD、BRKGA、GP、LLM。引言写好后，再按引言中的首次出现调整。
+% 证据：调研笔记 01～04；2026-10-23 新颖性检索（Storer 1992、Dorndorf & Pesch 1995、Hart 1998、Raidl 2000、SWO、LNS/IG、Chacón Sartori 2025）。
+% 只读过标题/摘要的文献只按题目层面描述。不写"首次"。
 
-This section reviews four lines of work:
-how decoders shape evolutionary search, how heuristics have been used to guide search,
-how construction rules are learned, and how schedules are repaired after a disturbance.
-For each line we state how \RDD differs.
-
-\subsection{Representations, Redundancy and Decoders}
+\subsection{Decoders and Representation Bias}
 \label{sec:related:repr}
 
-Indirect encodings with a decoder are common in EAs for scheduling (Section~\ref{sec:intro}).
-Rothlauf's theory of representations \cite{rothlauf2006representations} explains how this mapping affects a genetic algorithm (GA).
+Rothlauf's theory of representations \cite{rothlauf2006representations} explains how a decoder affects a genetic algorithm (GA).
 An encoding is \emph{redundant} when several genotypes give the same solution.
-For synonymous redundancy, where the genotypes of one solution are similar to each other, the theory shows the following.
-If every solution is represented equally often, redundancy does not change GA performance.
-If good solutions are represented more often than others, the GA performs better; if they are represented less often, it performs worse.
-Such a bias therefore helps only when it points in the right direction, and it can hurt when it does not.
+If good solutions are represented more often than others, the GA performs better; if less often, it performs worse.
+A decoder's bias therefore helps only when it points in the right direction.
 
-Decoders remain a common way to bring problem knowledge into EAs.
-Random-key GAs keep the variation operators independent of the problem and put all problem knowledge into the decoder;
-the biased random-key GA (BRKGA) also favors elite parents in crossover \cite{londe2025random}.
-Recent decoders contain more and more knowledge.
-Park and Huh \cite{park2026genetic} use a chromosome that ignores feasibility and a three-phase decoder (job assignment, feasibility adjustment, machine allocation) for semiconductor fabs with queue-time limits.
-Jiang \cite{jiang2025soft} proposes a soft encoding for steelmaking scheduling.
-Jiang \emph{et al.} \cite{jiang2025more} split a solution into route choices and operation priorities and decode it with a set of ready operations.
-
-These works design a decoder for one problem and judge it by the final result.
-They do not report how the decoder biases the search, and how strongly it does so is not a design parameter.
-In this paper, Section~\ref{sec:motivation} measures this bias for a series of decoders,
-and \RDD turns its strength into a parameter that Section~\ref{sec:theory} analyzes.
+Decoders remain the main way to bring problem knowledge into EAs.
+Random-key GAs keep the operators problem-independent and put the knowledge into the decoder \cite{londe2025random}.
+Weight codings perturb the problem data and let a greedy heuristic decode them \cite{raidl2000weighted}.
+Recent decoders for semiconductor fabs \cite{park2026genetic}, steelmaking \cite{jiang2025soft} and integrated process planning and scheduling \cite{jiang2025more} contain more and more problem knowledge,
+and an LLM has been used to set instance-specific bias weights inside the decoder of a biased random-key GA \cite{chacon2025llm}.
+In all of these, the strength of the bias is a side effect of the decoder's design.
+\RDD makes it an explicit parameter, the deviation rate, and Section~\ref{sec:theory} analyzes it.
 
 \subsection{Searching Near a Heuristic}
 \label{sec:related:bias}
 
-Several classic methods search near the solution of a construction heuristic.
-Storer \emph{et al.} \cite{storer1992new} proposed new search spaces for sequencing problems.
-In their problem space, the genes perturb the problem data, and a heuristic then builds the schedule from the perturbed data.
-Aickelin and Dowsland \cite{aickelin2004indirect} evolve the order in which a heuristic decoder assigns nurses,
-and compare decoders that contain different amounts of heuristic knowledge.
-In these encodings, genes affect every decision.
-Two methods outside evolutionary computation are closer to our idea.
-Limited discrepancy search \cite{harvey1995lds} explores a search tree for solutions that deviate from a heuristic in at most $k$ decisions.
-Heuristic-biased stochastic sampling \cite{bresina1996hbss} samples solutions with probabilities that favor the heuristic's top choices.
+Storer \etal \cite{storer1992new} proposed two search spaces built around a heuristic.
+In the problem space, genes perturb the problem data and the heuristic builds the schedule; in the heuristic space, genes choose which heuristic makes each decision.
+GAs over heuristic choices have been applied to job shops \cite{dorndorf1995evolution}, real-world scheduling \cite{hart1998solving} and nurse rostering \cite{aickelin2004indirect}.
+In these encodings every decision is open to the search, and no heuristic acts as a default.
 
-Recent work guides evolutionary search with learned policies.
-Gu \emph{et al.} \cite{gu2025synergizing} sample solutions from a reinforcement-learning policy, improve them with GA operators, and use the improved solutions to train the policy further.
-Chen \emph{et al.} \cite{chen2026teacher} use trained neural policies as teachers: their preferred actions guide an evolution of heuristic programs written by an LLM.
+Other methods search near a single heuristic.
+LDS explores solutions that deviate from a heuristic in at most $k$ decisions \cite{harvey1995lds};
+heuristic-biased stochastic sampling favors the heuristic's top choices with a fixed bias \cite{bresina1996hbss};
+squeaky wheel optimization repeatedly changes the priorities that drive a greedy constructor \cite{joslin1999squeaky};
+and large neighborhood search and iterated greedy destroy part of a solution and rebuild it with a heuristic \cite{shaw1998using,ruiz2007simple}.
+Within EAs, the most common way to use a heuristic is to seed the initial population with its solutions \cite{shen2015dfjsp,zhang2011effective}.
+Learned policies have also been used to sample \cite{gu2025synergizing} or to guide \cite{chen2026teacher} evolutionary search.
 
-\RDD takes the idea of limited discrepancy search, ``a heuristic plus a few deviations'', and turns it into an encoding for an MOEA.
-The deviations are stored in the genotype, and the rate of deviations is an explicit parameter.
-Unlike the encodings above, the genes affect only a few decisions, and the rule decides all others.
-Section~\ref{sec:theory} shows how the best number of deviations depends on the distance between the rule and good solutions and on the evaluation budget.
+\RDD takes the idea of LDS, a heuristic plus a few deviations, and turns it into an encoding for MOEAs.
+Unlike LDS and biased sampling, the deviations are stored in the genotype and evolved; unlike seeding, the rule acts on every genotype; and unlike heuristic-space search, there is a default rule and a parameter that sets how often the search leaves it.
+Section~\ref{sec:experiments} compares \RDD with these alternatives directly.
 
 \subsection{Learning Construction Rules}
 \label{sec:related:rules}
 
-\textbf{Genetic programming.}
-GP hyper-heuristics evolve dispatching rules, and they remain an active topic in this journal and elsewhere.
-Recent work keeps the GP population diverse with a tabu list of rule behaviors \cite{zhang2026genetic},
-trades rule quality against rule size in a many-objective setting \cite{pang2025multiform},
-learns rules online while the system runs \cite{nguyen2026towards},
-and evolves rules for different objectives in separate populations that share knowledge at an adaptive rate \cite{chen2025optimizing}.
+GP hyper-heuristics evolve dispatching rules and remain an active topic.
+Recent work keeps the GP population diverse \cite{zhang2026genetic}, trades rule quality against size \cite{pang2025multiform}, learns rules online \cite{nguyen2026towards}, and shares knowledge between populations for different objectives \cite{chen2025optimizing}.
+LLMs now write heuristics as code inside an evolutionary loop, following FunSearch \cite{romera2024funsearch}, EoH \cite{liu2024evolution} and ReEvo \cite{ye2024reevo}.
+Later methods maintain code diversity \cite{dat2025hsevo}, organize candidates in a search tree \cite{zheng2025monte}, optimize several objectives \cite{yao2025multi}, evolve sets of complementary heuristics \cite{liu2026eohs} or whole metaheuristics \cite{vanstein2025llamea}; HeuriGym benchmarks them \cite{chen2026heurigym}, and two surveys cover the field \cite{liu2026systematic,zhang2026systematic}.
+In scheduling, LLMs rewrite the operators of an EA during the run \cite{liao2025online}, build rule portfolios for dynamic shops \cite{zhou2026dsevolve}, generate dispatching rules \cite{may2026llm,huang2025leveraging}, and supply heuristics to NSGA-II \cite{fornies2025remoh}.
+Deep reinforcement learning trains policies that build schedules directly \cite{liu2025flexible}.
 
-\textbf{Large language models.}
-LLMs now write heuristics as code inside an evolutionary loop.
-FunSearch \cite{romera2024funsearch}, EoH \cite{liu2024evolution} and ReEvo \cite{ye2024reevo} established this approach.
-Later methods measure and maintain the diversity of the code population \cite{dat2025hsevo},
-organize the candidates in a search tree \cite{zheng2025monte},
-optimize several objectives such as quality and efficiency \cite{yao2025multi},
-evolve a set of complementary heuristics instead of one \cite{liu2026eohs},
-and generate complete metaheuristics \cite{vanstein2025llamea}.
-HeuriGym provides a benchmark for LLM-written heuristics \cite{chen2026heurigym}, and two surveys cover the field \cite{liu2026systematic,zhang2026systematic}.
-In scheduling, LLMs rewrite the operators of an EA for flexible job shops during the run \cite{liao2025online},
-build portfolios of dispatching rules with a learned selector for dynamic shops \cite{zhou2026dsevolve},
-generate dispatching rules in an actor--critic setup \cite{may2026llm},
-produce dispatching rules for human--robot collaborative manufacturing \cite{huang2025leveraging},
-and supply heuristics to NSGA-II \cite{deb2002nsga2} for multi-objective flexible job shops \cite{fornies2025remoh}.
-
-\textbf{Neural construction.}
-Deep reinforcement learning trains policies that build schedules directly, for example with graph neural networks for flexible job shops \cite{liu2025flexible}.
-
-In most of these works, a learned rule or program is judged by the quality of the schedules it produces.
-In \RDD, the rule is part of a decoder: the search starts from it and departs from it through a few genes that mark deviations (Section~\ref{sec:method}).
-We therefore judge a rule by the rosters that random deviations from it produce (Section~\ref{sec:method:proxy}),
-and Section~\ref{sec:exp-static} compares GP, neural networks and LLMs as learners for this score.
-The closest work in spirit is \cite{liao2025online}, which also uses an LLM to change how a GA explores;
-it rewrites the variation operators, whereas we change the rule inside the decoder.
+These works judge a learned rule by the schedules it produces.
+In \RDD the rule is the starting point of a search, so we judge it by the schedules that random deviations from it produce (Section~\ref{sec:method:learn}), and we compare GP, neural networks and LLMs as learners for this score.
 
 \subsection{Rescheduling and Multi-Objective Rostering}
 \label{sec:related:resched}
 
-When a schedule is disrupted, rescheduling methods revise the rest of it.
-Shen and Yao \cite{shen2015dfjsp} solve dynamic flexible job shops with proactive--reactive MOEAs that include a stability objective,
-and they seed the initial population with the previous schedule, a repaired schedule and their mutants.
-Recent work applies deep reinforcement learning to event-driven predictive--reactive multi-objective rescheduling \cite{duan2025deep},
-and combines a competitive EA with double Q-learning for robust scheduling under disruptions \cite{zhao2024dql}.
-In personnel rostering, rerostering after staff absences has been solved by GAs on permutations that are decoded into rosters \cite{moz2007genetic}
-and by other evolutionary methods \cite{maenhout2011evolutionary}.
-A recent review notes that most rostering studies combine their criteria into a weighted sum,
-and surveys the smaller set of methods that keep the trade-off between criteria \cite{bodvarsdottir2026review}.
-
-The evolutionary methods above use the old schedule as a reference in the objective or as a starting point of the search.
-\RDD instead puts the old schedule into the decoder (Section~\ref{sec:exp-rerostering}):
-the old schedule becomes the rule, and every genotype departs from it in only a few shifts.
-We keep two objectives, the number of changes and the imbalance, under a resource budget, and report the hypervolume.
+When a schedule is disrupted, the rest of it must be revised.
+Shen and Yao \cite{shen2015dfjsp} solve dynamic flexible job shops with proactive--reactive MOEAs that include a stability objective and seed the population with the previous schedule.
+Recent work uses deep reinforcement learning for predictive--reactive rescheduling \cite{duan2025deep} and combines a competitive EA with double Q-learning for robust scheduling \cite{zhao2024dql}.
+In personnel rostering, rerostering after absences has been solved by GAs over permutations \cite{moz2007genetic} and other evolutionary methods \cite{maenhout2011evolutionary},
+and a recent review notes that most rostering studies combine their criteria into a weighted sum \cite{bodvarsdottir2026review}.
+\RDD puts the old schedule into the decoder instead: it becomes the rule, and every genotype departs from it in only a few shifts.

@@ -1,71 +1,70 @@
 \section{Experimental Studies}
 \label{sec:experiments}
 
-% 证据：ga.py、neural/moea_any.py（算法设置）；neural/analyze_methods.py、reroster/analyze.py（HV 归一化与检验）
-% 本节按"统一设置 → 静态排班 → 重排班 → FJSP"组织。静态排班与 FJSP 的结果等实验全部完成后再写（见各小节注释）。
+% 2026-10-27 按新框架重写。证据：
+%  排班静态：neural/out/val_server.csv + val_Kext.csv（54 臂统一归一化，scratchpad val_methods_K.md）；最接近方法：neural/out/stats_t13_val_v2.md（D0.4、P16、X1.0、dec5）。
+%  重排班：reroster/main_report.md（Holm 由原始 p 计算）。
+%  FJSP：bench/v3_big_all13c.csv（12 臂统一归一化）；对 RDD（spr3.0）的 40 个检验 Holm 由 claude.ai 重算（scratchpad/fjsp/ana.py）；
+%        消融对比取 bench/stats_t13_final_v2.md（30 个检验一族）；RDD-U 对 RK+seed 为另算的 4 个检验一族；偏离率：v3_qk.csv + v3_qk2.csv。
+% 守住：spr3.0 由 pilot 集事先定好的规则选出；不写 E 组 RDD(NSGA-II) 优于 dec5；不写 ρ = 0.4 最优；不写 FJSP 只偏离少数几步。
 
-We evaluate \RDD in three settings:
-static rostering on the 47 test instances (Section~\ref{sec:exp-static}),
-re-rostering after a disturbance during execution (Section~\ref{sec:exp-rerostering}),
-and public flexible job shop benchmarks (Section~\ref{sec:exp-fjsp}).
-Section~\ref{sec:exp-setup} describes the settings that all experiments share.
+We evaluate \RDD on static rostering (Section~\ref{sec:exp-static}), on re-rostering after a disturbance (Section~\ref{sec:exp-rerostering}) and on public flexible job shop benchmarks (Section~\ref{sec:exp-fjsp}).
+Section~\ref{sec:exp-ablation} then asks which design choices of \RDD matter, using both problems.
 
-\subsection{Common Setup}
+\subsection{Experimental Setup}
 \label{sec:exp-setup}
 
 \textbf{Optimizers.}
-The main optimizer is NSGA-II \cite{deb2002nsga2} with population 30.
-Parents are drawn uniformly at random; offspring are created by SBX (distribution index 20, probability 0.9, each gene recombined with probability 0.5)
-and polynomial mutation (distribution index 20, rate $1/n$ per gene); survivors are chosen by non-dominated sorting and crowding distance.
-Genes take values in $[0, 0.99]$.
-Unless stated otherwise, each run has 465 evaluations.
-To check that the results do not depend on NSGA-II, we also use MOEA/D \cite{zhang2007moead} with the Tchebycheff approach, 30 weight vectors and a neighborhood of 6.
-All methods in a comparison use the same optimizer, budget and random seeds; only the decoder differs.
+Unless stated otherwise, all methods use NSGA-II \cite{deb2002nsga2} with population 30, uniform random mating,
+SBX (distribution index 20, probability 0.9, each gene recombined with probability 0.5) and polynomial mutation (distribution index 20, rate $1/n$), with genes in $[0, 0.99]$.
+MOEA/D \cite{zhang2007moead} uses the Tchebycheff approach, 30 weight vectors and a neighborhood of 6.
+Rostering runs have 465 evaluations; FJSP runs record the front after 465 to 20\,000 evaluations.
+Within a comparison, all methods share the optimizer, the budget and the random seeds.
 
-\textbf{Performance measure.}
-The result of a run is the non-dominated set of all feasible solutions it evaluated (in re-rostering, of those within the resource budget).
-We measure it by its HV.
-For each instance, both objectives are normalized by the smallest and largest values found by all compared methods,
-the reference point is $(1.1, 1.1)$, and the HV is divided by $1.1^2$, so that it lies between 0 and 1.
+\textbf{Compared methods.}
+Table~\ref{tab:methods} lists the methods.
+Besides the baseline decoder and random keys, they include the closest existing ways to bring a rule into an EA:
+seeding the initial population, heuristic-space and problem-space search, and dense per-decision deviations.
+Every parameter of a compared method was selected on training or tuning instances that are not used in the comparison, with the same procedure as for \RDD.
 
-\textbf{Statistics.}
-Unless stated otherwise, each method is run five times per instance.
-For methods with a learned rule, the method's result on an instance is the mean over all its design runs (independent runs of the rule learner) and their MOEA runs.
-We compare two methods by a paired Wilcoxon signed-rank test over instances and correct the $p$-values by Holm's method \cite{holm1979simple} within each family of comparisons, \eg all comparisons with one baseline in one table.
-We also count on how many instances a method is significantly better or worse than the other (Mann--Whitney U test, $p < 0.05$).
+\begin{table}[t]
+  \centering
+  \caption{Compared methods (R: rostering, F: flexible job shop).}
+  \label{tab:methods}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}p{2.25cm}p{4.85cm}c@{}}
+    \toprule
+    Method & How the rule or heuristic is used & Prob. \\
+    \midrule
+    \dec{5} & one gene per shift; rule-based ranking, look-ahead and repair & R \\
+    RK & two-vector random key \cite{zhang2011effective}; no rule & F \\
+    RK+seed, RK+GLR+seed & RK with the rule's schedule (and GLR initialization \cite{zhang2011effective}) in the initial population & F \\
+    Heuristic space & one gene per decision picks one of six dispatching rules \cite{storer1992new,dorndorf1995evolution} & F \\
+    Problem space & genes perturb processing times; the rule builds the schedule \cite{storer1992new} & F \\
+    Dense deviations (DD) & one gene per decision, which deviates from the rule with probability $\drate$, as in biased sampling \cite{bresina1996hbss} & R, F \\
+    \midrule
+    \RDD & rule + deviation slots (this paper) & R, F \\
+    \RDD-PLS & \RDD searched by Pareto local search & R, F \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Performance measure and statistics.}
+The result of a run is the non-dominated set of all feasible solutions it evaluated, measured by the HV.
+Per instance, both objectives are normalized by the smallest and largest values found by all methods in the comparison; the reference point is $(1.1, 1.1)$, and the HV is divided by $1.1^2$.
+Each method is run five times per instance on rostering and ten times on FJSP.
+For a method with a learned rule, the result on an instance is the mean over all design runs (independent runs of the rule learner) and their MOEA runs.
+We compare methods by a paired Wilcoxon signed-rank test over instances and correct the $p$-values by Holm's method \cite{holm1979simple} within the family of comparisons stated in each table.
+W/L counts the instances on which a method is significantly better/worse than its reference (Mann--Whitney U test over runs, $p < 0.05$).
 
 \subsection{Static Rostering}
 \label{sec:exp-static}
 
-% 证据：neural/out/val_server.csv + val_Kext.csv（54 个臂统一归一化，analyze_methods.py 重算，2026-10-23）；
-%       实验5_结论.md（代理分可靠性、H13、可解释性、设计成本）；报告/实验5_A_普适性.md、实验5_C_选定K.md C4（κ = 0.5 下的 MOEA/D 与 2000 次评价）；
-%       报告/实验5_D_扩展K.md 与 neural/out/d5_curves.md（K—HV 曲线）。
-% 守住：不写"LLM 优于 GP/网络"；不写"理论诊断反馈有效"；不写"所有实例优于 D5"（E 组无显著差别）；不写"κ = 1.0 是最优密度"；方法成绩用各设计运行平均。
-% 待定（T12 验证后）：κ 的选取经过是否披露；κ 与理论（K、q、预算）的关系怎么写。
-
-\textbf{Methods.}
-We compare the following methods on the 47 test instances:
-\begin{itemize}
-  \item \dec{5}, and \dec{5} with a larger budget of 765 evaluations;
-  \item \RDD with the default rule $\rul_0$;
-  \item \RDD with learned rules at the deviation rate used during rule learning, $\drate = 0.1$ ($\dens = 0.25$, $\qon = 0.4$):
-  GP (5 design runs), ES16, the network trained by imitation and then ES (3 runs),
-  LLM-score, the LLM rule evolved with score feedback (3 runs),
-  LLM-full, the same with extra diagnostic feedback (3 runs),
-  EoH, the original EoH procedure with its own prompts (3 runs),
-  and IL16 and IL32-16, networks with one hidden layer of 16 units or two layers of 32 and 16 units, trained by imitation only (5 runs each);
-  \item the final method: \RDD with $\drate = 0.4$ ($\dens = 1.0$, $\qon = 0.4$) and the GP or ES16 rules.
-\end{itemize}
-A \emph{design run} is one independent run of a rule learner, \ie one learned rule.
-The eight GP and ES16 rules are run at $\drate = 0.1$, 0.2, 0.3 and 0.4 ($\dens = 0.25$ to 1.0 with $\qon = 0.4$); the other learned rules at $\drate = 0.1$ only.
-All 54 arms are run five times with NSGA-II and 465 evaluations (765 for the larger \dec{5} budget),
-and HV is normalized per instance over all of them.
-Holm's correction is applied to one family for the comparisons with \dec{5} and the default rule (29 tests), and to another family for all pairwise comparisons between methods (91 tests).
-
 \begin{table*}[t]
   \centering
-  \caption{Static rostering on the 47 test instances (NSGA-II, 465 evaluations unless stated; mean HV over design runs and five runs; HV normalized per instance over all 54 arms).
-  $\Delta$: difference from \dec{5} over all instances, with Holm-corrected $p$. W/L: instances where the method is significantly better/worse than \dec{5}.}
+  \caption{Static rostering on the 47 test instances (NSGA-II, 465 evaluations unless stated; mean HV over design runs and runs; HV normalized per instance over 54 arms, which include the rates of Fig.~\ref{fig:roster-rate}).
+  $\Delta$: difference from \dec{5}, with Holm-corrected $p$ (29 comparisons with \dec{5} and the default rule). W/L: instances where the method is significantly better/worse than \dec{5}.}
   \label{tab:static-main}
   \footnotesize
   \setlength{\tabcolsep}{4pt}
@@ -91,195 +90,91 @@ Holm's correction is applied to one family for the comparisons with \dec{5} and 
   \end{tabular}
 \end{table*}
 
-\textbf{Overall result.}
+\textbf{Main result.}
 Table~\ref{tab:static-main} shows the results.
-The final method raises the mean HV from 0.570 with \dec{5} to 0.785 with the GP rules and 0.788 with the ES16 rules.
-Both are significantly better than \dec{5} (Holm-corrected $p = 3 \times 10^{-7}$) and are never significantly worse on any instance.
-Giving \dec{5} 65\% more evaluations raises its HV by only 0.022.
-The gain is large in the H and M groups ($+0.19$ and $+0.34$, Holm-corrected $p < 0.01$)
-and in the four hand-built scenarios ($+0.28$ to $+0.30$, too few instances for a significant test).
-In the E group, where all robots are of one type, the final method has a higher mean HV than \dec{5} ($+0.05$), but the difference is not significant (Holm-corrected $p \ge 0.22$).
+\RDD raises the mean HV from 0.570 with \dec{5} to 0.785 with the GP rules and 0.788 with the ES16 rules (Holm-corrected $p = 3 \times 10^{-7}$),
+and it is never significantly worse on any instance.
+Giving \dec{5} 65\% more evaluations adds only 0.022.
+The gain is large in the H and M groups and in the hand-built scenarios.
+In the E group, where all robots are of one type, \RDD has a higher mean HV than \dec{5} ($+0.05$), but the difference is not significant.
 
-\textbf{The rule is what makes \RDD work.}
-With the default rule, \RDD is not better than \dec{5} overall ($+0.020$, Holm-corrected $p = 0.81$):
-it is much better in the M group and much worse in the E group.
-With learned rules at the same deviation rate, \RDD is better than \dec{5} by $+0.07$ to $+0.16$, significantly so for all rule learners except IL32-16.
-The rule-and-deviation encoding alone is therefore not enough; it needs a good rule.
+\textbf{A good rule is essential.}
+With the default rule, \RDD is not better than \dec{5} overall ($+0.020$, Holm-corrected $p = 0.81$).
+With learned rules at the same deviation rate, it is better by $+0.07$ to $+0.16$, significantly so for all learners except IL32-16.
+The three learners guided by the proxy score, ES16 (0.724), GP (0.716) and LLM-score (0.699), do not differ significantly from each other (Holm-corrected $p \ge 0.9$ over 91 pairwise tests),
+whereas imitation alone (IL16) is significantly worse than ES16 and GP.
+The proxy score predicts test performance: over 28 rules, its Spearman correlation with the test HV is 0.91 ($p < 10^{-10}$).
+Section~S-V of the supplementary material reports the stability, cost and content of the learned rules, and a failure case of LLM rules.
 
-\textbf{Optimizing the proxy score matters more than the rule's form.}
-At $\drate = 0.1$, the three best learners, ES16 (0.724), GP (0.716) and LLM-score (0.699), do not differ significantly from each other
-(Holm-corrected $p \ge 0.9$).
-All three are guided by the proxy score alone.
-Imitation alone is clearly worse: IL16 is below ES16 by 0.061 and below GP by 0.052 (Holm-corrected $p \le 2 \times 10^{-4}$),
-although it uses the same network as ES16 before the ES stage.
-Good rosters often make different decisions in the same state, so there is no single correct action to imitate.
-EoH (0.676) and LLM-full (0.677) lie between these groups in mean HV; of their differences to the other learners, only EoH against ES16 is significant.
-The diagnostic feedback of LLM-full did not improve on score-only feedback.
+\textbf{Comparison with the closest alternatives.}
+Table~\ref{tab:roster-closest} compares \RDD with dense deviations (DD), which use the same rules and the same deviations but one gene per shift.
+Although the deviation probability of DD was selected on the training instances, \RDD is significantly better on 43 test instances and worse on none.
+In the E group, DD is even worse than \dec{5}.
+With Pareto local search instead of NSGA-II, \RDD reaches the same overall HV (\RDD-PLS, $+0.007$, Holm-corrected $p = 0.98$).
+The two optimizers differ by group: local search is better in the E group ($+0.076$) and worse in the M group ($-0.047$; uncorrected $p \le 0.003$).
+With local search, \RDD is also clearly better than \dec{5} in the E group ($+0.132$, uncorrected $p = 0.001$).
 
-\textbf{The proxy score predicts test performance.}
-We rescored all 28 rules (the default rule and 27 learned rules) on new sets of random genotypes.
-Their proxy scores have a Spearman correlation of 0.91 with their test HV ($p < 10^{-10}$).
-Averaged over the design runs of each learner, the score seen during learning exceeds the rescored one by at most 0.003 (0.013 for a single rule).
+\begin{table}[t]
+  \centering
+  \caption{Closest alternatives on the 47 test rostering instances (eight GP and ES16 rules, $\drate = 0.4$; HV normalized over the four methods). $\Delta$: difference from \RDD with Holm-corrected $p$ (four tests: DD and \RDD-PLS against \RDD and against \dec{5}). W/L: against \RDD.}
+  \label{tab:roster-closest}
+  \footnotesize
+  \setlength{\tabcolsep}{2.6pt}
+  \begin{tabular}{@{}lcccccc@{}}
+    \toprule
+    Method & All & $\Delta$ (Holm $p$) & W/L & E & H & M \\
+    \midrule
+    \dec{5}    & 0.525 & --- & --- & 0.607 & 0.509 & 0.473 \\
+    DD         & 0.643 & $-0.097$ ($2\!\times\!10^{-8}$) & 0/43 & 0.494 & 0.647 & 0.736 \\
+    \RDD       & 0.740 & --- & --- & 0.663 & 0.702 & \textbf{0.810} \\
+    \RDD-PLS   & \textbf{0.747} & $+0.007$ (0.98) & 16/5 & \textbf{0.739} & \textbf{0.728} & 0.763 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \textbf{Effect of the deviation rate.}
-Table~\ref{tab:kcurve} shows HV against $\drate$ for the eight GP and ES16 rules, with $\qon = 0.4$.
-On the test instances we report it only as a sensitivity analysis; it was not used to choose $\drate$.
-Training and test instances show the same shape: HV rises from $\drate = 0.1$ to 0.3 and is flat between 0.3 and 0.4.
-The difference between 0.3 and 0.4 is small and not significant on either set ($+0.005$, $p = 0.52$ on training; $+0.003$, $p = 0.54$ on test; uncorrected).
-The E group depends most on the deviation rate.
-On the test instances (eight rules pooled, Holm's correction over the four rates), the learned rules are significantly worse than \dec{5} at $\drate = 0.1$ ($-0.077$, $p = 0.004$), and from $\drate = 0.2$ on they are not.
+Fig.~\ref{fig:roster-rate} shows the HV of the eight GP and ES16 rules against $\drate$ (with $\qon = 0.4$).
+Training and test instances show the same shape: HV rises from $\drate = 0.1$ to 0.3 and is flat between 0.3 and 0.4
+($+0.005$, $p = 0.52$ on training; $+0.003$, $p = 0.54$ on test; uncorrected).
+The E group depends most on the rate: at $\drate = 0.1$ the learned rules are significantly worse than \dec{5} there, and from $\drate = 0.2$ on they are not.
+Settings with the same rate perform alike: $\dens = 0.5$ with $\qon = 0.8$ and $\dens = 1.0$ with $\qon = 0.4$ differ by $-0.007$ ($p = 0.47$),
+whereas raising $\qon$ from 0.4 to 0.8 at $\dens = 0.5$ adds $0.047$ ($p = 0.008$).
+Above $\drate = 0.4$, HV declines slightly but not significantly ($\drate = 0.8$: $-0.028$, $p = 0.15$).
 
-\textbf{The deviation rate, not the number of slots, is what matters.}
-In the third selection step we also varied the activation probability $\qon$ (Table~\ref{tab:rate}, training instances).
-Two settings with the same rate $\drate = 0.4$, $\dens = 0.5$ with $\qon = 0.8$ and $\dens = 1.0$ with $\qon = 0.4$, differ by only $-0.007$ ($p = 0.47$).
-With the same slot ratio $\dens = 0.5$, raising $\qon$ from 0.4 to 0.8 raises HV by $+0.047$ (13/2 instances, $p = 0.008$).
-Above $\drate = 0.4$, HV declines slightly, but not significantly ($\drate = 0.8$ against 0.4: $-0.028$, 5/10 instances, $p = 0.15$; all $p$ uncorrected).
-The search also keeps the share of active slots set by $\qon$:
-in the rosters on the final fronts, 0.39, 0.59 and 0.79 of the slots are active for $\qon = 0.4$, 0.6 and 0.8.
-
-\begin{table}[t]
+\begin{figure}[t]
   \centering
-  \caption{Mean HV against the deviation rate $\drate$ (eight GP and ES16 rules, $\qon = 0.4$, $\dens = 0.25$ to 1.0; NSGA-II, 465 evaluations). Training and test values are normalized separately and cannot be compared with each other. The test row ``All'' also includes the four hand-built scenarios.}
-  \label{tab:kcurve}
-  \footnotesize
-  \setlength{\tabcolsep}{3.5pt}
-  \begin{tabular}{@{}llccccc@{}}
-    \toprule
-    Set & Group & \dec{5} & $\drate = 0.1$ & 0.2 & 0.3 & 0.4 \\
-    \midrule
-    Training (15) & All & 0.491 & 0.622 & 0.698 & 0.732 & 0.737 \\
-                  & E   & 0.608 & 0.431 & 0.579 & 0.637 & 0.656 \\
-                  & H   & 0.471 & 0.655 & 0.708 & 0.742 & 0.734 \\
-                  & M   & 0.393 & 0.778 & 0.808 & 0.817 & 0.821 \\
-    \midrule
-    Test (47)     & All & 0.570 & 0.719 & 0.769 & 0.783 & 0.786 \\
-                  & E   & 0.733 & 0.656 & 0.758 & 0.772 & 0.781 \\
-                  & H   & 0.550 & 0.681 & 0.722 & 0.744 & 0.744 \\
-                  & M   & 0.463 & 0.777 & 0.810 & 0.806 & 0.809 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\begin{table}[t]
-  \centering
-  \caption{Mean HV of the eight GP and ES16 rules on the training instances for different slot ratios $\dens$ and activation probabilities $\qon$ (NSGA-II, 465 evaluations; HV normalized over the six settings).}
-  \label{tab:rate}
-  \footnotesize
-  \setlength{\tabcolsep}{5pt}
-  \begin{tabular}{@{}cccc@{}}
-    \toprule
-    $\drate = \qon\dens$ & $\dens$ & $\qon$ & HV \\
-    \midrule
-    0.2 & 0.5  & 0.4 & 0.551 \\
-    0.3 & 0.75 & 0.4 & 0.593 \\
-    0.4 & 0.5  & 0.8 & 0.598 \\
-    0.4 & 1.0  & 0.4 & \textbf{0.606} \\
-    0.6 & 1.0  & 0.6 & 0.590 \\
-    0.8 & 1.0  & 0.8 & 0.578 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+  \includegraphics[width=\linewidth]{roster_rate.pdf}
+  \caption{Mean HV of the eight GP and ES16 rules against the deviation rate $\drate$ (rostering, NSGA-II, 465 evaluations). Dotted lines: \dec{5} in the same group (same color). Training and test values are normalized separately.}
+  \label{fig:roster-rate}
+\end{figure}
 
 \textbf{Other optimizers and budgets.}
-We ran the robustness checks with $\drate = 0.2$ ($\dens = 0.5$, $\qon = 0.4$), the setting chosen in the first selection step; each setting is normalized separately.
-On the test instances with NSGA-II, $\drate = 0.2$ is about 0.017 below the final $\drate = 0.4$ (Table~\ref{tab:kcurve}).
-With MOEA/D (465 evaluations), \RDD with the ES16 and GP rules reaches 0.758 and 0.751 against 0.564 for \dec{5}
-($+0.19$, Holm-corrected $p = 3 \times 10^{-6}$).
-With NSGA-II and 2000 evaluations, \RDD with the ES16 rules reaches 0.782 against 0.563 for \dec{5} ($+0.218$, Holm-corrected $p = 10^{-7}$).
-In both settings the E group again shows no significant difference from \dec{5}.
-The comparison of rule learners at $\drate = 0.1$ changes slightly.
-Under MOEA/D, LLM-score falls significantly below GP (Holm-corrected $p \le 0.01$);
-whether it is also below ES16 depends on which arms are normalized together ($p = 0.048$ or $0.068$).
-With 2000 evaluations, ES16 is slightly but significantly better than GP ($p = 0.049$).
-ES16 is never significantly below another learner.
-
-\textbf{Stability across design runs.}
-The learners differ in how much their rules vary between independent runs.
-At $\drate = 0.1$, the three ES16 rules span a test HV range of only 0.723--0.725,
-whereas the GP rules span 0.689--0.725, the LLM-score rules 0.658--0.724 and the LLM-full rules 0.637--0.725.
-At $\drate = 0.4$, the ranges are 0.772--0.797 for ES16 and 0.766--0.796 for GP.
-
-\textbf{A failure case.}
-Five of the nine LLM-generated rules (from LLM-full, LLM-score and EoH) are infeasible in almost every run on one test instance, H13.
-They choose the type of a new robot by its own efficiency and ignore, or nearly ignore, the gene type,
-so every genotype opens a type whose tools cannot be cycled fast enough on this instance.
-No training instance has such a tight tool supply, so the proxy score did not penalize this choice.
-The GP and network rules keep the gene type as an input of their score and do not fail.
-LLM rules can thus remove freedom that the encoding was meant to provide.
-
-\textbf{What the rules learn.}
-In four of the five GP runs, the tree for \reuse candidates uses the feature that indicates whether a robot is due for maintenance after this duty and the maintenance can still finish before the end of the horizon;
-in one run, this tree uses only this feature, and the whole rule has four nodes.
-These rules send robots that are close to maintenance first, which spreads the maintenances over time.
-The ES16 networks rely most on the capacity ratio, on whether a robot is close to maintenance, and on its working hours relative to the fleet.
-The ES16, GP and LLM rules reach similar test HV, yet they often choose differently:
-on the states that the default rule visits on the test instances, their first choices agree with those of a reference GP or LLM rule in only 57--97\% of the cases.
-Several different rules can thus be equally good starting points for the search.
-
-\textbf{Design cost.}
-One LLM design run uses about 55 proxy evaluations and 55 LLM calls; EoH uses 54 evaluations and about 91 calls.
-A GP run uses 174--539 proxy evaluations, and an ES16 run 693 plus the imitation data, which cost 139 evaluations to generate.
-The LLM learners need the fewest evaluations, but LLM-full and LLM-score vary most between runs.
-GP and ES16 cost more, and every one of their runs reaches a proxy score of 0.82 (LLM-full and LLM-score: 3 of 6 runs; EoH: 0 of 3).
+With MOEA/D, \RDD with the ES16 and GP rules reaches 0.758 and 0.751 against 0.564 for \dec{5} (Holm-corrected $p = 3 \times 10^{-6}$);
+with NSGA-II and 2000 evaluations, \RDD with the ES16 rules reaches 0.782 against 0.563 ($p = 10^{-7}$).
+These checks used $\drate = 0.2$, which is 0.017 below the final rate on the test instances.
 
 \subsection{Re-rostering During Execution}
 \label{sec:exp-rerostering}
 
-% 证据：实验 4b（reroster/：core.py、moea.py、plans.py、gen_scenarios.py、analyze.py、main_report.md、pilot_report.md）
-% Holm 校正：对 dec5+seed 的三个比较为一族（由 main_report.md 的原始 p 按 Holm 计算：6.89e-45×3、9.98e-41×2、5.39e-26×1）。
-% plan+seed 对 plan（全部 / 30% / 60%）为一族：原始 p = 0.59 / 0.003 / 0.048 → Holm 0.59 / 0.009 / 0.096。
-% E/H/M 分组（2 个方法 × 3 组为一族）：最大原始 p = 2.02e-4（plan，E 组），排最后，Holm 后仍为 2.0e-4。以上两族来自 2026-10-22 核对时的重算，需补进服务器报告。
-% 待补（κ 完整结果出来后）：本实验 κ = 0.25 与静态排班最终 κ 的关系
+% 证据：reroster/main_report.md；Holm：对 dec5+seed 的三个比较为一族；plan+seed 对 plan 为一族（原始 p 0.59 / 0.003 / 0.048 → Holm 0.59 / 0.009 / 0.096）。
 
-Rosters are rarely executed exactly as planned.
-A robot may break down, need maintenance early, or come back late.
-The rest of the roster must then be repaired, and the repair should change as few shifts as possible.
-\RDD fits this task naturally: the original plan is a good rule, and the search only has to find the few changes that the disturbance requires.
+When a robot breaks down, needs maintenance early or comes back late, the rest of the roster must be repaired with as few changes as possible.
+\RDD fits this task directly: the old roster is a good rule, and the search only has to find the changes that the disturbance requires.
 
-\textbf{Scenarios.}
-For each of the 62 instances, the original plan is the roster with the fewest resources (and, among those, the best balance) found by one NSGA-II run with \dec{5}.
-We execute the plan up to 30\% or 60\% of its shifts.
-Then the robot that the plan sends next is hit by one of three disturbances:
-\begin{itemize}
-  \item \textbf{Breakdown}: the robot is out of service for 48\,h; after the repair its duty budget is full again.
-  \item \textbf{Early maintenance}: the robot must go to maintenance before its next duty.
-  \item \textbf{Delay}: the robot becomes ready 8\,h later than it otherwise would.
-\end{itemize}
-If the plan opens a new robot at that shift, the disturbance moves to the next shift.
-This gives $62 \times 3 \times 2 = 372$ scenarios.
-For one instance, neither of the two simple repairs described below is feasible in any of its six scenarios, so no resource budget can be set; we use the remaining 366 scenarios.
-The shifts before the disturbance cannot be changed.
-
-\textbf{Objectives.}
-A repaired roster has two objectives, both minimized:
-the number of \emph{changes}, \ie shifts after the disturbance whose robot differs from that of the planned shift with the nearest start time,
-and the imbalance $\fbal$.
-The resource count must not exceed a budget $B$, the smaller resource count of two simple repairs:
-following the plan rule below without deviations, and encoding the plan for \dec{5}.
-Rosters over budget are penalized in proportion to the excess.
-In a pilot study with resource count and changes as the objectives, the smallest resource count was the same for all methods in all 36 scenarios,
-so we turned it into a constraint.
+\textbf{Scenarios and objectives.}
+For each instance, we execute the roster with the fewest resources found by \dec{5} up to 30\% or 60\% of its shifts.
+The robot sent next then breaks down for 48\,h, needs maintenance at once, or becomes ready 8\,h late.
+This gives 366 scenarios with a feasible repair.
+We minimize the number of changed shifts and the imbalance, with the resource count limited to the smaller one of two simple repairs.
 
 \textbf{Methods.}
-All methods start decoding from the state at the disturbance.
-\begin{itemize}
-  \item \textbf{\dec{5}}: per-shift genes and a random initial population, \ie re-rostering from scratch.
-  \item \textbf{\dec{5}+seed}: as \dec{5}, but 20\% of the initial population is the plan encoded for \dec{5} (the second simple repair) and its mutants.
-  This is a simplified form of the seeding of Shen and Yao \cite{shen2015dfjsp},
-  who fill 20\% of the population with the previous schedule and its mutants and 30\% with a repaired schedule and its mutants.
-  \item \textbf{Plan as rule}: \RDD with the plan as the rule.
-  The \emph{plan rule} sends the robot that the plan sends at the nearest start time if that robot is available;
-  if the plan opens a robot there, it opens one of the same type; otherwise it falls back to the default rule $\rul_0$.
-  The number of slots is set from the full horizon with $\dens = 0.25$ and $\qon = 0.4$ ($\drate = 0.1$), and the slots point only to the remaining shifts, so the rate on the remaining shifts is higher.
-  \item \textbf{Plan as rule + seed}: as above, and 20\% of the initial population is the genotype without deviations and its mutants.
-\end{itemize}
-The plan rule is not learned, so all 62 instances can be used.
-We report the HV, the smallest number of changes found, and how often a run finds a repair with at most three changes.
-The $p$-values compare each method with \dec{5}+seed and are Holm-corrected over these three comparisons.
+\dec{5} re-rosters from scratch; \dec{5}+seed puts the old roster and its mutants into 20\% of the initial population, a simplified form of the seeding of Shen and Yao \cite{shen2015dfjsp}.
+\emph{Plan as rule} is \RDD with the old roster as the rule: it sends the robot that the plan sends if that robot is available, and otherwise falls back to $\rul_0$ ($\drate = 0.1$ over the full horizon).
+\emph{Plan as rule + seed} also seeds the population with the genotype without deviations.
 
 \begin{table}[t]
   \centering
-  \caption{Re-rostering results on 366 scenarios. $\Delta$: difference in mean HV from \dec{5}+seed. W/L: scenarios in which a method is significantly better/worse than \dec{5}+seed. Min.\ ch.: smallest number of changes found (mean). $\le 3$: share of runs that find a repair with at most three changes.}
+  \caption{Re-rostering on 366 scenarios. $\Delta$: difference in mean HV from \dec{5}+seed, with Holm-corrected $p$ (three tests). W/L: against \dec{5}+seed. Min.\ ch.: smallest number of changes found (mean). $\le 3$: share of runs that find a repair with at most three changes.}
   \label{tab:reroster}
   \footnotesize
   \setlength{\tabcolsep}{2.8pt}
@@ -290,266 +185,126 @@ The $p$-values compare each method with \dec{5}+seed and are Holm-corrected over
     \dec{5}             & 0.339 & $-0.265$ & $2\!\times\!10^{-44}$ & 2/200  & 25.0 & 0.01 \\
     \dec{5}+seed        & 0.605 & ---      & ---                    & ---    & 9.9  & 0.36 \\
     Plan as rule        & 0.788 & $+0.184$ & $5\!\times\!10^{-26}$ & 249/44 & 7.0  & 0.28 \\
-    Plan as rule + seed & 0.815 & $+0.210$ & $2\!\times\!10^{-40}$ & 238/24 & 6.4  & 0.41 \\
+    Plan as rule + seed & \textbf{0.815} & $+0.210$ & $2\!\times\!10^{-40}$ & 238/24 & \textbf{6.4}  & \textbf{0.41} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\begin{table}[t]
-  \centering
-  \caption{Mean HV by disturbance type and by how much of the plan was executed. Each group has 122 (type) or 183 (time) scenarios. Every method differs significantly from \dec{5}+seed in every group (Holm-corrected $p < 10^{-5}$).}
-  \label{tab:reroster-groups}
-  \footnotesize
-  \setlength{\tabcolsep}{3pt}
-  \begin{tabular}{@{}lccccc@{}}
-    \toprule
-    Method & Breakdown & Early maint. & Delay & 30\% & 60\% \\
-    \midrule
-    \dec{5}             & 0.328 & 0.329 & 0.362 & 0.335 & 0.344 \\
-    \dec{5}+seed        & 0.618 & 0.645 & 0.551 & 0.546 & 0.663 \\
-    Plan as rule        & 0.772 & 0.787 & 0.805 & 0.789 & 0.788 \\
-    Plan as rule + seed & 0.807 & 0.832 & 0.806 & 0.782 & 0.848 \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\textbf{The plan works better as a rule than as a seed.}
-Table~\ref{tab:reroster} shows that using the plan as the rule raises the mean HV from 0.605 to 0.788.
-It is significantly better than seeding in 249 scenarios and worse in 44.
-Its repairs also change fewer shifts: the smallest repair it finds changes 7.0 shifts on average, against 9.9 with seeding.
-Re-rostering from scratch is far behind and almost never finds a repair with few changes.
-
-\textbf{The result holds across disturbances.}
-In every group of Table~\ref{tab:reroster-groups}, both rule-based methods beat seeding, and seeding beats re-rostering from scratch.
-The plan rule's gain over seeding is largest for delays ($+0.254$) and smallest for early maintenance ($+0.142$).
-Both rule-based methods also beat seeding within each of the E, H and M families (Holm-corrected $p \le 3 \times 10^{-4}$).
-
-\textbf{Rule and seeding complement each other.}
-Seeding finds repairs with at most three changes in 36\% of the runs, more often than the plan rule alone (28\%).
-Combining the two raises this share to 41\% and gives the highest mean HV (0.815).
-Its HV is not significantly higher than that of the plan rule alone, however (Holm-corrected $p = 0.59$).
-When the disturbance comes late (60\% executed), the combination has a higher mean HV than the plan rule alone (0.848 against 0.788), but the difference is not significant ($p = 0.10$).
-When it comes early, the plan rule alone is slightly better (0.789 against 0.782, $p = 0.009$).
-
-\textbf{Why the rule beats seeding.}
-The two methods bring the plan into the search in different ways, and this explains why the rule-based repairs need fewer changes.
-Seeding puts the plan into a few individuals of the initial population.
-With per-shift genes, a mutation of such an individual changes which robots are available later, so the offspring differ from the plan at many shifts (Section~\ref{sec:motivation}).
-With the plan as the rule, every genotype starts from the plan.
-An offspring departs from the plan only at its active slots, and after each departure the rule returns to the planned robot whenever that robot is available.
-The whole search therefore stays close to the plan, which is where good repairs lie.
+\textbf{Results.}
+Using the old roster as the rule raises the mean HV from 0.605 with seeding to 0.788 (Table~\ref{tab:reroster}), and its repairs change fewer shifts (7.0 against 9.9).
+The gain holds for every disturbance type, at both execution points and in every instance family (Section~S-VI of the supplementary material).
+Seeding finds repairs with at most three changes more often than the rule alone.
+Combining the two gives the highest HV (0.815) and the most such repairs, although its HV is not significantly higher than that of the rule alone (Holm-corrected $p = 0.59$).
+The difference between rule and seed comes from what a mutation does.
+With per-shift genes, a mutation of a seeded roster changes which robots are available later, so the offspring differ from the plan at many shifts.
+With the plan as the rule, an offspring departs from the plan only at its active slots, and the rule returns to the plan wherever it can.
 
 \subsection{Flexible Job Shop Benchmarks}
 \label{sec:exp-fjsp}
 
-% 证据：bench/fjsp.py、fjsp2.py（解码）、moea_fjsp2.py、seed_fjsp.py、analyze_fjsp2.py；v3_main.csv（20 次）、v3_big_all.csv、v3_moead.csv、v3_behnke.csv、v3_qk.csv + v3_qk2.csv；
-%       报告/T3_分析.md、T5_MOEAD.md、T6_FJSP最终版.md、T7_Behnke.md、T8_qk补点.md、T9_启发式初始化.md；项目文档 实验6续_FJSP最终结果.md。
-% Holm p 与逐实例 Mann--Whitney 计数由 2026-10-23 重算（scratchpad/fjsp/ana.py），均值与服务器报告一致。
-% 约定：Behnke 只报 HV 与 W/L，不报间隙；不写"超过已知最好解"；不写理论的定量部分（1/q 比例）在 FJSP 上成立。
-% 注意：rk 显著更好的 12 个实例中 edata 是 8 个（项目文档写的 7 个有误）。
-
-The rostering problem is our own.
-To see whether the representation results carry over to a well-studied problem, we apply \RDD to the FJSP \cite{dauzere2024flexible}.
-We do not learn a rule here: \RDD uses a standard dispatching rule.
+To see whether the results carry over to a well-studied problem, we apply \RDD to the FJSP \cite{dauzere2024flexible}.
+Here we do not learn a rule.
 
 \textbf{Problem and instances.}
-A job is a sequence of operations, and each operation can be processed on one of several eligible machines, with a processing time that depends on the machine.
-We minimize two objectives, the makespan and the total workload (the sum of the processing times of all operations), two of the three objectives of Kacem \etal \cite{kacem2002approach}.
-The instances come from a public collection \cite{schedulinglab2024fjsp}.
-The \emph{main set} has 276 instances:
-Brandimarte (15) \cite{brandimarte1993routing},
-the edata, rdata and vdata sets of Hurink \etal (66 each) \cite{hurink1994tabu},
-Dauz\`ere-P\'er\`es and Paulli (18) \cite{dauzere1997integrated},
-Barnes and Chambers (21) \cite{barnes1996flexible},
-Kacem \etal (4) \cite{kacem2002approach}
-and Fattahi \etal (20) \cite{fattahi2007mathematical}.
-The 78 instances outside the Hurink sets form the \emph{large-budget set}.
-We also use the 60 instances of Behnke and Geiger \cite{behnke2012test}, which have up to 500 operations.
+Each job is a sequence of operations, and each operation can be processed on one of several machines with a machine-dependent time.
+We minimize the makespan and the total workload, two of the three objectives of Kacem \etal \cite{kacem2002approach}.
+The comparison uses the 78 instances of Brandimarte \cite{brandimarte1993routing}, Dauz\`ere-P\'er\`es and Paulli \cite{dauzere1997integrated}, Barnes and Chambers \cite{barnes1996flexible}, Kacem \etal \cite{kacem2002approach} and Fattahi \etal \cite{fattahi2007mathematical}, taken from a public collection \cite{schedulinglab2024fjsp}.
+On 30 of them, all machines of an operation have the same processing time, so the total workload is constant and only the makespan varies.
+The parameters of all methods were selected on 15 other instances, the rdata instances la16--la30 of Hurink \etal \cite{hurink1994tabu}.
 
-\textbf{Schedule builder.}
-All encodings use the same builder.
-It schedules one operation per step.
-At each step, the candidates are all pairs of a job's next operation and one of its eligible machines.
-The chosen operation is placed into the earliest idle interval of its machine that can hold it after the job's previous operation.
-An instance with $N$ operations thus needs $N$ decisions.
-
-\textbf{Encodings.}
-\begin{itemize}
-  \item \textbf{\RDD.} The rule ranks the candidates by the earliest completion time (ECT); ties are broken by the most work remaining in the job (MWKR) and then by the shorter processing time.
-  The slots work as in Section~\ref{sec:method:genotype}, with $N$ steps in place of $\Nmax$ shifts.
-  There are $\K = \max(4, \lceil \dens N \rceil)$ slots.
-  A slot is active if $a_k \ge 1 - \qon$, and it acts at step $\lfloor p_k N \rfloor$.
-  There, $u_k$ picks one of the candidates other than the first choice, uniformly in the rule's order.
-  There is no ``open'' action and there are no other genes, so the genotype has $2\K$ genes.
-  We use $\qon = 0.4$ and $\dens = 0.1$, 0.25 and 0.5, \ie $\drate = 0.04$, 0.1 and 0.2.\footnote{On the smallest instances, the minimum of four slots makes the actual rate higher than this nominal value.}
-  \item \textbf{RK.} The two-vector random key, the standard encoding of EAs for the FJSP \cite{zhang2011effective, londe2025random}.
-  The first $N$ keys give the operation sequence (sorting them gives the order in which the jobs' next operations are scheduled), and the other $N$ keys select the machine of each operation.
-  \item \textbf{PD.} A per-decision encoding, which gives every step its own gene like the rostering baselines: the gene selects the candidate at rank $\lfloor g\,|C| \rfloor$ in the rule's order, where $|C|$ is the number of candidates.
-  It uses the rule's order, but a random gene does not favor the rule's first choice.
-\end{itemize}
-As a reference, the rule alone (\RDD without active slots) has a mean gap of 37.9\% on the main set.
-
-\textbf{Setup.}
-The optimizers are those of Section~\ref{sec:exp-setup}.
-On the main set, each encoding is run 20 times per instance, and the front is recorded after 465, 2000 and 5000 evaluations.
-On the large-budget set, each encoding is run 10 times with NSGA-II up to 20\,000 evaluations, and 10 times with MOEA/D up to 5000 evaluations.
-On the Behnke set, each encoding is run 10 times up to 5000 evaluations.
-HV is normalized per instance and budget over all encodings of the same experiment.
-Absolute HV values of different budgets or different tables therefore cannot be compared; we compare encodings only within each budget.
-The \emph{gap} is the best makespan of a run divided by the best-known makespan (the optimum if known, otherwise the best upper bound in the collection), minus one, averaged over runs.
-Holm's correction is applied over all comparisons with one baseline in one experiment.
+\textbf{Decoding.}
+All encodings use the same schedule builder.
+At each step it picks one pair of a job's next operation and an eligible machine, and places the operation in the earliest idle interval of that machine.
+The rule is earliest completion time (ECT), with ties broken by the most work remaining.
+\RDD uses a rule portfolio: a deviation takes the first choice of one of five other rules (shortest processing time, most and least work remaining, earliest start, most operations remaining).
+The selected setting is $\dens = 3.0$ with $\qon = 0.4$.
+Because several slots hit the same step and the proposals often agree with ECT, the schedules with the best makespan depart from ECT in about half of the steps.
+\RDD-U is the variant with ranked alternatives over all operation--machine pairs ($\drate = 0.2$).
+Heuristic-space search uses the same six rules without a default.
 
 \begin{table}[t]
   \centering
-  \caption{FJSP main set (276 instances, NSGA-II, 20 runs). HV is normalized per budget. W/L: instances where an encoding is significantly better/worse than RK at 5000 evaluations. Every encoding differs significantly from RK at every budget (Holm-corrected $p \le 0.005$).}
+  \caption{FJSP: 78 instances, 10 runs; HV normalized per budget over all methods. Gap: best makespan over the best-known value, minus one. W/L: instances where \RDD is significantly better/worse than the method at 20\,000 evaluations. All differences from \RDD are significant at every budget (Holm-corrected $p \le 3 \times 10^{-6}$, 40 tests), except for \RDD-U-PLS from 5000 evaluations on.}
   \label{tab:fjsp-main}
   \footnotesize
-  \setlength{\tabcolsep}{3pt}
-  \begin{tabular}{@{}lcccccccc@{}}
+  \setlength{\tabcolsep}{2.4pt}
+  \begin{tabular}{@{}lcccccc@{}}
     \toprule
-    & & \multicolumn{3}{c}{HV} & & \multicolumn{2}{c}{Gap (\%)} \\
-    \cmidrule(lr){3-5} \cmidrule(lr){7-8}
-    Encoding & $\drate$ & 465 & 2000 & 5000 & W/L & 465 & 5000 \\
+    & \multicolumn{2}{c}{HV} & \multicolumn{2}{c}{Gap (\%)} & \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5}
+    Method & 465 & 20\,000 & 465 & 20\,000 & W/L \\
     \midrule
-    Rule alone & --- & --- & --- & --- & --- & 37.9 & 37.9 \\
-    RK   & --- & 0.445 & 0.447 & 0.463 & ---    & 30.4 & 24.5 \\
-    PD   & --- & 0.362 & 0.421 & 0.437 & 48/81  & 32.5 & 26.0 \\
-    \RDD & 0.04 & 0.719 & 0.699 & 0.695 & 190/34 & 17.5 & 14.9 \\
-    \RDD & 0.1  & 0.775 & 0.765 & 0.763 & 215/23 & 16.1 & 13.4 \\
-    \RDD & 0.2  & \textbf{0.795} & \textbf{0.801} & \textbf{0.803} & 237/12 & \textbf{15.7} & \textbf{12.5} \\
+    RK            & 0.389 & 0.452 & 36.4 & 22.4 & 70/0 \\
+    RK+seed       & 0.546 & 0.567 & 24.8 & 18.6 & 68/1 \\
+    RK+GLR+seed   & 0.613 & 0.610 & 19.5 & 15.4 & 65/1 \\
+    Problem space & 0.614 & 0.558 & 22.6 & 20.5 & 72/0 \\
+    DD            & 0.684 & 0.717 & 17.5 & 11.5 & 54/0 \\
+    Heuristic space & 0.818 & 0.791 & 10.8 & 8.7 & 33/0 \\
+    \midrule
+    \RDD-U        & 0.758 & 0.779 & 14.6 & 10.2 & 44/6 \\
+    \RDD-U-PLS    & 0.794 & 0.829 & 13.8 & 8.8 & 29/19 \\
+    \RDD          & \textbf{0.850} & \textbf{0.837} & \textbf{9.8} & \textbf{7.4} & --- \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-\textbf{\RDD is better than random keys on most instances.}
-Table~\ref{tab:fjsp-main} shows the main set.
-All three \RDD settings are significantly better than RK at every budget (Holm-corrected $p < 10^{-24}$).
-With $\drate = 0.2$ and 5000 evaluations, \RDD reaches an HV of 0.803 against 0.463 for RK.
-It is significantly better on 237 instances and worse on 12.
-Its mean gap is 12.5\%, half that of RK (24.5\%).
-More evaluations do not close this difference:
-from 465 to 5000 evaluations, the gap of RK falls from 30.4\% to 24.5\%, while that of \RDD falls from 15.7\% to 12.5\%.
-Among the three settings, $\drate = 0.2$ is best, and its lead over $\drate = 0.1$ grows with the budget
-($+0.019$ at 465 and $+0.040$ at 5000 evaluations; significantly better on 55 and 93 instances, worse on 42 and 16).
+\textbf{Results.}
+Table~\ref{tab:fjsp-main} shows the comparison.
+\RDD has the highest HV and the smallest gap at both budgets.
+It is significantly better than every existing method at every budget, including heuristic-space search, the strongest of them ($+0.046$ at 20\,000 evaluations; better on 33 instances, worse on none).
+Seeding helps random keys, but much less than placing the rule in the decoder.
+With ranked alternatives, Pareto local search is better than NSGA-II, and \RDD-U-PLS comes close to \RDD at large budgets (the difference is not significant from 5000 evaluations on).
+The makespans of \RDD remain about 7\% above the best-known values.
+These values were found by specialized algorithms with problem-specific neighborhoods and much larger budgets \cite{dauzere2024flexible}; our comparison is between encodings under the same generic search.
 
-\textbf{The bias toward the first choice is what helps.}
-PD uses the same rule order as \RDD, yet it is worse than RK at every budget
-($-0.083$ at 465 evaluations, Holm-corrected $p = 10^{-16}$; $-0.026$ at 5000, $p = 0.005$).
-A random PD gene picks any rank with equal probability, so random genotypes are not pulled toward the rule's schedule.
-Ranking the candidates by a rule is therefore not enough; the encoding must also pull the search toward the rule's first choices.
+\textbf{The deviation rate.}
+We varied $\dens$ and $\qon$ for \RDD-U on 30 instances (Fig.~\ref{fig:fjsp-rate}).
+Plotted against $\dens$, the curves for different $\qon$ are far apart; plotted against $\drate = \qon\dens$, they nearly coincide.
+Per instance and budget, a quadratic function of $\log\drate$ explains the HV with a mean $R^2$ of 0.68--0.78, whereas $\log\dens$ explains only 0.46--0.48,
+and none of 40 comparisons between settings with equal $\drate$ is significant after Holm's correction.
+For every $\qon$, HV first rises and then falls with the rate: at 465 evaluations, the best setting beats the one with the largest $\dens$ by 0.07 to 0.15 (Holm-corrected $p \le 0.002$).
+The best rate grows with the budget, from $\drate = 0.08$ at 465 evaluations to 0.21 from 5000 evaluations on, as Section~\ref{sec:theory} predicts.
+Section~S-VI of the supplementary material reports \RDD-U against random keys on all 276 instances of the six benchmark families, with MOEA/D, and on 60 large instances; \RDD-U is significantly better in all three.
 
-\textbf{The gain grows with flexibility.}
-The three Hurink sets have the same jobs but differ in the mean number of eligible machines per operation: 1.15 (edata), 1.97 (rdata) and 4.13 (vdata).
-At 5000 evaluations, the HV gain of \RDD ($\drate = 0.2$) over RK is $+0.225$, $+0.353$ and $+0.420$ on these sets.
-All 12 instances on which RK is significantly better belong to the Hurink sets, and 8 of them to edata, which is closest to the classical job shop.
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{fjsp_rate.pdf}
+  \caption{FJSP: mean HV of \RDD-U on 30 instances against the slot ratio $\dens$ (left) and the deviation rate $\drate = \qon\dens$ (right), for three activation probabilities $\qon$. Solid: 465 evaluations; dashed: 20\,000 evaluations. HV normalized per budget over all settings.}
+  \label{fig:fjsp-rate}
+\end{figure*}
+
+\subsection{Which Design Choices Matter?}
+\label{sec:exp-ablation}
+
+Table~\ref{tab:ablation} isolates the design choices of \RDD by comparing pairs of methods that differ in only one of them.
 
 \begin{table}[t]
   \centering
-  \caption{FJSP large-budget set (78 instances, NSGA-II, 10 runs). The first four rows use RK with different initial populations. HV is normalized per budget over all seven rows.}
-  \label{tab:fjsp-big}
+  \caption{Effect of single design choices: difference in mean HV (Holm-corrected $p$). Rostering: 47 test instances, $\drate = 0.4$ unless stated; FJSP: 78 instances, 20\,000 evaluations.}
+  \label{tab:ablation}
   \footnotesize
-  \setlength{\tabcolsep}{2.6pt}
-  \begin{tabular}{@{}lccccccc@{}}
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}p{3.0cm}cc@{}}
     \toprule
-    & & \multicolumn{4}{c}{HV} & \multicolumn{2}{c}{Gap (\%)} \\
-    \cmidrule(lr){3-6} \cmidrule(lr){7-8}
-    Encoding & $\drate$ & 465 & 2000 & 5000 & 20\,000 & 465 & 20\,000 \\
+    Comparison & Rostering & FJSP \\
     \midrule
-    RK            & --- & 0.386 & 0.402 & 0.420 & 0.437 & 36.4 & 22.4 \\
-    RK+seed       & --- & 0.552 & 0.549 & 0.551 & 0.555 & 24.8 & 18.6 \\
-    RK+GLR        & --- & 0.578 & 0.572 & 0.571 & 0.569 & 20.5 & 15.7 \\
-    RK+GLR+seed   & --- & 0.625 & 0.615 & 0.613 & 0.602 & 19.5 & 15.4 \\
-    \RDD          & 0.04 & 0.767 & 0.766 & 0.761 & 0.744 & 16.3 & 12.2 \\
-    \RDD          & 0.1  & \textbf{0.805} & 0.816 & 0.813 & 0.793 & 14.8 & 10.8 \\
-    \RDD          & 0.2  & 0.803 & \textbf{0.818} & \textbf{0.819} & \textbf{0.807} & \textbf{14.6} & \textbf{10.2} \\
+    Rule in the decoder vs.\ in the initial population & $+0.184$ ($5\!\times\!10^{-26}$)$^a$ & $+0.212$ ($4\!\times\!10^{-13}$)$^b$ \\
+    Slots vs.\ one gene per decision & $+0.097$ ($2\!\times\!10^{-8}$) & $+0.062$ ($3\!\times\!10^{-9}$)$^c$ \\
+    Rule portfolio vs.\ ranked alternatives & --- & $+0.058$ ($3\!\times\!10^{-6}$) \\
+    Learned vs.\ default rule & $+0.135$ ($8\!\times\!10^{-7}$)$^d$ & --- \\
+    NSGA-II vs.\ Pareto local search & $-0.007$ (0.98) & $-0.050$ ($3\!\times\!10^{-10}$)$^c$ \\
     \bottomrule
+    \multicolumn{3}{@{}p{8.3cm}@{}}{\footnotesize $^a$Re-rostering: plan as rule vs.\ plan as seed. $^b$\RDD-U vs.\ RK+seed (same rule). $^c$With ranked alternatives (\RDD-U). $^d$ES16 vs.\ $\rul_0$ at $\drate = 0.1$.}
   \end{tabular}
 \end{table}
 
-\textbf{Larger budgets and another optimizer.}
-On the large-budget set (Table~\ref{tab:fjsp-big}), \RDD stays well ahead of RK up to 20\,000 evaluations.
-With $\drate = 0.2$, its HV lead shrinks only slowly, from 0.417 at 465 evaluations to 0.370 at 20\,000;
-at 20\,000 evaluations it is significantly better on 68 instances and worse on none (Holm-corrected $p = 10^{-12}$),
-and its gap is 10.2\% against 22.4\% for RK.
-With MOEA/D (large-budget set, 5000 evaluations), \RDD with $\drate = 0.2$ reaches an HV of 0.787 against 0.359 for RK
-($+0.428$, Holm-corrected $p = 4 \times 10^{-13}$; better on 69 instances, worse on none).
-All three \RDD settings are significantly better than RK with MOEA/D at all three budgets.
-
-\textbf{The rule works better in the decoder than in the initial population.}
-A rule can also help an EA through its initial population.
-We give RK three initial populations, keeping everything else fixed:
-one rule schedule and 29 random genotypes (RK+seed);
-the global, local and random selection (GLR) initialization of Zhang \etal \cite{zhang2011effective} (RK+GLR);
-and one rule schedule with 29 GLR genotypes (RK+GLR+seed).
-All three improve RK (Holm-corrected $p \le 0.003$ at every budget), and RK+GLR+seed is the best of them (Table~\ref{tab:fjsp-big}).
-\RDD with $\drate = 0.2$ is still better than RK+GLR+seed by 0.178 at 465 evaluations and by 0.205 at 20\,000
-(Holm-corrected $p \le 2 \times 10^{-10}$; better on 51 and 59 instances, worse on 6 and 2).
-The best initialization recovers 57\% of the HV gain of \RDD over RK at 465 evaluations, and only 45\% at 20\,000.
-One explanation is that an initial population biases only the start of the search, whereas \RDD keeps the bias for the whole run, because every genotype is decoded relative to the rule.
-The re-rostering experiment (Section~\ref{sec:exp-rerostering}) showed the same pattern: the plan helped more as a rule than as a seed.
-
-\textbf{Large instances.}
-On the 60 Behnke instances, all three \RDD settings are significantly better than RK on every instance at 465, 2000 and 5000 evaluations (Holm-corrected $p = 1.5 \times 10^{-10}$).
-Here the smallest rate is best.
-At 5000 evaluations, $\drate = 0.04$ reaches an HV of 0.971, against 0.950 for $\drate = 0.1$, 0.890 for $\drate = 0.2$ and 0.128 for RK;
-it is significantly better than both other settings (Holm-corrected $p < 10^{-8}$).
-We do not report gaps for this set.
-The collection gives only bounds for its instances, and they are loose: the rule alone is on average within 0.7\% of the upper bound.
-
-\begin{table}[t]
-  \centering
-  \caption{Mean HV against the slot ratio $\dens$ and the activation probability $\qon$ on 30 FJSP instances (NSGA-II, 5 runs; the deviation rate is $\drate = \qon\dens$). HV is normalized per budget over all 24 settings and RK (RK: 0.232 at 465 and 0.263 at 20\,000 evaluations). Bold: best per column.}
-  \label{tab:fjsp-rate}
-  \footnotesize
-  \setlength{\tabcolsep}{3.5pt}
-  \begin{tabular}{@{}ccccccc@{}}
-    \toprule
-    & \multicolumn{2}{c}{$\qon = 0.2$} & \multicolumn{2}{c}{$\qon = 0.4$} & \multicolumn{2}{c}{$\qon = 0.6$} \\
-    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
-    $\dens$ & 465 & 20\,000 & 465 & 20\,000 & 465 & 20\,000 \\
-    \midrule
-    0.05 & 0.665 & 0.629 & 0.715 & 0.685 & 0.748 & 0.721 \\
-    0.1  & 0.712 & 0.677 & 0.748 & 0.730 & 0.776 & 0.760 \\
-    0.2  & 0.752 & 0.714 & \textbf{0.793} & 0.768 & \textbf{0.789} & 0.787 \\
-    0.35 & 0.768 & 0.752 & 0.789 & 0.780 & 0.776 & \textbf{0.798} \\
-    0.5  & 0.778 & 0.757 & 0.777 & \textbf{0.792} & 0.770 & 0.792 \\
-    0.75 & \textbf{0.788} & 0.777 & 0.758 & 0.791 & 0.702 & 0.747 \\
-    1.0  & \textbf{0.788} & \textbf{0.792} & 0.725 & 0.769 & 0.635 & 0.704 \\
-    1.5  & 0.756 & 0.775 & --- & --- & --- & --- \\
-    2.0  & 0.727 & 0.755 & --- & --- & --- & --- \\
-    3.0  & 0.664 & 0.691 & --- & --- & --- & --- \\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\textbf{The deviation rate on FJSP.}
-To relate the FJSP results to Section~\ref{sec:theory}, we varied $\dens$ and $\qon$ on 30 instances
-(Brandimarte and the rdata instances la16--la30), with budgets of up to 20\,000 evaluations (Table~\ref{tab:fjsp-rate}).
-Four findings stand out.
-\begin{itemize}
-  \item \emph{The rate $\drate$ is the parameter that matters}, as in rostering.
-  For each instance and budget, a quadratic function of $\log\drate$ explains the HV of the 24 settings with a mean $R^2$ of 0.68--0.78; a quadratic function of $\log\dens$ explains only 0.46--0.48.
-  Eight pairs of settings with the same $\drate$ but different $\dens$ and $\qon$ differ by at most 0.029 in mean HV.
-  None of the 40 comparisons (eight pairs, five budgets) is significant after Holm's correction.
-  \item \emph{The search keeps the share of active slots near $\qon$.}
-  In the schedule with the best makespan of a run, the share of slots that change a decision is 0.21, 0.36 and 0.52 for $\qon = 0.2$, 0.4 and 0.6 (465 evaluations, settings with $\dens \le 1$), and it hardly changes with the budget.
-  \item \emph{Too many deviations hurt.}
-  For every $\qon$, HV first rises and then falls with $\dens$.
-  At 465 evaluations, we compare the best setting of each $\qon$ with its setting of largest $\dens$ (Holm's correction over the three tests).
-  For $\qon = 0.2$, $\drate = 0.2$ beats $\drate = 0.6$ by 0.125.
-  For $\qon = 0.4$, $\drate = 0.08$ beats $\drate = 0.4$ by 0.068.
-  For $\qon = 0.6$, $\drate = 0.12$ beats $\drate = 0.6$ by 0.154.
-  All three differences are significant (Holm-corrected $p \le 0.002$).
-  At 20\,000 evaluations, the decline is still significant for $\qon = 0.2$ and 0.6 (Holm-corrected $p \le 2 \times 10^{-4}$), but not for $\qon = 0.4$ ($+0.023$, $p = 0.10$).
-  \item \emph{The best rate grows with the budget.}
-  The setting with the highest mean HV has $\drate = 0.08$ at 465 evaluations, 0.12 at 2000, and 0.21 from 5000 on.
-  The median over instances of the best $\drate$ rises from 0.10 at 465 evaluations to 0.175 at 2000 and to 0.20--0.21 from 5000 on.
-  This agrees with the second guideline of Section~\ref{sec:theory:consequences}.
-  The Behnke results are consistent with this: with up to 500 decisions and at most 5000 evaluations, the smallest rate was best.
-\end{itemize}
-On FJSP the best rate is thus 0.1--0.2 for moderate and large budgets, lower than the rate of 0.4 chosen for rostering (Section~\ref{sec:method:k}).
-
-\textbf{Distance to specialized algorithms.}
-The best makespans of \RDD are still above the best-known values: by 12.5\% on average on the main set at 5000 evaluations, and by 10.2\% on the large-budget set at 20\,000 evaluations.
-These values were found by specialized FJSP algorithms that use problem-specific neighborhoods and much larger budgets \cite{dauzere2024flexible}.
-Our experiment compares encodings under the same generic MOEA; it does not compete with these algorithms.
+Four conclusions follow.
+\emph{Where the rule goes matters most.}
+The same rule helps far more in the decoder than in the initial population.
+A seeded solution can only bias the start of the search, whereas the decoder biases every genotype that the search creates.
+\emph{Slots beat one gene per decision} at a tuned deviation rate on both problems.
+With slots, a mutation typically adds, removes or moves one deviation, and the rule handles the other decisions.
+\emph{The alternatives must be good candidates.}
+On FJSP, where a step has dozens of options, deviating to the proposals of other rules is much better than deviating to any option.
+\emph{The optimizer matters less than the encoding.}
+Pareto local search is as good as NSGA-II on rostering and better on FJSP, and both are far ahead of the methods that do not use the encoding.

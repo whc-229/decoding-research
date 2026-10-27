@@ -1,0 +1,665 @@
+\documentclass[journal]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{xr}
+\externaldocument[M-]{main}
+\usepackage[hidelinks]{hyperref}
+\graphicspath{{figures/}}
+\input{macros}
+\renewcommand{\thesection}{S-\Roman{section}}
+\renewcommand{\thetable}{S\Roman{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+
+\title{Supplementary Material for\\ ``Rules as Bias, Deviations as Freedom:\\ Rule-Deviation Decoding for Evolutionary Rostering''}
+\author{Author~One and~Author~Two}
+\markboth{Supplementary Material}{Rule-Deviation Decoding for Evolutionary Rostering}
+
+\begin{document}
+\maketitle
+
+% 2026-10-27：由旧版正文移来的细节（old_v1 备份）。引用正文用 \ref{M-...}（xr 包，需先编译 main.tex）。
+
+\section{Rostering Model, Instances and Baseline Decoders}
+\label{sec:s-model}
+
+\subsubsection{Robot--Tool Duty Rostering}
+\label{sec:problem:model}
+
+A duty post must be staffed by one robot at all times during a horizon $[0,\horizon]$.
+Robots take turns in \emph{shifts}, and each shift starts when the previous one ends.
+If shift $i-1$ ends at time $E_{i-1}$ and shift $i$ is served by a robot of type $\tau$,
+shift $i$ ends at $E_i = E_{i-1} + w_\tau$, where $w_\tau$ is the duty length of type $\tau$.
+The first shift starts once the first robot has installed its tools and travelled to the post.
+The roster is complete when $E_i \ge \horizon$.
+
+\textbf{Robots.}
+Each robot type $\tau$ has a travel time to the post $o_\tau$, a return time $b_\tau$, a charging time $\gamma_\tau$ and a maintenance time $\mu_\tau$.
+A robot can serve at most $n_\tau$ duties between two maintenances; we call this its \emph{duty budget}.
+After each duty the robot returns and its tools are removed.
+It then charges, or, if its budget is used up, goes to maintenance, which refills the budget.
+A robot is \emph{available} for a shift that starts at time $E$ if it is ready by $E - o_\tau$ and still has budget for one duty.
+At most $L_\tau$ robots of type $\tau$ may be used.
+
+\textbf{Tools.}
+Each duty needs $\nu_\tau$ tools of types compatible with the robot.
+A tool in use is busy for its installation, its travel and work time, its removal and a rest period.
+When a robot is dispatched, the simulator first reuses compatible tools that are ready, earliest first.
+If tools are missing, new ones are created, and their type has to be chosen.
+At most $L_k$ tools of type $k$ may be used.
+A roster is infeasible if it needs more robots or tools than these limits allow.
+
+\textbf{Decisions.}
+At every shift $i$ one decision is made: which robot serves it.
+The decision is an action
+\begin{equation}
+  \act_i \in \{\reuse(r) : r \in \avail_i\} \cup \{\new(\tau)\},
+\end{equation}
+where $\avail_i$ is the set of available robots.
+\reuse{}$(r)$ sends a robot that is already in the fleet; \new{}$(\tau)$ adds a new robot of type $\tau$.
+Together with the types of the new tools, these actions fix the roster.
+Each action changes which robots are available later, so a decision at one shift affects all later shifts.
+
+\subsubsection{Objectives}
+\label{sec:problem:objectives}
+
+We minimize two objectives.
+The first is the \emph{resource count}, the number of robots and tools used:
+\begin{equation}
+  \fres = |\mathcal{R}| + |\mathcal{T}|.
+\end{equation}
+The second is the \emph{imbalance} of the robot fleet:
+\begin{equation}
+  \fbal = 0.3\,\sigma(\mathbf{n}) + 0.4\,\sigma(\mathbf{h}) + 0.3\,\sigma(\Delta\mathbf{t}),
+\end{equation}
+where $\sigma(\cdot)$ is the standard deviation, $\mathbf{n}$ and $\mathbf{h}$ are the robots' duty counts and total duty hours,
+and $\Delta\mathbf{t}$ are the gaps between the times at which successive robots first go to maintenance.
+A low imbalance means that all robots wear evenly and do not go to maintenance at the same time.
+The two objectives conflict.
+A small fleet must work some robots hard, while an even workload needs extra robots.
+
+For each instance we also compute a lower bound $\LB$ on the resource count.
+The robot part comes from an exact feasibility search with unlimited tools;
+the tool part checks whether a tool used in one shift can be ready again for the next shift, and if not, counts the extra tools needed.
+
+\subsubsection{Instances}
+\label{sec:problem:instances}
+
+We use 62 instances (Table~\ref{tab:instances}).
+Four are hand-built scenarios: one is the request file of the scheduling software that motivated this work (one robot type, 700\,h),
+and three have three robot types and four tool types, one of them with tight fleet limits.
+The other 58 are random instances in three families:
+\begin{itemize}
+  \item \textbf{E} (homogeneous): one robot type.
+  \item \textbf{H} (heterogeneous): two or three robot types, all with 10\,h duties.
+  \item \textbf{M} (mixed duty lengths): two or three robot types with duty lengths from $\{6,8,10,12\}$\,h, so shifts have different lengths.
+\end{itemize}
+Robot parameters are drawn at random: travel 1--2\,h, charging 2--5\,h, maintenance 48--120\,h,
+2--5 duties per maintenance cycle, 2 or 3 tools per duty, and 6--10 robots per type.
+Tools take 1--2\,h to install or remove and rest for 3--8\,h.
+We generated 60 random instances and removed two for which no method found a feasible roster.
+
+The instances are split once into 15 training instances (five per family) and 47 test instances.
+The construction rules of our method are learned on the training instances only, and its deviation rate is selected on them (Section~\ref{M-sec:method}).
+The test instances measure the final performance.
+% 待定（κ 完整结果出来后再写）：是否说明早期探索性运行曾在测试集上评价过 κ = 0.5
+
+\begin{table}[t]
+  \centering
+  \caption{Instance groups. $\Nmax$ is the upper bound on the number of shifts.}
+  \label{tab:instances}
+  \footnotesize
+  \setlength{\tabcolsep}{2.5pt}
+  \begin{tabular}{@{}lccccccc@{}}
+    \toprule
+    Group & Train & Test & \shortstack{Robot\\types} & \shortstack{Tool\\types} & Horizon (h) & Duty (h) & $\Nmax$ \\
+    \midrule
+    Hand-built & 0 & 4  & 1--3 & 1--4 & 700--1440 & 6, 10 & 70--240 \\
+    E        & 5 & 12 & 1    & 1--3 & 480--1080 & 10    & 48--108 \\
+    H        & 5 & 15 & 2--3 & 2--3 & 480--1080 & 10    & 48--108 \\
+    M        & 5 & 16 & 2--3 & 2--3 & 480--1080 & 6--12 & 60--180 \\
+    \midrule
+    Total    & 15 & 47 & & & & & \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsubsection{Encoding and Baseline Decoders}
+\label{sec:problem:decoders}
+
+All decoders in this paper use a random-key genotype $\genome \in [0,1)^n$, a vector of $n$ numbers, and build the roster one shift at a time.
+At each shift the decoder finds the available robots, picks an action, and simulates the shift.
+Since every shift lasts at least $\min_\tau w_\tau$, the number of shifts is at most
+\begin{equation}
+  \Nmax = \left\lceil \horizon / \min_\tau w_\tau \right\rceil .
+\end{equation}
+
+The baseline decoders give each shift two genes: a robot gene $x_i$ that picks the action, and a tool gene $y_i$ that picks the type of any new tool.
+The tool gene points into the list of the $c_\tau$ compatible types at position $\lfloor y_i (c_\tau - 1) \rfloor$;
+if that type has reached its limit, the next type is used.
+All decoders read the tool genes in this way, following the original software.
+They differ in how they read the robot gene.
+We name them \dec{0} to \dec{5}; each one adds a piece of problem knowledge to the one before.
+
+\textbf{\dec{0} (original).}
+The gene is scaled to an index over the available robots followed by the robot types: $\lfloor (x_i - 10^{-3})(|\avail_i| + n_R) \rfloor$, where $n_R$ is the number of types.
+A small index sends an available robot, and a large one opens a new robot.
+Because $|\avail_i|$ changes from shift to shift, the same gene value can mean ``send'' at one shift and ``open'' at another.
+
+\textbf{\dec{1} (threshold).}
+A gene below $\theta = 0.85$ always means \reuse, and a gene above $\theta$ always means \new.
+Below $\theta$, the gene picks robot $\lfloor x_i |\avail_i| / \theta \rfloor$; above $\theta$, it picks a type.
+
+\textbf{\dec{2} (ranking).}
+As \dec{1}, but the available robots are sorted, fewest duties first (ties: most remaining budget first).
+A small gene now sends the least-used robot.
+
+\textbf{\dec{3} (capacity look-ahead).}
+As \dec{2}, but before opening a new robot the decoder estimates how many duty hours the current fleet can still provide.
+If the fleet can cover the rest of the horizon, it sends an existing robot instead.
+
+\textbf{\dec{4} (maintenance phase).}
+As \dec{3}, but robots that are closest to maintenance are ranked first.
+
+\textbf{\dec{5} (backtracking repair).}
+As \dec{3}, with one more step.
+If no robot is available at shift $i$, the decoder goes back over the last $W = 12$ shifts.
+At each of them it tries sending a different robot and re-simulates up to shift $i$.
+It keeps the first change that leaves a robot available at shift $i$, and opens a new robot only if no change works.
+
+\dec{5} performs best of the six and is our main baseline.
+All six decoders, however, share one structure: every shift has its own gene, and that gene decides the shift.
+We implemented all decoders in Python and checked \dec{1}--\dec{5} against the C++ code of the original software, genotype by genotype.
+
+
+
+\section{Analysis of the Baseline Decoders}
+\label{sec:s-motivation}
+
+
+To see why some decoders work better than others, we measured four properties of each decoder on 16 instances
+(the four hand-built scenarios with all six decoders, and 12 E, H and M instances with \dec{2}--\dec{5}):
+\begin{itemize}
+  \item \textbf{Neutral rate}: the chance that redrawing one robot gene leaves the roster unchanged.
+  A high neutral rate means that many genotypes produce the same roster, \ie the encoding is \emph{redundant}.
+  \item \textbf{Good-start rate}: the chance that a uniformly random genotype gives a roster with $\fres \le \LB + 1$.
+  \item \textbf{Change propagation}: after one robot gene is changed, the share of later shifts whose robot also changes.
+  \item \textbf{Reachability}: whether some genotype produces the optimal roster. We computed the optimal rosters of the hand-built scenarios by dynamic programming.
+\end{itemize}
+We also recorded the \emph{override share}: how often the capacity look-ahead of \dec{3}--\dec{5} (below) turns a \new action into a \reuse action.
+The good-start rate is estimated from 1000 random genotypes.
+The neutral rate and change propagation are measured on 100 random feasible genotypes and on the 30 best of the 1000, with five single-gene changes each.
+We then compared these properties with the HV that NSGA-II \cite{deb2002nsga2} reaches with each decoder
+(population 30, about 465 evaluations).
+For each instance we computed the Spearman correlation between each property and HV across the decoders, and we report the median over instances.
+Table~\ref{tab:neutral} lists the first two properties on the hand-built scenarios.
+
+\begin{table}[t]
+  \centering
+  \caption{Neutral rate / good-start rate of the six decoders on the four hand-built scenarios.}
+  \label{tab:neutral}
+  \footnotesize
+  \setlength{\tabcolsep}{1.6pt}
+  \begin{tabular}{@{}lcccccc@{}}
+    \toprule
+    Scenario & \dec{0} & \dec{1} & \dec{2} & \dec{3} & \dec{4} & \dec{5} \\
+    \midrule
+    1 type, 700 h   & 0.30/.000 & 0.42/.007 & 0.41/.007 & 0.61/.919 & 0.61/.929 & 0.69/.981 \\
+    3 types, 720 h  & 0.10/.000 & 0.21/.000 & 0.22/.000 & 0.44/.020 & 0.46/.024 & 0.50/.032 \\
+    3 types, 1440 h & 0.06/.000 & 0.13/.000 & 0.14/.000 & 0.38/.014 & 0.42/.008 & 0.44/.029 \\
+    3 types, tight  & 0.12/.000 & 0.24/.000 & 0.19/.000 & 0.44/.020 & 0.47/.024 & 0.49/.032 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{Finding 1: the better decoders favor good rosters.}
+From \dec{0} to \dec{5}, the neutral rate rises from 0.06--0.30 to 0.44--0.69, and the good-start rate rises with it.
+Both go with better HV: the median correlation is $+0.91$ for the neutral rate and $+0.80$ for the good-start rate,
+with the same sign on every instance where the correlation is defined (12/12 and 14/14).
+The override share correlates even more strongly ($+0.97$, 16/16).
+These three properties rise together, so the data cannot tell their effects apart.
+Taken together, they agree with the theory of redundant representations \cite{rothlauf2006representations}:
+an encoding helps when its redundancy favors good solutions.
+
+\textbf{Finding 2: change propagation is high in every decoder.}
+On the hand-built scenarios, changing one gene changes the robot at 39--61\% of the later shifts, for every decoder.
+This share does not track performance (median correlation $+0.23$, same sign on 7/12 instances).
+The reason is structural: a changed decision changes which robots are available, and every later gene is then read in a different situation.
+None of the steps from \dec{0} to \dec{5} reduced this effect.
+
+\textbf{Finding 3: built-in knowledge helps even when it hides good rosters.}
+The capacity look-ahead of \dec{3}--\dec{5} sometimes forbids opening a robot.
+On two hand-built scenarios, this makes the optimal roster unreachable: that roster opens a fifth robot at shift 9, which the look-ahead does not allow.
+Other optimal rosters can still be reached, and on one of the two scenarios \dec{5} still finds the optimal values.
+Making the optimal roster reachable again did not help.
+When we added a range of gene values that always opens a robot, the imbalance got significantly worse on the two scenarios that had not lost the optimum,
+and nothing improved on the two that had.
+
+\textbf{Finding 4: well-balanced rosters are rare.}
+With every decoder, at most 1.7\% of random genotypes give a roster with $\fres = \LB$ and an imbalance within 1.5 times the optimum;
+on the three-type scenarios almost none do.
+This is where the search falls short: at $\fres = \LB$, the mean imbalance reached by \dec{5} is 1.1--2.3 times the optimum.
+
+\textbf{Structure of optimal rosters.}
+The optimal rosters follow a simple pattern.
+In 85--90\% of their shifts they send the available robot with the fewest duties.
+In the remaining shifts they send a different robot; in the single-type scenario, this happens in 10 of its 65 reuse decisions.
+A per-shift encoding has no direct way to say ``follow this rule except at a few shifts''.
+The choice of rule also matters.
+On the four hand-built scenarios, always sending the robot with the fewest duties needs 11--17 resources,
+while always sending the robot with the least remaining budget reaches the lower bound of 9 on all four.
+
+
+
+\section{Mean-Field Model of the Search}
+\label{sec:s-meanfield}
+
+A simple model of the search dynamics explains this trend.
+At any time, each slot is in one of three states:
+on and wrong (it changes a position that should not change, or sets a wrong option), on and right, or off.
+Let $w$, $c$ and $v = \K - w - c$ be the numbers of slots in these states, so that $f = w + (\dist - c)$.
+Mutation changes about one gene per offspring, so each slot is touched with probability about $1/\K$.
+Selection keeps only changes that lower $f$.
+There are three such changes: switching off a wrong slot ($w \to w-1$),
+switching on an inactive slot at a missing position with the right option ($c \to c+1$),
+and moving a wrong slot to a missing position with the right option ($w \to w-1$, $c \to c+1$).
+They occur at the rates
+\begin{equation}
+  \alpha\, \frac{w}{2\K}, \qquad
+  \alpha\, \frac{v}{2\K} \cdot \frac{\dist - c}{\npos(\nval-1)}, \qquad
+  \beta\, \frac{w}{2\K} \cdot \frac{\dist - c}{\npos(\nval-1)}.
+\end{equation}
+The starting values of $w$ and $c$ come from Proposition~\ref{M-prop:init}, corrected for selecting the best of the initial population.
+The constants $\alpha$ and $\beta$ depend only on the operators.
+We fit them on the runs with 465 and 2000 evaluations ($\alpha = 0.05$, $\beta = 1.5$; mean squared error 2.4).
+On the runs with 10\,000 evaluations, which were not used for fitting, predicted and observed final distances have a correlation of 0.994,
+but a larger mean squared error of 22.6, and the model's best $\K$ is 1.3 to 3 times too large.
+The model therefore captures the trend but not the exact values; we use it only to explain the trend.
+
+The explanation is as follows.
+Every wrong slot costs one unit of distance and has to be switched off.
+A random genotype starts with about $\qon\K$ of them, so this cost grows with $\K$, and it is paid early in the search.
+Fixing a missing position needs a slot that is off and can be switched on at the right place.
+When $\K$ is close to $\dist$, such spare slots run out as the search gets close to the target, and progress slows down.
+With few evaluations, most of the effort goes into switching off wrong slots, so fewer slots are better.
+With many evaluations, progress near the target is what limits the search, so spare slots pay off.
+
+
+
+\section{Rule Interface and Rule Learners}
+\label{sec:s-learners}
+
+\subsection{Rule Interface}
+
+A rule $\rul$ looks at the current state $s_i$ and returns a list of actions, best first:
+\begin{equation}
+  \rul(s_i) = \bigl(\act_i^{(1)}, \act_i^{(2)}, \dots\bigr).
+\end{equation}
+The first action is the rule's \emph{first choice}; it is taken at every shift without a deviation.
+The other \reuse actions are the alternatives a deviation can choose from, in the rule's order.
+
+The rule can read the state but not change it.
+It sees the current time and the remaining horizon, which robots are available,
+and for every robot in the fleet its duty count, duty hours, remaining budget, duties left before maintenance, ready time, the end of its last duty and its first maintenance time.
+It also sees the parameters of each robot type, how many robots of each type may still be added,
+the capacity estimate of \dec{3},
+and a \emph{gene type} $\tau_g$, a robot type read from one gene that the rule can use when it opens a robot.
+If the rule leaves out some available robots, the decoder appends them in fewest-duties order, and it always appends $\tau_g$ as an option to open.
+In this way every available robot can be reached by a deviation, whatever the rule returns.
+
+The simplest rule is the \emph{default rule} $\rul_0$:
+send the available robot with the fewest duties, and open a robot of type $\tau_g$ if none is available.
+It is the ranking of \dec{2} without genes.
+
+
+\subsection{Proxy Score}
+
+In \RDD the rule is used inside a search.
+A good rule is therefore not simply one that builds a good roster on its own.
+It is one near which the search finds good rosters.
+Section~\ref{M-sec:motivation} showed that the rosters produced by random genotypes are a good indicator of this.
+We use them to score rules.
+
+For each training instance $I$ we fix a set $G_I$ of 67 genotypes:
+three with all slots off (with $g = 0.1$, 0.5 and 0.9) and 64 uniformly random ones.
+Every candidate rule is scored on the same set, so that differences between rules are not due to sampling.
+Let $\mathcal{D}_\rul(\genome)$ be the roster that \RDD decodes from $\genome$ with rule $\rul$.
+We decode all genotypes in $G_I$ and compute the HV of the non-dominated feasible rosters.
+The \emph{proxy score} is the mean over the training instances:
+\begin{equation}
+  \proxy(\rul) = \frac{1}{|\mathcal{I}_{\text{train}}|} \sum_{I \in \mathcal{I}_{\text{train}}} \HV_I\bigl(\{\mathcal{D}_\rul(\genome) : \genome \in G_I\}\bigr).
+\end{equation}
+The normalization of $\HV_I$ is fixed per instance by the default rule $\rul_0$, so that scores of different rules can be compared.
+The resource count is shifted by $\LB$ and divided by $\max(2, \fres^{\max} - \LB)$, and the imbalance is divided by $\fbal^{\max}$,
+where $\fres^{\max}$ and $\fbal^{\max}$ are the largest values among the rosters that $\rul_0$ produces on $G_I$.
+The reference point is $(1.1, 1.1)$, and the HV is divided by $1.1^2$.
+During rule learning we use $\dens = 0.25$ and $\qon = 0.4$, \ie $\drate = 0.1$.
+
+One evaluation of $\proxy$ takes $15 \times 67 = 1005$ decodings, about one seventh of a single 465-evaluation NSGA-II run on each of the 15 training instances.
+Section~\ref{M-sec:exp-static} shows that the score is strongly rank-correlated with the HV of full MOEA runs on the test instances (Spearman $r_s = 0.91$ over 28 rules).
+
+
+\subsection{Learners}
+
+The proxy score treats the rule as a black box, so any kind of rule can be optimized with it.
+We use three kinds: trees built by genetic programming, a small neural network, and Python code written by a large language model.
+
+\textbf{Features.}
+The GP and neural rules give each candidate action a score and sort the candidates by it.
+The score is computed from features that do not depend on the instance size:
+6 global features (\eg the remaining share of the horizon, the capacity ratio, the number of available robots),
+7 features of the robot type (\eg duty length, overhead per duty, duties per maintenance cycle),
+9 features of a \reuse candidate (\eg its duty count and hours relative to the fleet mean, the duties it has left before maintenance, and whether its maintenance can still finish before $\horizon$),
+and 5 features of a \new candidate (\eg how many robots of this type may still be added, whether it is the gene type, and a flag that marks new candidates).
+The network uses all 27 features.
+The GP tree for \reuse candidates uses the 22 features that apply to them; the tree for \new candidates uses 17, since it does not need the flag.
+
+\textbf{Genetic programming (GP).}
+A GP rule consists of two trees: one scores \reuse candidates and one scores \new candidates.
+We use a standard GP hyper-heuristic setup:
+functions $\{+, -, \times, \div_{\text{protected}}, \max, \min\}$,
+ramped half-and-half initialization (depth 2--6, maximum depth 8),
+tournament size 7, crossover 0.80, mutation 0.15, reproduction 0.05, two elites,
+population 64 and 30 generations.
+To save time, each generation is scored on 19 of the 67 genotypes per instance (the 3 without deviations and 16 random ones);
+the final rule is chosen with all 67.
+
+\textbf{Neural network with evolution strategies (ES).}
+One small network scores every candidate from its 27 features.
+It has one hidden layer of 16 $\tanh$ units, 465 weights in total.
+Training has two stages.
+First, the network learns by imitation to repeat the decisions in good rosters found by \dec{5} on the training instances (87\,451 state--action pairs).
+Then OpenAI-ES \cite{salimans2017evolution} optimizes the proxy score directly
+(population 32, noise $\sigma = 0.02$, Adam \cite{kingma2015adam} with learning rate 0.01, 60 generations, 23 genotypes per instance and generation).
+Imitation alone is not enough: good rosters often make different choices in the same state, so there is no single right answer to imitate.
+Its purpose is to give ES a useful starting point.
+A network with random weights can open so many robots that every decoded roster lies outside the normalization range;
+then the proxy score is zero for every perturbation, and ES gets no signal.
+
+\textbf{Large language model (LLM).}
+Here the rule is a Python function that follows the interface of Section~\ref{M-sec:method:rule}.
+We evolve it in the style of EoH \cite{liu2024evolution}.
+Five initial rules are written from five prompts that each suggest a different idea.
+In each of 12 generations, the LLM writes four new rules (two refinements, one new idea, one combination of two parents), and the six best rules are kept.
+The LLM is shown the score of each rule.
+The generated code runs in a sandbox that forbids imports, \texttt{while} loops, reflection and access to private fields, and it is stopped after a time limit.
+One run needs about 55 LLM calls and 55 evaluations of $\proxy$.
+
+
+
+\section{Additional Rostering Results}
+\label{sec:s-roster}
+
+\subsection{Deviation Rate}
+\textbf{Effect of the deviation rate.}
+Table~\ref{tab:kcurve} shows HV against $\drate$ for the eight GP and ES16 rules, with $\qon = 0.4$.
+On the test instances we report it only as a sensitivity analysis; it was not used to choose $\drate$.
+Training and test instances show the same shape: HV rises from $\drate = 0.1$ to 0.3 and is flat between 0.3 and 0.4.
+The difference between 0.3 and 0.4 is small and not significant on either set ($+0.005$, $p = 0.52$ on training; $+0.003$, $p = 0.54$ on test; uncorrected).
+The E group depends most on the deviation rate.
+On the test instances (eight rules pooled, Holm's correction over the four rates), the learned rules are significantly worse than \dec{5} at $\drate = 0.1$ ($-0.077$, $p = 0.004$), and from $\drate = 0.2$ on they are not.
+
+\textbf{The deviation rate, not the number of slots, is what matters.}
+In the third selection step we also varied the activation probability $\qon$ (Table~\ref{tab:rate}, training instances).
+Two settings with the same rate $\drate = 0.4$, $\dens = 0.5$ with $\qon = 0.8$ and $\dens = 1.0$ with $\qon = 0.4$, differ by only $-0.007$ ($p = 0.47$).
+With the same slot ratio $\dens = 0.5$, raising $\qon$ from 0.4 to 0.8 raises HV by $+0.047$ (13/2 instances, $p = 0.008$).
+Above $\drate = 0.4$, HV declines slightly, but not significantly ($\drate = 0.8$ against 0.4: $-0.028$, 5/10 instances, $p = 0.15$; all $p$ uncorrected).
+The search also keeps the share of active slots set by $\qon$:
+in the rosters on the final fronts, 0.39, 0.59 and 0.79 of the slots are active for $\qon = 0.4$, 0.6 and 0.8.
+
+\begin{table}[t]
+  \centering
+  \caption{Mean HV against the deviation rate $\drate$ (eight GP and ES16 rules, $\qon = 0.4$, $\dens = 0.25$ to 1.0; NSGA-II, 465 evaluations). Training and test values are normalized separately and cannot be compared with each other. The test row ``All'' also includes the four hand-built scenarios.}
+  \label{tab:kcurve}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{@{}llccccc@{}}
+    \toprule
+    Set & Group & \dec{5} & $\drate = 0.1$ & 0.2 & 0.3 & 0.4 \\
+    \midrule
+    Training (15) & All & 0.491 & 0.622 & 0.698 & 0.732 & 0.737 \\
+                  & E   & 0.608 & 0.431 & 0.579 & 0.637 & 0.656 \\
+                  & H   & 0.471 & 0.655 & 0.708 & 0.742 & 0.734 \\
+                  & M   & 0.393 & 0.778 & 0.808 & 0.817 & 0.821 \\
+    \midrule
+    Test (47)     & All & 0.570 & 0.719 & 0.769 & 0.783 & 0.786 \\
+                  & E   & 0.733 & 0.656 & 0.758 & 0.772 & 0.781 \\
+                  & H   & 0.550 & 0.681 & 0.722 & 0.744 & 0.744 \\
+                  & M   & 0.463 & 0.777 & 0.810 & 0.806 & 0.809 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[t]
+  \centering
+  \caption{Mean HV of the eight GP and ES16 rules on the training instances for different slot ratios $\dens$ and activation probabilities $\qon$ (NSGA-II, 465 evaluations; HV normalized over the six settings).}
+  \label{tab:rate}
+  \footnotesize
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{@{}cccc@{}}
+    \toprule
+    $\drate = \qon\dens$ & $\dens$ & $\qon$ & HV \\
+    \midrule
+    0.2 & 0.5  & 0.4 & 0.551 \\
+    0.3 & 0.75 & 0.4 & 0.593 \\
+    0.4 & 0.5  & 0.8 & 0.598 \\
+    0.4 & 1.0  & 0.4 & \textbf{0.606} \\
+    0.6 & 1.0  & 0.6 & 0.590 \\
+    0.8 & 1.0  & 0.8 & 0.578 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{The Learned Rules}
+\textbf{Stability across design runs.}
+The learners differ in how much their rules vary between independent runs.
+At $\drate = 0.1$, the three ES16 rules span a test HV range of only 0.723--0.725,
+whereas the GP rules span 0.689--0.725, the LLM-score rules 0.658--0.724 and the LLM-full rules 0.637--0.725.
+At $\drate = 0.4$, the ranges are 0.772--0.797 for ES16 and 0.766--0.796 for GP.
+
+\textbf{A failure case.}
+Five of the nine LLM-generated rules (from LLM-full, LLM-score and EoH) are infeasible in almost every run on one test instance, H13.
+They choose the type of a new robot by its own efficiency and ignore, or nearly ignore, the gene type,
+so every genotype opens a type whose tools cannot be cycled fast enough on this instance.
+No training instance has such a tight tool supply, so the proxy score did not penalize this choice.
+The GP and network rules keep the gene type as an input of their score and do not fail.
+LLM rules can thus remove freedom that the encoding was meant to provide.
+
+\textbf{What the rules learn.}
+In four of the five GP runs, the tree for \reuse candidates uses the feature that indicates whether a robot is due for maintenance after this duty and the maintenance can still finish before the end of the horizon;
+in one run, this tree uses only this feature, and the whole rule has four nodes.
+These rules send robots that are close to maintenance first, which spreads the maintenances over time.
+The ES16 networks rely most on the capacity ratio, on whether a robot is close to maintenance, and on its working hours relative to the fleet.
+The ES16, GP and LLM rules reach similar test HV, yet they often choose differently:
+on the states that the default rule visits on the test instances, their first choices agree with those of a reference GP or LLM rule in only 57--97\% of the cases.
+Several different rules can thus be equally good starting points for the search.
+
+\textbf{Design cost.}
+One LLM design run uses about 55 proxy evaluations and 55 LLM calls; EoH uses 54 evaluations and about 91 calls.
+A GP run uses 174--539 proxy evaluations, and an ES16 run 693 plus the imitation data, which cost 139 evaluations to generate.
+The LLM learners need the fewest evaluations, but LLM-full and LLM-score vary most between runs.
+GP and ES16 cost more, and every one of their runs reaches a proxy score of 0.82 (LLM-full and LLM-score: 3 of 6 runs; EoH: 0 of 3).
+
+
+\section{Additional Re-Rostering and FJSP Results}
+\label{sec:s-more}
+
+\subsection{Re-Rostering by Group}
+\textbf{Scenarios.}
+For each of the 62 instances, the original plan is the roster with the fewest resources (and, among those, the best balance) found by one NSGA-II run with \dec{5}.
+We execute the plan up to 30\% or 60\% of its shifts.
+Then the robot that the plan sends next is hit by one of three disturbances:
+\begin{itemize}
+  \item \textbf{Breakdown}: the robot is out of service for 48\,h; after the repair its duty budget is full again.
+  \item \textbf{Early maintenance}: the robot must go to maintenance before its next duty.
+  \item \textbf{Delay}: the robot becomes ready 8\,h later than it otherwise would.
+\end{itemize}
+If the plan opens a new robot at that shift, the disturbance moves to the next shift.
+This gives $62 \times 3 \times 2 = 372$ scenarios.
+For one instance, neither of the two simple repairs described below is feasible in any of its six scenarios, so no resource budget can be set; we use the remaining 366 scenarios.
+The shifts before the disturbance cannot be changed.
+
+\textbf{Objectives.}
+A repaired roster has two objectives, both minimized:
+the number of \emph{changes}, \ie shifts after the disturbance whose robot differs from that of the planned shift with the nearest start time,
+and the imbalance $\fbal$.
+The resource count must not exceed a budget $B$, the smaller resource count of two simple repairs:
+following the plan rule below without deviations, and encoding the plan for \dec{5}.
+Rosters over budget are penalized in proportion to the excess.
+In a pilot study with resource count and changes as the objectives, the smallest resource count was the same for all methods in all 36 scenarios,
+so we turned it into a constraint.
+
+\begin{table}[t]
+  \centering
+  \caption{Mean HV by disturbance type and by how much of the plan was executed. Each group has 122 (type) or 183 (time) scenarios. Every method differs significantly from \dec{5}+seed in every group (Holm-corrected $p < 10^{-5}$).}
+  \label{tab:reroster-groups}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lccccc@{}}
+    \toprule
+    Method & Breakdown & Early maint. & Delay & 30\% & 60\% \\
+    \midrule
+    \dec{5}             & 0.328 & 0.329 & 0.362 & 0.335 & 0.344 \\
+    \dec{5}+seed        & 0.618 & 0.645 & 0.551 & 0.546 & 0.663 \\
+    Plan as rule        & 0.772 & 0.787 & 0.805 & 0.789 & 0.788 \\
+    Plan as rule + seed & 0.807 & 0.832 & 0.806 & 0.782 & 0.848 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\textbf{The result holds across disturbances.}
+In every group of Table~\ref{tab:reroster-groups}, both rule-based methods beat seeding, and seeding beats re-rostering from scratch.
+The plan rule's gain over seeding is largest for delays ($+0.254$) and smallest for early maintenance ($+0.142$).
+Both rule-based methods also beat seeding within each of the E, H and M families (Holm-corrected $p \le 3 \times 10^{-4}$).
+
+\textbf{Rule and seeding complement each other.}
+Seeding finds repairs with at most three changes in 36\% of the runs, more often than the plan rule alone (28\%).
+Combining the two raises this share to 41\% and gives the highest mean HV (0.815).
+Its HV is not significantly higher than that of the plan rule alone, however (Holm-corrected $p = 0.59$).
+When the disturbance comes late (60\% executed), the combination has a higher mean HV than the plan rule alone (0.848 against 0.788), but the difference is not significant ($p = 0.10$).
+When it comes early, the plan rule alone is slightly better (0.789 against 0.782, $p = 0.009$).
+
+
+\subsection{FJSP: All 276 Instances, Large Instances and the Deviation-Rate Sweep}
+These experiments use \RDD-U, the variant with ranked alternatives over all operation--machine pairs, at $\qon = 0.4$ and $\dens = 0.1$, 0.25 and 0.5 ($\drate = 0.04$, 0.1 and 0.2).
+PD gives every step its own gene, which selects the candidate at rank $\lfloor g\,|C| \rfloor$ in the rule's order.
+On the main set of 276 instances (the 78 instances of the main paper and the 198 Hurink instances), each encoding is run 20 times; on the 60 instances of Behnke and Geiger \cite{behnke2012test}, 10 times.
+On all Hurink instances, all machines of an operation have the same processing time, so only the makespan varies.
+
+\begin{table}[t]
+  \centering
+  \caption{FJSP main set (276 instances, NSGA-II, 20 runs). HV is normalized per budget. W/L: instances where an encoding is significantly better/worse than RK at 5000 evaluations. Every encoding differs significantly from RK at every budget (Holm-corrected $p \le 0.005$).}
+  \label{tab:fjsp-main}
+  \footnotesize
+  \setlength{\tabcolsep}{3pt}
+  \begin{tabular}{@{}lcccccccc@{}}
+    \toprule
+    & & \multicolumn{3}{c}{HV} & & \multicolumn{2}{c}{Gap (\%)} \\
+    \cmidrule(lr){3-5} \cmidrule(lr){7-8}
+    Encoding & $\drate$ & 465 & 2000 & 5000 & W/L & 465 & 5000 \\
+    \midrule
+    Rule alone & --- & --- & --- & --- & --- & 37.9 & 37.9 \\
+    RK   & --- & 0.445 & 0.447 & 0.463 & ---    & 30.4 & 24.5 \\
+    PD   & --- & 0.362 & 0.421 & 0.437 & 48/81  & 32.5 & 26.0 \\
+    \RDD-U & 0.04 & 0.719 & 0.699 & 0.695 & 190/34 & 17.5 & 14.9 \\
+    \RDD-U & 0.1  & 0.775 & 0.765 & 0.763 & 215/23 & 16.1 & 13.4 \\
+    \RDD-U & 0.2  & \textbf{0.795} & \textbf{0.801} & \textbf{0.803} & 237/12 & \textbf{15.7} & \textbf{12.5} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{\RDD-U is better than random keys on most instances.}
+Table~\ref{tab:fjsp-main} shows the main set.
+All three \RDD-U settings are significantly better than RK at every budget (Holm-corrected $p < 10^{-24}$).
+With $\drate = 0.2$ and 5000 evaluations, \RDD-U reaches an HV of 0.803 against 0.463 for RK.
+It is significantly better on 237 instances and worse on 12.
+Its mean gap is 12.5\%, half that of RK (24.5\%).
+More evaluations do not close this difference:
+from 465 to 5000 evaluations, the gap of RK falls from 30.4\% to 24.5\%, while that of \RDD-U falls from 15.7\% to 12.5\%.
+Among the three settings, $\drate = 0.2$ is best, and its lead over $\drate = 0.1$ grows with the budget
+($+0.019$ at 465 and $+0.040$ at 5000 evaluations; significantly better on 55 and 93 instances, worse on 42 and 16).
+
+\textbf{The bias toward the first choice is what helps.}
+PD uses the same rule order as \RDD-U, yet it is worse than RK at every budget
+($-0.083$ at 465 evaluations, Holm-corrected $p = 10^{-16}$; $-0.026$ at 5000, $p = 0.005$).
+A random PD gene picks any rank with equal probability, so random genotypes are not pulled toward the rule's schedule.
+Ranking the candidates by a rule is therefore not enough; the encoding must also pull the search toward the rule's first choices.
+
+\textbf{The gain grows with flexibility.}
+The three Hurink sets have the same jobs but differ in the mean number of eligible machines per operation: 1.15 (edata), 1.97 (rdata) and 4.13 (vdata).
+At 5000 evaluations, the HV gain of \RDD-U ($\drate = 0.2$) over RK is $+0.225$, $+0.353$ and $+0.420$ on these sets.
+All 12 instances on which RK is significantly better belong to the Hurink sets, and 8 of them to edata, which is closest to the classical job shop.
+
+
+\textbf{Large instances.}
+On the 60 Behnke instances, all three \RDD-U settings are significantly better than RK on every instance at 465, 2000 and 5000 evaluations (Holm-corrected $p = 1.5 \times 10^{-10}$).
+Here the smallest rate is best.
+At 5000 evaluations, $\drate = 0.04$ reaches an HV of 0.971, against 0.950 for $\drate = 0.1$, 0.890 for $\drate = 0.2$ and 0.128 for RK;
+it is significantly better than both other settings (Holm-corrected $p < 10^{-8}$).
+We do not report gaps for this set.
+The collection gives only bounds for its instances, and they are loose: the rule alone is on average within 0.7\% of the upper bound.
+
+\begin{table}[t]
+  \centering
+  \caption{Mean HV against the slot ratio $\dens$ and the activation probability $\qon$ on 30 FJSP instances (NSGA-II, 5 runs; the deviation rate is $\drate = \qon\dens$). HV is normalized per budget over all 24 settings and RK (RK: 0.232 at 465 and 0.263 at 20\,000 evaluations). Bold: best per column.}
+  \label{tab:fjsp-rate}
+  \footnotesize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabular}{@{}ccccccc@{}}
+    \toprule
+    & \multicolumn{2}{c}{$\qon = 0.2$} & \multicolumn{2}{c}{$\qon = 0.4$} & \multicolumn{2}{c}{$\qon = 0.6$} \\
+    \cmidrule(lr){2-3} \cmidrule(lr){4-5} \cmidrule(lr){6-7}
+    $\dens$ & 465 & 20\,000 & 465 & 20\,000 & 465 & 20\,000 \\
+    \midrule
+    0.05 & 0.665 & 0.629 & 0.715 & 0.685 & 0.748 & 0.721 \\
+    0.1  & 0.712 & 0.677 & 0.748 & 0.730 & 0.776 & 0.760 \\
+    0.2  & 0.752 & 0.714 & \textbf{0.793} & 0.768 & \textbf{0.789} & 0.787 \\
+    0.35 & 0.768 & 0.752 & 0.789 & 0.780 & 0.776 & \textbf{0.798} \\
+    0.5  & 0.778 & 0.757 & 0.777 & \textbf{0.792} & 0.770 & 0.792 \\
+    0.75 & \textbf{0.788} & 0.777 & 0.758 & 0.791 & 0.702 & 0.747 \\
+    1.0  & \textbf{0.788} & \textbf{0.792} & 0.725 & 0.769 & 0.635 & 0.704 \\
+    1.5  & 0.756 & 0.775 & --- & --- & --- & --- \\
+    2.0  & 0.727 & 0.755 & --- & --- & --- & --- \\
+    3.0  & 0.664 & 0.691 & --- & --- & --- & --- \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\textbf{The deviation rate on FJSP.}
+To relate the FJSP results to Section~\ref{M-sec:theory}, we varied $\dens$ and $\qon$ on 30 instances
+(Brandimarte and the rdata instances la16--la30), with budgets of up to 20\,000 evaluations (Table~\ref{tab:fjsp-rate}).
+Four findings stand out.
+\begin{itemize}
+  \item \emph{The rate $\drate$ is the parameter that matters}, as in rostering.
+  For each instance and budget, a quadratic function of $\log\drate$ explains the HV of the 24 settings with a mean $R^2$ of 0.68--0.78; a quadratic function of $\log\dens$ explains only 0.46--0.48.
+  Eight pairs of settings with the same $\drate$ but different $\dens$ and $\qon$ differ by at most 0.029 in mean HV.
+  None of the 40 comparisons (eight pairs, five budgets) is significant after Holm's correction.
+  \item \emph{The search keeps the share of active slots near $\qon$.}
+  In the schedule with the best makespan of a run, the share of slots that change a decision is 0.21, 0.36 and 0.52 for $\qon = 0.2$, 0.4 and 0.6 (465 evaluations, settings with $\dens \le 1$), and it hardly changes with the budget.
+  \item \emph{Too many deviations hurt.}
+  For every $\qon$, HV first rises and then falls with $\dens$.
+  At 465 evaluations, we compare the best setting of each $\qon$ with its setting of largest $\dens$ (Holm's correction over the three tests).
+  For $\qon = 0.2$, $\drate = 0.2$ beats $\drate = 0.6$ by 0.125.
+  For $\qon = 0.4$, $\drate = 0.08$ beats $\drate = 0.4$ by 0.068.
+  For $\qon = 0.6$, $\drate = 0.12$ beats $\drate = 0.6$ by 0.154.
+  All three differences are significant (Holm-corrected $p \le 0.002$).
+  At 20\,000 evaluations, the decline is still significant for $\qon = 0.2$ and 0.6 (Holm-corrected $p \le 2 \times 10^{-4}$), but not for $\qon = 0.4$ ($+0.023$, $p = 0.10$).
+  \item \emph{The best rate grows with the budget.}
+  The setting with the highest mean HV has $\drate = 0.08$ at 465 evaluations, 0.12 at 2000, and 0.21 from 5000 on.
+  The median over instances of the best $\drate$ rises from 0.10 at 465 evaluations to 0.175 at 2000 and to 0.20--0.21 from 5000 on.
+  This agrees with the second guideline of Section~\ref{M-sec:theory:consequences}.
+  The Behnke results are consistent with this: with up to 500 decisions and at most 5000 evaluations, the smallest rate was best.
+\end{itemize}
+On FJSP the best rate is thus 0.1--0.2 for moderate and large budgets, lower than the rate of 0.4 chosen for rostering (Section~\ref{M-sec:method:k}).
+
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}

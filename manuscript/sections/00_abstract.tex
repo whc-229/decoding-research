@@ -1,19 +1,17 @@
 \begin{abstract}
 % 证据：第 VI 节各表。≤ 250 词（TEVC）。
-Decoders for evolutionary scheduling build a solution one decision at a time and usually give every decision its own gene.
-Such an encoding cannot express ``a rule plus a few exceptions'', and the decoder's bias toward good solutions cannot be tuned.
-We propose rule-deviation decoding (RDD), which separates bias from freedom.
-A construction rule makes every decision by default; the genotype encodes only a few deviation slots, each naming a decision and an alternative action.
-The deviation rate, the expected number of active slots per decision, sets how far the search may move from the rule.
-Rules are learned offline by scoring the solutions that random deviations produce;
-with NSGA-II, genetic programming, a neural network trained by an evolution strategy, and a large language model reach similar quality under this score.
-A rule-distance model shows that too few slots keep good solutions out of reach and that the best number of slots grows with the budget.
-On a bi-objective robot--tool duty rostering problem, RDD raises the mean hypervolume of NSGA-II on 47 test instances from 0.570 with the best existing decoder to 0.788.
-For repairs during execution, using the old roster as the rule works better than seeding the population with it.
-On 276 flexible job shop benchmarks, RDD with a standard dispatching rule outperforms random keys on most instances, also with MOEA/D, larger budgets and heuristic initialization.
-On both problems, the deviation rate, not the number of slots, is the parameter that matters.
+Decoders for evolutionary scheduling usually give every decision its own gene, and the bias of the decoder toward good solutions is fixed by its design.
+We propose rule-deviation decoding (RDD).
+A construction rule makes every decision by default; the genotype encodes deviation slots, each naming a decision and an alternative action from a structured list, such as the rule's own ranking or the proposals of other rules.
+The deviation rate, the expected number of active slots per decision, sets the balance between the rule's bias and the freedom of the search.
+RDD is an encoding and works with any optimizer.
+We learn the rule offline by scoring the solutions that random deviations from it produce; under this score, genetic programming, a neural network trained by an evolution strategy, and a large language model learn rules of similar quality.
+A rule-distance model shows that the deviation rate determines where the search starts, that too few slots keep good solutions out of reach, and that the best number of slots grows with the budget.
+On a bi-objective robot--tool duty rostering problem, RDD raises the mean hypervolume of NSGA-II on 47 test instances from 0.570 with the best existing decoder to 0.788, and an old roster used as the rule repairs disturbances better than seeding.
+On 78 flexible job shop benchmark instances, RDD outperforms random keys, seeded initialization, heuristic-space and problem-space search, and dense per-decision deviations.
+Ablations on both problems show that placing the rule in the decoder, encoding deviations in slots, and choosing good alternatives each contribute.
 \end{abstract}
 
 \begin{IEEEkeywords}
-Representation, decoder, multi-objective evolutionary algorithm, rostering, flexible job shop scheduling, heuristic bias, limited discrepancy search.
+Representation, decoder, multi-objective evolutionary algorithm, rostering, flexible job shop scheduling, construction rule, limited discrepancy search.
 \end{IEEEkeywords}

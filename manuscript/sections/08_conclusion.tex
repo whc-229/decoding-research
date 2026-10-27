@@ -2,17 +2,16 @@
 \label{sec:conclusion}
 
 This paper proposed rule-deviation decoding for evolutionary scheduling.
-A construction rule makes every decision by default, and the genotype encodes only where and how to depart from it.
+A construction rule makes every decision by default, and the genotype encodes only where to depart from it and which alternative to take.
 The rule provides the bias, the deviation slots provide the freedom, and the deviation rate sets the balance between them.
 Rules are learned offline by scoring the solutions that random deviations from them produce.
 
-The experiments support three conclusions.
-First, a good rule used in this way helps the search a lot: on robot--tool duty rostering, the mean HV on the test instances rises from 0.570 to 0.788, and on FJSP benchmarks a standard dispatching rule raises it from 0.463 with random keys to 0.803.
-Second, a rule helps more inside the decoder than in the initial population, both when a roster is repaired during execution and on FJSP.
-Third, the deviation rate is the parameter that matters, and its best value depends on the problem and on the budget.
-For rostering, a few settings tested on training instances were enough to set it.
+On robot--tool duty rostering, \RDD raises the mean HV on the test instances from 0.570 to 0.788, and an old roster used as the rule repairs disturbances with fewer changes than seeding.
+On FJSP benchmarks, \RDD with standard dispatching rules is significantly better than random keys, seeding, heuristic-space and problem-space search.
+Ablations on both problems show that the rule helps far more in the decoder than in the initial population,
+that deviation slots beat one gene per decision, that the alternatives must be good candidates, and that the encoding matters more than the optimizer.
 
-Several questions remain open.
-The deviation rate is fixed during a run; adapting it to the budget used so far, or to the instance, is a natural next step.
-\RDD could be combined with problem-specific local search, which might narrow the gap to specialized FJSP algorithms.
-Finally, measuring how much an unnecessary deviation costs in a given decoder could help show whether the theory can predict the best deviation rate before any runs.
+Several directions remain open.
+The deviation rate could be adapted during a run or per instance instead of being fixed on training instances.
+\RDD could be combined with problem-specific local search to close the gap to specialized algorithms.
+Finally, the alternatives themselves could be learned together with the rule.

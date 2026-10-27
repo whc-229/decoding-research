@@ -125,5 +125,25 @@ def fig_fronts():
     print("fronts:", pick)
 
 
+# ---------------------------------------------------------------- Fig: rostering HV vs deviation rate (values of Table kcurve, fact-checked 2026-10-23)
+def fig_roster_rate():
+    rho = [0.1, 0.2, 0.3, 0.4]
+    T = {"Training (15)": {"All": ([0.622, 0.698, 0.732, 0.737], 0.491), "E": ([0.431, 0.579, 0.637, 0.656], 0.608),
+                           "H": ([0.655, 0.708, 0.742, 0.734], 0.471), "M": ([0.778, 0.808, 0.817, 0.821], 0.393)},
+         "Test (47)": {"All": ([0.719, 0.769, 0.783, 0.786], 0.570), "E": ([0.656, 0.758, 0.772, 0.781], 0.733),
+                       "H": ([0.681, 0.722, 0.744, 0.744], 0.550), "M": ([0.777, 0.810, 0.806, 0.809], 0.463)}}
+    col = {"All": "#0b0b0b", "E": C1, "H": C2, "M": C3}
+    mk = {"All": "o", "E": "s", "H": "^", "M": "D"}
+    fig, axs = plt.subplots(1, 2, figsize=(COL1, 1.9), sharey=True)
+    for ax, (name, G) in zip(axs, T.items()):
+        for g, (y, d5) in G.items():
+            ax.plot(rho, y, color=col[g], marker=mk[g], label=g, lw=1.2, ms=3.5)
+            ax.axhline(d5, color=col[g], lw=0.7, ls=":")
+        ax.set_title(name, fontsize=8); ax.set_xticks(rho); ax.set_xlabel(r"deviation rate $\rho$"); ax.grid(True, axis="y")
+    axs[0].set_ylabel("mean HV")
+    axs[1].legend(fontsize=6.5, loc="lower right", ncol=2, handlelength=1.4)
+    fig.tight_layout(pad=0.4); fig.savefig(os.path.join(OUT, "roster_rate.pdf")); plt.close(fig)
+
+
 if __name__ == "__main__":
-    fig_rate(); fig_budget(); fig_fronts()
+    fig_rate(); fig_budget(); fig_fronts(); fig_roster_rate()

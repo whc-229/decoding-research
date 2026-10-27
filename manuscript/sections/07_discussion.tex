@@ -1,72 +1,37 @@
-\section{Discussion and Limitations}
+\section{Discussion}
 \label{sec:discussion}
 
-% 证据：第 VI 节各表；实验5续_最终方法与普适性_结论.md（E 组 dev/槽数、与理论的张力、T11）；待检验_偏离偏置与最优K.md（T11）；实验6续_FJSP最终结果.md。
-% 守住："排班更能容忍偏离是因为多余偏离代价低"只作推测（未在排班上直接测，T12 已撤销）；不写"理论预言了 ρ = 0.4"；不写 ρ = 0.4 是最优。
-% 区间比例：第 V 节没有推导 1/q 比例，且 FJSP 上的增幅随统计量（均值/中位数）而变，只写"方向对、大小未得到一致验证"。
+% 2026-10-27 重写、压缩。守住："多余偏离代价低"只作推测；不写 ρ = 0.4 最优；理论的增长幅度未得到一致验证。
 
-\subsection{When Does \RDD Help?}
+\textbf{When does \RDD help?}
+\RDD needs a rule that is good and good solutions that lie within reach of it.
+With the default rule, \RDD is not better than \dec{5}; with learned rules it is (Table~\ref{tab:static-main}).
+The E rostering group shows the second condition.
+At $\drate = 0.1$, the median distance from the rule to the nearest good roster found by \dec{5} on the E training instances is about equal to the number of slots, and \RDD is worse than \dec{5}.
+More slots remove this deficit, and Pareto local search over the deviations makes \RDD clearly better than \dec{5} in this group (Table~\ref{tab:roster-closest}).
 
-\RDD helps when two conditions hold: the rule is good, and good solutions lie within reach of it.
-The first condition is clear in the rostering results.
-With the default rule, \RDD is not better than \dec{5}; with learned rules at the same deviation rate, it is (Table~\ref{tab:static-main}).
-On FJSP, a standard dispatching rule is good enough, but the bias toward its first choice is needed: the per-decision encoding PD, which uses the same rule order without that bias, is worse than random keys (Table~\ref{tab:fjsp-main}).
+\textbf{Bias and freedom.}
+The comparisons place \RDD between two extremes.
+Heuristic-space search has full freedom and no default; seeding has a default only at the start.
+On FJSP, both are clearly worse than \RDD, which keeps a default rule and lets the search leave it at a tuned rate.
+How often the best solutions leave the rule depends on the alternatives.
+With a rule portfolio on FJSP, the best schedules leave the default rule in about half of the steps; on rostering, a random genotype at the selected rate still follows the rule in about two thirds of the shifts.
+The best rate is therefore a property of the problem and the alternatives, and \RDD sets it on training instances.
 
-The second condition explains where \RDD gains least.
-In the E group of the rostering instances, all robots are of one type.
-For the good rosters that \dec{5} finds on the five E training instances, we counted the shifts at which each roster differs from the rule's first choice.
-At $\drate = 0.1$, the median distance to the nearest good roster is about equal to the number of slots,
-and on the test instances the learned rules are then significantly worse than \dec{5} in this group.
-From $\drate = 0.2$ on, they are no longer worse, but they are not significantly better either.
-On FJSP, among the three Hurink sets, the gain is smallest on edata, which is closest to the classical job shop.
-Of the 12 instances on which RK is significantly better, 8 come from this set.
+\textbf{Theory and observations.}
+Several predictions of Section~\ref{sec:theory} hold on both problems:
+the deviation rate, not the number of slots, determines performance; the search keeps the share of active slots near $\qon$;
+too few slots keep good solutions out of reach; and on FJSP the best rate grows with the budget.
+One observation does not fit the model directly.
+On rostering, HV keeps rising up to $\drate \approx 0.3$--0.4 already at 465 evaluations, whereas the model predicts that small budgets call for no more slots than the rule distance.
+Part of this can be explained by the spread of the front: the nearest good roster differs from the rule in fewer than five shifts on four training instances,
+but the median roster on the first front of \dec{5} differs in 21 to 35.
+Of the model extensions we tested, only cheap unnecessary deviations reproduce the rest; the high neutrality of the rostering decoders is consistent with this, but we have not measured it directly.
+The model also predicts the direction of the budget effect but not its size.
 
-\subsection{The Deviation Rate and the Theory}
-
-Several predictions of Section~\ref{sec:theory} hold on both problems.
-The deviation rate $\drate = \qon\dens$, not the number of slots, determines performance.
-The search keeps the share of active slots close to $\qon$, as the binomial prior of the model assumes.
-With too few slots, good solutions are out of reach, as in the E group at $\drate = 0.1$.
-On FJSP, the best rate grows with the budget.
-
-One result does not fit the model.
-On rostering, HV keeps rising up to a high rate ($\drate \approx 0.3$--0.4) already at 465 evaluations.
-The model, in contrast, predicts that a small budget calls for no more slots than the rule distance.
-Part of this gap can be explained by the spread of the front.
-The rosters on a front lie much farther from the rule than the nearest good roster:
-on four training instances, the nearest good roster differs from the rule in fewer than five shifts, but the median roster on the first front of \dec{5} differs in 21 to 35.
-As Section~\ref{sec:theory:multi} shows, the best number of slots then follows the mean distance to the front.
-Of the model extensions we tested, only cheap unnecessary deviations reproduce the rest of the gap.
-The rostering decoder is highly neutral (Section~\ref{sec:motivation}), so a deviation that is not needed may often change little, but we have not measured this cost directly.
-On FJSP, unnecessary deviations are clearly costly: HV drops significantly when the rate is too high (Table~\ref{tab:fjsp-rate}).
-
-The model predicts that the best number of slots grows with the budget, and on FJSP it does.
-The size of the growth, however, does not match the model consistently:
-from 465 to 20\,000 evaluations, the mean best rate over instances grows by a factor of only 1.3 to 1.7 for $\qon = 0.2$, 0.4 and 0.6, much less than the growth of the best $\K$ in Table~\ref{tab:theory-budget}.
-
-In practice, the deviation rate must therefore be set for each problem.
-Good rates are about 0.3 to 0.4 for rostering (we use 0.4) and 0.1 to 0.2 for FJSP at moderate and large budgets.
-For rostering, a few settings evaluated on training instances were enough: the test instances show the same curve (Table~\ref{tab:kcurve}).
-
-\subsection{Choosing a Rule Learner}
-
-Under the proxy score and with NSGA-II, GP, a neural network trained by ES, and an LLM with score feedback reach similar test performance, while imitation of good rosters is clearly worse.
-With MOEA/D, the LLM-score rules fall significantly below the GP rules.
-The learners differ in cost and reliability.
-The LLM needs the fewest proxy evaluations, but its rules vary most between runs.
-Five of the nine LLM rules fail on one test instance.
-They ignore the gene type and thus remove freedom that the encoding was meant to provide.
-The ES-trained network is the most stable across runs.
-When an LLM writes the rule, its rules should therefore be checked on instances with tight resources, and the interface should keep the inputs that carry the genotype's choices.
-
-\subsection{Limitations}
-
-\begin{itemize}
-  \item \textbf{One problem family for rule learning.} The learned rules and the main tests use one rostering problem, with instances from one generator and 15 training instances (five per group).
-  With five instances per group, the deviation rate could only be selected for all groups together.
-  \item \textbf{Baselines.} The rostering baselines are the decoders \dec{0}--\dec{5} of the scheduling software that motivated this work.
-  We did not compare with other metaheuristics that also search near a construction heuristic, such as large neighborhood search or iterated greedy.
-  \item \textbf{Robustness checks.} The final rate $\drate = 0.4$ was tested on the test instances only with NSGA-II and 465 evaluations; the checks with MOEA/D and 2000 evaluations used $\drate = 0.2$.
-  \item \textbf{Limited reach.} \RDD searches near the rule: every decision without a deviation follows the rule. In the model of Section~\ref{sec:theory}, $\K$ slots cannot reach a solution that differs from the rule in more than $\K$ decisions (Proposition~\ref{prop:floor}). \RDD therefore cannot make up for a rule that is far from all good solutions.
-  \item \textbf{FJSP.} We used a fixed rule and a generic MOEA. The makespans remain 10--13\% above the best-known values, and \RDD has not been combined with the local search that specialized FJSP algorithms use.
-\end{itemize}
+\textbf{Limitations.}
+The learned rules and the main tests use one rostering problem, with instances from one generator and 15 training instances.
+The rostering comparison covers the decoders of the software that motivated this work and dense deviations, but not other metaheuristics for this problem.
+Pareto local search improved with its step size up to the largest value tested, so the optimizer side of \RDD is not fully tuned.
+The checks with MOEA/D and 2000 evaluations used $\drate = 0.2$ rather than the final rate.
+On FJSP we used fixed rules and a generic search; specialized algorithms with problem-specific neighborhoods reach better makespans.
